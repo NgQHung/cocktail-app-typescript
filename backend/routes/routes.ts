@@ -1,11 +1,10 @@
 import express from "express";
 import { Router } from "express";
+import { getAllCocktail } from "../controllers/cocktailController";
 
 const router = Router();
 
-router.get("/", (req: express.Request, res: express.Response) => {
-    res.json("mainPage");
-});
+router.get("/", getAllCocktail);
 router.get("/navigation", (req: express.Request, res: express.Response) => {
     res.json("navigation");
 });
