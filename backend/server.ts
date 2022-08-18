@@ -22,10 +22,7 @@ app.use((req, res, next) => {
 app.use("/api", router);
 
 mongoose
-    .connect(
-        // "mongodb+srv://HungNguyenQuang:123@cluster0.ysrvy.mongodb.net/?retryWrites=true&w=majority"
-        URI
-    )
+    .connect(URI)
     .then(() => {
         app.listen(PORT, () => {
             console.log("listening on port", PORT);
