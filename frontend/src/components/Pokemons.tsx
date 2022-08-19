@@ -8,7 +8,7 @@ interface Props {
 
 export const Pokemons: React.FC<Props> = (props) => {
     return (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex"  }}>
             {props.pokemons.map((item, index) => (
                 <PokemonsItem
                     key={index}

@@ -46,8 +46,16 @@ function App() {
 
     const loadMore = () => {
         // setClicked(true);
-        fetMoreCocktail();
+        // fetMoreCocktail();
         // console.log(nextUrl);
+        fetchCocktal();
+    };
+
+    const fetchCocktal = async () => {
+        const res = await axios.get(
+            "http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
+        );
+        console.log(res.data.drinks);
     };
 
     useEffect(() => {
