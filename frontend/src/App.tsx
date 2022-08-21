@@ -10,10 +10,9 @@ export interface Cocktail {
 
 function App() {
     const [cocktails, setCocktails] = useState<Cocktail[]>([]);
-    const [cocktailInitital, setCocktailInitial] = useState<Cocktail[]>([]);
-    const [cocktailNext, setCocktailNext] = useState<Cocktail[]>([]);
-    const [indexx, setIndexx] = useState(20);
+    const [index, setIndex] = useState(20);
     const [loading, setLoading] = useState(false);
+    // let index: number = 20;
 
     const fetchCocktal = async () => {
         setLoading(true);
@@ -21,26 +20,14 @@ function App() {
             "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic"
         );
         const data = res.data.drinks;
-        setCocktailInitial(res.data.drinks.slice(0, indexx));
-        setCocktailNext(res.data.drinks.slice(indexx, indexx + 20));
-        // res.data.drinks.map((coc: Cocktail, index: number) => {
-        //     if ((index = indexx)) {
-        //         console.log(coc);
-        //         return setCocktails((prev) => [...prev, coc]);
-        //     }
-        // });
+        setCocktails(data.slice(0, index));
         setLoading(false);
     };
     const loadMore = () => {
-        // setIndexx((prev) => prev + 20);
+        setIndex((prev) => prev + 20);
         fetchCocktal();
     };
-    console.log(cocktailInitital);
-    console.log(cocktailNext);
 
-    const nextCocktails = (a: number, b: number) => {
-        return [a + 20, b + 20];
-    };
     return (
         <div className="App bg-gray-100">
             <Cocktails cocktailData={cocktails} />
