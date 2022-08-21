@@ -8,7 +8,7 @@ interface Props {
 
 const Cocktails: React.FC<Props> = (props) => {
     return (
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap justify-center">
             {props.cocktailData.map((coc) => (
                 <CocktailItem
                     key={coc.idDrink}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cocktails from "./components/Cocktails/Cocktails";
+import Button from "./UI/Button";
 
 export interface Cocktail {
     idDrink: number;
@@ -32,7 +33,9 @@ function App() {
         <div className="App bg-gray-100">
             <Cocktails cocktailData={cocktails} />
 
-            <button onClick={loadMore}>Load more</button>
+            <div className="flex justify-center ">
+                <Button clickHandler={loadMore}>Load more</Button>
+            </div>
         </div>
     );
 }
