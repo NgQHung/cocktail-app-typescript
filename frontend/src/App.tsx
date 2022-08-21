@@ -1,72 +1,50 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Pokemons } from "./components/Pokemons";
+import Cocktails from "./components/Cocktails/Cocktails";
 
-interface PokemonType {
-    name: string;
-    url: string;
-}
-
-export interface PokemonDetail {
-    name: string;
-    id: number;
-    sprites: {
-        front_default: string;
-    };
+export interface Cocktail {
+    idDrink: number;
+    strDrink: string;
+    strDrinkThumb: string;
 }
 
 function App() {
-    // const dispatch = useAppDispatch();
-    const [pokemon, setPokemon] = useState<PokemonDetail[]>([]);
-    const [clicked, setClicked] = useState(false);
-    const [nextUrl, setNextUrl] = useState<string>("");
-
-    const fetchAllCocktail = async () => {
-        const response = await axios.get("https://pokeapi.co/api/v2/pokemon?limit=20&offset=20");
-        setNextUrl(response.data.next);
-        response.data.results.map(async (pokemon: PokemonType) => {
-            const pokemonUrl = await axios.get(pokemon.url);
-            // if (clicked) {
-            //     const morePoke = await axios.get(response.data.next);
-            //     console.log(morePoke);
-            //     setPokemon((prev) => [...prev, morePoke.data]);
-            // }
-            setPokemon((prev) => [...prev, pokemonUrl.data]);
-        });
-    };
-
-    const fetMoreCocktail = async () => {
-        const response = await axios.get(nextUrl);
-        // console.log(response.data);
-        response.data.results.map(async (pokemon: PokemonType) => {
-            const pokemonUrl = await axios.get(pokemon.url);
-            setPokemon((prev) => [...prev, pokemonUrl.data]);
-        });
-    };
-
-    const loadMore = () => {
-        // setClicked(true);
-        // fetMoreCocktail();
-        // console.log(nextUrl);
-        fetchCocktal();
-    };
+    const [cocktails, setCocktails] = useState<Cocktail[]>([]);
+    const [cocktailInitital, setCocktailInitial] = useState<Cocktail[]>([]);
+    const [cocktailNext, setCocktailNext] = useState<Cocktail[]>([]);
+    const [indexx, setIndexx] = useState(20);
+    const [loading, setLoading] = useState(false);
 
     const fetchCocktal = async () => {
+        setLoading(true);
         const res = await axios.get(
-            "http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita"
+            "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic"
         );
-        console.log(res.data.drinks);
+        const data = res.data.drinks;
+        setCocktailInitial(res.data.drinks.slice(0, indexx));
+        setCocktailNext(res.data.drinks.slice(indexx, indexx + 20));
+        // res.data.drinks.map((coc: Cocktail, index: number) => {
+        //     if ((index = indexx)) {
+        //         console.log(coc);
+        //         return setCocktails((prev) => [...prev, coc]);
+        //     }
+        // });
+        setLoading(false);
     };
+    const loadMore = () => {
+        // setIndexx((prev) => prev + 20);
+        fetchCocktal();
+    };
+    console.log(cocktailInitital);
+    console.log(cocktailNext);
 
-    useEffect(() => {
-        fetchAllCocktail();
-    }, []);
-
+    const nextCocktails = (a: number, b: number) => {
+        return [a + 20, b + 20];
+    };
     return (
-        <div className="App">
-            {/* <button>click</button> */}
-            {/* {cocktail} */}
-            <Pokemons pokemons={pokemon} />
+        <div className="App bg-gray-100">
+            <Cocktails cocktailData={cocktails} />
+
             <button onClick={loadMore}>Load more</button>
         </div>
     );
