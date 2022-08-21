@@ -4,6 +4,8 @@ import Cocktails from "./components/Cocktails/Cocktails";
 import Button from "./UI/Button";
 import Header from "./Layouts/Header";
 import { Route, Routes } from "react-router-dom";
+import Alcoholic from "./pages/Alcoholic";
+import NonAlcoholic from "./pages/NonAlcoholic";
 
 export interface Cocktail {
     idDrink: number;
@@ -43,6 +45,8 @@ function App() {
                     path="/"
                     element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
                 />
+                <Route path="/alcoholic" element={<Alcoholic />} />
+                <Route path="/non-alcoholic" element={<NonAlcoholic />} />
             </Routes>
         </Fragment>
     );
