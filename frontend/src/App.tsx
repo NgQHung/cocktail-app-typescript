@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import Cocktails from "./components/Cocktails/Cocktails";
 import Button from "./UI/Button";
+import Header from "./Layouts/Header";
+import { Route, Routes } from "react-router-dom";
 
 export interface Cocktail {
     idDrink: number;
@@ -29,14 +31,20 @@ function App() {
         fetchCocktal();
     };
 
-    return (
-        <div className="App bg-gray-100">
-            <Cocktails cocktailData={cocktails} />
+    useEffect(() => {
+        setIndex((prev) => prev + 20);
+        fetchCocktal();
+    }, []);
 
-            <div className="flex justify-center ">
-                <Button clickHandler={loadMore}>Load more</Button>
-            </div>
-        </div>
+    return (
+        <Fragment>
+            <Routes>
+                <Route
+                    path="/"
+                    element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
+                />
+            </Routes>
+        </Fragment>
     );
 }
 
