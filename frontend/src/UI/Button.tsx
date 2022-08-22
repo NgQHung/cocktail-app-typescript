@@ -6,7 +6,7 @@ interface Props {
     clickHandler: () => void;
 }
 
-const Button: React.FC<Props> = (props) => {
+export const Button: React.FC<Props> = (props) => {
     return (
         <div
             onClick={props.clickHandler}
@@ -17,4 +17,10 @@ const Button: React.FC<Props> = (props) => {
     );
 };
 
-export default Button;
+export const ButtonHeader: React.FC<Props> = (props) => {
+    return (
+        <div className="flex justify-center cursor-pointer text-3xl " onClick={props.clickHandler}>
+            {props.children}
+        </div>
+    );
+};

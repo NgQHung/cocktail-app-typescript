@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import CocktailItem from "./CocktailItem";
 import { Cocktail } from "../../App";
 import Header from "../../Layouts/Header";
-import Button from "../../UI/Button";
+import { Button } from "../../UI/Button";
 import Navigation from "../../Layouts/Navigation";
 
 interface Props {
@@ -13,8 +13,10 @@ interface Props {
 const Cocktails: React.FC<Props> = (props) => {
     return (
         <Fragment>
-            <Header />
-            <Navigation />
+            <div className="">
+                <Header />
+            </div>
+            {/* <Navigation /> */}
 
             <div className="flex flex-wrap justify-center">
                 {props.cocktailData.map((coc) => (

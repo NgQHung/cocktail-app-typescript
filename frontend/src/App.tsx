@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import Cocktails from "./components/Cocktails/Cocktails";
-import Button from "./UI/Button";
 import Header from "./Layouts/Header";
 import { Route, Routes } from "react-router-dom";
 import Alcoholic from "./pages/Alcoholic";
