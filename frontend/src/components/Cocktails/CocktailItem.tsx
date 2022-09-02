@@ -1,5 +1,4 @@
 import React from "react";
-import { Cocktail } from "../../App";
 
 interface Props {
     id: number;

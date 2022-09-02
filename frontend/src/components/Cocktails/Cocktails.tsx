@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
 import CocktailItem from "./CocktailItem";
-import { Cocktail } from "../../App";
 import Header from "../../Layouts/Header";
 import { Button } from "../../UI/Button";
 import Navigation from "../../Layouts/Navigation";
+import { Cocktail } from "../../models/cocktails";
 
 interface Props {
     cocktailData: Cocktail[];

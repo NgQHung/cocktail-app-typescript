@@ -1,9 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
+import cocktailSlice from "./cocktail-slice";
+import logger from "redux-logger";
 // ...
 
-const store = configureStore({
-    reducer: {},
+export const store = configureStore({
+    reducer: {
+        cocktailSlice: cocktailSlice,
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
+applyMiddleware(thunk);
 
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

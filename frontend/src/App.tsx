@@ -5,12 +5,7 @@ import Header from "./Layouts/Header";
 import { Route, Routes } from "react-router-dom";
 import Alcoholic from "./pages/Alcoholic";
 import NonAlcoholic from "./pages/NonAlcoholic";
-
-export interface Cocktail {
-    idDrink: number;
-    strDrink: string;
-    strDrinkThumb: string;
-}
+import { Cocktail } from "./models/cocktails";
 
 function App() {
     const [cocktails, setCocktails] = useState<Cocktail[]>([]);

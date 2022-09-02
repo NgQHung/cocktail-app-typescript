@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Cocktail } from "../App";
 import Cocktails from "../components/Cocktails/Cocktails";
+import { Cocktail } from "../models/cocktails";
 
 const NonAlcoholic = () => {
     const [cocktails, setCocktails] = useState<Cocktail[]>([]);
