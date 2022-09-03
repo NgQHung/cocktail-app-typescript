@@ -24,15 +24,15 @@ const CocktailItem: React.FC<Props> = (props) => {
     // console.log(match);
     return (
         <div>
+            {/* <Routes>
+                <Route path={`cocktail/:id`} element={<CocktailDetail name={name} />} />
+            </Routes> */}
             <Link to={`/cocktail/${name}`}>
                 <div className="bg-white rounded-lg mt-12 shadow-lg overflow-hidden mr-6 cursor-pointer">
                     <img src={image} alt={name} className="w-64 h-32 sm:h-48 object-cover" />
                     <div className="p-3 font-bold text-sm">{name}</div>
                 </div>
             </Link>
-            {/* <Routes>
-                <Route path={`cocktail/${name}`} element={<CocktailDetail />} />
-            </Routes> */}
         </div>
     );
 };

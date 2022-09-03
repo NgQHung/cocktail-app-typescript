@@ -53,7 +53,10 @@ function App() {
                 </Routes> */}
                 <Route path="/alcoholic" element={<Alcoholic />} />
                 <Route path="/alcoholic/non-alcoholic" element={<NonAlcoholic />} />
-                <Route path={"/cocktail/:id"} element={<CocktailDetail />} />
+                <Route
+                    path={"/cocktail/:id"}
+                    element={<CocktailDetail cocktailData={cocktails} />}
+                />
             </Routes>
         </Fragment>
     );

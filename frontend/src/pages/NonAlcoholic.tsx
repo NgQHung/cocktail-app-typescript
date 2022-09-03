@@ -11,6 +11,7 @@ const NonAlcoholic = () => {
         const res = await axios.get(
             "http://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
         );
+        console.log(res);
         const data = res.data.drinks;
         setCocktails(data.slice(0, index));
     };
