@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 // interface Props {
 //     isClicked: boolean;
@@ -46,6 +46,7 @@ const Navigation = () => {
                     </NavLink>
                 </div>
             </div>
+            <Outlet />
         </Fragment>
     );
 };

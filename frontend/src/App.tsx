@@ -43,20 +43,11 @@ function App() {
                 <Route
                     path="/"
                     element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
-                />
-                <Route
-                    path="/*"
-                    element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
-                />
-                {/* <Routes>
-                    <Route path="*" element={<Navigation />} />
-                </Routes> */}
-                <Route path="/alcoholic" element={<Alcoholic />} />
+                >
+                    <Route path="/navigation" element={<Navigation />} />
+                </Route>
                 <Route path="/alcoholic/non-alcoholic" element={<NonAlcoholic />} />
-                <Route
-                    path={"/cocktail/:id"}
-                    element={<CocktailDetail cocktailData={cocktails} />}
-                />
+                <Route path="/alcoholic" element={<Alcoholic />} />
             </Routes>
         </Fragment>
     );

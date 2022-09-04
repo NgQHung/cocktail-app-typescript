@@ -7,26 +7,14 @@ interface Props {
     name: string;
     image: string;
 }
-interface Match {
-    path: string;
-    // exact: boolean;
-    // strict: boolean
-}
 
 const CocktailItem: React.FC<Props> = (props) => {
-    const { id, name, image } = props;
-    const location = useLocation();
-    // const match = matchPath<Match>(location.pathname, {
-    //     path: "/users/:id",
-    //     //   exact: true,
-    //     //   strict: false
-    // });
-    // console.log(match);
+    const { name, image } = props;
     return (
         <div>
-            {/* <Routes>
-                <Route path={`cocktail/:id`} element={<CocktailDetail name={name} />} />
-            </Routes> */}
+            <Routes>
+                <Route path={"/cocktail/:name"} element={<CocktailDetail name={name} />} />
+            </Routes>
             <Link to={`/cocktail/${name}`}>
                 <div className="bg-white rounded-lg mt-12 shadow-lg overflow-hidden mr-6 cursor-pointer">
                     <img src={image} alt={name} className="w-64 h-32 sm:h-48 object-cover" />
