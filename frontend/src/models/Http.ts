@@ -5,4 +5,5 @@ export interface Http {
     clickedCocktail: Cocktail[];
     navigationClicked: boolean;
     searchClicked: boolean;
+    typeSearchClicked: boolean;
 }

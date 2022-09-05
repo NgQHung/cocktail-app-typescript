@@ -39,9 +39,9 @@ const Header = () => {
                         </ButtonHeader>
                     </Link>
                 </div>
-                {/* <div className="flex flex-end"> */}
-                <Search />
-                {/* </div> */}
+                <div className="flex justify-center">
+                    <Search />
+                </div>
             </div>
             {navigationClicked && <Navigation />}
             {!navigationClicked && isNavigation ? <Navigate to="/" /> : null}

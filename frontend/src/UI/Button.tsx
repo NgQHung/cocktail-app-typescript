@@ -2,14 +2,16 @@ import React from "react";
 
 interface Props {
     children: React.ReactNode;
-    clickHandler?: () => void;
+    clickHandler?: (e: any) => void;
+    dataValue?: string;
 }
 
 export const Button: React.FC<Props> = (props) => {
     return (
         <div
             onClick={props.clickHandler}
-            className="flex border-2 m-16 hover:bg-red-300 hover:pointer-event-auto justify-center align-center p-2 text-xl rounded-xl cursor-pointer"
+            className="flex border-2 hover:bg-red-300 hover:pointer-event-auto justify-center align-center p-2 text-xl rounded-xl cursor-pointer"
+            data-value={props.dataValue}
         >
             {props.children}
         </div>

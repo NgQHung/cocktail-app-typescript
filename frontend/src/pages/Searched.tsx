@@ -8,23 +8,27 @@ const Searched = () => {
     const [searchedCocktail, setSearchedCocktail] = useState([]);
     const params = useParams();
 
-    const searchData = async () => {
+    const searchDataByName = async () => {
         const res = await axios.get(
             `http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${params.cocktail}`
         );
         setSearchedCocktail(res.data.drinks);
     };
+    const searchDataByFirstLetter = async () => {
+        const res = await axios.get(
+            `www.thecocktaildb.com/api/json/v1/1/search.php?f=${params.cocktail}`
+        );
+    };
+    const searchIngredientByName = async () => {
+        const res = await axios.get(
+            `www.thecocktaildb.com/api/json/v1/1/search.php?i=${params.cocktail}`
+        );
+    };
 
     useEffect(() => {
-        searchData();
+        searchDataByName();
     }, [params.cocktail]);
 
-    // console.log(params.cocktail);
-    // const searchedCocktail: any = props.cocktailData.filter(
-    //     (item) => item.strDrink === params.cocktail
-    // );
-    // props.cocktailData.map((item) => console.log(item.strDrink === params.cocktail));
-    // console.log(searchedCocktail);
     return (
         <div>
             <Cocktails cocktailData={searchedCocktail} />

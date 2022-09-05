@@ -7,6 +7,7 @@ const initialValue: Http = {
     clickedCocktail: [],
     navigationClicked: false,
     searchClicked: false,
+    typeSearchClicked: false,
 };
 interface Action {
     type?: any;
@@ -29,6 +30,9 @@ const cocktailSlice = createSlice({
         },
         searchHandler(state) {
             state.searchClicked = !state.searchClicked;
+        },
+        typeSearchHandler(state) {
+            state.typeSearchClicked = !state.typeSearchClicked;
         },
     },
 });
