@@ -16,13 +16,13 @@ interface ClickedCocktail {
 const CocktailDetail: React.FC<Props> = (props) => {
     const params = useParams();
     const isID = props.cocktailData.filter((item) => item.idDrink.toString() === params.cocktailId);
-    // props.cocktailData.filter((item) => console.log(item.idDrink.toString()));
-    // const {idDrink, strDrink, strDrinkThumb}:Cocktail  = props.cocktailData.map((item) => console.log(item));
-
-    // console.log(params.cocktailId);
     const clickedCoc: any = useSelector<ClickedCocktail>(
         (state) => state.cocktailSlice.clickedCocktail
     );
+    // const navigationClicked: any = useSelector<any>(
+    //     (state) => state.cocktailSlice.navigationClicked
+    // );
+    // console.log(navigationClicked);
 
     return (
         <div className="flex justify-center items-center p-5">

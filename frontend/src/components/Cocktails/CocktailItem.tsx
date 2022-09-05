@@ -1,10 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
-import { Cocktail } from "../../models/cocktails";
+import { Link } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
-import CocktailDetail from "./CocktailDetail";
 
 interface Props {
     id: number;
@@ -16,9 +14,15 @@ const CocktailItem: React.FC<Props> = (props) => {
     const { id, name, image } = props;
 
     const dispatch = useDispatch();
+    const navigationClicked: any = useSelector<any>(
+        (state) => state.cocktailSlice.navigationClicked
+    );
     const clickedCocktailHandler = () => {
         dispatch(cocktailSliceAction.clickedCocktailHandler({ id, name, image }));
+        if (navigationClicked === true) return dispatch(cocktailSliceAction.navigationHandler());
+        // if (navigationClicked === false) return;
     };
+
     return (
         <div>
             {/* <Routes>
