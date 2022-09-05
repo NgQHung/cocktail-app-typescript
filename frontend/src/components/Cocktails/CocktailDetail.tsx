@@ -19,15 +19,11 @@ const CocktailDetail: React.FC<Props> = (props) => {
     const clickedCoc: any = useSelector<ClickedCocktail>(
         (state) => state.cocktailSlice.clickedCocktail
     );
-    // const navigationClicked: any = useSelector<any>(
-    //     (state) => state.cocktailSlice.navigationClicked
-    // );
-    // console.log(navigationClicked);
 
     return (
-        <div className="flex justify-center items-center p-5">
+        <div className="flex flex-col justify-center items-center p-5">
             {typeof clickedCoc === "object" && (
-                <img src={clickedCoc?.image} alt={clickedCoc?.name} />
+                <img className="w-48 h-auto" src={clickedCoc?.image} alt={clickedCoc?.name} />
             )}
 
             <h1>{isID && `This Cocktail at #${params.cocktailId}`}</h1>

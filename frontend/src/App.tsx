@@ -9,6 +9,7 @@ import { Cocktail } from "./models/cocktails";
 import Navigation from "./pages/Navigation";
 import CocktailItem from "./components/Cocktails/CocktailItem";
 import CocktailDetail from "./components/Cocktails/CocktailDetail";
+import Searched from "./pages/Searched";
 
 function App() {
     const [cocktails, setCocktails] = useState<Cocktail[]>([]);
@@ -54,6 +55,7 @@ function App() {
                     path="/cocktail/:cocktailId"
                     element={<CocktailDetail cocktailData={cocktails} />}
                 />
+                <Route path="/searched/:cocktail" element={<Searched />} />
             </Routes>
         </Fragment>
     );
