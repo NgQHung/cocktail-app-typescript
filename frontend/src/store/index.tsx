@@ -1,14 +1,14 @@
 import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import cocktailSlice from "./cocktail-slice";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 // ...
 
 export const store = configureStore({
     reducer: {
         cocktailSlice: cocktailSlice,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 applyMiddleware(thunk);
 

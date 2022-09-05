@@ -1,21 +1,35 @@
 import express from "express";
 import { Router } from "express";
-import { getAllCocktail } from "../controllers/cocktailController";
+import { alcoholic, getAllCocktail, nonAlcoholic } from "../controllers/cocktailController";
 
 const router = Router();
 
 router.get("/", getAllCocktail);
-router.get("/navigation", (req: express.Request, res: express.Response) => {
-    res.json("navigation");
+router.get("/category", (req: express.Request, res: express.Response) => {
+    res.json("ordinary-drink");
 });
-router.get("/category/type", (req: express.Request, res: express.Response) => {
-    res.json("category");
+// category
+router.get("/category/ordinary-drink", (req: express.Request, res: express.Response) => {
+    res.json("ordinary-drink");
 });
-router.get("/collection/:id", (req: express.Request, res: express.Response) => {
-    res.json("collection");
+router.get("/category/cocktail", (req: express.Request, res: express.Response) => {
+    res.json("cocktail");
 });
-router.get("/cocktail/:id", (req: express.Request, res: express.Response) => {
-    res.json("cocktails");
+
+// glass
+router.get("/glass/cocktail-glass", (req: express.Request, res: express.Response) => {
+    res.json("cocktail-glass");
 });
+router.get("/glass/champagne-flute", (req: express.Request, res: express.Response) => {
+    res.json("champagne-flute");
+});
+
+// ingredient
+router.get("/ingredient/gin");
+router.get("/ingredient/vodka");
+
+// alcoholic
+router.get("/alcoholic/alcoholic", alcoholic);
+router.get("/alcoholic/non-alcoholic", nonAlcoholic);
 
 export default router;
