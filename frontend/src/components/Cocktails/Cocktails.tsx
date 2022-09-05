@@ -9,7 +9,7 @@ import CocktailDetail from "./CocktailDetail";
 
 interface Props {
     cocktailData: Cocktail[];
-    loadMore: () => void;
+    loadMore?: () => void;
 }
 
 const Cocktails: React.FC<Props> = (props) => {

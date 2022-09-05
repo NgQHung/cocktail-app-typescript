@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
     children: React.ReactNode;
-    clickHandler: () => void;
+    clickHandler?: () => void;
 }
 
 export const Button: React.FC<Props> = (props) => {
