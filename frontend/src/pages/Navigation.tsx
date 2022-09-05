@@ -1,17 +1,34 @@
 import React, { Fragment } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
+import { cocktailSliceAction } from "../store/cocktail-slice";
 
 // interface Props {
 //     isClicked: boolean;
 // }
 
 const Navigation = () => {
+    const navigationClicked: any = useSelector<any>(
+        (state) => state.cocktailSlice.navigationClicked
+    );
+    const dispatch = useDispatch();
+    const clickedCocktailHandler = () => {
+        if (navigationClicked === true) return dispatch(cocktailSliceAction.navigationHandler());
+    };
     return (
         <Fragment>
-            <div className="flex justify-center mt-2 flex-col items-center">
+            <div
+                className="flex justify-center mt-2 flex-col items-center"
+                onClick={clickedCocktailHandler}
+            >
                 <p>Alcoholic</p>
                 <div className="flex text-xl text-gray-400">
-                    <NavLink className="p-4 hover:text-blue-600" to="/alcoholic/alcoholic">
+                    <NavLink
+                        // onClick={clickedCocktailHandler}
+                        className="p-4 hover:text-blue-600"
+                        to="/alcoholic/alcoholic"
+                    >
                         Alcoholic
                     </NavLink>
                     <NavLink className="p-4 hover:text-blue-600" to="/alcoholic/non-alcoholic">

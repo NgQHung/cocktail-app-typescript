@@ -46,10 +46,10 @@ function App() {
                 >
                     <Route path="navigation" element={<Navigation />} />
                     {/* <Route path='cocktail' element={<CocktailItem />}/> */}
-                    <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
-                    <Route path="alcoholic" element={<Alcoholic />} />
                     {/* <Route path="cocktail/:cocktailId" element={<CocktailDetail />} /> */}
                 </Route>
+                <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
+                <Route path="alcoholic" element={<Alcoholic />} />
                 <Route
                     path="/cocktail/:cocktailId"
                     element={<CocktailDetail cocktailData={cocktails} />}

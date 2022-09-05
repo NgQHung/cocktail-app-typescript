@@ -25,9 +25,6 @@ const CocktailItem: React.FC<Props> = (props) => {
 
     return (
         <div>
-            {/* <Routes>
-                <Route path={"/cocktail/:name"} element={<CocktailDetail />} />
-            </Routes> */}
             <Link to={`/cocktail/${id}`}>
                 <div
                     onClick={clickedCocktailHandler}
