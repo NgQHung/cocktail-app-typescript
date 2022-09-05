@@ -5,7 +5,7 @@ import { Button } from "../../UI/Button";
 import Navigation from "../../pages/Navigation";
 import { Cocktail } from "../../models/cocktails";
 import { Route, Routes, useLocation } from "react-router-dom";
-import CocktailDetail from "../CocktailDetail";
+import CocktailDetail from "./CocktailDetail";
 
 interface Props {
     cocktailData: Cocktail[];
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Cocktails: React.FC<Props> = (props) => {
-    const location = useLocation();
+    // const location = useLocation();
     return (
         <Fragment>
             <div className="flex flex-wrap justify-center">

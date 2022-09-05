@@ -4,6 +4,7 @@ import { Http } from "../models/Http";
 
 const initialValue: Http = {
     data: [],
+    clickedCocktail: [],
 };
 interface Action {
     type?: any;
@@ -17,6 +18,9 @@ const cocktailSlice = createSlice({
         fetCocktail(state: Http, action: Action) {
             state.data = action.payload;
             // console.log(action.payload);
+        },
+        clickedCocktailHandler(state, action) {
+            state.clickedCocktail = action.payload;
         },
     },
 });

@@ -8,7 +8,7 @@ import NonAlcoholic from "./pages/NonAlcoholic";
 import { Cocktail } from "./models/cocktails";
 import Navigation from "./pages/Navigation";
 import CocktailItem from "./components/Cocktails/CocktailItem";
-import CocktailDetail from "./components/CocktailDetail";
+import CocktailDetail from "./components/Cocktails/CocktailDetail";
 
 function App() {
     const [cocktails, setCocktails] = useState<Cocktail[]>([]);
@@ -44,10 +44,16 @@ function App() {
                     path="/"
                     element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
                 >
-                    <Route path="/navigation" element={<Navigation />} />
+                    <Route path="navigation" element={<Navigation />} />
+                    {/* <Route path='cocktail' element={<CocktailItem />}/> */}
+                    <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
+                    <Route path="alcoholic" element={<Alcoholic />} />
+                    {/* <Route path="cocktail/:cocktailId" element={<CocktailDetail />} /> */}
                 </Route>
-                <Route path="/alcoholic/non-alcoholic" element={<NonAlcoholic />} />
-                <Route path="/alcoholic" element={<Alcoholic />} />
+                <Route
+                    path="/cocktail/:cocktailId"
+                    element={<CocktailDetail cocktailData={cocktails} />}
+                />
             </Routes>
         </Fragment>
     );
