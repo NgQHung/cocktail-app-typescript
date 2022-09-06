@@ -10,13 +10,11 @@ interface Props {
 }
 
 const Cocktails: React.FC<Props> = (props) => {
-    // console.log(props.cocktailData);
     const error = props.cocktailData === null;
-    // const cocktail = props.selectedType !== 'ingredient_id'
     const ingredient = props.selectedType === "ingredient_id";
     return (
         <Fragment>
-            <div className="flex flex-wrap justify-center ">
+            <div className="bg-cocktail color-overlay-bg flex flex-wrap justify-center pb-12 ">
                 {!ingredient &&
                     props.cocktailData?.map((coc) => (
                         <CocktailItem

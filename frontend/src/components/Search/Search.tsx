@@ -57,7 +57,7 @@ const Search = () => {
     const ingredientIsSelected = selectedType === "ingredient_id";
 
     return (
-        <nav onKeyUp={handleKeyboardEvent} className="flex flex-col ">
+        <nav onKeyUp={handleKeyboardEvent} className="flex flex-col mt-12 ">
             <div className="flex justify-around items-center ">
                 <div className={`flex ${style_search}`}>
                     <Button dataValue="cocktail_name" clickHandler={typeSearchHandler}>
@@ -96,7 +96,7 @@ const Search = () => {
                     {searchClicked && <FontAwesomeIcon icon={faXmark} />}
                 </div>
             </div>
-            <div className="flex justify-center mt-12 ml-12 mr-12 text-xl ">
+            <div className="flex justify-center mt-12 ml-48 mr-48 text-xl ">
                 <div
                     className="flex items-center cursor-pointer hover:bg-gray-100 pl-2 pr-2 hover:text-green-500 font-normal opacity"
                     onClick={searchHandler}

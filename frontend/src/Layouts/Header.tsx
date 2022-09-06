@@ -30,17 +30,17 @@ const Header = () => {
 
     return (
         <div
-            className={`${
-                searchPath ? "hidden" : ""
-            } flex justify-between align-center flex-col w-full border-b-4 shadow-md sticky top-0 z-40 bg-white p-4 `}
+            className={`bg-header
+            ${searchPath ? "hidden" : ""}
+            h-full w-full border-b shadow-xl sticky top-0 z-99 bg-white p-4 `}
         >
-            <div className="flex w-full justify-between items-center justify-center">
+            <div className="flex justify-around">
                 <div className={`cursor-pointer ${style_search}`}>
                     <Link onClick={navigationClicked} to="/">
-                        logo
+                        <img className="w-16" src="logo.png" alt="logo" />
                     </Link>
                 </div>
-                <div className={`${style_search}`}>
+                <div className={` ${style_search}`}>
                     <Link to="/navigation">
                         <ButtonHeader
                             clickHandler={() => dispatch(cocktailSliceAction.navigationHandler())}
@@ -49,10 +49,10 @@ const Header = () => {
                         </ButtonHeader>
                     </Link>
                 </div>
-                <div className="">
+                <div className="w-16 flex items-center justify-center">
                     <Link to="/search">
                         <div
-                            className="cursor-point hover:bg-gray-100 pl-2 pr-2 hover:text-green-500"
+                            className=" cursor-point hover:bg-gray-100 hover:text-green-500"
                             onClick={searchHandler}
                         >
                             {!searchClicked && <FontAwesomeIcon icon={faMagnifyingGlass} />}
@@ -61,7 +61,6 @@ const Header = () => {
                 </div>
             </div>
             <div>
-                {/* {searchClicked && <Search />} */}
                 {navigationClicked && !searchClicked ? <Navigation /> : null}
                 {!navigationClicked && isNavigation ? <Navigate to="/" /> : null}
             </div>
