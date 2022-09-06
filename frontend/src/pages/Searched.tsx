@@ -42,7 +42,7 @@ const Searched = () => {
         if (ingredientIsSelected) {
             searchIngredientByName();
         }
-    }, [params.cocktail, selectedType]);
+    }, [params.cocktail]);
 
     return (
         <div>

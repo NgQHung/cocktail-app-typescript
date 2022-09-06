@@ -19,18 +19,19 @@ const Header = () => {
         (state) => state.cocktailSlice.navigationClicked
     );
     const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
+    console.log(searchClicked);
     const isNavigation = location.pathname === "/navigation";
 
     const style_search = searchClicked ? "hidden" : "";
     return (
         <div className=" flex justify-between align-center flex-col w-full border-b-4 shadow-md sticky top-0 z-40 bg-white p-4 ">
-            <div className="flex justify-between items-center justify-center">
+            <div className="flex w-full justify-between items-center justify-center">
                 <div className={`cursor-pointer ${style_search}`}>
                     <Link onClick={navigationClicked} to="/">
                         logo
                     </Link>
                 </div>
-                <div className={` ${style_search}`}>
+                <div className={`${style_search}`}>
                     <Link to="/navigation">
                         <ButtonHeader
                             clickHandler={() => dispatch(cocktailSliceAction.navigationHandler())}
@@ -39,12 +40,17 @@ const Header = () => {
                         </ButtonHeader>
                     </Link>
                 </div>
-                <div className="flex justify-center cursor-pointer">
+                <div className="">
+                    {/* <Link to="/search"> */}
                     <Search />
+                    {/* </Link> */}
                 </div>
             </div>
-            {navigationClicked && <Navigation />}
-            {!navigationClicked && isNavigation ? <Navigate to="/" /> : null}
+            <div>
+                {/* {searchClicked && <Navigate to="/" />} */}
+                {navigationClicked && <Navigation />}
+                {!navigationClicked && isNavigation ? <Navigate to="/" /> : null}
+            </div>
         </div>
     );
 };

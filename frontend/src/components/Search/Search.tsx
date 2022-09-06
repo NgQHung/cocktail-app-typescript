@@ -1,9 +1,9 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { searchSliceAction } from "../../store/search-slice";
 import { Button } from "../../UI/Button";
 
@@ -18,7 +18,9 @@ const Search = () => {
 
     const searchHandler = () => {
         dispatch(searchSliceAction.searchHandler());
-        if (searchClicked) return navigate(`/searched/${valueEntered}`);
+        if (searchClicked) {
+            navigate(`/searched/${valueEntered}`);
+        }
     };
     const changeHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setValueEntered(e.currentTarget.value);
@@ -32,6 +34,24 @@ const Search = () => {
         if (dataValue === "ingredient_id") return setSelectedType("ingredient_id");
     };
 
+    // trigger enter as a onclick button
+    const handleKeyboardEvent = (e: React.KeyboardEvent): void => {
+        if (e.key === "Enter") {
+            searchHandler();
+        }
+    };
+
+    // close search section
+    const closeSearchHandler = () => {
+        dispatch(searchSliceAction.searchHandler());
+        // if (!searchClicked) {
+        //     navigate("/");
+        // }
+    };
+    const openSearchHandler = () => {
+        dispatch(searchSliceAction.searchHandler());
+    };
+
     const style_search = !searchClicked ? "hidden" : "";
 
     const cocktailNameIsSelected = selectedType === "cocktail_name";
@@ -39,10 +59,12 @@ const Search = () => {
     const ingredientIsSelected = selectedType === "ingredient_id";
 
     return (
-        <div className="flex justify-center">
-            <div className="cursor-point" onClick={searchHandler}>
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </div>
+        <nav onKeyUp={handleKeyboardEvent} className="flex w-full justify-between items-center">
+            <Link to="/search">
+                <div className="cursor-point" onClick={searchHandler}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </div>
+            </Link>
             <div className={`flex ${style_search} mr-12 ml-12`}>
                 <Button dataValue="cocktail_name" clickHandler={typeSearchHandler}>
                     <div
@@ -77,7 +99,10 @@ const Search = () => {
                 className={`border border-black w-96 rounded-xl ${style_search} 
                 `}
             />
-        </div>
+            <div className="ml-12 cursor-pointer" onClick={closeSearchHandler}>
+                <Link to="/">{searchClicked && <FontAwesomeIcon icon={faXmark} />}</Link>
+            </div>
+        </nav>
     );
 };
 
