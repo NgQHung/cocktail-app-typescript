@@ -24,8 +24,12 @@ const Cocktails: React.FC<Props> = (props) => {
                 ))}
                 {error && <p>There are no such cocktail</p>}
             </div>
-            <div className="flex justify-center ">
-                {!error && <Button clickHandler={props.loadMore}>Load more</Button>}
+            <div className="flex justify-center mt-12 mb-12  ">
+                {!error && (
+                    <Button clickHandler={props.loadMore}>
+                        <div className="border-2 rounded-xl p-2 hover:bg-red-300">Load more</div>
+                    </Button>
+                )}
             </div>
         </Fragment>
     );

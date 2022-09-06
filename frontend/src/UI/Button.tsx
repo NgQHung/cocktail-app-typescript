@@ -7,10 +7,11 @@ interface Props {
 }
 
 export const Button: React.FC<Props> = (props) => {
+    const active = "bg-green-500";
     return (
         <div
             onClick={props.clickHandler}
-            className="flex border-2 hover:bg-red-300 hover:pointer-event-auto justify-center align-center p-2 text-xl rounded-xl cursor-pointer"
+            className="flex justify-center align-center p-2 text-xl cursor-pointer"
             data-value={props.dataValue}
         >
             {props.children}
