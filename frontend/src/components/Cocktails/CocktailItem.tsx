@@ -7,7 +7,7 @@ import { cocktailSliceAction } from "../../store/cocktail-slice";
 interface Props {
     id: number;
     name: string;
-    image: string;
+    image?: string;
 }
 
 const CocktailItem: React.FC<Props> = (props) => {
@@ -30,7 +30,9 @@ const CocktailItem: React.FC<Props> = (props) => {
                     onClick={clickedCocktailHandler}
                     className="bg-white rounded-lg mt-12 shadow-lg overflow-hidden mr-6 cursor-pointer"
                 >
-                    <img src={image} alt={name} className="w-64 h-32 sm:h-48 object-cover" />
+                    {image && (
+                        <img src={image} alt={name} className="w-64 h-32 sm:h-48 object-cover" />
+                    )}
                     <div className="p-3 font-bold text-sm">{name}</div>
                 </div>
             </Link>

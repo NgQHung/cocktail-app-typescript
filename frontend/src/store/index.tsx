@@ -1,12 +1,13 @@
 import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import cocktailSlice from "./cocktail-slice";
-// import logger from "redux-logger";
+import searchSlice from "./search-slice";
 // ...
 
 export const store = configureStore({
     reducer: {
         cocktailSlice: cocktailSlice,
+        searchSlice: searchSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

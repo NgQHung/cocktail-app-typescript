@@ -4,41 +4,40 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { cocktailSliceAction } from "../../store/cocktail-slice";
+import { searchSliceAction } from "../../store/search-slice";
 import { Button } from "../../UI/Button";
 
 const Search = () => {
     const dispatch = useDispatch();
-    const [valueEntered, setValueEntered] = useState("");
-    const [selectedType, setSelectedType] = useState("");
-    const searchClicked: any = useSelector<any>((state) => state.cocktailSlice.searchClicked);
-    const typeSearchClicked: any = useSelector<any>(
-        (state) => state.cocktailSlice.typeSearchClicked
-    );
-
     const navigate = useNavigate();
+
+    const [valueEntered, setValueEntered] = useState("");
+    const [selectedType, setSelectedType] = useState("cocktail_name");
+    const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
+    const selectedTypes: any = useSelector<any>((state) => state.searchSlice.typeSearchClicked);
+
     const searchHandler = () => {
-        dispatch(cocktailSliceAction.searchHandler());
+        dispatch(searchSliceAction.searchHandler());
         if (searchClicked) return navigate(`/searched/${valueEntered}`);
     };
     const changeHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setValueEntered(e.currentTarget.value);
     };
-    const active = "bg-green-500";
 
     const typeSearchHandler = (e: any) => {
-        dispatch(cocktailSliceAction.typeSearchHandler());
-        // console.log(e.currentTarget.classList.toggle(active));
         const dataValue = e.currentTarget.getAttribute("data-value");
+        dispatch(searchSliceAction.typeSearchHandler(dataValue));
         if (dataValue === "cocktail_name") return setSelectedType("cocktail_name");
         if (dataValue === "cocktail_letter") return setSelectedType("cocktail_letter");
         if (dataValue === "ingredient_id") return setSelectedType("ingredient_id");
     };
 
-    // const active = 'bg-'
-
     const style_search = !searchClicked ? "hidden" : "";
-    // console.log(selectedType);
+
+    const cocktailNameIsSelected = selectedType === "cocktail_name";
+    const cocktailLetterIsSelected = selectedType === "cocktail_letter";
+    const ingredientIsSelected = selectedType === "ingredient_id";
+
     return (
         <div className="flex justify-center">
             <div className="cursor-point" onClick={searchHandler}>
@@ -48,8 +47,8 @@ const Search = () => {
                 <Button dataValue="cocktail_name" clickHandler={typeSearchHandler}>
                     <div
                         className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
-                            selectedType === "cocktail_name" ? active : ""
-                        }`}
+                            cocktailNameIsSelected ? "bg-green-500" : ""
+                        } `}
                     >
                         Search Cocktail By Name
                     </div>
@@ -57,8 +56,8 @@ const Search = () => {
                 <Button dataValue="cocktail_letter" clickHandler={typeSearchHandler}>
                     <div
                         className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
-                            selectedType === "cocktail_letter" ? active : ""
-                        }`}
+                            cocktailLetterIsSelected ? "bg-green-500" : ""
+                        } `}
                     >
                         Search Cocktail By First Letter
                     </div>
@@ -66,19 +65,18 @@ const Search = () => {
                 <Button dataValue="ingredient_id" clickHandler={typeSearchHandler}>
                     <div
                         className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
-                            selectedType === "ingredient_id" ? active : ""
-                        }`}
+                            ingredientIsSelected ? "bg-green-500" : ""
+                        } `}
                     >
                         Search Ingredient By Id
                     </div>
                 </Button>
             </div>
-            {/* <input
+            <input
                 onChange={changeHandler}
                 className={`border border-black w-96 rounded-xl ${style_search} 
-                ${type_search}
                 `}
-            /> */}
+            />
         </div>
     );
 };

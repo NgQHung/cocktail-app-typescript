@@ -18,14 +18,14 @@ const Header = () => {
     const navigationClicked: any = useSelector<any>(
         (state) => state.cocktailSlice.navigationClicked
     );
-    const searchClicked: any = useSelector<any>((state) => state.cocktailSlice.searchClicked);
+    const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
     const isNavigation = location.pathname === "/navigation";
 
     const style_search = searchClicked ? "hidden" : "";
     return (
         <div className=" flex justify-between align-center flex-col w-full border-b-4 shadow-md sticky top-0 z-40 bg-white p-4 ">
             <div className="flex justify-between items-center justify-center">
-                <div className={` cursor-pointer ${style_search}`}>
+                <div className={`cursor-pointer ${style_search}`}>
                     <Link onClick={navigationClicked} to="/">
                         logo
                     </Link>
@@ -39,7 +39,7 @@ const Header = () => {
                         </ButtonHeader>
                     </Link>
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center cursor-pointer">
                     <Search />
                 </div>
             </div>

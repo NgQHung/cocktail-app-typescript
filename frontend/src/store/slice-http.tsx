@@ -9,12 +9,12 @@ export const getAllCocktail = async () => {
             console.log(data);
             return data;
         };
-        try {
-            const data = await sendRequest();
-            dispatch(cocktailSliceAction.fetCocktail(data));
-            // console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
+        // try {
+        //     const data = await sendRequest();
+        //     dispatch(cocktailSliceAction.fetCocktail(data));
+        //     // console.log(data);
+        // } catch (error) {
+        //     console.log(error);
+        // }
     };
 };

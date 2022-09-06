@@ -2,16 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { Cocktail } from "../models/cocktails";
 import { Http } from "../models/Http";
 
-const initialValue: Http = {
+const initialValue: any = {
     data: [],
     clickedCocktail: [],
     navigationClicked: false,
-    searchClicked: false,
-    typeSearchClicked: false,
 };
 interface Action {
     type?: any;
-    payload: any;
+    payload?: any;
 }
 
 const cocktailSlice = createSlice({
@@ -20,19 +18,12 @@ const cocktailSlice = createSlice({
     reducers: {
         fetCocktail(state: Http, action: Action) {
             state.data = action.payload;
-            // console.log(action.payload);
         },
         navigationHandler(state) {
             state.navigationClicked = !state.navigationClicked;
         },
         clickedCocktailHandler(state, action) {
             state.clickedCocktail = action.payload;
-        },
-        searchHandler(state) {
-            state.searchClicked = !state.searchClicked;
-        },
-        typeSearchHandler(state) {
-            state.typeSearchClicked = !state.typeSearchClicked;
         },
     },
 });
