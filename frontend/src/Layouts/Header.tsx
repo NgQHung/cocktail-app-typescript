@@ -22,7 +22,7 @@ const Header = () => {
 
     const style_search = searchClicked ? "hidden" : "";
 
-    const searchPath = location.pathname;
+    const searchPath = location.pathname === "/search";
 
     const searchHandler = () => {
         dispatch(searchSliceAction.searchHandler());
@@ -30,7 +30,9 @@ const Header = () => {
 
     return (
         <div
-            className={`flex justify-between align-center flex-col w-full border-b-4 shadow-md sticky top-0 z-40 bg-white p-4 `}
+            className={`${
+                searchPath ? "hidden" : ""
+            } flex justify-between align-center flex-col w-full border-b-4 shadow-md sticky top-0 z-40 bg-white p-4 `}
         >
             <div className="flex w-full justify-between items-center justify-center">
                 <div className={`cursor-pointer ${style_search}`}>
@@ -59,7 +61,7 @@ const Header = () => {
                 </div>
             </div>
             <div>
-                {searchClicked && <Search />}
+                {/* {searchClicked && <Search />} */}
                 {navigationClicked && !searchClicked ? <Navigation /> : null}
                 {!navigationClicked && isNavigation ? <Navigate to="/" /> : null}
             </div>

@@ -12,6 +12,7 @@ import CocktailDetail from "./components/Cocktails/CocktailDetail";
 import Searched from "./pages/Searched";
 import NotFound from "./pages/NotFound";
 import Search from "./components/Search/Search";
+import Footer from "./Layouts/Footer";
 
 function App() {
     const [cocktails, setCocktails] = useState<Cocktail[]>([]);
@@ -49,7 +50,7 @@ function App() {
                 >
                     <Route path="navigation" element={<Navigation />} />
                 </Route>
-                {/* <Route path="/search" element={<Search />} /> */}
+                <Route path="search" element={<Search />} />
                 <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
                 <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
                 <Route path="*" element={<NotFound />} />
@@ -60,6 +61,7 @@ function App() {
                 <Route path="/searched/:cocktail" element={<Searched />} />
                 <Route path="/searched/*" element={<NotFound />} />
             </Routes>
+            <Footer />
         </Fragment>
     );
 }

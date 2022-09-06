@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import Footer from "../../Layouts/Footer";
 import { searchSliceAction } from "../../store/search-slice";
 import { Button } from "../../UI/Button";
 
@@ -56,55 +57,61 @@ const Search = () => {
     const ingredientIsSelected = selectedType === "ingredient_id";
 
     return (
-        <nav onKeyUp={handleKeyboardEvent} className="flex items-start justify-between">
-            <div
-                className="cursor-point hover:bg-gray-100 pl-2 pr-2 hover:text-green-500"
-                onClick={searchHandler}
-            >
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
+        <nav onKeyUp={handleKeyboardEvent} className="flex flex-col ">
+            <div className="flex justify-around items-center ">
+                <div className={`flex ${style_search}`}>
+                    <Button dataValue="cocktail_name" clickHandler={typeSearchHandler}>
+                        <div
+                            className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
+                                cocktailNameIsSelected ? "bg-green-500" : ""
+                            } `}
+                        >
+                            Search Cocktail By Name
+                        </div>
+                    </Button>
+                    <Button dataValue="cocktail_letter" clickHandler={typeSearchHandler}>
+                        <div
+                            className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
+                                cocktailLetterIsSelected ? "bg-green-500" : ""
+                            } `}
+                        >
+                            Search Cocktail By First Letter
+                        </div>
+                    </Button>
+                    <Button dataValue="ingredient_id" clickHandler={typeSearchHandler}>
+                        <div
+                            className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
+                                ingredientIsSelected ? "bg-green-500" : ""
+                            } `}
+                        >
+                            Search Ingredient By Id
+                        </div>
+                    </Button>
+                </div>
+
+                <div
+                    className="flex cursor-pointer hover:bg-gray-100 pl-2 pr-2 hover:text-red-500 text-2xl"
+                    onClick={closeSearchHandler}
+                >
+                    {searchClicked && <FontAwesomeIcon icon={faXmark} />}
+                </div>
             </div>
-            <div className={`flex ${style_search} mr-12 ml-12`}>
-                <Button dataValue="cocktail_name" clickHandler={typeSearchHandler}>
-                    <div
-                        className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
-                            cocktailNameIsSelected ? "bg-green-500" : ""
-                        } `}
-                    >
-                        Search Cocktail By Name
-                    </div>
-                </Button>
-                <Button dataValue="cocktail_letter" clickHandler={typeSearchHandler}>
-                    <div
-                        className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
-                            cocktailLetterIsSelected ? "bg-green-500" : ""
-                        } `}
-                    >
-                        Search Cocktail By First Letter
-                    </div>
-                </Button>
-                <Button dataValue="ingredient_id" clickHandler={typeSearchHandler}>
-                    <div
-                        className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
-                            ingredientIsSelected ? "bg-green-500" : ""
-                        } `}
-                    >
-                        Search Ingredient By Id
-                    </div>
-                </Button>
+            <div className="flex justify-center mt-12 ml-12 mr-12 text-xl ">
+                <div
+                    className="flex items-center cursor-pointer hover:bg-gray-100 pl-2 pr-2 hover:text-green-500 font-normal opacity"
+                    onClick={searchHandler}
+                >
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </div>
+                <input
+                    onChange={changeHandler}
+                    className={`border w-full rounded-lg pt-4 pb-4 pl-4  ${style_search} 
+                        `}
+                    value={valueEntered}
+                    placeholder="search..."
+                />
             </div>
-            <input
-                onChange={changeHandler}
-                className={`border border-black w-96 rounded-xl mr-12 ${style_search} 
-                `}
-                value={valueEntered}
-            />
-            <div
-                className="flex cursor-pointer hover:bg-gray-100 pl-2 pr-2 hover:text-red-500"
-                onClick={closeSearchHandler}
-            >
-                {searchClicked && <FontAwesomeIcon icon={faXmark} />}
-            </div>
-            <div className="h-screen"></div>
+            <div className="h-80"></div>
         </nav>
     );
 };

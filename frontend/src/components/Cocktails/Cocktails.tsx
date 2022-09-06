@@ -16,7 +16,7 @@ const Cocktails: React.FC<Props> = (props) => {
     const ingredient = props.selectedType === "ingredient_id";
     return (
         <Fragment>
-            <div className="flex flex-wrap justify-center">
+            <div className="flex flex-wrap justify-center ">
                 {!ingredient &&
                     props.cocktailData?.map((coc) => (
                         <CocktailItem
