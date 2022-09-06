@@ -16,12 +16,6 @@ const Search = () => {
     const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
     const selectedTypes: any = useSelector<any>((state) => state.searchSlice.typeSearchClicked);
 
-    const searchHandler = () => {
-        dispatch(searchSliceAction.searchHandler());
-        if (searchClicked) {
-            navigate(`/searched/${valueEntered}`);
-        }
-    };
     const changeHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setValueEntered(e.currentTarget.value);
     };
@@ -32,6 +26,14 @@ const Search = () => {
         if (dataValue === "cocktail_name") return setSelectedType("cocktail_name");
         if (dataValue === "cocktail_letter") return setSelectedType("cocktail_letter");
         if (dataValue === "ingredient_id") return setSelectedType("ingredient_id");
+        // dispatch(searchSliceAction.typeSearchHandler(""));
+        setValueEntered("");
+    };
+    const searchHandler = () => {
+        if (searchClicked) {
+            navigate(`/searched/${valueEntered}`);
+        }
+        setValueEntered("");
     };
 
     // trigger enter as a onclick button
@@ -44,12 +46,7 @@ const Search = () => {
     // close search section
     const closeSearchHandler = () => {
         dispatch(searchSliceAction.searchHandler());
-        // if (!searchClicked) {
-        //     navigate("/");
-        // }
-    };
-    const openSearchHandler = () => {
-        dispatch(searchSliceAction.searchHandler());
+        navigate("/");
     };
 
     const style_search = !searchClicked ? "hidden" : "";
@@ -59,12 +56,13 @@ const Search = () => {
     const ingredientIsSelected = selectedType === "ingredient_id";
 
     return (
-        <nav onKeyUp={handleKeyboardEvent} className="flex w-full justify-between items-center">
-            <Link to="/search">
-                <div className="cursor-point" onClick={searchHandler}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </div>
-            </Link>
+        <nav onKeyUp={handleKeyboardEvent} className="flex items-start justify-between">
+            <div
+                className="cursor-point hover:bg-gray-100 pl-2 pr-2 hover:text-green-500"
+                onClick={searchHandler}
+            >
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </div>
             <div className={`flex ${style_search} mr-12 ml-12`}>
                 <Button dataValue="cocktail_name" clickHandler={typeSearchHandler}>
                     <div
@@ -96,12 +94,17 @@ const Search = () => {
             </div>
             <input
                 onChange={changeHandler}
-                className={`border border-black w-96 rounded-xl ${style_search} 
+                className={`border border-black w-96 rounded-xl mr-12 ${style_search} 
                 `}
+                value={valueEntered}
             />
-            <div className="ml-12 cursor-pointer" onClick={closeSearchHandler}>
-                <Link to="/">{searchClicked && <FontAwesomeIcon icon={faXmark} />}</Link>
+            <div
+                className="flex cursor-pointer hover:bg-gray-100 pl-2 pr-2 hover:text-red-500"
+                onClick={closeSearchHandler}
+            >
+                {searchClicked && <FontAwesomeIcon icon={faXmark} />}
             </div>
+            <div className="h-screen"></div>
         </nav>
     );
 };

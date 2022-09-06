@@ -8,9 +8,7 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Search from "../components/Search/Search";
-// interface MatchParams {
-//     id: string
-// }
+import { searchSliceAction } from "../store/search-slice";
 
 const Header = () => {
     const location = useLocation();
@@ -18,13 +16,22 @@ const Header = () => {
     const navigationClicked: any = useSelector<any>(
         (state) => state.cocktailSlice.navigationClicked
     );
+    // console.log(location);
     const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
-    console.log(searchClicked);
     const isNavigation = location.pathname === "/navigation";
 
     const style_search = searchClicked ? "hidden" : "";
+
+    const searchPath = location.pathname;
+
+    const searchHandler = () => {
+        dispatch(searchSliceAction.searchHandler());
+    };
+
     return (
-        <div className=" flex justify-between align-center flex-col w-full border-b-4 shadow-md sticky top-0 z-40 bg-white p-4 ">
+        <div
+            className={`flex justify-between align-center flex-col w-full border-b-4 shadow-md sticky top-0 z-40 bg-white p-4 `}
+        >
             <div className="flex w-full justify-between items-center justify-center">
                 <div className={`cursor-pointer ${style_search}`}>
                     <Link onClick={navigationClicked} to="/">
@@ -41,14 +48,19 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className="">
-                    {/* <Link to="/search"> */}
-                    <Search />
-                    {/* </Link> */}
+                    <Link to="/search">
+                        <div
+                            className="cursor-point hover:bg-gray-100 pl-2 pr-2 hover:text-green-500"
+                            onClick={searchHandler}
+                        >
+                            {!searchClicked && <FontAwesomeIcon icon={faMagnifyingGlass} />}
+                        </div>
+                    </Link>
                 </div>
             </div>
             <div>
-                {/* {searchClicked && <Navigate to="/" />} */}
-                {navigationClicked && <Navigation />}
+                {searchClicked && <Search />}
+                {navigationClicked && !searchClicked ? <Navigation /> : null}
                 {!navigationClicked && isNavigation ? <Navigate to="/" /> : null}
             </div>
         </div>

@@ -4,7 +4,7 @@ import { Cocktail } from "../models/cocktails";
 
 const initialValue: any = {
     searchClicked: false,
-    selectedType: "",
+    selectedType: "cocktail_name",
 };
 interface Action {
     type?: any;

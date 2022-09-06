@@ -48,8 +48,8 @@ function App() {
                     element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
                 >
                     <Route path="navigation" element={<Navigation />} />
-                    <Route path="search" element={<Search />} />
                 </Route>
+                {/* <Route path="/search" element={<Search />} /> */}
                 <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
                 <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
                 <Route path="*" element={<NotFound />} />
