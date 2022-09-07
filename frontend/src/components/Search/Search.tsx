@@ -112,7 +112,7 @@ const Search = () => {
                 </div>
 
                 <div
-                    className="flex cursor-pointer hover:bg-gray-100 pl-2 pr-2 hover:text-red-500 text-2xl"
+                    className="flex cursor-pointer pl-2 pr-2 hover:text-red-500 text-2xl"
                     onClick={closeSearchHandler}
                 >
                     {searchClicked && <FontAwesomeIcon icon={faXmark} />}

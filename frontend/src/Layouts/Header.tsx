@@ -47,7 +47,7 @@ const Header = () => {
                         <Link onClick={navigationClicked} to="/">
                             <img
                                 className="w-12"
-                                src="https://banner2.cleanpng.com/20180708/bs/kisspng-bacardi-cocktail-martini-cocktail-glass-logo-cocktail-logo-5b42630719a652.9189521615310773831051.jpg"
+                                src="https://i.pinimg.com/originals/b8/6f/67/b86f67625bc4f99d4b3acfd7992b3c09.png"
                                 alt="logo"
                             />
                         </Link>
