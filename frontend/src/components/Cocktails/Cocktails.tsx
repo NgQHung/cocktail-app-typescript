@@ -14,7 +14,7 @@ const Cocktails: React.FC<Props> = (props) => {
     const ingredient = props.selectedType === "ingredient_id";
     return (
         <Fragment>
-            <div className="bg-cocktail color-overlay-bg flex flex-wrap justify-center pb-12 ">
+            <div className="bg-cocktail flex flex-wrap justify-center pb-12 ">
                 {!ingredient &&
                     props.cocktailData?.map((coc) => (
                         <CocktailItem

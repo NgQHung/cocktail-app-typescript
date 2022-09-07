@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -18,23 +18,27 @@ const CocktailItem: React.FC<Props> = (props) => {
         (state) => state.cocktailSlice.navigationClicked
     );
     const clickedCocktailHandler = () => {
-        dispatch(cocktailSliceAction.clickedCocktailHandler({ id, name, image }));
+        // dispatch(cocktailSliceAction.clickedCocktailHandler({ id, name, image }));
         if (navigationClicked === true) return dispatch(cocktailSliceAction.navigationHandler());
         // dispatch(cocktailSliceAction.navigationHandler());
     };
 
     return (
-        <div>
-            <Link to={`/cocktail/${id}`}>
-                <div
-                    onClick={clickedCocktailHandler}
-                    className="bg-white rounded-lg mt-12 shadow-lg overflow-hidden m-6 cursor-pointer"
-                >
-                    {image && <img src={image} alt={name} className="h-32 w-48 object-cover" />}
-                    <div className="p-3 font-bold text-sm">{name}</div>
-                </div>
-            </Link>
-        </div>
+        <Fragment>
+            <div
+                onClick={clickedCocktailHandler}
+                className="flex flex-col justify-center items-center bg-white rounded-lg mt-12 shadow-lg overflow-hidden mx-6 cursor-pointer"
+            >
+                <Link to={`/cocktail/${name}`}>
+                    <div className="flex flex-col items-center sm:w-48 sm:h-42">
+                        {image && (
+                            <img src={image} alt={name} className=" h-32 w-48 object-cover" />
+                        )}
+                        <p className="p-3 font-bold text-xs break-words flex flex-wrap">{name}</p>
+                    </div>
+                </Link>
+            </div>
+        </Fragment>
     );
 };
 

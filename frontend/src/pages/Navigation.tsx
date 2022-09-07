@@ -4,11 +4,7 @@ import { useDispatch } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import { cocktailSliceAction } from "../store/cocktail-slice";
 import { motion } from "framer-motion";
-import {
-    motionNavigation,
-    motionNavigation_content_l,
-    motionNavigation_content_r,
-} from "../UI/Animation";
+import { motionNavigation_content_l, motionNavigation_content_r } from "../UI/Animation";
 // interface Props {
 //     isClicked: boolean;
 // }
@@ -25,6 +21,10 @@ const Navigation = () => {
     return (
         <Fragment>
             <motion.div
+                // variants={motionNavigation}
+                // initial="hidden"
+                // animate="visible"
+                // exit="exit"
                 className=" flex justify-around mt-2 flex-row "
                 onClick={clickedCocktailHandler}
             >
@@ -96,7 +96,7 @@ const Navigation = () => {
                         <NavLink className="p-4 hover:text-blue-600" to="/glass/cocktail-glass">
                             Cocktail Glass
                         </NavLink>
-                        <NavLink className=" p-4 hover:text-blue-600" to="/glass/champagne-flute">
+                        <NavLink className="p-4 hover:text-blue-600" to="/glass/champagne-flute">
                             Champagne Flute
                         </NavLink>
                     </motion.div>

@@ -17,3 +17,10 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+footer ul li a {
+    color: blue;
+    cursor: pointer;
+}
+.main {
+    min-height: 100vh;
+}

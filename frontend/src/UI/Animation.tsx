@@ -7,10 +7,16 @@ export const motionNavigation = {
     visible: {
         y: 0,
         opacity: 1,
+        transition: {
+            delay: 0.5,
+            type: "spring",
+        },
     },
-    transition: {
-        delay: 0.5,
-        type: "spring",
+    exit: {
+        x: "-100vw",
+        Transition: {
+            ease: "easeInOut",
+        },
     },
 };
 export const motionNavigation_content_l = {
