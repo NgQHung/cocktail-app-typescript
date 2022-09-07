@@ -11,10 +11,16 @@ interface Props {
 
 const Cocktails: React.FC<Props> = (props) => {
     const error = props.cocktailData === null;
+    const dataIsEmpty = props.cocktailData.length === 0;
+    // console.log(props.cocktailData.length);
     const ingredient = props.selectedType === "ingredient_id";
     return (
         <Fragment>
-            <div className="bg-cocktail flex flex-wrap justify-center pb-12 ">
+            <div
+                className={`${
+                    !error && !dataIsEmpty ? "bg-cocktail" : "hidden"
+                } flex flex-wrap justify-center pb-12 `}
+            >
                 {!ingredient &&
                     props.cocktailData?.map((coc) => (
                         <CocktailItem
@@ -35,12 +41,16 @@ const Cocktails: React.FC<Props> = (props) => {
                     ))}
                 {error && <p>There are no such cocktail</p>}
             </div>
-            <div className="flex justify-center mt-12 mb-12  ">
-                {!error && (
-                    <Button clickHandler={props.loadMore}>
-                        <div className="border-2 rounded-xl p-2 hover:bg-red-300">Load more</div>
-                    </Button>
-                )}
+            <div
+                className={`${
+                    !error && !dataIsEmpty ? "" : "hidden"
+                } flex justify-center mt-12 mb-12 `}
+            >
+                {!error && !dataIsEmpty ? (
+                    <div className="border-2 rounded-xl p-2 hover:bg-red-300">
+                        <Button clickHandler={props.loadMore}>Load more</Button>
+                    </div>
+                ) : null}
             </div>
         </Fragment>
     );

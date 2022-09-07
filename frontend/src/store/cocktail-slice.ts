@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 import { Cocktail } from "../models/cocktails";
 import { Http } from "../models/Http";
 
@@ -19,8 +20,8 @@ const cocktailSlice = createSlice({
         fetCocktail(state: Http, action: Action) {
             state.data = action.payload;
         },
-        navigationHandler(state) {
-            state.navigationClicked = !state.navigationClicked;
+        navigationHandler(state, action) {
+            state.navigationClicked = action.payload;
         },
         clickedCocktailHandler(state, action) {
             state.clickedCocktail = action.payload;

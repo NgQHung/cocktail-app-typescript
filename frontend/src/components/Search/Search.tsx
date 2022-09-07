@@ -48,7 +48,7 @@ const Search = () => {
         if (e.key === "Enter") {
             searchHandler();
         }
-        dispatch(cocktailSliceAction.navigationHandler());
+        dispatch(cocktailSliceAction.navigationHandler(false));
     };
 
     // close search section

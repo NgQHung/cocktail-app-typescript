@@ -34,45 +34,19 @@ const Header = () => {
             <div
                 className={`bg-header
                 ${searchPath ? "hidden" : ""}
-                 border-b shadow-xl sticky top-0 z-99 p-4 rounded-b-xl `}
+                absolute  border-b shadow-xl sticky top-0 z-99 p-4 rounded-b-xl `}
             >
-                <motion.div
-                    variants={motionHeader}
+                {/* <motion.div
+                    variants={motionNavigation}
                     initial="hidden"
                     animate="visible"
-                    transition={motionHeader.transition}
-                    className="flex justify-around items-center"
-                >
-                    <div className={`cursor-pointer ${style_search}`}>
-                        <Link onClick={navigationClicked} to="/">
-                            <img
-                                className="w-12"
-                                src="https://i.pinimg.com/originals/b8/6f/67/b86f67625bc4f99d4b3acfd7992b3c09.png"
-                                alt="logo"
-                            />
-                        </Link>
-                    </div>
-                    <div className={` ${style_search}`}>
-                        <Link to="/navigation">
-                            <ButtonHeader
-                                clickHandler={() =>
-                                    dispatch(cocktailSliceAction.navigationHandler())
-                                }
-                            >
-                                Cocktail
-                            </ButtonHeader>
-                        </Link>
-                    </div>
-                    <div className="w-12 flex items-center justify-center">
-                        <Link to="search">
-                            <div className=" cursor-point hover:text-green-500 text-xl">
-                                <FontAwesomeIcon className="w-12" icon={faMagnifyingGlass} />
-                            </div>
-                        </Link>
-                    </div>
-                </motion.div>
-                {navigationClicked && !searchClicked ? <Navigation /> : null}
-                {!navigationClicked && isNavigation ? <Navigate to="/" /> : null}
+                    exit="exit"
+                    // className={`${isNavigation ? "" : "hidden"}`}
+                > */}
+                {/* {navigationClicked && !searchClicked ? <Navigation /> : null} */}
+                <Navigation />
+                {/* </motion.div> */}
+                {/* {!navigationClicked && isNavigation ? <Navigate to="/" /> : null} */}
             </div>
         </Fragment>
     );
