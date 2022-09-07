@@ -1,6 +1,6 @@
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
@@ -34,6 +34,7 @@ const Search = () => {
         // dispatch(searchSliceAction.typeSearchHandler(""));
         setValueEntered("");
     };
+
     const searchHandler = () => {
         if (searchClicked) {
             dispatch(searchSliceAction.searchHandler(false));
@@ -47,7 +48,7 @@ const Search = () => {
         if (e.key === "Enter") {
             searchHandler();
         }
-        dispatch(cocktailSliceAction.navigationHandler(false));
+        dispatch(cocktailSliceAction.navigationHandler());
     };
 
     // close search section
@@ -55,10 +56,14 @@ const Search = () => {
         dispatch(searchSliceAction.searchHandler(false));
         navigate("/");
     };
+    const isSearch = location.pathname === "/search";
 
-    if (location.pathname === "/search") {
-        dispatch(searchSliceAction.searchHandler(true));
-    }
+    useEffect(() => {
+        if (isSearch) {
+            dispatch(searchSliceAction.searchHandler(true));
+        }
+    }, [isSearch]);
+
     // console.log(location);
 
     const style_search = !searchClicked ? "hidden" : "";

@@ -19,7 +19,8 @@ const CocktailItem: React.FC<Props> = (props) => {
     );
     const clickedCocktailHandler = () => {
         dispatch(cocktailSliceAction.clickedCocktailHandler({ id, name, image }));
-        dispatch(cocktailSliceAction.navigationHandler(false));
+        if (navigationClicked === true) return dispatch(cocktailSliceAction.navigationHandler());
+        // dispatch(cocktailSliceAction.navigationHandler());
     };
 
     return (

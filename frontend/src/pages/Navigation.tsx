@@ -19,7 +19,8 @@ const Navigation = () => {
     );
     const dispatch = useDispatch();
     const clickedCocktailHandler = () => {
-        dispatch(cocktailSliceAction.navigationHandler(false));
+        if (navigationClicked === true) return dispatch(cocktailSliceAction.navigationHandler());
+        // dispatch(cocktailSliceAction.navigationHandler());
     };
     return (
         <Fragment>

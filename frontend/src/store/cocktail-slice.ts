@@ -19,8 +19,8 @@ const cocktailSlice = createSlice({
         fetCocktail(state: Http, action: Action) {
             state.data = action.payload;
         },
-        navigationHandler(state, action) {
-            state.navigationClicked = action.payload;
+        navigationHandler(state) {
+            state.navigationClicked = !state.navigationClicked;
         },
         clickedCocktailHandler(state, action) {
             state.clickedCocktail = action.payload;
