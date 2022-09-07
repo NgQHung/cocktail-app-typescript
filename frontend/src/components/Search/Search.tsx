@@ -73,15 +73,15 @@ const Search = () => {
     const ingredientIsSelected = selectedType === "ingredient_id";
 
     return (
-        <nav onKeyUp={handleKeyboardEvent} className="flex flex-col mt-12 ">
+        <nav onKeyUp={handleKeyboardEvent} className="flex flex-col my-12 mx-2 ">
             <motion.div
                 variants={motionSearchType}
                 initial="hidden"
                 animate="visible"
                 transition={motionSearchType.transition}
-                className="flex justify-around items-center "
+                className="flex justify-around items-center flex-wrap "
             >
-                <div className={`flex ${style_search}`}>
+                <div className={`flex ${style_search} flex-wrap`}>
                     <Button dataValue="cocktail_name" clickHandler={typeSearchHandler}>
                         <div
                             className={`text-xs border-2 rounded-xl p-2 hover:bg-green-300 ${
@@ -110,20 +110,13 @@ const Search = () => {
                         </div>
                     </Button>
                 </div>
-
-                <div
-                    className="flex cursor-pointer pl-2 pr-2 hover:text-red-500 text-2xl"
-                    onClick={closeSearchHandler}
-                >
-                    {searchClicked && <FontAwesomeIcon icon={faXmark} />}
-                </div>
             </motion.div>
             <motion.div
                 variants={motionSearch}
                 initial="hidden"
                 animate="visible"
                 transition={motionSearch.transition}
-                className="flex justify-center mt-12 ml-48 mr-48 text-xl "
+                className="flex sm:my-12 sm:mx-12 my-12 text-xl items-center "
             >
                 <div
                     className="flex items-center cursor-pointer hover:bg-gray-100 pl-2 pr-2 hover:text-green-500 font-normal opacity"
@@ -138,8 +131,14 @@ const Search = () => {
                     value={valueEntered}
                     placeholder="search..."
                 />
+                <div
+                    className="flex cursor-pointer pl-2 pr-2 hover:text-red-500 text-2xl"
+                    onClick={closeSearchHandler}
+                >
+                    {searchClicked && <FontAwesomeIcon icon={faXmark} />}
+                </div>
             </motion.div>
-            <div className="h-80"></div>
+            <div className="h-36"></div>
         </nav>
     );
 };

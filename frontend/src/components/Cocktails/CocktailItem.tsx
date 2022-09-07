@@ -28,11 +28,9 @@ const CocktailItem: React.FC<Props> = (props) => {
             <Link to={`/cocktail/${id}`}>
                 <div
                     onClick={clickedCocktailHandler}
-                    className="bg-white rounded-lg mt-12 shadow-lg overflow-hidden mr-6 cursor-pointer"
+                    className="bg-white rounded-lg mt-12 shadow-lg overflow-hidden m-6 cursor-pointer"
                 >
-                    {image && (
-                        <img src={image} alt={name} className="w-64 h-32 sm:h-48 object-cover" />
-                    )}
+                    {image && <img src={image} alt={name} className="h-32 w-48 object-cover" />}
                     <div className="p-3 font-bold text-sm">{name}</div>
                 </div>
             </Link>

@@ -28,7 +28,7 @@ const Navigation = () => {
                 className=" flex justify-around mt-2 flex-row "
                 onClick={clickedCocktailHandler}
             >
-                <div className="w-12"></div>
+                {/* <div className="w-12"></div> */}
                 <div className="flex flex-col justify-center items-center">
                     <motion.p
                         variants={motionNavigation_content_l}
@@ -43,7 +43,7 @@ const Navigation = () => {
                         initial="hidden"
                         animate="visible"
                         transition={motionNavigation_content_r.transition}
-                        className="flex text-xl text-gray-400"
+                        className="flex text-lg text-gray-400"
                     >
                         <NavLink
                             // onClick={clickedCocktailHandler}
@@ -69,7 +69,7 @@ const Navigation = () => {
                         initial="hidden"
                         animate="visible"
                         transition={motionNavigation_content_r.transition}
-                        className="flex text-xl text-gray-400"
+                        className="flex text-lg text-gray-400"
                     >
                         <NavLink className="p-4 hover:text-blue-600" to="/ingredient/gin">
                             Gin
@@ -91,12 +91,12 @@ const Navigation = () => {
                         initial="hidden"
                         animate="visible"
                         transition={motionNavigation_content_r.transition}
-                        className="flex text-xl text-gray-400"
+                        className="flex text-lg text-gray-400"
                     >
                         <NavLink className="p-4 hover:text-blue-600" to="/glass/cocktail-glass">
                             Cocktail Glass
                         </NavLink>
-                        <NavLink className="p-4 hover:text-blue-600" to="/glass/champagne-flute">
+                        <NavLink className=" p-4 hover:text-blue-600" to="/glass/champagne-flute">
                             Champagne Flute
                         </NavLink>
                     </motion.div>
@@ -123,7 +123,7 @@ const Navigation = () => {
                         </NavLink>
                     </motion.div>
                 </div>
-                <div className="w-12"></div>
+                {/* <div className="w-12"></div> */}
             </motion.div>
             <Outlet />
         </Fragment>
