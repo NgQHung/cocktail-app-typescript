@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../Layouts/Footer";
+import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { searchSliceAction } from "../../store/search-slice";
 import { Button } from "../../UI/Button";
 
@@ -32,6 +33,7 @@ const Search = () => {
     };
     const searchHandler = () => {
         if (searchClicked) {
+            dispatch(searchSliceAction.searchHandler());
             navigate(`/searched/${valueEntered}`);
         }
         setValueEntered("");
@@ -42,6 +44,7 @@ const Search = () => {
         if (e.key === "Enter") {
             searchHandler();
         }
+        dispatch(cocktailSliceAction.navigationHandler(false));
     };
 
     // close search section
