@@ -51,6 +51,7 @@ function App() {
                     <Route path="navigation" element={<Navigation />} />
                 </Route>
                 <Route path="search" element={<Search />} />
+                <Route path="search/" element={<NotFound />} />
                 <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
                 <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
                 <Route path="*" element={<NotFound />} />

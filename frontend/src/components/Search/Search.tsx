@@ -3,15 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Footer from "../../Layouts/Footer";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { searchSliceAction } from "../../store/search-slice";
 import { Button } from "../../UI/Button";
+import { motion } from "framer-motion";
+import { motionSearch, motionSearchType } from "../../UI/Animation";
 
 const Search = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [valueEntered, setValueEntered] = useState("");
     const [selectedType, setSelectedType] = useState("cocktail_name");
@@ -33,7 +36,7 @@ const Search = () => {
     };
     const searchHandler = () => {
         if (searchClicked) {
-            dispatch(searchSliceAction.searchHandler());
+            dispatch(searchSliceAction.searchHandler(false));
             navigate(`/searched/${valueEntered}`);
         }
         setValueEntered("");
@@ -49,9 +52,14 @@ const Search = () => {
 
     // close search section
     const closeSearchHandler = () => {
-        dispatch(searchSliceAction.searchHandler());
+        dispatch(searchSliceAction.searchHandler(false));
         navigate("/");
     };
+
+    if (location.pathname === "/search") {
+        dispatch(searchSliceAction.searchHandler(true));
+    }
+    // console.log(location);
 
     const style_search = !searchClicked ? "hidden" : "";
 
@@ -61,7 +69,13 @@ const Search = () => {
 
     return (
         <nav onKeyUp={handleKeyboardEvent} className="flex flex-col mt-12 ">
-            <div className="flex justify-around items-center ">
+            <motion.div
+                variants={motionSearchType}
+                initial="hidden"
+                animate="visible"
+                transition={motionSearchType.transition}
+                className="flex justify-around items-center "
+            >
                 <div className={`flex ${style_search}`}>
                     <Button dataValue="cocktail_name" clickHandler={typeSearchHandler}>
                         <div
@@ -98,8 +112,14 @@ const Search = () => {
                 >
                     {searchClicked && <FontAwesomeIcon icon={faXmark} />}
                 </div>
-            </div>
-            <div className="flex justify-center mt-12 ml-48 mr-48 text-xl ">
+            </motion.div>
+            <motion.div
+                variants={motionSearch}
+                initial="hidden"
+                animate="visible"
+                transition={motionSearch.transition}
+                className="flex justify-center mt-12 ml-48 mr-48 text-xl "
+            >
                 <div
                     className="flex items-center cursor-pointer hover:bg-gray-100 pl-2 pr-2 hover:text-green-500 font-normal opacity"
                     onClick={searchHandler}
@@ -113,7 +133,7 @@ const Search = () => {
                     value={valueEntered}
                     placeholder="search..."
                 />
-            </div>
+            </motion.div>
             <div className="h-80"></div>
         </nav>
     );

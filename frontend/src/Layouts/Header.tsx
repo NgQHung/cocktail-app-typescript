@@ -26,7 +26,7 @@ const Header = () => {
     const searchPath = location.pathname === "/search";
 
     const searchHandler = () => {
-        dispatch(searchSliceAction.searchHandler());
+        dispatch(searchSliceAction.searchHandler(true));
     };
 
     return (
@@ -69,7 +69,9 @@ const Header = () => {
                                 className=" cursor-point hover:bg-gray-100 hover:text-green-500"
                                 onClick={searchHandler}
                             >
-                                {!searchClicked && <FontAwesomeIcon icon={faMagnifyingGlass} />}
+                                {!searchClicked && (
+                                    <FontAwesomeIcon className="w-12" icon={faMagnifyingGlass} />
+                                )}
                             </div>
                         </Link>
                     </div>

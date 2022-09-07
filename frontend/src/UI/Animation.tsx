@@ -58,3 +58,34 @@ export const motionHeader = {
         type: "spring",
     },
 };
+
+// motion search
+export const motionSearch = {
+    hidden: {
+        x: "30vw",
+        opacity: 0,
+    },
+    visible: {
+        x: 0,
+        opacity: 1,
+    },
+    transition: {
+        delay: 0.5,
+        type: "spring",
+    },
+};
+
+export const motionSearchType = {
+    hidden: {
+        x: "-30vw",
+        opacity: 0,
+    },
+    visible: {
+        x: 0,
+        opacity: 1,
+    },
+    transition: {
+        delay: 0.5,
+        type: "spring",
+    },
+};

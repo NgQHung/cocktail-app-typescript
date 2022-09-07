@@ -23,18 +23,7 @@ const Navigation = () => {
     };
     return (
         <Fragment>
-            {/* <motion.div
-                variants={motionNavigation}
-                initial="hidden"
-                animate="visible"
-                transition={motionNavigation.transition}
-                className="bg-gray-200 h-screen"
-            ></motion.div> */}
             <motion.div
-                // variants={motionNavigation}
-                // initial="hidden"
-                // animate="visible"
-                // transition={motionNavigation.transition}
                 className=" flex justify-around mt-2 flex-row "
                 onClick={clickedCocktailHandler}
             >

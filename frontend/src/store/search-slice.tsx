@@ -15,8 +15,8 @@ const searchSlice = createSlice({
     name: "dataState",
     initialState: initialValue,
     reducers: {
-        searchHandler(state) {
-            state.searchClicked = !state.searchClicked;
+        searchHandler(state, action) {
+            state.searchClicked = action.payload;
         },
         typeSearchHandler(state, action) {
             state.selectedType = action.payload;

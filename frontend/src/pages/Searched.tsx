@@ -31,6 +31,7 @@ const Searched = () => {
     const cocktailNameIsSelected = selectedType === "cocktail_name";
     const cocktailLetterIsSelected = selectedType === "cocktail_letter";
     const ingredientIsSelected = selectedType === "ingredient_id";
+    // console.log(params);
 
     useEffect(() => {
         if (cocktailNameIsSelected) {
