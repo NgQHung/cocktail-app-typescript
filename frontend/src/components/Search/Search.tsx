@@ -31,7 +31,6 @@ const Search = () => {
         if (dataValue === "cocktail_name") return setSelectedType("cocktail_name");
         if (dataValue === "cocktail_letter") return setSelectedType("cocktail_letter");
         if (dataValue === "ingredient_id") return setSelectedType("ingredient_id");
-        // dispatch(searchSliceAction.typeSearchHandler(""));
         setValueEntered("");
     };
 
@@ -54,6 +53,8 @@ const Search = () => {
     // close search section
     const closeSearchHandler = () => {
         dispatch(searchSliceAction.searchHandler(false));
+        dispatch(cocktailSliceAction.navigationHandler(false));
+
         navigate("/");
     };
     const isSearch = location.pathname === "/search";

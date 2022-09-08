@@ -24,11 +24,18 @@ const Navigation = () => {
     // console.log(navigationClicked);
     const location = useLocation();
     const navigate = useNavigate();
-    // console.log(location);
     const dispatch = useDispatch();
-    const clickedCocktailHandler = () => {
-        if (navigationClicked === true)
-            return dispatch(cocktailSliceAction.navigationHandler(false));
+    const pathName = location.pathname;
+    const mainPath = location.pathname === "/";
+    const navPath = location.pathname === "/navigation";
+    const searchPath = location.pathname === "/search";
+    const navigationHandler = () => {
+        if (mainPath) {
+            dispatch(cocktailSliceAction.navigationHandler(true));
+        }
+        if (navPath) {
+            dispatch(cocktailSliceAction.navigationHandler(false));
+        }
     };
 
     const isNavigation = location.pathname === "/navigation";
@@ -62,14 +69,8 @@ const Navigation = () => {
                     </Link>
                 </div>
                 <div className={` ${style_search}`}>
-                    <Link to="/navigation">
-                        <ButtonHeader
-                            clickHandler={() =>
-                                dispatch(cocktailSliceAction.navigationHandler(!navigationClicked))
-                            }
-                        >
-                            Cocktail
-                        </ButtonHeader>
+                    <Link to={mainPath ? "/navigation" : "/"}>
+                        <ButtonHeader clickHandler={navigationHandler}>Cocktail</ButtonHeader>
                     </Link>
                 </div>
                 <div className="w-12 flex items-center justify-center">
@@ -88,7 +89,6 @@ const Navigation = () => {
                         animate="visible"
                         exit="exit"
                         className={`flex justify-around z-99 bg_nav mt-2 flex-row h-96`}
-                        onClick={clickedCocktailHandler}
                     ></motion.div>
 
                     <div className=" absolute left-0 right-0 top-24 mx-auto text-center">
@@ -109,13 +109,18 @@ const Navigation = () => {
                             className=" text-lg text-gray-400"
                         >
                             <NavLink
-                                // onClick={clickedCocktailHandler}
+                                onClick={() =>
+                                    dispatch(cocktailSliceAction.navigationHandler(false))
+                                }
                                 className="p-4 hover:text-blue-600"
                                 to="/alcoholic/alcoholic"
                             >
                                 Alcoholic
                             </NavLink>
                             <NavLink
+                                onClick={() =>
+                                    dispatch(cocktailSliceAction.navigationHandler(false))
+                                }
                                 className="p-4 hover:text-blue-600"
                                 to="/alcoholic/non-alcoholic"
                             >
@@ -138,10 +143,22 @@ const Navigation = () => {
                             transition={motionNavigation_content_r.transition}
                             className=" text-lg text-gray-400"
                         >
-                            <NavLink className="p-4 hover:text-blue-600" to="/ingredient/gin">
+                            <NavLink
+                                onClick={() =>
+                                    dispatch(cocktailSliceAction.navigationHandler(false))
+                                }
+                                className="p-4 hover:text-blue-600"
+                                to="/ingredient/gin"
+                            >
                                 Gin
                             </NavLink>
-                            <NavLink className="p-4 hover:text-blue-600" to="/ingredient/vodka">
+                            <NavLink
+                                onClick={() =>
+                                    dispatch(cocktailSliceAction.navigationHandler(false))
+                                }
+                                className="p-4 hover:text-blue-600"
+                                to="/ingredient/vodka"
+                            >
                                 Vodka
                             </NavLink>
                         </motion.div>
@@ -161,10 +178,19 @@ const Navigation = () => {
                             transition={motionNavigation_content_r.transition}
                             className=" text-lg text-gray-400"
                         >
-                            <NavLink className="p-4 hover:text-blue-600" to="/glass/cocktail-glass">
+                            <NavLink
+                                onClick={() =>
+                                    dispatch(cocktailSliceAction.navigationHandler(false))
+                                }
+                                className="p-4 hover:text-blue-600"
+                                to="/glass/cocktail-glass"
+                            >
                                 Cocktail Glass
                             </NavLink>
                             <NavLink
+                                onClick={() =>
+                                    dispatch(cocktailSliceAction.navigationHandler(false))
+                                }
                                 className="p-4 hover:text-blue-600"
                                 to="/glass/champagne-flute"
                             >
@@ -187,10 +213,22 @@ const Navigation = () => {
                             transition={motionNavigation_content_r.transition}
                             className=" text-xl text-gray-400"
                         >
-                            <NavLink className="p-4 hover:text-blue-600" to="/glass/ordinary-drink">
+                            <NavLink
+                                onClick={() =>
+                                    dispatch(cocktailSliceAction.navigationHandler(false))
+                                }
+                                className="p-4 hover:text-blue-600"
+                                to="/glass/ordinary-drink"
+                            >
                                 Ordinary Drink
                             </NavLink>
-                            <NavLink className="p-4 hover:text-blue-600" to="/glass/cocktail">
+                            <NavLink
+                                onClick={() =>
+                                    dispatch(cocktailSliceAction.navigationHandler(false))
+                                }
+                                className="p-4 hover:text-blue-600"
+                                to="/glass/cocktail"
+                            >
                                 Cocktail
                             </NavLink>
                         </motion.div>
