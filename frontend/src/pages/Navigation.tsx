@@ -21,7 +21,7 @@ const Navigation = () => {
     const navigationClicked: any = useSelector<any>(
         (state) => state.cocktailSlice.navigationClicked
     );
-    console.log(navigationClicked);
+    // console.log(navigationClicked);
     const location = useLocation();
     const navigate = useNavigate();
     // console.log(location);

@@ -22,13 +22,10 @@ footer ul li a {
     color: blue;
     cursor: pointer;
 }
-.ingredient ul li {
-    /* font-size: ; */
-    display: flex;
-    flex-direction: row;
+.ingredient li {
     border-bottom: 1px solid black;
 }
-.ingredient ul li p {
+.ingredient li p {
     min-width: 8rem;
 }
 
@@ -38,4 +35,7 @@ footer ul li a {
 .bg_nav {
     background: url("../public/noise-lines.jpg") repeat-x 0 0;
     /* background-image: linear-gradient(rgb(255, 255, 255), rgb(198, 198, 198)); */
+}
+.swiper-wrapper {
+    display: flex;
 }
