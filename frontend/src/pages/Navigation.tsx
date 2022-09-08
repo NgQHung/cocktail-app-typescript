@@ -6,6 +6,7 @@ import { cocktailSliceAction } from "../store/cocktail-slice";
 import { motion } from "framer-motion";
 import {
     motionHeader,
+    motionNavigation,
     motionNavigation_content_l,
     motionNavigation_content_r,
 } from "../UI/Animation";
@@ -20,7 +21,7 @@ const Navigation = () => {
     const navigationClicked: any = useSelector<any>(
         (state) => state.cocktailSlice.navigationClicked
     );
-    // console.log(navigationClicked);
+    console.log(navigationClicked);
     const location = useLocation();
     const navigate = useNavigate();
     // console.log(location);
@@ -30,13 +31,13 @@ const Navigation = () => {
             return dispatch(cocktailSliceAction.navigationHandler(false));
     };
 
-    const mainPath = location.pathname === "/";
+    const isNavigation = location.pathname === "/navigation";
 
     const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
     const style_search = searchClicked ? "hidden" : "";
 
     useEffect(() => {
-        if (!navigationClicked) {
+        if (!navigationClicked && isNavigation) {
             navigate("/");
         }
     }, [navigationClicked]);
@@ -49,7 +50,7 @@ const Navigation = () => {
                 initial="hidden"
                 animate="visible"
                 transition={motionHeader.transition}
-                className="flex justify-around items-center"
+                className="flex justify-around items-center py-4"
             >
                 <div className={`cursor-pointer ${style_search}`}>
                     <Link onClick={navigationClicked} to="/">
@@ -79,114 +80,124 @@ const Navigation = () => {
                     </Link>
                 </div>
             </motion.div>
-            <motion.div
-                // variants={motionNavigation}
-                // initial="hidden"
-                // animate="visible"
-                // exit="exit"
-                className={`${
-                    mainPath || !navigationClicked ? "hidden" : ""
-                } flex justify-around mt-2 flex-row`}
-                onClick={clickedCocktailHandler}
-            >
-                {/* <div className="w-12"></div> */}
-                <div className="flex flex-col justify-center items-center">
-                    <motion.p
-                        variants={motionNavigation_content_l}
-                        initial="hidden"
-                        animate="visible"
-                        transition={motionNavigation_content_l.transition}
-                    >
-                        Alcoholic
-                    </motion.p>
+            {!searchClicked && navigationClicked ? (
+                <div className="">
                     <motion.div
-                        variants={motionNavigation_content_r}
+                        variants={motionNavigation}
                         initial="hidden"
                         animate="visible"
-                        transition={motionNavigation_content_r.transition}
-                        className="flex text-lg text-gray-400"
-                    >
-                        <NavLink
-                            // onClick={clickedCocktailHandler}
-                            className="p-4 hover:text-blue-600"
-                            to="/alcoholic/alcoholic"
+                        exit="exit"
+                        className={`flex justify-around z-99 bg_nav mt-2 flex-row h-96`}
+                        onClick={clickedCocktailHandler}
+                    ></motion.div>
+
+                    <div className=" absolute left-0 right-0 top-24 mx-auto text-center">
+                        <motion.p
+                            variants={motionNavigation_content_l}
+                            initial="hidden"
+                            animate="visible"
+                            transition={motionNavigation_content_l.transition}
+                            className="py-4"
                         >
                             Alcoholic
-                        </NavLink>
-                        <NavLink className="p-4 hover:text-blue-600" to="/alcoholic/non-alcoholic">
-                            Non-Alcoholic
-                        </NavLink>
-                    </motion.div>
-                    <motion.p
-                        variants={motionNavigation_content_l}
-                        initial="hidden"
-                        animate="visible"
-                        transition={motionNavigation_content_l.transition}
-                    >
-                        Ingredient
-                    </motion.p>
-                    <motion.div
-                        variants={motionNavigation_content_r}
-                        initial="hidden"
-                        animate="visible"
-                        transition={motionNavigation_content_r.transition}
-                        className="flex text-lg text-gray-400"
-                    >
-                        <NavLink className="p-4 hover:text-blue-600" to="/ingredient/gin">
-                            Gin
-                        </NavLink>
-                        <NavLink className="p-4 hover:text-blue-600" to="/ingredient/vodka">
-                            Vodka
-                        </NavLink>
-                    </motion.div>
-                    <motion.p
-                        variants={motionNavigation_content_l}
-                        initial="hidden"
-                        animate="visible"
-                        transition={motionNavigation_content_l.transition}
-                    >
-                        Glass
-                    </motion.p>
-                    <motion.div
-                        variants={motionNavigation_content_r}
-                        initial="hidden"
-                        animate="visible"
-                        transition={motionNavigation_content_r.transition}
-                        className="flex text-lg text-gray-400"
-                    >
-                        <NavLink className="p-4 hover:text-blue-600" to="/glass/cocktail-glass">
-                            Cocktail Glass
-                        </NavLink>
-                        <NavLink className="p-4 hover:text-blue-600" to="/glass/champagne-flute">
-                            Champagne Flute
-                        </NavLink>
-                    </motion.div>
-                    <motion.p
-                        variants={motionNavigation_content_l}
-                        initial="hidden"
-                        animate="visible"
-                        transition={motionNavigation_content_l.transition}
-                    >
-                        Category
-                    </motion.p>
-                    <motion.div
-                        variants={motionNavigation_content_r}
-                        initial="hidden"
-                        animate="visible"
-                        transition={motionNavigation_content_r.transition}
-                        className="flex text-xl text-gray-400"
-                    >
-                        <NavLink className="p-4 hover:text-blue-600" to="/glass/ordinary-drink">
-                            Ordinary Drink
-                        </NavLink>
-                        <NavLink className="p-4 hover:text-blue-600" to="/glass/cocktail">
-                            Cocktail
-                        </NavLink>
-                    </motion.div>
+                        </motion.p>
+                        <motion.div
+                            variants={motionNavigation_content_r}
+                            initial="hidden"
+                            animate="visible"
+                            transition={motionNavigation_content_r.transition}
+                            className=" text-lg text-gray-400"
+                        >
+                            <NavLink
+                                // onClick={clickedCocktailHandler}
+                                className="p-4 hover:text-blue-600"
+                                to="/alcoholic/alcoholic"
+                            >
+                                Alcoholic
+                            </NavLink>
+                            <NavLink
+                                className="p-4 hover:text-blue-600"
+                                to="/alcoholic/non-alcoholic"
+                            >
+                                Non-Alcoholic
+                            </NavLink>
+                        </motion.div>
+                        <motion.p
+                            variants={motionNavigation_content_l}
+                            initial="hidden"
+                            animate="visible"
+                            transition={motionNavigation_content_l.transition}
+                            className="py-4"
+                        >
+                            Ingredient
+                        </motion.p>
+                        <motion.div
+                            variants={motionNavigation_content_r}
+                            initial="hidden"
+                            animate="visible"
+                            transition={motionNavigation_content_r.transition}
+                            className=" text-lg text-gray-400"
+                        >
+                            <NavLink className="p-4 hover:text-blue-600" to="/ingredient/gin">
+                                Gin
+                            </NavLink>
+                            <NavLink className="p-4 hover:text-blue-600" to="/ingredient/vodka">
+                                Vodka
+                            </NavLink>
+                        </motion.div>
+                        <motion.p
+                            variants={motionNavigation_content_l}
+                            initial="hidden"
+                            animate="visible"
+                            transition={motionNavigation_content_l.transition}
+                            className="py-4"
+                        >
+                            Glass
+                        </motion.p>
+                        <motion.div
+                            variants={motionNavigation_content_r}
+                            initial="hidden"
+                            animate="visible"
+                            transition={motionNavigation_content_r.transition}
+                            className=" text-lg text-gray-400"
+                        >
+                            <NavLink className="p-4 hover:text-blue-600" to="/glass/cocktail-glass">
+                                Cocktail Glass
+                            </NavLink>
+                            <NavLink
+                                className="p-4 hover:text-blue-600"
+                                to="/glass/champagne-flute"
+                            >
+                                Champagne Flute
+                            </NavLink>
+                        </motion.div>
+                        <motion.p
+                            variants={motionNavigation_content_l}
+                            initial="hidden"
+                            animate="visible"
+                            transition={motionNavigation_content_l.transition}
+                            className="py-4"
+                        >
+                            Category
+                        </motion.p>
+                        <motion.div
+                            variants={motionNavigation_content_r}
+                            initial="hidden"
+                            animate="visible"
+                            transition={motionNavigation_content_r.transition}
+                            className=" text-xl text-gray-400"
+                        >
+                            <NavLink className="p-4 hover:text-blue-600" to="/glass/ordinary-drink">
+                                Ordinary Drink
+                            </NavLink>
+                            <NavLink className="p-4 hover:text-blue-600" to="/glass/cocktail">
+                                Cocktail
+                            </NavLink>
+                        </motion.div>
+                    </div>
+                    {/* </motion.div> */}
                 </div>
-                {/* <div className="w-12"></div> */}
-            </motion.div>
-            {/* </div> */}
+            ) : null}
             <Outlet />
         </Fragment>
     );

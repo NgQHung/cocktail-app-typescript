@@ -34,7 +34,7 @@ const Header = () => {
             <div
                 className={`bg-header
                 ${searchPath ? "hidden" : ""}
-                absolute  border-b shadow-xl sticky top-0 z-99 p-4 rounded-b-xl `}
+                relative border-b shadow-xl sticky top-0 z-99 rounded-b-xl `}
             >
                 {/* <motion.div
                     variants={motionNavigation}
@@ -44,7 +44,9 @@ const Header = () => {
                     // className={`${isNavigation ? "" : "hidden"}`}
                 > */}
                 {/* {navigationClicked && !searchClicked ? <Navigation /> : null} */}
+                {/* <div className="h-96"> */}
                 <Navigation />
+                {/* </div> */}
                 {/* </motion.div> */}
                 {/* {!navigationClicked && isNavigation ? <Navigate to="/" /> : null} */}
             </div>

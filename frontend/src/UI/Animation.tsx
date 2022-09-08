@@ -14,7 +14,7 @@ export const motionNavigation = {
     },
     exit: {
         x: "-100vw",
-        Transition: {
+        transition: {
             ease: "easeInOut",
         },
     },
@@ -32,6 +32,12 @@ export const motionNavigation_content_l = {
         delay: 0.5,
         type: "spring",
     },
+    exit: {
+        x: "-100vw",
+        transition: {
+            ease: "easeInOut",
+        },
+    },
 };
 
 export const motionNavigation_content_r = {
@@ -46,6 +52,12 @@ export const motionNavigation_content_r = {
     transition: {
         delay: 0.5,
         type: "spring",
+    },
+    exit: {
+        x: "-100vw",
+        transition: {
+            ease: "easeInOut",
+        },
     },
 };
 
@@ -63,6 +75,12 @@ export const motionHeader = {
         delay: 1,
         type: "spring",
     },
+    exit: {
+        x: "-100vw",
+        transition: {
+            ease: "easeInOut",
+        },
+    },
 };
 
 // motion search
@@ -79,6 +97,12 @@ export const motionSearch = {
         delay: 0.5,
         type: "spring",
     },
+    exit: {
+        x: "-100vw",
+        transition: {
+            ease: "easeInOut",
+        },
+    },
 };
 
 export const motionSearchType = {
@@ -93,5 +117,11 @@ export const motionSearchType = {
     transition: {
         delay: 0.5,
         type: "spring",
+    },
+    exit: {
+        x: "-100vw",
+        transition: {
+            ease: "easeInOut",
+        },
     },
 };
