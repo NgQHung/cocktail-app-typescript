@@ -24,10 +24,13 @@ const CocktailDetail: React.FC<Props> = (props) => {
     const [my_swiper, set_my_swiper] = useState<any>({});
     const [hasError, setHasError] = useState();
     const dispatch = useDispatch();
-    // const location = useLocation();
+    const location = useLocation();
+    // console.log(location.pathname);
     const clickedCoc: any = useSelector<any>((state) => state.cocktailSlice.clickedCocktail);
     // console.log(clickedCoc);
     const idName = params.cocktailId?.split(" ").join("%");
+    const idName2 = params.cocktailId?.split(" ").join("%20");
+    // console.log(idName);
 
     const swiperHandlerR = (e: any) => {
         e.preventDefault();
@@ -49,7 +52,14 @@ const CocktailDetail: React.FC<Props> = (props) => {
     useEffect(() => {
         enteredCocktail(idName);
     }, []);
+    useEffect(() => {
+        if (location.pathname === `/cocktail/${idName2}`) {
+            dispatch(cocktailSliceAction.navigationHandler(false));
+        }
+    }, [location.pathname]);
     // console.log(hasError === null);
+    // console.log(`/cocktail/${idName}`);
+    // console.log(location.pathname === `/cocktail/${idName2}`);
 
     return (
         <div className="detail">
@@ -57,10 +67,10 @@ const CocktailDetail: React.FC<Props> = (props) => {
                 <div className="" key={item?.idDrink}>
                     <section className="text-gray-600 body-font">
                         <div className="container px-5 py-24 mx-auto flex justify-around flex-wrap">
-                            <div className="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
+                            <div className="lg:w-1/2 mb-10 lg:mb-0 rounded-lg overflow-hidden flex justify-center">
                                 <img
                                     alt="feature"
-                                    className="object-cover object-center h-full w-full"
+                                    className="object-cover object-center h-full w-96"
                                     src={item?.strDrinkThumb}
                                 />
                             </div>
@@ -248,14 +258,13 @@ const CocktailDetail: React.FC<Props> = (props) => {
                                                             <a>{item.strIngredient9}</a>
                                                         </li>
                                                     </ul>
-                                                    <Link
-                                                        to=""
+                                                    <div
                                                         className="mt-3 text-indigo-500 inline-flex items-center cursor-pointer"
                                                         onClick={swiperHandlerR}
                                                     >
                                                         How To Mix
                                                         <FontAwesomeIcon icon={faArrowRight} />
-                                                    </Link>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -263,7 +272,7 @@ const CocktailDetail: React.FC<Props> = (props) => {
                                     <SwiperSlide>
                                         <div className="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-full lg:p-12 lg:text-left text-center">
                                             <div className="flex flex-col justify-center mb-10 items-center h-full">
-                                                <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
+                                                <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 ">
                                                     <FontAwesomeIcon icon={faUtensils} />
                                                 </div>
                                             </div>

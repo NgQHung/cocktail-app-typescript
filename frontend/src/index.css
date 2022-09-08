@@ -39,3 +39,8 @@ footer ul li a {
 .swiper-wrapper {
     display: flex;
 }
+.cocktail_item {
+    display: grid;
+    height: 100vh;
+    place-items: center;
+}

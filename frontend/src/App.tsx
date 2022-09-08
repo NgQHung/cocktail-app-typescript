@@ -74,6 +74,7 @@ function App() {
                     <Route path="/searched/*" element={<NotFound />} />
                 </Routes>
                 {/* </AnimatePresence> */}
+                {/* <CocktailItem /> */}
                 <Footer />
             </div>
         </Fragment>

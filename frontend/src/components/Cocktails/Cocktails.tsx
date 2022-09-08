@@ -19,7 +19,7 @@ const Cocktails: React.FC<Props> = (props) => {
             <div
                 className={`${
                     !error && !dataIsEmpty ? "bg-cocktail" : "hidden"
-                } flex flex-wrap justify-center pb-12 `}
+                } flex flex-wrap justify-center py-12 `}
             >
                 {!ingredient &&
                     props.cocktailData?.map((coc) => (
