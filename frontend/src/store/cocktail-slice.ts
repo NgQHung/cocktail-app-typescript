@@ -22,6 +22,7 @@ const cocktailSlice = createSlice({
         },
         navigationHandler(state, action) {
             state.navigationClicked = action.payload;
+            state.clickedCocktail = null;
         },
         clickedCocktailHandler(state, action) {
             state.clickedCocktail = action.payload;

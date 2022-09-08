@@ -35,14 +35,6 @@ function App() {
         setLoading(false);
     };
 
-    const enteredCocktail = async (idName?: string) => {
-        const res = await axios.get(
-            `http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${idName}`
-        );
-        // console.log(res.data.drinks);
-        dispatch(cocktailSliceAction.clickedCocktailHandler(res.data.drinks));
-    };
-
     const loadMore = () => {
         setIndex((prev) => prev + 20);
         fetchCocktal();
@@ -57,31 +49,31 @@ function App() {
         <Fragment>
             <div className="main flex flex-col justify-between">
                 <Header />
-                <AnimatePresence>
-                    <Routes location={location} key={location.key}>
-                        <Route
-                            path="/"
-                            element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
-                        >
-                            <Route path="navigation" element={<Navigation />} />
-                        </Route>
-                        <Route path="/search" element={<Search />} />
-                        <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
-                        <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
-                        <Route path="*" element={<NotFound />} />
-                        <Route
-                            path="/cocktail/:cocktailId"
-                            element={
-                                <CocktailDetail
-                                    cocktailEntered={enteredCocktail}
-                                    cocktailData={cocktails}
-                                />
-                            }
-                        />
-                        <Route path="/searched/:cocktail" element={<Searched />} />
-                        <Route path="/searched/*" element={<NotFound />} />
-                    </Routes>
-                </AnimatePresence>
+                {/* <AnimatePresence> */}
+                <Routes location={location} key={location.key}>
+                    <Route
+                        path="/"
+                        element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
+                    >
+                        <Route path="navigation" element={<Navigation />} />
+                    </Route>
+                    <Route path="/search" element={<Search />} />
+                    <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
+                    <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
+                    <Route path="*" element={<NotFound />} />
+                    <Route
+                        path="/cocktail/:cocktailId"
+                        element={
+                            <CocktailDetail
+                                // cocktailEntered={enteredCocktail}
+                                cocktailData={cocktails}
+                            />
+                        }
+                    />
+                    <Route path="/searched/:cocktail" element={<Searched />} />
+                    <Route path="/searched/*" element={<NotFound />} />
+                </Routes>
+                {/* </AnimatePresence> */}
                 <Footer />
             </div>
         </Fragment>
