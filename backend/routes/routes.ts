@@ -1,13 +1,18 @@
 import express from "express";
 import { Router } from "express";
 import { alcoholic, getAllCocktail, nonAlcoholic } from "../controllers/cocktailController";
+import { Request, Response, NextFunction } from "express";
 
 const router = Router();
 
 // router.get("/", getAllCocktail);
-// router.get("/category", (req: express.Request, res: express.Response) => {
-//     res.json("ordinary-drink");
-// });
+router.get("/hi", (req: Request, res: Response) => {
+    res.json({ message: "hello world" });
+});
+
+router.get("/category", (req: Request, res: Response) => {
+    res.json("ordinary-drink");
+});
 // // category
 // router.get("/category/ordinary-drink", (req: express.Request, res: express.Response) => {
 //     res.json("ordinary-drink");

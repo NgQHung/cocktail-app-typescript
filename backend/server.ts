@@ -14,12 +14,11 @@ const URI: string = process.env.MONGO_URI!;
 // middleware
 app.use(express.json());
 
+// routes
+app.use("/api/cocktail", router);
 app.use((req, res, next) => {
     next();
 });
-
-// routes
-app.use("/api", router);
 
 mongoose
     .connect(URI)
