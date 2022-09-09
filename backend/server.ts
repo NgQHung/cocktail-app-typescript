@@ -1,9 +1,10 @@
-import express from "express";
-import router from "./routes/routes";
-import mongoose from "mongoose";
-const dotenv = require("dotenv");
+const express = require("express");
+const routes = require("./routes/routes");
+const userRoutes = require("./routes/userRoutes");
+require("dotenv").config();
+const mongoose = require("mongoose");
 
-dotenv.config();
+// dotenv.config();
 
 const app = express();
 
@@ -15,7 +16,7 @@ const URI: string = process.env.MONGO_URI!;
 app.use(express.json());
 
 // routes
-app.use("/api/cocktail", router);
+app.use("/api/cocktail", routes);
 app.use((req, res, next) => {
     next();
 });

@@ -1,18 +1,19 @@
-import express from "express";
-import { Router } from "express";
-import { alcoholic, getAllCocktail, nonAlcoholic } from "../controllers/cocktailController";
-import { Request, Response, NextFunction } from "express";
+// const express = require("express");
+import * as express from "express";
+const { Router } = require("express");
+// const { alcoholic, getAllCocktail, nonAlcoholic } =require ("../controllers/cocktailController");
+// const { Request, Response, NextFunction } = require("express");
 
-const router = Router();
+const router = express.Router();
 
 // router.get("/", getAllCocktail);
-router.get("/hi", (req: Request, res: Response) => {
+router.get("/hi", (req: express.Request, res: express.Response) => {
     res.json({ message: "hello world" });
 });
 
-router.get("/category", (req: Request, res: Response) => {
-    res.json("ordinary-drink");
-});
+// router.get("/category", (req: Request, res: Response) => {
+//     res.json("ordinary-drink");
+// });
 // // category
 // router.get("/category/ordinary-drink", (req: express.Request, res: express.Response) => {
 //     res.json("ordinary-drink");
