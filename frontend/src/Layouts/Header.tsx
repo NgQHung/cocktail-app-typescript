@@ -34,7 +34,7 @@ const Header = () => {
             <div
                 className={`bg-header
                 ${searchPath ? "hidden" : ""}
-                relative border-b shadow-xl sticky top-0 z-50 rounded-b-xl `}
+                relative border-b shadow-xl sticky top-0 z-50 rounded-b-xl overflow-hidden `}
             >
                 <Navigation />
             </div>

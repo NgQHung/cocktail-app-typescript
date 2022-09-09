@@ -74,7 +74,7 @@ const Search = () => {
     const ingredientIsSelected = selectedType === "ingredient_id";
 
     return (
-        <nav onKeyUp={handleKeyboardEvent} className=" flex flex-col my-12 mx-2 ">
+        <nav onKeyUp={handleKeyboardEvent} className=" flex flex-col my-12 mx-2 overflow-hidden ">
             <motion.div
                 variants={motionSearchType}
                 initial="hidden"

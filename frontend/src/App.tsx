@@ -16,6 +16,8 @@ import { AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { cocktailSliceAction } from "./store/cocktail-slice";
 import CocktailDetail from "./pages/CocktailDetail";
+import Signup from "./components/Form/Signup";
+import Signin from "./components/Form/Signin";
 
 function App() {
     const [cocktails, setCocktails] = useState<Cocktail[]>([]);
@@ -56,6 +58,8 @@ function App() {
                         element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
                     >
                         <Route path="navigation" element={<Navigation />} />
+                        <Route path="signup" element={<Signup />} />
+                        <Route path="signin" element={<Signin />} />
                     </Route>
                     <Route path="/search" element={<Search />} />
                     <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />

@@ -21,7 +21,7 @@ export const Button: React.FC<Props> = (props) => {
 
 export const ButtonHeader: React.FC<Props> = (props) => {
     return (
-        <div className="flex justify-center cursor-pointer text-3xl " onClick={props.clickHandler}>
+        <div className="flex justify-center cursor-pointer " onClick={props.clickHandler}>
             {props.children}
         </div>
     );

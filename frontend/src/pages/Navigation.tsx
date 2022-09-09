@@ -29,6 +29,10 @@ const Navigation = () => {
     const mainPath = location.pathname === "/";
     const navPath = location.pathname === "/navigation";
     const searchPath = location.pathname === "/search";
+    const isSignin = location.pathname === "/signin";
+    const isSignup = location.pathname === "/signup";
+    console.log(pathName);
+
     const navigationHandler = () => {
         if (mainPath) {
             dispatch(cocktailSliceAction.navigationHandler(true));
@@ -36,6 +40,9 @@ const Navigation = () => {
         if (navPath) {
             dispatch(cocktailSliceAction.navigationHandler(false));
         }
+        // if () {
+        //     dispatch(cocktailSliceAction.navigationHandler(false));
+        // }
     };
 
     const isNavigation = location.pathname === "/navigation";
@@ -57,7 +64,7 @@ const Navigation = () => {
                 initial="hidden"
                 animate="visible"
                 transition={motionHeader.transition}
-                className="flex justify-around items-center py-4"
+                className="flex justify-between items-center py-4 px-12"
             >
                 <div className={`cursor-pointer ${style_search}`}>
                     <Link onClick={navigationClicked} to="/">
@@ -68,10 +75,26 @@ const Navigation = () => {
                         />
                     </Link>
                 </div>
-                <div className={` ${style_search}`}>
+                <div className={`text-3xl  ${style_search}`}>
                     <Link to={mainPath ? "/navigation" : "/"}>
                         <ButtonHeader clickHandler={navigationHandler}>Cocktail</ButtonHeader>
                     </Link>
+                </div>
+                <div className="absolute right-52 text-lg">
+                    <div className="items-center justify-end md:flex md:flex-1 lg:w-0">
+                        <Link
+                            to="/signin"
+                            className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                        >
+                            Sign in
+                        </Link>
+                        <Link
+                            to="/signup"
+                            className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                        >
+                            Sign up
+                        </Link>
+                    </div>
                 </div>
                 <div className="w-12 flex items-center justify-center">
                     <Link to="search">
