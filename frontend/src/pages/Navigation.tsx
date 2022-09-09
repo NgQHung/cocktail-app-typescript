@@ -31,7 +31,7 @@ const Navigation = () => {
     const searchPath = location.pathname === "/search";
     const isSignin = location.pathname === "/signin";
     const isSignup = location.pathname === "/signup";
-    console.log(pathName);
+    // console.log(pathName);
 
     const navigationHandler = () => {
         if (mainPath) {

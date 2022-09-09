@@ -1,6 +1,8 @@
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import Modal from "../../UI/Modal";
 
@@ -8,6 +10,11 @@ const Signup = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const isSignup = location.pathname === "/signup";
+    const navigate = useNavigate();
+
+    const closeSignupHandler = () => {
+        navigate("/");
+    };
 
     useEffect(() => {
         if (isSignup) {
@@ -19,9 +26,15 @@ const Signup = () => {
         <Modal>
             {/* <body className="font-mono bg-gray-400"> */}
             <div className="container mx-auto">
-                <div className="flex justify-center px-6 my-12">
+                <div className="flex justify-center px-6 my-4">
                     <div className="w-full xl:w-full lg:w-full flex">
-                        <div className="w-full lg:w-full bg-white p-5 rounded-lg lg:rounded-l-none">
+                        <div className="w-full lg:w-full bg-white p-5 rounded-lg">
+                            <div
+                                className="absolute right-12 hover:text-red-500 cursor-pointer text-xl"
+                                onClick={closeSignupHandler}
+                            >
+                                <FontAwesomeIcon icon={faXmark} />
+                            </div>
                             <h3 className="pt-4 text-2xl text-center">Create an Account!</h3>
                             <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
                                 <div className="mb-4 md:flex md:justify-between">
@@ -36,7 +49,7 @@ const Signup = () => {
                                             className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="firstName"
                                             type="text"
-                                            // placeholder="First Name"
+                                            placeholder="First Name"
                                         />
                                     </div>
                                     <div className="md:ml-2">
@@ -50,7 +63,7 @@ const Signup = () => {
                                             className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="lastName"
                                             type="text"
-                                            // placeholder="Last Name"
+                                            placeholder="Last Name"
                                         />
                                     </div>
                                 </div>
@@ -77,14 +90,13 @@ const Signup = () => {
                                             Password
                                         </label>
                                         <input
-                                            className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                                            className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500s rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="password"
-                                            type="password"
-                                            // placeholder="******************"
+                                            placeholder="******************"
                                         />
-                                        <p className="text-xs italic text-red-500">
+                                        {/* <p className="text-xs italic text-red-500">
                                             Please choose a password.
-                                        </p>
+                                        </p> */}
                                     </div>
                                     <div className="md:ml-2">
                                         <label
@@ -96,8 +108,7 @@ const Signup = () => {
                                         <input
                                             className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                                             id="c_password"
-                                            type="password"
-                                            // placeholder="******************"
+                                            placeholder="******************"
                                         />
                                     </div>
                                 </div>
