@@ -5,12 +5,46 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import Modal from "../../UI/Modal";
+import Use_Form from "../../hooks/use_form";
+
+const inputIsValid = (value: string) => value.trim() !== "";
+const emailInputIsValid = (value: string) => value.includes("@");
 
 const Signin = () => {
+    const initialValue = {
+        email: "",
+        password: "",
+    };
+
+    // use form for input
+    const {
+        input: emailInput,
+        hasError: emailHasError,
+        inputIsValid: emailIsValid,
+        reset: emailReset,
+        onChangeHandler: emailChange,
+        inputBlurHandler: emailOnBlur,
+    } = Use_Form(emailInputIsValid);
+
+    const {
+        input: passwordeInput,
+        hasError: passwordHasError,
+        inputIsValid: passwordIsValid,
+        reset: passwordReset,
+        onChangeHandler: passwordChange,
+        inputBlurHandler: passwordOnBlur,
+    } = Use_Form(inputIsValid);
+    // console.log(input);
+
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isSignin = location.pathname === "/signin";
+
+    const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        // dispatch(formSliceActions.formHandler());
+    };
 
     useEffect(() => {
         if (isSignin) {
@@ -58,44 +92,88 @@ const Signin = () => {
                     <span className="text-gray-500 font-normal">OR</span>
                     <span className="h-px w-16 bg-gray-300"></span>
                 </div>
-                <form className="mt-8 space-y-6" action="#" method="POST">
+                <form
+                    className="mt-8 space-y-6"
+                    action="#"
+                    method="POST"
+                    onSubmit={onSubmitHandler}
+                >
                     <input type="hidden" name="remember" />
                     <div className="relative">
                         <div className="absolute right-0 mt-4">
-                            {/* <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 text-green-500"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                ></path>
-                            </svg> */}
+                            {emailIsValid && (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6 text-green-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    ></path>
+                                </svg>
+                            )}
                         </div>
                         <label className="text-sm font-bold text-gray-700 tracking-wide">
                             Email
                         </label>
                         <input
-                            className=" w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                            className={`${
+                                emailHasError ? "border-red-500" : ""
+                            } w-full text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500`}
                             type=""
                             placeholder="mail@gmail.com"
+                            onChange={emailChange}
+                            onBlur={emailOnBlur}
+                            name="email"
                         />
+
+                        {emailHasError && (
+                            <p className="text-xs italic text-red-500">
+                                Please enter a valid name.
+                            </p>
+                        )}
                     </div>
                     <div className="mt-8 content-center">
+                        <div className="absolute right-10 mt-4">
+                            {passwordIsValid && (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6 text-green-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    ></path>
+                                </svg>
+                            )}
+                        </div>
                         <label className="text-sm font-bold text-gray-700 tracking-wide">
                             Password
                         </label>
                         <input
-                            className="w-full content-center text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                            className={`${
+                                passwordHasError ? "border-red-500" : ""
+                            }w-full content-center text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500`}
                             type=""
                             placeholder="Enter your password"
+                            name="password"
+                            onChange={passwordChange}
+                            onBlur={passwordOnBlur}
                         />
                     </div>
+                    {passwordHasError && (
+                        <p className="text-xs italic text-red-500">Please enter a valid name.</p>
+                    )}
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <input
