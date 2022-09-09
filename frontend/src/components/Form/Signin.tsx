@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import Modal from "../../UI/Modal";
 import Use_Form from "../../hooks/use_form";
+import { formSliceActions } from "../../store/form-slice";
 
 const inputIsValid = (value: string) => value.trim() !== "";
 const emailInputIsValid = (value: string) => value.includes("@");
@@ -27,7 +28,7 @@ const Signin = () => {
     } = Use_Form(emailInputIsValid);
 
     const {
-        input: passwordeInput,
+        input: passwordInput,
         hasError: passwordHasError,
         inputIsValid: passwordIsValid,
         reset: passwordReset,
@@ -43,7 +44,12 @@ const Signin = () => {
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // dispatch(formSliceActions.formHandler());
+        dispatch(
+            formSliceActions.formHandler({
+                email: emailInput,
+                password: passwordInput,
+            })
+        );
     };
 
     useEffect(() => {

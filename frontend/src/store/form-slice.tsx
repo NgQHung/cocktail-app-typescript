@@ -14,7 +14,7 @@ const formSlice = createSlice({
     reducers: {
         formHandler(state, action) {
             state.formInput = action.payload;
-            // console.log(state.formInput);
+            console.log(state.formInput);
         },
     },
 });

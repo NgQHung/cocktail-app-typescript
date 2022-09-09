@@ -37,6 +37,7 @@ const Signup = () => {
         reset: firstNameReset,
         onChangeHandler: firstNameChange,
         inputBlurHandler: firstNameOnBlur,
+        isTouched: firstNameIsTouched,
     } = Use_Form(inputIsValid);
 
     const {
@@ -156,7 +157,9 @@ const Signup = () => {
                                                 onChange={firstNameChange}
                                                 onBlur={firstNameOnBlur}
                                             />
-                                            {firstNameIsValid && iconValid}
+                                            {firstNameIsValid && firstNameIsTouched
+                                                ? iconValid
+                                                : null}
                                         </div>
 
                                         {firstNameHasError && (
@@ -266,15 +269,18 @@ const Signup = () => {
                                                 onChange={confirmPassChange}
                                                 onBlur={confirmPassOnBlur}
                                             />
-                                            {confirmPassIsValid && !confirmPasswordHasError
+                                            {confirmPassIsValid &&
+                                            !confirmPassHasError &&
+                                            !confirmPasswordHasError
                                                 ? iconValid
                                                 : null}
                                         </div>
-                                        {confirmPassHasError ? (
+                                        {confirmPassHasError && (
                                             <p className="text-xs italic text-red-500">
                                                 Please enter a valid password.
                                             </p>
-                                        ) : confirmPasswordHasError ? (
+                                        )}
+                                        {!confirmPassHasError && confirmPasswordHasError ? (
                                             <p className="text-xs italic text-red-500">
                                                 Password and confirm password does not match
                                             </p>
