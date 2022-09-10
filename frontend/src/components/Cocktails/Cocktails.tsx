@@ -22,7 +22,7 @@ const Cocktails: React.FC<Props> = (props) => {
     const ingredient = props.selectedType === "ingredient_id";
     return (
         <Fragment>
-            <div
+            {/* <div
                 className={`${
                     !error && !dataIsEmpty ? "bg-cocktail" : "hidden"
                 } flex flex-wrap justify-center py-12 `}
@@ -59,7 +59,7 @@ const Cocktails: React.FC<Props> = (props) => {
                 ) : null}
                 {isSignin && !isSignup ? <Signin /> : null}
                 {!isSignin && isSignup ? <Signup /> : null}
-            </div>
+            </div> */}
         </Fragment>
     );
 };

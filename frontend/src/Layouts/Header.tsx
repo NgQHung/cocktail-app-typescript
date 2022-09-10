@@ -6,10 +6,17 @@ import { useDispatch } from "react-redux";
 import { cocktailSliceAction } from "../store/cocktail-slice";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+    faMagnifyingGlass,
+    faUser,
+    faHeart,
+    faBasketShopping,
+} from "@fortawesome/free-solid-svg-icons";
 import { searchSliceAction } from "../store/search-slice";
 import { motion } from "framer-motion";
 import { motionHeader, motionNavigation } from "../UI/Animation";
+import Search from "./components/Search";
+import NavTools from "./components/NavTools";
 
 const Header = () => {
     const location = useLocation();
@@ -34,9 +41,36 @@ const Header = () => {
             <div
                 className={`bg-header
                 ${searchPath ? "hidden" : ""}
-                relative border-b shadow-xl sticky top-0 z-50 rounded-b-xl overflow-hidden `}
+                relative border-b shadow-xl sticky top-0 z-40 rounded-b-xl overflow-hidden `}
             >
                 <Navigation />
+
+                <header className="bg-white">
+                    <div className="container mx-auto px-4 py-8 flex items-center">
+                        {/* <!-- logo --> */}
+                        <div className="mr-auto md:w-48 flex-shrink-0">
+                            <img
+                                className="h-8 md:h-10"
+                                src="https://i.pinimg.com/originals/b8/6f/67/b86f67625bc4f99d4b3acfd7992b3c09.png"
+                                alt=""
+                            />
+                        </div>
+
+                        {/* <!-- search --> */}
+                        <Search />
+
+                        {/* <!-- buttons --> */}
+                        <NavTools />
+
+                        {/* <!-- cart count --> */}
+                        <div className="ml-4 hidden sm:flex flex-col font-bold">
+                            <span className="text-xs text-gray-400">Your Cart</span>
+                            <span>$2,650,59</span>
+                        </div>
+                    </div>
+
+                    {/* <hr> */}
+                </header>
             </div>
         </Fragment>
     );
