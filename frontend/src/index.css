@@ -61,3 +61,25 @@ footer ul li a {
     transform: translateX(-50%);
     z-index: 30;
 }
+.dropdown_list {
+    display: none;
+}
+/* .dropdown::before {
+    content: "";
+    height: 2.5rem;
+    width: 51px;
+    position: absolute;
+    top: 91px;
+    right: 176px;
+    background-color: transparent;
+} */
+.dropdown:focus,
+.dropdown:hover .dropdown_list {
+    display: block;
+}
+.dropdown:focus .dropdown_list {
+    display: block;
+}
+.dropdown_list ul li a {
+    transition: background-color 0.2s linear;
+}

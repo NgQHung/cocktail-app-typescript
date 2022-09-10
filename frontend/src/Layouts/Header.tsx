@@ -41,12 +41,12 @@ const Header = () => {
             <div
                 className={`bg-header
                 ${searchPath ? "hidden" : ""}
-                relative border-b shadow-xl sticky top-0 z-40 rounded-b-xl overflow-hidden `}
+                border-b shadow-xl sticky top-0 z-40 rounded-b-xl `}
             >
-                <Navigation />
+                {/* <Navigation /> */}
 
-                <header className="bg-white">
-                    <div className="container mx-auto px-4 py-8 flex items-center">
+                <header className="bg-white h-[116px] w-full relative">
+                    <div className=" mx-auto px-4 py-8 flex items-center">
                         {/* <!-- logo --> */}
                         <div className="mr-auto md:w-48 flex-shrink-0">
                             <img
