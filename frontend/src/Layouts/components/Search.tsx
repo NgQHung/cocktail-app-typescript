@@ -5,10 +5,10 @@ import React, { Fragment } from "react";
 const Search = () => {
     return (
         <Fragment>
-            <div className="lg:block absolute left-1/2 -translate-x-1/2 w-full max-w-[320px] lg:max-w-[512px] 2xl:max-w-2xl bg-gray-100 rounded-md xl:flex  mr-24">
-                <div className="flex flex-col lg:flex-row flex-start lg:items-center">
+            <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-[320px] lg:max-w-[512px] lg:w-full bg-gray-100 rounded-md lg:flex  mr-24">
+                <div className="flex flex-col lg:flex-row flex-start lg:items-center lg:w-full">
                     <select
-                        className="max-w-[170px] bg-transparent uppercase font-bold text-sm py-1 px-3 lg:p-4 lg:left-0 mr-4"
+                        className="w-[95%] bg-transparent border-b uppercase font-bold text-sm py-1 px-3 lg:p-4 lg:left-0 mr-4"
                         name=""
                         id=""
                     >
@@ -19,7 +19,7 @@ const Search = () => {
                     </select>
                     <div className="flex justify-between w-full py-4">
                         <input
-                            className="w-full border-l border-gray-300 bg-transparent font-semibold text-sm pl-4 "
+                            className="w-full lg:border-l border-gray-300 bg-transparent font-semibold text-sm pl-4 "
                             type="text"
                             placeholder="I'm searching for ..."
                         />
