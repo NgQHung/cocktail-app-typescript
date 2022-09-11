@@ -64,30 +64,15 @@ const CocktailDetail: React.FC<Props> = (props) => {
 
     return (
         <div className="detail">
-            {/* {clickedCoc?.map((item: ClickedCocktail) => (
-                <div className="" key={item?.idDrink}>
-                    <section className="text-gray-600 body-font">
-                        <Link to="/">Home</Link> / Shop by Category / {item?.strDrink}
-                        <div className="container px-5 py-24 mx-auto flex justify-around flex-wrap">
-                            <div className="lg:w-1/2 mb-10 lg:mb-0 rounded-lg overflow-hidden flex justify-center">
-                                <img
-                                    alt="feature"
-                                    className="object-cover object-center h-full w-96"
-                                    src={item?.strDrinkThumb}
-                                />
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            ))} */}
             {clickedCoc?.map((item: ClickedCocktail) => (
                 <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4 ">
                     <div className="flex relative justify-center items-center lg:flex-row flex-col gap-8">
                         {/* <!-- Description Div --> */}
                         <div className=" w-full sm:w-96 md:w-8/12  lg:w-6/12 flex lg:flex-row flex-col lg:gap-8 sm:gap-6 gap-4">
                             <div className="">
-                                <p className="absolute left-0 top-0 p-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-600">
-                                    <Link to="/">Home</Link> / Furniture / {item?.strDrink}
+                                <p className="absolute flex left-0 top-0 p-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 font-normal text-base leading-4 text-gray-600">
+                                    <Link to="/">Home</Link> / Cocktail /
+                                    <p className="font-bold text-gray-700">{item?.strDrink}</p>
                                 </p>
                                 <div className="w-full lg:w-8/12 flex justify-center items-center mt-12">
                                     <img

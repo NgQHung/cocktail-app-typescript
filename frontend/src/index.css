@@ -55,8 +55,8 @@ footer ul li a {
 }
 .modal {
     position: fixed;
-    margin: auto 0;
-    top: 13vh;
+    /* margin: auto 0; */
+    top: 2vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 30;

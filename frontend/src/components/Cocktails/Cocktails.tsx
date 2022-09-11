@@ -12,6 +12,7 @@ interface Props {
     cocktailData: Cocktail[];
     selectedType?: string;
     loadMore?: () => void;
+    amountCocktail?: number;
 }
 
 const Cocktails: React.FC<Props> = (props) => {
@@ -22,6 +23,7 @@ const Cocktails: React.FC<Props> = (props) => {
     const isSignup = location.pathname === "/signup";
     // console.log(props.cocktailData.length);
     const ingredient = props.selectedType === "ingredient_id";
+    const amountCocktail = props?.amountCocktail!;
     return (
         <Fragment>
             {/* <div
@@ -36,10 +38,10 @@ const Cocktails: React.FC<Props> = (props) => {
                     </p>
                 </div>
                 <div className=" py-6 lg:px-20 md:px-6 px-4">
-                    <p className=" font-normal text-sm leading-3 text-gray-600 ">
+                    {/* <p className=" font-normal text-sm leading-3 text-gray-600 ">
                         <Link to="/">Home</Link> / Shop by Category / Women
                     </p>
-                    <hr className=" w-full bg-gray-200 my-6" />
+                    <hr className=" w-full bg-gray-200 my-6" /> */}
 
                     <div className=" flex justify-between items-center">
                         <div className=" flex space-x-3 justify-center items-center">
@@ -47,7 +49,7 @@ const Cocktails: React.FC<Props> = (props) => {
                             <p className=" font-normal text-base leading-4 text-gray-800">Filter</p>
                         </div>
                         <p className=" cursor-pointer hover:underline duration-100 font-normal text-base leading-4 text-gray-600">
-                            Showing 18 products
+                            Showing {amountCocktail - 20} products
                         </p>
                     </div>
 

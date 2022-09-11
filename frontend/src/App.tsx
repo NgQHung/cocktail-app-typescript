@@ -55,7 +55,13 @@ function App() {
                 <Routes location={location} key={location.key}>
                     <Route
                         path="/"
-                        element={<Cocktails cocktailData={cocktails} loadMore={loadMore} />}
+                        element={
+                            <Cocktails
+                                cocktailData={cocktails}
+                                loadMore={loadMore}
+                                amountCocktail={index}
+                            />
+                        }
                     >
                         <Route path="navigation" element={<Navigation />} />
                         <Route path="signup" element={<Signup />} />

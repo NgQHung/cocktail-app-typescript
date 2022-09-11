@@ -16,7 +16,11 @@ const BackDrop: React.FC<Props> = (props) => {
 };
 
 const OverLays: React.FC<Props> = (props) => {
-    return <div className="modal">{props.children}</div>;
+    return (
+        <div className="relative w-full h-screen z-50 sm:fixed sm:top-[50%] sm:translate-y-[-50%] sm:left-[50%] sm:translate-x-[-50%] sm:w-[500px] sm:h-[700px]   ">
+            {props.children}
+        </div>
+    );
 };
 
 const portalElement = document.getElementById("overlays")!;

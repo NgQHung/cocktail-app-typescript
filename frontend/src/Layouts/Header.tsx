@@ -39,14 +39,13 @@ const Header = () => {
     return (
         <Fragment>
             <div
-                className={`bg-header
-                ${searchPath ? "hidden" : ""}
-                border-b shadow-xl sticky top-0 z-40 rounded-b-xl `}
+                className={`
+                ${searchPath ? "hidden" : ""} shadow-xl sticky top-0 z-10 rounded-b-xl h-[90px] `}
             >
                 {/* <Navigation /> */}
 
-                <header className="bg-white h-[116px] w-full relative">
-                    <div className=" mx-auto px-4 py-8 flex items-center">
+                <header className=" bg-white w-full h-full relative">
+                    <div className="mx-auto px-4 py-8 h-full flex items-center">
                         {/* <!-- logo --> */}
                         <div className="mr-auto md:w-48 flex-shrink-0">
                             <img

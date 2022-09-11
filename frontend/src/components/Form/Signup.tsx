@@ -122,10 +122,10 @@ const Signup = () => {
     return (
         <Modal>
             {/* <body className="font-mono bg-gray-400"> */}
-            <div className="container mx-auto">
-                <div className="flex justify-center px-6 my-4">
+            <div className="container mx-auto absolute w-full h-full">
+                <div className="flex justify-center sm:px-6 sm:my-4">
                     <div className="w-full xl:w-full lg:w-full flex">
-                        <div className="w-full lg:w-full bg-white p-5 rounded-lg">
+                        <div className="w-full lg:w-full bg-white p-5 sm:rounded-lg">
                             <div
                                 className="absolute right-12 hover:text-red-500 cursor-pointer text-xl"
                                 onClick={closeSignupHandler}
