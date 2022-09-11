@@ -1,13 +1,12 @@
 // const express = require("express");
-import * as express from "express";
-const { Router } = require("express");
+import express from "express";
 // const { alcoholic, getAllCocktail, nonAlcoholic } =require ("../controllers/cocktailController");
 // const { Request, Response, NextFunction } = require("express");
 
 const router = express.Router();
 
 // router.get("/", getAllCocktail);
-router.get("/hi", (req: express.Request, res: express.Response) => {
+router.get("/", (req: express.Request, res: express.Response) => {
     res.json({ message: "hello world" });
 });
 
