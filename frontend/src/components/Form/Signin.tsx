@@ -7,6 +7,7 @@ import { cocktailSliceAction } from "../../store/cocktail-slice";
 import Modal from "../../UI/Modal";
 import Use_Form from "../../hooks/use_form";
 import { formSliceActions } from "../../store/form-slice";
+import { authSliceActions } from "../../store/auth-slice";
 
 const inputIsValid = (value: string) => value.trim() !== "";
 const emailInputIsValid = (value: string) => value.includes("@");
@@ -42,6 +43,35 @@ const Signin = () => {
     const navigate = useNavigate();
     const isSignin = location.pathname === "/signin";
 
+    const loginHandler = async () => {
+        const res = await fetch("http://localhost:4000/api/users/login", {
+            method: "POST",
+            body: JSON.stringify({
+                email: emailInput,
+                password: passwordInput,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await res.json();
+        // console.log(res.json());
+        if (!res.ok) {
+            console.log("Your email or password is incorrect");
+        } else {
+            // console.log("You sent data successfully");
+            // console.log(data.data);
+            if (data.errors[0]?.msg) {
+                console.log(data.errors[0]?.msg);
+            }
+            if (data.data?.user?.email) {
+                // console.log("You signed in successfully with email " + data.data?.user?.email);
+                dispatch(authSliceActions.login(data.data));
+            }
+        }
+        navigate("/");
+    };
+
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(
@@ -50,6 +80,7 @@ const Signin = () => {
                 password: passwordInput,
             })
         );
+        loginHandler();
     };
 
     useEffect(() => {

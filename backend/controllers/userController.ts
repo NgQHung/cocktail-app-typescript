@@ -46,8 +46,6 @@ export const loginUser = async (req: Request, res: Response) => {
                     id: user._id,
                     email: user.email,
                 },
-                value: user.password,
-                password: password,
             },
         });
     } catch (error: any) {

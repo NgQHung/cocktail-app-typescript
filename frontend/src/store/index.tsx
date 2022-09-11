@@ -1,5 +1,6 @@
 import { configureStore, applyMiddleware } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
+import authSlice from "./auth-slice";
 import cocktailSlice from "./cocktail-slice";
 import formSlice from "./form-slice";
 import searchSlice from "./search-slice";
@@ -10,6 +11,7 @@ export const store = configureStore({
         cocktailSlice: cocktailSlice,
         searchSlice: searchSlice,
         formSlice: formSlice,
+        authSlice: authSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

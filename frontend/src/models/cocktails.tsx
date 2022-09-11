@@ -36,3 +36,10 @@ export interface ClickedCocktail {
     strMeasure9?: string;
     strInstructions?: string;
 }
+
+export interface signupModel {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}

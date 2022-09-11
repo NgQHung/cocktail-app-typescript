@@ -4,8 +4,9 @@ import React, { useEffect, useState, MouseEventHandler } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Use_Form from "../../hooks/use_form";
+import { authSliceActions } from "../../store/auth-slice";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
-import { formSliceActions } from "../../store/form-slice";
+import { formSliceActions, signupHandler } from "../../store/form-slice";
 import Modal from "../../UI/Modal";
 
 const inputIsValid = (value: string) => value.trim() !== "";
@@ -99,10 +100,40 @@ const Signup = () => {
         navigate("/");
     };
 
+    const signupHandler = async () => {
+        const res = await fetch("http://localhost:4000/api/users/signup", {
+            method: "POST",
+            body: JSON.stringify({
+                email: emailInput,
+                password: passwordInput,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await res.json();
+        // const json = JSON.stringify(data);
+        if (!res.ok) {
+            throw new Error("Something went wrong");
+        } else {
+            // user = JSON.stringify(json);
+            console.log("You sent data successfully");
+            if (data.errors[0]?.msg) {
+                console.log(data.errors[0]?.msg);
+            }
+            if (data.data?.user?.email) {
+                console.log("You signed up successfully with email " + data.data?.user?.email);
+                dispatch(authSliceActions.login(data.data));
+                navigate("/");
+            }
+        }
+    };
+
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // setInputObj()
         // console.log()
+        // console.log("hello?");
         dispatch(
             formSliceActions.formHandler({
                 firstName: firstNameInput,
@@ -111,7 +142,19 @@ const Signup = () => {
                 password: passwordInput,
             })
         );
+        signupHandler();
+
+        // signupHandler({
+        //     firstName: firstNameInput,
+        //     lastName: lastNameInput,
+        //     email: emailInput,
+        //     password: passwordInput,
+        // });
     };
+
+    // useEffect(() => {
+    //     postSignupData();
+    // }, []);
 
     useEffect(() => {
         if (isSignup) {
