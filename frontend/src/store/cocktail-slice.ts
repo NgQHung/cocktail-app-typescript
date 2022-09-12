@@ -7,7 +7,8 @@ const initialValue: any = {
     data: [],
     clickedCocktail: [],
     navigationClicked: false,
-    addedCocktails: [],
+    cocktails: [],
+    amount: 0,
 };
 interface Action {
     type?: any;
@@ -29,13 +30,52 @@ const cocktailSlice = createSlice({
             state.clickedCocktail = action.payload;
         },
         addCocktail(state, action) {
-            state.addedCocktails = [...state.addedCocktails, action.payload];
+            const idCocktail = action.payload.id;
+            const existingCocktailIndex = state.cocktails.findIndex(
+                (item: any) => item.id === idCocktail
+            );
+            const existingCocktail = state.cocktails[existingCocktailIndex];
+            // console.log(existingCocktail.amount);
+            // console.log(action.payload.amount);
+            // console.log(existingCocktail);
+            let updateCocktails;
+            if (existingCocktail) {
+                const updateCocktail = {
+                    ...existingCocktail,
+                    amount: existingCocktail.amount + action.payload.amount,
+                };
+                // console.log(updateCocktail);
+                updateCocktails = [...state.cocktails];
+                updateCocktails[existingCocktailIndex] = updateCocktail;
+                state.cocktails = updateCocktails;
+                // console.log(state.cocktails);
+            } else {
+                state.cocktails = [...state.cocktails, action.payload];
+                // console.log(state.cocktails);
+            }
+            // console.log(updateCocktails);
+            // return {
+            //     cocktails: updateCocktails,
+            // };
         },
         removeCocktail(state, action) {
-            state.addedCocktails = state.addedCocktails.filter(
-                (item: any) => item.id !== action.payload
+            const existingCocktailIndex = state.cocktails.findIndex(
+                (item: any) => item.id === action.payload
             );
-            // state.
+            const existingCocktail = state.cocktails[existingCocktailIndex];
+            let updateCocktails;
+            if (existingCocktail.amount === 1) {
+                updateCocktails = state.cocktails.filter((item: any) => item.id !== action.payload);
+                state.cocktails = updateCocktails;
+            } else {
+                const updateCocktail = {
+                    ...existingCocktail,
+                    amount: existingCocktail.amount - 1,
+                };
+                updateCocktails = [...state.cocktails];
+                updateCocktails[existingCocktailIndex] = updateCocktail;
+                state.cocktails = updateCocktails;
+            }
         },
     },
 });

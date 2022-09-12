@@ -1,10 +1,13 @@
 import { faBasketShopping, faHeart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment } from "react";
+import { useSelector } from "react-redux";
 import ShoppingCart from "./ShoppingCart";
 import User from "./User";
 
 const NavTools = () => {
+    const cocktails: any = useSelector<any>((state) => state.cocktailSlice.cocktails);
+    const amountItems = cocktails.length;
     return (
         <Fragment>
             <nav className="contents relative">
@@ -52,7 +55,7 @@ const NavTools = () => {
                     </li>
                     <li className="group dropdown_basket ml-2 lg:ml-4 relative inline-block cursor-pointer">
                         <div className="absolute -top-1 right-0 z-10 bg-yellow-400 text-xs font-bold px-1 py-0.5 rounded-sm">
-                            12
+                            {amountItems}
                         </div>
                         <div className="h-9 relative text-xl lg:h-10 p-2 text-gray-500 lg:group-hover:border lg:group-hover:border-black">
                             <FontAwesomeIcon icon={faBasketShopping} />
