@@ -6,17 +6,18 @@ import { useSelector } from "react-redux";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 
 const ShoppingCart = () => {
-    const cocktails: any = useSelector<any>((state) => state.cocktailSlice.cocktails);
-    // const totalPrice: any = useSelector<any>((state) => state.cocktailSlice.totalPrice);
-    const totalPrices = cocktails
+    const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
+    const totalPrices = cocktailsBasket
         .map((item: any) => item.totalPrice)
-        .reduce((prev: number, curr: number) => prev + curr);
+        .reduce((prev: number, curr: number) => prev + curr, 0);
     const dispatch = useDispatch();
-    // console.log(cocktails);
-    // console.log(totalPrice);
 
     const removeCocktailHandler = (id: string) => {
         dispatch(cocktailSliceAction.removeCocktail(id));
+    };
+
+    const heartHandler = (cocktailHeart: any) => {
+        dispatch(cocktailSliceAction.heartHandler(cocktailHeart));
     };
 
     return (
@@ -24,7 +25,7 @@ const ShoppingCart = () => {
             <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 dark:bg-gray-900 dark:text-gray-100">
                 <h2 className="text-xl font-semibold">Your cart</h2>
 
-                {cocktails.map((cocktail: any, inx: number) => (
+                {cocktailsBasket.map((cocktail: any, inx: number) => (
                     <div key={inx}>
                         <ul className="flex flex-col divide-y divide-gray-700">
                             <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
@@ -75,6 +76,7 @@ const ShoppingCart = () => {
                                             </button>
                                             <button
                                                 type="button"
+                                                onClick={() => heartHandler(cocktail)}
                                                 className="flex items-center px-2 py-1 space-x-1"
                                             >
                                                 <FontAwesomeIcon icon={faHeart} />
@@ -89,7 +91,7 @@ const ShoppingCart = () => {
                     </div>
                 ))}
 
-                {cocktails?.length === 0 ? (
+                {cocktailsBasket?.length === 0 ? (
                     <h1 className="text-center text-2xl font-bold">Your cart is empty</h1>
                 ) : (
                     <div>
@@ -103,12 +105,14 @@ const ShoppingCart = () => {
                             </p>
                         </div>
                         {/* <div className=" space-x-4"> */}
-                        <button
-                            type="button"
-                            className="px-6 py-2 border rounded-md dark:bg-violet-400 dark:text-gray-900 dark:border-violet-400"
-                        >
-                            <span className="sr-only sm:not-sr-only">Continue to </span>Checkout
-                        </button>
+                        <div className="text-center mt-4">
+                            <button
+                                type="button"
+                                className="text-center px-6 py-2 border rounded-md dark:bg-violet-400 dark:text-gray-900 dark:border-violet-400"
+                            >
+                                <span className="sr-only sm:not-sr-only">Continue to </span>Checkout
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>

@@ -1,9 +1,6 @@
 import React, { useState, Fragment } from "react";
-import { ButtonHeader } from "../UI/Button";
-import Navigation from "../pages/Navigation";
 import { Link, useLocation, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { cocktailSliceAction } from "../store/cocktail-slice";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,22 +10,18 @@ import {
     faBasketShopping,
 } from "@fortawesome/free-solid-svg-icons";
 import { searchSliceAction } from "../store/search-slice";
-import { motion } from "framer-motion";
-import { motionHeader, motionNavigation } from "../UI/Animation";
 import Search from "./components/Search";
 import NavTools from "./components/NavTools";
 
 const Header = () => {
     const location = useLocation();
     const dispatch = useDispatch();
-    const navigationClicked: any = useSelector<any>(
-        (state) => state.cocktailSlice.navigationClicked
-    );
-    // console.log(location);
-    const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
-    const isNavigation = location.pathname === "/navigation";
 
-    const style_search = searchClicked ? "hidden" : "";
+    const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
+
+    const totalPrices = cocktailsBasket
+        .map((item: any) => item.totalPrice)
+        .reduce((prev: number, curr: number) => prev + curr, 0);
 
     const searchPath = location.pathname === "/search";
 
@@ -64,7 +57,7 @@ const Header = () => {
                         {/* <!-- cart count --> */}
                         <div className="ml-4 hidden sm:flex flex-col font-bold">
                             <span className="text-xs text-gray-400">Your Cart</span>
-                            <span>$2,650,59</span>
+                            <span>$ {totalPrices}</span>
                         </div>
                     </div>
 

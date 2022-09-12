@@ -18,6 +18,7 @@ import { cocktailSliceAction } from "./store/cocktail-slice";
 import CocktailDetail from "./pages/CocktailDetail";
 import Signup from "./components/Form/Signup";
 import Signin from "./components/Form/Signin";
+import WishList from "./pages/WishList";
 
 function App() {
     const [cocktails, setCocktails] = useState<Cocktail[]>([]);
@@ -70,6 +71,7 @@ function App() {
                     <Route path="/search" element={<Search />} />
                     <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
                     <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
+                    <Route path="/wish-list" element={<WishList />} />
                     <Route path="*" element={<NotFound />} />
                     <Route
                         path="/cocktail/:cocktailId"

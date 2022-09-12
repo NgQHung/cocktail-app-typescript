@@ -2,12 +2,16 @@ import { faBasketShopping, faHeart, faUser } from "@fortawesome/free-solid-svg-i
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 import User from "./User";
 
 const NavTools = () => {
-    const cocktails: any = useSelector<any>((state) => state.cocktailSlice.cocktails);
-    const amountItems = cocktails.length;
+    const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
+    const cocktailsHeart: any = useSelector<any>((state) => state.cocktailSlice.cocktailsHeart);
+    const amountCocktailsHeart = cocktailsHeart.length;
+    // console.log(cocktailsHeart);
+    const amountItems = cocktailsBasket.length;
     return (
         <Fragment>
             <nav className="contents relative">
@@ -44,14 +48,17 @@ const NavTools = () => {
                         {/* </a> */}
                     </li>
                     <li className="h-[40px] ml-2 lg:ml-4 relative inline-block">
-                        <a className="" href="">
+                        <Link to="/wish-list" className="">
                             <div className="absolute -top-1 right-0 z-10 bg-yellow-400 text-xs font-bold px-1 py-0.5 rounded-sm">
-                                3
+                                {amountCocktailsHeart}
                             </div>
-                            <div className="h-9 text-xl lg:h-10 p-2 text-gray-500">
+                            <div
+                                // onClick={heartHandler}
+                                className="h-9 text-xl lg:h-10 p-2 text-gray-500"
+                            >
                                 <FontAwesomeIcon icon={faHeart} />
                             </div>
-                        </a>
+                        </Link>
                     </li>
                     <li className="group dropdown_basket ml-2 lg:ml-4 relative inline-block cursor-pointer">
                         <div className="absolute -top-1 right-0 z-10 bg-yellow-400 text-xs font-bold px-1 py-0.5 rounded-sm">
