@@ -7,6 +7,7 @@ const initialValue: any = {
     data: [],
     clickedCocktail: [],
     navigationClicked: false,
+    addedCocktails: [],
 };
 interface Action {
     type?: any;
@@ -26,6 +27,15 @@ const cocktailSlice = createSlice({
         },
         clickedCocktailHandler(state, action) {
             state.clickedCocktail = action.payload;
+        },
+        addCocktail(state, action) {
+            state.addedCocktails = [...state.addedCocktails, action.payload];
+        },
+        removeCocktail(state, action) {
+            state.addedCocktails = state.addedCocktails.filter(
+                (item: any) => item.id !== action.payload
+            );
+            // state.
         },
     },
 });
