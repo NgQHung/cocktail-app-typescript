@@ -9,6 +9,8 @@ const initialValue: any = {
     navigationClicked: false,
     cocktails: [],
     amount: 0,
+    totalPrice: 0,
+    price: 0,
 };
 interface Action {
     type?: any;
@@ -31,32 +33,28 @@ const cocktailSlice = createSlice({
         },
         addCocktail(state, action) {
             const idCocktail = action.payload.id;
+            // state.totalPrice = action.payload.price * action.payload.price + state.price;
             const existingCocktailIndex = state.cocktails.findIndex(
                 (item: any) => item.id === idCocktail
             );
             const existingCocktail = state.cocktails[existingCocktailIndex];
-            // console.log(existingCocktail.amount);
-            // console.log(action.payload.amount);
-            // console.log(existingCocktail);
             let updateCocktails;
             if (existingCocktail) {
                 const updateCocktail = {
                     ...existingCocktail,
                     amount: existingCocktail.amount + action.payload.amount,
+                    totalPrice:
+                        action.payload.price * existingCocktail.amount + action.payload.price,
                 };
-                // console.log(updateCocktail);
                 updateCocktails = [...state.cocktails];
                 updateCocktails[existingCocktailIndex] = updateCocktail;
                 state.cocktails = updateCocktails;
-                // console.log(state.cocktails);
             } else {
                 state.cocktails = [...state.cocktails, action.payload];
-                // console.log(state.cocktails);
             }
-            // console.log(updateCocktails);
-            // return {
-            //     cocktails: updateCocktails,
-            // };
+            // state.totalPrice = state.cocktails
+            //     .map((item: any) => item.price)
+            //     .reduce((prev: any, curr: any) => prev + curr, 0);
         },
         removeCocktail(state, action) {
             const existingCocktailIndex = state.cocktails.findIndex(
@@ -71,11 +69,15 @@ const cocktailSlice = createSlice({
                 const updateCocktail = {
                     ...existingCocktail,
                     amount: existingCocktail.amount - 1,
+                    totalPrice: existingCocktail.totalPrice - existingCocktail.price,
                 };
                 updateCocktails = [...state.cocktails];
                 updateCocktails[existingCocktailIndex] = updateCocktail;
                 state.cocktails = updateCocktails;
             }
+            // state.totalPrice = state.cocktails
+            //     .map((item: any) => item.price)
+            //     .reduce((prev: any, curr: any) => prev + curr, 0);
         },
     },
 });

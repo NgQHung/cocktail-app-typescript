@@ -33,6 +33,8 @@ const CocktailItem: React.FC<Props> = (props) => {
                 image: image,
                 id: id,
                 amount: 1,
+                price: 10,
+                totalPrice: 0,
             })
         );
     };

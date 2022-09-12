@@ -7,8 +7,13 @@ import { cocktailSliceAction } from "../../store/cocktail-slice";
 
 const ShoppingCart = () => {
     const cocktails: any = useSelector<any>((state) => state.cocktailSlice.cocktails);
+    // const totalPrice: any = useSelector<any>((state) => state.cocktailSlice.totalPrice);
+    const totalPrices = cocktails
+        .map((item: any) => item.totalPrice)
+        .reduce((prev: number, curr: number) => prev + curr);
     const dispatch = useDispatch();
     // console.log(cocktails);
+    // console.log(totalPrice);
 
     const removeCocktailHandler = (id: string) => {
         dispatch(cocktailSliceAction.removeCocktail(id));
@@ -36,13 +41,15 @@ const ShoppingCart = () => {
                                                     {cocktail.name}
                                                 </h3>
                                                 <p className="text-sm dark:text-gray-400">
-                                                    Classic
+                                                    Total price
                                                 </p>
                                             </div>
                                             <div className="text-right">
-                                                <p className="text-lg font-semibold">59.99€</p>
-                                                <p className="text-sm line-through dark:text-gray-600">
-                                                    75.50€
+                                                <p className="text-lg font-semibold">
+                                                    {cocktail.price}€
+                                                </p>
+                                                <p className="text-sm dark:text-gray-600">
+                                                    {cocktail.totalPrice}€
                                                 </p>
                                             </div>
                                         </div>
@@ -89,7 +96,7 @@ const ShoppingCart = () => {
                         <div className="space-y-1 text-right">
                             <p>
                                 Total amount:
-                                <span className="font-semibold">357 €</span>
+                                <span className="font-semibold"> {totalPrices} €</span>
                             </p>
                             <p className="text-sm dark:text-gray-400">
                                 Not including taxes and shipping costs
