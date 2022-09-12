@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import CocktailItem from "./CocktailItem";
 import { Button, ButtonLoadMore } from "../../UI/Button";
 import { Cocktail } from "../../models/cocktails";
@@ -7,6 +7,10 @@ import Signin from "../Form/Signin";
 import Signup from "../Form/Signup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+import Alert from "../../UI/Alert";
+import { useDispatch } from "react-redux";
+import { cocktailSliceAction } from "../../store/cocktail-slice";
 
 interface Props {
     cocktailData: Cocktail[];
@@ -18,12 +22,25 @@ interface Props {
 const Cocktails: React.FC<Props> = (props) => {
     const error = props.cocktailData === null;
     const dataIsEmpty = props.cocktailData.length === 0;
+    const dispatch = useDispatch();
+    // const [alert, setAlert] = useState(false);
+
+    const alert: any = useSelector<any>((state) => state.cocktailSlice.alert);
+    console.log(alert);
+
     const location = useLocation();
     const isSignin = location.pathname === "/signin";
     const isSignup = location.pathname === "/signup";
     // console.log(props.cocktailData.length);
     const ingredient = props.selectedType === "ingredient_id";
     const amountCocktail = props?.amountCocktail!;
+
+    useEffect(() => {
+        let time = setTimeout(() => dispatch(cocktailSliceAction.alertHandler(false)), 2000);
+        return () => {
+            clearTimeout(time);
+        };
+    }, [alert]);
     return (
         <Fragment>
             {/* <div
@@ -31,6 +48,7 @@ const Cocktails: React.FC<Props> = (props) => {
                     !error && !dataIsEmpty ? "bg-cocktail" : "hidden"
                 } flex flex-wrap justify-center py-12 `}
             > */}
+            {alert && <Alert />}
             <div className=" 2xl:container 2xl:mx-auto">
                 <div className=" bg-gray-50 text-center lg:py-10 md:py-8 py-6">
                     <p className=" w-10/12 mx-auto md:w-full  font-semibold lg:text-4xl text-3xl lg:leading-9 md:leading-7 leading-9 text-center text-gray-800">

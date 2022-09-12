@@ -18,6 +18,7 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
+    const total: any = useSelector<any>((state) => state.cocktailSlice.total);
 
     const totalPrices = cocktailsBasket
         .map((item: any) => item.totalPrice)
@@ -57,7 +58,7 @@ const Header = () => {
                         {/* <!-- cart count --> */}
                         <div className="ml-4 hidden sm:flex flex-col font-bold">
                             <span className="text-xs text-gray-400">Your Cart</span>
-                            <span>$ {totalPrices}</span>
+                            <span>$ {total}</span>
                         </div>
                     </div>
 

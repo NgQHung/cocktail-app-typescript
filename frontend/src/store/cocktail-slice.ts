@@ -9,10 +9,13 @@ const initialValue: any = {
     navigationClicked: false,
     cocktailsBasket: [],
     amount: 0,
+    totalAmount: 0,
     totalPrice: 0,
+    total: 0,
     price: 0,
     cocktailsHeart: [],
     amountCocktailsHeart: 0,
+    alert: false,
 };
 interface Action {
     type?: any;
@@ -35,7 +38,8 @@ const cocktailSlice = createSlice({
         },
         addCocktail(state, action) {
             const idCocktail = action.payload.id;
-            // state.totalPrice = action.payload.price * action.payload.price + state.price;
+            state.total = state.total + action.payload.price * action.payload.amount;
+            // console.log(state.totalPrice);
             const existingCocktailIndex = state.cocktailsBasket.findIndex(
                 (item: any) => item.id === idCocktail
             );
@@ -45,14 +49,17 @@ const cocktailSlice = createSlice({
                 const updateCocktail = {
                     ...existingCocktail,
                     amount: existingCocktail.amount + action.payload.amount,
-                    totalPrice:
-                        action.payload.price * existingCocktail.amount + action.payload.price,
+                    // totalPrice:
+                    //     action.payload.price * existingCocktail.amount + action.payload.price,
                 };
+                // console.log()
                 updateCocktails = [...state.cocktailsBasket];
                 updateCocktails[existingCocktailIndex] = updateCocktail;
                 state.cocktailsBasket = updateCocktails;
             } else {
                 state.cocktailsBasket = [...state.cocktailsBasket, action.payload];
+                // state.totalPrice = action.payload.price;
+                // console.log(state.totalPrice);
             }
         },
         removeCocktail(state, action) {
@@ -70,7 +77,7 @@ const cocktailSlice = createSlice({
                 const updateCocktail = {
                     ...existingCocktail,
                     amount: existingCocktail.amount - 1,
-                    totalPrice: existingCocktail.totalPrice - existingCocktail.price,
+                    // totalPrice: existingCocktail.totalPrice - existingCocktail.price,
                 };
                 updateCocktails = [...state.cocktailsBasket];
                 updateCocktails[existingCocktailIndex] = updateCocktail;
@@ -96,24 +103,14 @@ const cocktailSlice = createSlice({
             }
         },
         removeCocktailHeart(state, action) {
-            const existingCocktailIndex = state.cocktailsHeart.findIndex(
-                (item: any) => item.id === action.payload
-            );
-            const existingCocktail = state.cocktailsHeart[existingCocktailIndex];
             let updateCocktails;
-            // if (existingCocktail.amount === 1) {
             updateCocktails = state.cocktailsHeart.filter(
                 (item: any) => item.id !== action.payload
             );
             state.cocktailsHeart = updateCocktails;
-            // } else {
-            //     const updateCocktail = {
-            //         ...existingCocktail,
-            //     };
-            //     updateCocktails = [...state.cocktailsHeart];
-            //     updateCocktails[existingCocktailIndex] = updateCocktail;
-            //     state.cocktailsHeart = updateCocktails;
-            // }
+        },
+        alertHandler(state, alert) {
+            state.alert = alert.payload;
         },
     },
 });

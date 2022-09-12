@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import Alert from "../../UI/Alert";
 
 interface Props {
     id?: number;
@@ -19,12 +20,15 @@ const CocktailItem: React.FC<Props> = (props) => {
     const navigationClicked: any = useSelector<any>(
         (state) => state.cocktailSlice.navigationClicked
     );
+
+    const alertValue: any = useSelector<any>((state) => state.cocktailSlice.alert);
     const navigate = useNavigate();
     const clickedCocktailHandler = () => {
         // dispatch(cocktailSliceAction.clickedCocktailHandler({ id, name, image }));
         if (navigationClicked === true) dispatch(cocktailSliceAction.navigationHandler(false));
         // dispatch(cocktailSliceAction.navigationHandler());
     };
+    const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
 
     const addCocktailHandler = () => {
         dispatch(
@@ -37,6 +41,8 @@ const CocktailItem: React.FC<Props> = (props) => {
                 totalPrice: 0,
             })
         );
+        // setAlert(true)
+        dispatch(cocktailSliceAction.alertHandler(true));
     };
 
     return (
@@ -74,16 +80,16 @@ const CocktailItem: React.FC<Props> = (props) => {
                     <div className=" relative group">
                         <div className=" flex justify-center items-center opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-50 absolute top-0 left-0 h-full w-full"></div>
                         <img className=" w-full" src={image} alt={name} />
-                        <div className=" absolute bottom-0 p-8 w-full opacity-0 group-hover:opacity-100">
+                        <div className=" absolute bottom-0 p-8 w-full opacity-0 group-hover:opacity-100 ">
                             <button
                                 onClick={addCocktailHandler}
-                                className=" font-medium text-base leading-4 text-gray-800 bg-white py-3 w-full"
+                                className=" font-medium text-base leading-4 text-gray-800 bg-white hover:bg-gray-200 hover:transition-colors py-3 w-full"
                             >
                                 Add to bag
                             </button>
                             <button
                                 type="button"
-                                className=" bg-transparent font-medium text-base leading-4 border-2 border-white py-3 w-full mt-2 text-white"
+                                className=" bg-transparent font-medium text-base leading-4 border-2 border-white py-3 w-full mt-2 text-white hover:text-black hover:bg-gray-100 hover:transition-all"
                                 onClick={() => navigate("/cocktail/" + name)}
                             >
                                 Quick View

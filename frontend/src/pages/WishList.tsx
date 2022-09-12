@@ -1,15 +1,23 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../store/cocktail-slice";
 
 const WishList = () => {
     const cocktailsHeart: any = useSelector<any>((state) => state.cocktailSlice.cocktailsHeart);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const amountCocktailsHeart = cocktailsHeart.length;
 
     const removeCocktailHeartHandler = (id: string) => {
         dispatch(cocktailSliceAction.removeCocktailHeart(id));
+    };
+
+    const navigateHandler = (name: string) => {
+        const nameUrl = name.split(" ").join("%");
+        // console.log(nameUrl);
+        navigate("/cocktail/" + nameUrl);
     };
 
     return (
@@ -44,8 +52,8 @@ const WishList = () => {
                         </tr>
                     </thead>
                     <tbody className="w-full text-left">
-                        {cocktailsHeart.map((item: any) => (
-                            <tr className="border-gray-200 border-b">
+                        {cocktailsHeart.map((item: any, inx: number) => (
+                            <tr key={inx} className="border-gray-200 border-b">
                                 <th>
                                     <img
                                         className="my-10 pl-4 lg:pl-10 2xl:pl-20"
@@ -60,12 +68,12 @@ const WishList = () => {
                                     <p>${item.price}</p>
                                 </th>
                                 <th className="my-10 text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
-                                    <a
-                                        href="javascript:void(0)"
+                                    <div
+                                        onClick={() => navigateHandler(item.name)}
                                         className="hover:underline text-base font-medium leading-none  text-gray-800 focus:outline-none focus:underline"
                                     >
                                         View detail
-                                    </a>
+                                    </div>
                                 </th>
                                 <th className="my-10 pl-4 lg:pl-12  2xl:pl-28 pr-4 2xl:pr-20">
                                     <button
@@ -90,8 +98,8 @@ const WishList = () => {
                             ({amountCocktailsHeart} Items)
                         </p>
                     </div>
-                    {cocktailsHeart.map((item: any) => (
-                        <div className="border-gray-200 border-b pb-10">
+                    {cocktailsHeart.map((item: any, inx: number) => (
+                        <div key={inx} className="border-gray-200 border-b pb-10">
                             <div className="px-4 flex flex-col jusitfy-center items-start mt-10">
                                 <div>
                                     <img src={item.image} alt="girl" />
@@ -112,7 +120,7 @@ const WishList = () => {
                             <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
                                 <div>
                                     <a
-                                        href="javascript:void(0)"
+                                        // href="javascript:void(0)"
                                         className="hover:underline text-base font-medium leading-none focus:outline-none focus:underline  text-gray-800"
                                     >
                                         {" "}
