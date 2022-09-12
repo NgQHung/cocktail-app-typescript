@@ -4,6 +4,7 @@ import authSlice from "./auth-slice";
 import cocktailSlice from "./cocktail-slice";
 import formSlice from "./form-slice";
 import searchSlice from "./search-slice";
+import notificationSlice from "./notification-slice";
 // ...
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
         searchSlice: searchSlice,
         formSlice: formSlice,
         authSlice: authSlice,
+        notificationSlice: notificationSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

@@ -15,7 +15,6 @@ const initialValue: any = {
     price: 0,
     cocktailsHeart: [],
     amountCocktailsHeart: 0,
-    alert: false,
 };
 interface Action {
     type?: any;
@@ -108,9 +107,6 @@ const cocktailSlice = createSlice({
                 (item: any) => item.id !== action.payload
             );
             state.cocktailsHeart = updateCocktails;
-        },
-        alertHandler(state, alert) {
-            state.alert = alert.payload;
         },
     },
 });

@@ -29,7 +29,7 @@ const NavTools = () => {
                             id="dropdownUserAvatarButton"
                             data-dropdown-toggle="dropdownAvatar"
                             // onClick={dropDownHandler}
-                            className=" text-xl focus:text-gray-500 rounded-full md:mr-0"
+                            className=" text-xl focus:text-gray-500 rounded-full hover:transition-all md:mr-0"
                         >
                             {/* <span className="sr-only">Open user menu</span> */}
                             <div className="h-9 relative text-xl lg:h-10 p-2 text-gray-500 lg:group-hover:border lg:group-hover:border-black">

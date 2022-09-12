@@ -1,13 +1,16 @@
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
+import { notificationSliceActions } from "../../store/notification-slice";
+import { AlertSuccessRemoved } from "../../UI/Alert";
 
 const ShoppingCart = () => {
     const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
+    const alert: any = useSelector<any>((state) => state.notificationSlice.alertRemoved);
     const totalPrices = cocktailsBasket
         .map((item: any) => item.totalPrice)
         .reduce((prev: number, curr: number) => prev + curr, 0);
@@ -16,14 +19,26 @@ const ShoppingCart = () => {
 
     const removeCocktailHandler = (id: string) => {
         dispatch(cocktailSliceAction.removeCocktail(id));
+        dispatch(notificationSliceActions.alertHandlerRemove(true));
     };
 
     const heartHandler = (cocktailHeart: any) => {
         dispatch(cocktailSliceAction.heartHandler(cocktailHeart));
     };
 
+    useEffect(() => {
+        let time = setTimeout(
+            () => dispatch(notificationSliceActions.alertHandlerRemove(false)),
+            1000
+        );
+        return () => {
+            clearTimeout(time);
+        };
+    }, [alert]);
+
     return (
         <Fragment>
+            {alert && <AlertSuccessRemoved />}
             <div className="relative flex flex-col max-w-4xl max-h-[600px] pl-6 pt-6 pb-40 over-flow space-y-4 dark:bg-gray-900 dark:text-gray-100">
                 <h2 className="text-xl font-semibold">Your cart</h2>
 

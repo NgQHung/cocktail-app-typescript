@@ -3,15 +3,20 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../store/cocktail-slice";
+import { notificationSliceActions } from "../store/notification-slice";
+import { AlertSuccessRemoved } from "../UI/Alert";
 
 const WishList = () => {
     const cocktailsHeart: any = useSelector<any>((state) => state.cocktailSlice.cocktailsHeart);
+    const alert: any = useSelector<any>((state) => state.notificationSlice.alertRemoved);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const amountCocktailsHeart = cocktailsHeart.length;
 
     const removeCocktailHeartHandler = (id: string) => {
         dispatch(cocktailSliceAction.removeCocktailHeart(id));
+        dispatch(notificationSliceActions.alertHandlerRemove(true));
     };
 
     const navigateHandler = (name: string) => {
@@ -23,6 +28,7 @@ const WishList = () => {
     return (
         <div className=" py-12">
             {/* Desktop Responsive Start */}
+            {alert && <AlertSuccessRemoved />}
             <div className="hidden sm:flex flex-col justify-start items-start">
                 <div className="pl-4 lg:px-10 2xl:px-20 flex flex-row justify-center items-end space-x-4">
                     <h1 className="text-4xl font-semibold leading-9 text-gray-800">Favourites</h1>

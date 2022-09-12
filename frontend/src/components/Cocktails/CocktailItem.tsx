@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import Alert from "../../UI/Alert";
+import { notificationSliceActions } from "../../store/notification-slice";
 
 interface Props {
     id?: number;
@@ -21,7 +21,6 @@ const CocktailItem: React.FC<Props> = (props) => {
         (state) => state.cocktailSlice.navigationClicked
     );
 
-    const alertValue: any = useSelector<any>((state) => state.cocktailSlice.alert);
     const navigate = useNavigate();
     const clickedCocktailHandler = () => {
         // dispatch(cocktailSliceAction.clickedCocktailHandler({ id, name, image }));
@@ -41,8 +40,7 @@ const CocktailItem: React.FC<Props> = (props) => {
                 totalPrice: 0,
             })
         );
-        // setAlert(true)
-        dispatch(cocktailSliceAction.alertHandler(true));
+        dispatch(notificationSliceActions.alertHandlerAdded(true));
     };
 
     return (
