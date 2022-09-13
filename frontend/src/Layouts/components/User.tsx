@@ -34,6 +34,7 @@ const User = () => {
             })
         );
         navigate("/");
+        window.location.reload();
     };
 
     return (

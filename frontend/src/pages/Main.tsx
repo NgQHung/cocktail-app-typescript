@@ -6,11 +6,12 @@ import { Cocktail } from "../models/cocktails";
 interface Props {
     cocktailData?: Cocktail[];
     selectedType?: string;
-    loadMore?: () => void;
-    amountCocktail?: number;
+    // loadMore?: () => void;
+    // amountCocktail?: number;
 }
 
 const Main: React.FC<Props> = (props) => {
+    console.log(props.cocktailData);
     return (
         <div>
             <div className=" 2xl:container 2xl:mx-auto">
@@ -23,9 +24,9 @@ const Main: React.FC<Props> = (props) => {
                 <div className=" flex justify-between items-center">
                     <div className=" flex space-x-3 justify-center items-center">
                         <Cocktails
-                            cocktailData={props.cocktailData}
-                            loadMore={props.loadMore}
-                            amountCocktail={props.amountCocktail}
+                            cocktailData={props?.cocktailData}
+                            // loadMore={props.loadMore}
+                            // amountCocktail={props.amountCocktail}
                         />
                     </div>
                 </div>

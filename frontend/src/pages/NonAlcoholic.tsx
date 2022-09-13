@@ -26,11 +26,7 @@ const NonAlcoholic = () => {
         fetchCocktal();
     }, []);
 
-    return (
-        <div>
-            <Cocktails cocktailData={cocktails} loadMore={loadMore} />
-        </div>
-    );
+    return <div>{/* <Cocktails cocktailData={cocktails} loadMore={loadMore} /> */}</div>;
 };
 
 export default NonAlcoholic;

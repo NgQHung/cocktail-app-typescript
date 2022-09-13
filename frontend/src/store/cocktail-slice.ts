@@ -25,7 +25,7 @@ const cocktailSlice = createSlice({
     name: "dataState",
     initialState: initialValue,
     reducers: {
-        fetCocktail(state: Http, action: Action) {
+        fetCocktail(state: Http, action) {
             state.data = action.payload;
         },
         localStorageHandler(state, action) {

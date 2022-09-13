@@ -4,31 +4,28 @@ const Loading = () => {
     return (
         <>
             <div className="bg-gray-100">
-                <div className=" rounded relative">
-                    <div className="rounded-full bg-indigo-200 w-[190px] h-[190px] relative flex justify-center items-center mx-auto animate-spin">
-                        <svg
-                            className="absolute top-[2px] right-0"
-                            width={76}
-                            height={97}
-                            viewBox="0 0 76 97"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <mask id="path-1-inside-1_2495_2146" fill="white">
-                                <path d="M76 97C76 75.6829 69.2552 54.9123 56.7313 37.6621C44.2074 20.4118 26.5466 7.56643 6.27743 0.964994L0.0860505 19.9752C16.343 25.2698 30.5078 35.5725 40.5526 49.408C50.5974 63.2436 56.007 79.9026 56.007 97H76Z" />
-                            </mask>
-                            <path
-                                d="M76 97C76 75.6829 69.2552 54.9123 56.7313 37.6621C44.2074 20.4118 26.5466 7.56643 6.27743 0.964994L0.0860505 19.9752C16.343 25.2698 30.5078 35.5725 40.5526 49.408C50.5974 63.2436 56.007 79.9026 56.007 97H76Z"
-                                stroke="#4338CA"
-                                strokeWidth={40}
-                                mask="url(#path-1-inside-1_2495_2146)"
-                            />
-                        </svg>
-                        <div className="rounded-full bg-white w-[150px] h-[150px]" />
+                <div className="px-4 py-12">
+                    <div className="rounded relative bg-white py-12">
+                        <div className="rounded-full bg-indigo-200 w-[177px] h-[177px] relative flex justify-center items-center mx-auto animate-spin">
+                            <svg
+                                className="absolute top-0 0 left-0"
+                                width={177}
+                                height={177}
+                                viewBox="0 0 177 177"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M169.667 88.5C173.717 88.5 177.032 85.2113 176.696 81.1755C175.457 66.2542 170.448 51.8477 162.085 39.332C152.361 24.7783 138.539 13.435 122.367 6.73666C106.196 0.0383073 88.4018 -1.71429 71.2345 1.7005C54.0672 5.11529 38.298 13.5441 25.9211 25.921C13.5441 38.298 5.1153 54.0672 1.7005 71.2345C-1.71429 88.4018 0.0383044 106.196 6.73666 122.367C13.435 138.539 24.7783 152.361 39.332 162.085C51.8477 170.448 66.2542 175.457 81.1755 176.696C85.2113 177.032 88.5 173.717 88.5 169.667V169.667C88.5 165.618 85.2089 162.373 81.1792 161.971C69.1624 160.774 57.5826 156.642 47.4795 149.891C35.3374 141.778 25.8738 130.247 20.2855 116.755C14.6971 103.264 13.2349 88.4181 16.0838 74.0955C18.9328 59.773 25.9649 46.6168 36.2909 36.2908C46.6169 25.9649 59.773 18.9328 74.0955 16.0838C88.4181 13.2349 103.264 14.6971 116.755 20.2855C130.247 25.8739 141.778 35.3375 149.891 47.4795C156.642 57.5826 160.774 69.1624 161.971 81.1793C162.373 85.209 165.618 88.5 169.667 88.5V88.5Z"
+                                    fill="#4338CA"
+                                />
+                            </svg>
+                            <div className="div rounded-full bg-slate-50 w-[150px] h-[150px]" />
+                        </div>
+                        <p className="mt-6 text-base font-medium text-gray-800 text-center">
+                            Loading ...
+                        </p>
                     </div>
-                    <p className="absolute mx-auto inset-x-0 my-auto inset-y-[80px] text-base font-medium text-gray-800 text-center">
-                        Loading ...
-                    </p>
                 </div>
             </div>
         </>

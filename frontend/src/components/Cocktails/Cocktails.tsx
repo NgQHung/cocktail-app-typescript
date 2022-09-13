@@ -13,12 +13,13 @@ import { useDispatch } from "react-redux";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import Filter from "../Filter";
+import { dataSliceActions } from "../../store/slice-http";
 
 interface Props {
     cocktailData?: Cocktail[];
     selectedType?: string;
-    loadMore?: () => void;
-    amountCocktail?: number;
+    // loadMore?: () => void;
+    // amountCocktail?: number;
 }
 
 const Cocktails: React.FC<Props> = (props) => {
@@ -36,7 +37,11 @@ const Cocktails: React.FC<Props> = (props) => {
     const isSignup = location.pathname === "/signup";
     // console.log(props.cocktailData.length);
     const ingredient = props.selectedType === "ingredient_id";
-    const amountCocktail = props?.amountCocktail ? props?.amountCocktail : 20;
+    // const amountCocktail = props?.amountCocktail ? props?.amountCocktail : 20;
+
+    const loadMoreHandler = () => {
+        // dispatch(dataSliceActions.getMoreCocktails());
+    };
 
     useEffect(() => {
         let time = setTimeout(() => {
@@ -66,7 +71,7 @@ const Cocktails: React.FC<Props> = (props) => {
                             </div>
                         </div>
                         <p className=" cursor-pointer hover:underline duration-100 font-normal text-base leading-4 text-gray-600">
-                            Showing {amountCocktail - 20} products
+                            {/* Showing {amountCocktail - 20} products */}
                         </p>
                     </div>
 
@@ -100,12 +105,15 @@ const Cocktails: React.FC<Props> = (props) => {
                         !error && !dataIsEmpty ? "" : "hidden"
                     } flex justify-center mt-12 mb-12 cursor-pointer `}
                 >
-                    {!error && !dataIsEmpty && amountCocktail !== 20 ? (
+                    {/* need to fix more */}
+                    {!error && !dataIsEmpty ? (
                         // <div className="border-2 rounded-xl p-2 hover:bg-red-300">
                         //     <Button clickHandler={props.loadMore}>Load more</Button>
                         // </div>
                         <div className=" flex justify-center items-center">
-                            <ButtonLoadMore clickHandler={props.loadMore}>Load More</ButtonLoadMore>
+                            <ButtonLoadMore clickHandler={loadMoreHandler}>
+                                Load More
+                            </ButtonLoadMore>
                         </div>
                     ) : null}
                     {isSignin && !isSignup ? <Signin /> : null}

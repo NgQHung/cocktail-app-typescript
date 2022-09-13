@@ -20,64 +20,87 @@ import Signup from "./components/Form/Signup";
 import Signin from "./components/Form/Signin";
 import WishList from "./pages/WishList";
 import Main from "./pages/Main";
+import { useSelector } from "react-redux";
+import { dataSliceActions, fetchData } from "./store/slice-http";
+import { useAppDispatch, useAppSelector } from "./store/hook";
+import { AppDispatch } from "./store";
+import { UISliceActions } from "./store/ui-slice";
+import Loading from "./UI/Loading";
+
+let isInitial = true;
 
 function App() {
-    const [cocktails, setCocktails] = useState<Cocktail[]>([]);
-    const [index, setIndex] = useState(20);
+    // const [cocktails, setCocktails] = useState<Cocktail[]>([]);
+    // const [index, setIndex] = useState(20);
     const [loading, setLoading] = useState(false);
     var emptyArr: any = [];
-    const dispatch = useDispatch();
+    // const dispatch = useAppDispatch();
     const itemsSavedToLocalStorageCart: any = localStorage.getItem("Cart");
     const itemsSavedToLocalStorageHeart: any = localStorage.getItem("Heart");
     const user: any = localStorage.getItem("User");
+    const dispatch = useDispatch<any>();
+    const loadingState = useAppSelector((state) => state.UISlice.loading);
+    console.log(loadingState);
 
-    // if (itemsSavedToLocalStorageCart === null) {
-    //     localStorage.setItem("Cart", emptyArr);
-    // }
-    // let index: number = 20;
     const location = useLocation();
 
-    const fetchCocktal = async () => {
-        setLoading(true);
-        const res = await axios.get(
-            "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic"
-        );
-        const data = res.data.drinks;
-        setCocktails(data.slice(0, index));
-        setLoading(false);
-    };
+    // const fetchCocktal = async () => {
+    //     setLoading(true);
+    //     const res = await axios.get(
+    //         "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic"
+    //     );
+    //     const data = res.data.drinks;
+    //     setCocktails(data.slice(0, index));
+    //     setLoading(false);
+    // };
 
-    const loadMore = () => {
-        setIndex((prev) => prev + 20);
-        fetchCocktal();
-    };
+    // const loadMore = () => {
+    //     setIndex((prev) => prev + 20);
+    //     fetchCocktal();
+    // };
 
-    useEffect(() => {
-        setIndex((prev) => prev + 20);
-        fetchCocktal();
-    }, []);
     // useEffect(() => {
-    //     try {
-    //         dispatch(
-    //             );
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     }, []);
+    //     setIndex((prev) => prev + 20);
+    //     fetchCocktal();
+    // }, []);
     useEffect(() => {
+        // dispatch(UISliceActions.loadingHandler(true));
         try {
             const basket = JSON.parse(itemsSavedToLocalStorageCart);
             const heart = JSON.parse(itemsSavedToLocalStorageHeart);
             if (!user) {
                 dispatch(cocktailSliceAction.localStorageHandler({ heart: heart, basket: basket }));
+            } else {
+                dispatch(cocktailSliceAction.localStorageHandler({ heart: [], basket: [] }));
+                // window.location.reload(false);
             }
+            dispatch(fetchData());
         } catch (error) {
             console.log(error);
         }
+        // dispatch(UISliceActions.loadingHandler(false));
     }, []);
+    const data = useAppSelector((state) => state.dataSlice?.data);
+    const dataToShow = useAppSelector((state) => state.dataSlice?.dataToShow);
+
+    // if (isInitial) {
+    //     isInitial = false;
+    //     return;
+    // }
+    // useEffect(() => {}, []);
+    useEffect(() => {
+        dispatch(UISliceActions.loadingHandler(true));
+        if (data) {
+            dispatch(dataSliceActions.getCocktailsToShow());
+            // console.log("data");
+        }
+
+        dispatch(UISliceActions.loadingHandler(false));
+    }, [data]);
 
     return (
         <Fragment>
+            <div className="absolute">{loadingState && <Loading />}</div>
             <div className="main flex flex-col justify-between">
                 <Header />
                 <AnimatePresence>
@@ -86,9 +109,9 @@ function App() {
                             path="/"
                             element={
                                 <Main
-                                    cocktailData={cocktails}
-                                    loadMore={loadMore}
-                                    amountCocktail={index}
+                                    cocktailData={dataToShow}
+                                    // loadMore={loadMore}
+                                    // amountCocktail={index}
                                 />
                             }
                         >
@@ -106,7 +129,7 @@ function App() {
                             element={
                                 <CocktailDetail
                                     // cocktailEntered={enteredCocktail}
-                                    cocktailData={cocktails}
+                                    cocktailData={dataToShow}
                                 />
                             }
                         />
