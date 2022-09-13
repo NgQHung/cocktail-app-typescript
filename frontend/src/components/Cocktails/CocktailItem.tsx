@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { notificationSliceActions } from "../../store/notification-slice";
 
 interface Props {
     id?: number;
     name?: string;
     image?: string;
+    notification: (state: boolean) => void;
 }
 
 const CocktailItem: React.FC<Props> = (props) => {
@@ -40,7 +40,15 @@ const CocktailItem: React.FC<Props> = (props) => {
                 totalPrice: 0,
             })
         );
-        dispatch(notificationSliceActions.alertHandlerAdded(true));
+        dispatch(
+            notificationSliceActions.alertHandler({
+                title: "Well done!",
+                description: "Cocktail is added successfully",
+                type: "success",
+                about: "addCocktail",
+            })
+        );
+        props.notification(true);
     };
 
     return (

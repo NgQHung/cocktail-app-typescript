@@ -38,7 +38,7 @@ export const signupHandler = async (data: signupModel) => {
         throw new Error("Something went wrong");
     } else {
         user = JSON.stringify(json);
-        console.log("You are Signed up");
+        // console.log("You are Signed up");
     }
     // };
 

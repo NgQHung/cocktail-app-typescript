@@ -3,14 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
-import { AlertSuccessRemoved } from "../../UI/Alert";
+import { Alert } from "../../UI/Alert";
 
 const ShoppingCart = () => {
     const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
-    const alert: any = useSelector<any>((state) => state.notificationSlice.alertRemoved);
+    const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertRemoved);
+    const location = useLocation();
     const totalPrices = cocktailsBasket
         .map((item: any) => item.totalPrice)
         .reduce((prev: number, curr: number) => prev + curr, 0);
@@ -19,26 +21,41 @@ const ShoppingCart = () => {
 
     const removeCocktailHandler = (id: string) => {
         dispatch(cocktailSliceAction.removeCocktail(id));
-        dispatch(notificationSliceActions.alertHandlerRemove(true));
+        dispatch(
+            notificationSliceActions.alertHandler({
+                title: "Well done!",
+                description: "Cocktail is deleted successfully",
+                type: "success",
+            })
+        );
     };
 
     const heartHandler = (cocktailHeart: any) => {
         dispatch(cocktailSliceAction.heartHandler(cocktailHeart));
     };
 
-    useEffect(() => {
-        let time = setTimeout(
-            () => dispatch(notificationSliceActions.alertHandlerRemove(false)),
-            1000
+    const addToFavorHandler = () => {
+        dispatch(
+            notificationSliceActions.alertHandler({
+                title: "Well done!",
+                description: "Cocktail is added successfully to wish list",
+                type: "success",
+            })
         );
+    };
+
+    useEffect(() => {
+        let time = setTimeout(() => dispatch(notificationSliceActions.alertHandler(false)), 1000);
         return () => {
             clearTimeout(time);
         };
-    }, [alert]);
+    }, []);
 
     return (
         <Fragment>
-            {alert && <AlertSuccessRemoved />}
+            <div className="absolute">
+                {alertContent && location.pathname === "/" ? <Alert /> : null}
+            </div>
             <div className="relative flex flex-col max-w-4xl max-h-[600px] pl-6 pt-6 pb-40 over-flow space-y-4 dark:bg-gray-900 dark:text-gray-100">
                 <h2 className="text-xl font-semibold">Your cart</h2>
 
@@ -99,7 +116,9 @@ const ShoppingCart = () => {
                                                 >
                                                     <FontAwesomeIcon icon={faHeart} />
 
-                                                    <span>Add to favorites</span>
+                                                    <div onClick={addToFavorHandler}>
+                                                        Add to favorites
+                                                    </div>
                                                 </button>
                                             </div>
                                         </div>

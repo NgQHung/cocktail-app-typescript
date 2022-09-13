@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { authSliceActions } from "../../store/auth-slice";
+import { notificationSliceActions } from "../../store/notification-slice";
 
 const User = () => {
     // const [dropDown, setDropDown] = useState(false);
@@ -25,6 +26,13 @@ const User = () => {
 
     const signoutHandler = () => {
         dispatch(authSliceActions.logout());
+        dispatch(
+            notificationSliceActions.alertHandler({
+                title: "Oops!",
+                description: "You logged out in successfully with",
+                type: "success",
+            })
+        );
         navigate("/");
     };
 

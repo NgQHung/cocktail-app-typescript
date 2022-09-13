@@ -8,10 +8,11 @@ import Signup from "../Form/Signup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { AlertSuccess } from "../../UI/Alert";
+import { Alert } from "../../UI/Alert";
 import { useDispatch } from "react-redux";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
+import Filter from "../Filter";
 
 interface Props {
     cocktailData?: Cocktail[];
@@ -24,8 +25,10 @@ const Cocktails: React.FC<Props> = (props) => {
     const error = props.cocktailData === null;
     const dataIsEmpty = props.cocktailData?.length === 0;
     const dispatch = useDispatch();
+    const [addCocktailNotification, setAddCocktailNotification] = useState(false);
+    // console.log(addCocktailNotification);
 
-    const alert: any = useSelector<any>((state) => state.notificationSlice.alertAdded);
+    const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertContent);
     // console.log(alert);
 
     const location = useLocation();
@@ -36,20 +39,32 @@ const Cocktails: React.FC<Props> = (props) => {
     const amountCocktail = props?.amountCocktail ? props?.amountCocktail : 20;
 
     useEffect(() => {
-        let time = setTimeout(
-            () => dispatch(notificationSliceActions.alertHandlerAdded(false)),
-            1000
-        );
+        let time = setTimeout(() => {
+            dispatch(notificationSliceActions.alertHandler(null));
+            setAddCocktailNotification(false);
+        }, 1000);
         return () => {
             clearTimeout(time);
         };
-    }, [alert]);
+    }, []);
     return (
         <Fragment>
-            {alert && <AlertSuccess />}
+            <div className="absolute">
+                {alertContent && location.pathname === "/" ? <Alert /> : null}
+            </div>
             <div className=" 2xl:container 2xl:mx-auto">
                 <div className=" py-6 lg:px-20 md:px-6 px-4">
                     <div className=" flex justify-between items-center">
+                        <div className="relative dropdown_filter flex cursor-pointer">
+                            <FontAwesomeIcon icon={faFilter} />
+                            {/* <Alert /> */}
+                            <p className=" ml-4 font-normal text-base leading-4 text-gray-800">
+                                Filter
+                            </p>
+                            <div className="dropdown_filter_list">
+                                <Filter />
+                            </div>
+                        </div>
                         <p className=" cursor-pointer hover:underline duration-100 font-normal text-base leading-4 text-gray-600">
                             Showing {amountCocktail - 20} products
                         </p>
@@ -63,6 +78,7 @@ const Cocktails: React.FC<Props> = (props) => {
                                     id={coc.idDrink}
                                     name={coc.strDrink}
                                     image={coc.strDrinkThumb}
+                                    notification={setAddCocktailNotification}
                                 />
                             ))}
                         {ingredient &&
@@ -71,6 +87,7 @@ const Cocktails: React.FC<Props> = (props) => {
                                     key={coc.idDrink}
                                     id={coc.idIngredient}
                                     name={coc.strIngredient}
+                                    notification={setAddCocktailNotification}
                                     // image={coc.strDrinkThumb}
                                 />
                             ))}

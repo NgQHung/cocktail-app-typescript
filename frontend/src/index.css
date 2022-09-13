@@ -65,6 +65,7 @@ footer ul li a {
 .hide_part_user,
 .hide_part_basket,
 .dropdown_search_list,
+.dropdown_filter_list,
 .dropdown_list_user {
     display: none;
 }
@@ -104,6 +105,9 @@ footer ul li a {
     display: block;
 }
 .dropdown_search:hover .dropdown_search_list {
+    display: block;
+}
+.dropdown_filter:hover .dropdown_filter_list {
     display: block;
 }
 .dropdown_search:hover::before {

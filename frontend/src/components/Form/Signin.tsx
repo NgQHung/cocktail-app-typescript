@@ -8,6 +8,9 @@ import Modal from "../../UI/Modal";
 import Use_Form from "../../hooks/use_form";
 import { formSliceActions } from "../../store/form-slice";
 import { authSliceActions } from "../../store/auth-slice";
+import { notificationSliceActions } from "../../store/notification-slice";
+import { useSelector } from "react-redux";
+import { Alert } from "../../UI/Alert";
 
 const inputIsValid = (value: string) => value.trim() !== "";
 const emailInputIsValid = (value: string) => value.includes("@");
@@ -43,6 +46,8 @@ const Signin = () => {
     const navigate = useNavigate();
     const isSignin = location.pathname === "/signin";
 
+    const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertContent);
+
     const loginHandler = async () => {
         const res = await fetch("http://localhost:4000/api/users/login", {
             method: "POST",
@@ -63,13 +68,27 @@ const Signin = () => {
             // console.log(data.data);
             if (data.errors[0]?.msg) {
                 console.log(data.errors[0]?.msg);
+                dispatch(
+                    notificationSliceActions.alertHandler({
+                        title: "Error!",
+                        description: data.errors[0]?.msg,
+                        type: "error",
+                    })
+                );
             }
             if (data.data?.user?.email) {
                 // console.log("You signed in successfully with email " + data.data?.user?.email);
                 dispatch(authSliceActions.login(data.data));
+                dispatch(
+                    notificationSliceActions.alertHandler({
+                        title: "Well done!",
+                        description: "You signed in successfully with" + data.data?.user?.email,
+                        type: "success",
+                    })
+                );
+                navigate("/");
             }
         }
-        navigate("/");
     };
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -93,6 +112,7 @@ const Signin = () => {
     };
     return (
         <Modal>
+            <div className="absolute">{alertContent && <Alert />}</div>
             <div className="absolute h-full w-full sm:static space-y-8 px-10 pb-10 pt-5 bg-white lg:rounded-xl z-10">
                 <div
                     className="absolute right-8 hover:text-red-500 cursor-pointer text-xl"

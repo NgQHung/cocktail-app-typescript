@@ -19,12 +19,21 @@ import CocktailDetail from "./pages/CocktailDetail";
 import Signup from "./components/Form/Signup";
 import Signin from "./components/Form/Signin";
 import WishList from "./pages/WishList";
+import Main from "./pages/Main";
 
 function App() {
     const [cocktails, setCocktails] = useState<Cocktail[]>([]);
     const [index, setIndex] = useState(20);
     const [loading, setLoading] = useState(false);
+    var emptyArr: any = [];
     const dispatch = useDispatch();
+    const itemsSavedToLocalStorageCart: any = localStorage.getItem("Cart");
+    const itemsSavedToLocalStorageHeart: any = localStorage.getItem("Heart");
+    const user: any = localStorage.getItem("User");
+
+    // if (itemsSavedToLocalStorageCart === null) {
+    //     localStorage.setItem("Cart", emptyArr);
+    // }
     // let index: number = 20;
     const location = useLocation();
 
@@ -47,45 +56,64 @@ function App() {
         setIndex((prev) => prev + 20);
         fetchCocktal();
     }, []);
+    // useEffect(() => {
+    //     try {
+    //         dispatch(
+    //             );
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     }, []);
+    useEffect(() => {
+        try {
+            const basket = JSON.parse(itemsSavedToLocalStorageCart);
+            const heart = JSON.parse(itemsSavedToLocalStorageHeart);
+            if (!user) {
+                dispatch(cocktailSliceAction.localStorageHandler({ heart: heart, basket: basket }));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
     return (
         <Fragment>
             <div className="main flex flex-col justify-between">
                 <Header />
-                {/* <AnimatePresence> */}
-                <Routes location={location} key={location.key}>
-                    <Route
-                        path="/"
-                        element={
-                            <Cocktails
-                                cocktailData={cocktails}
-                                loadMore={loadMore}
-                                amountCocktail={index}
-                            />
-                        }
-                    >
-                        <Route path="navigation" element={<Navigation />} />
-                        <Route path="signup" element={<Signup />} />
-                        <Route path="signin" element={<Signin />} />
-                    </Route>
-                    <Route path="/search" element={<Search />} />
-                    <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
-                    <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
-                    <Route path="/wish-list" element={<WishList />} />
-                    <Route path="*" element={<NotFound />} />
-                    <Route
-                        path="/cocktail/:cocktailId"
-                        element={
-                            <CocktailDetail
-                                // cocktailEntered={enteredCocktail}
-                                cocktailData={cocktails}
-                            />
-                        }
-                    />
-                    <Route path="/searched/:cocktail" element={<Searched />} />
-                    <Route path="/searched/*" element={<NotFound />} />
-                </Routes>
-                {/* </AnimatePresence> */}
+                <AnimatePresence>
+                    <Routes location={location} key={location.key}>
+                        <Route
+                            path="/"
+                            element={
+                                <Main
+                                    cocktailData={cocktails}
+                                    loadMore={loadMore}
+                                    amountCocktail={index}
+                                />
+                            }
+                        >
+                            <Route path="navigation" element={<Navigation />} />
+                            <Route path="signup" element={<Signup />} />
+                            <Route path="signin" element={<Signin />} />
+                        </Route>
+                        <Route path="/search" element={<Search />} />
+                        <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
+                        <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
+                        <Route path="/wish-list" element={<WishList />} />
+                        <Route path="*" element={<NotFound />} />
+                        <Route
+                            path="/cocktail/:cocktailId"
+                            element={
+                                <CocktailDetail
+                                    // cocktailEntered={enteredCocktail}
+                                    cocktailData={cocktails}
+                                />
+                            }
+                        />
+                        <Route path="/searched/:cocktail" element={<Searched />} />
+                        <Route path="/searched/*" element={<NotFound />} />
+                    </Routes>
+                </AnimatePresence>
                 {/* <CocktailItem /> */}
                 <Footer />
             </div>

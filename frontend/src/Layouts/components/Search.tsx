@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import { searchSliceAction } from "../../store/search-slice";
-import { Alert, AlertError } from "../../UI/Alert";
+import { Alert } from "../../UI/Alert";
 
 const Search = () => {
     const dispatch = useDispatch();
@@ -48,6 +48,7 @@ const Search = () => {
                 notificationSliceActions.alertHandler({
                     title: "Error!",
                     description: "You must select a type first",
+                    type: "error",
                 })
             );
         }
@@ -67,6 +68,7 @@ const Search = () => {
                 notificationSliceActions.alertHandler({
                     title: "Error!",
                     description: "You must select a type first",
+                    type: "error",
                 })
             );
         }
@@ -81,7 +83,9 @@ const Search = () => {
 
     return (
         <Fragment>
-            {alertContent && <Alert />}
+            <div className="absolute">
+                {alertContent && location.pathname === "/" ? <Alert /> : null}
+            </div>
             <div
                 onKeyUp={handleKeyboardEvent}
                 className="absolute left-1/2 -translate-x-1/2 w-full max-w-[320px] lg:max-w-[512px] lg:w-full bg-gray-100 rounded-md lg:flex  mr-24"

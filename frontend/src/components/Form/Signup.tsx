@@ -7,6 +7,7 @@ import Use_Form from "../../hooks/use_form";
 import { authSliceActions } from "../../store/auth-slice";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { formSliceActions, signupHandler } from "../../store/form-slice";
+import { notificationSliceActions } from "../../store/notification-slice";
 import Modal from "../../UI/Modal";
 
 const inputIsValid = (value: string) => value.trim() !== "";
@@ -117,13 +118,27 @@ const Signup = () => {
             throw new Error("Something went wrong");
         } else {
             // user = JSON.stringify(json);
-            console.log("You sent data successfully");
+            // console.log("You sent data successfully");
             if (data.errors[0]?.msg) {
-                console.log(data.errors[0]?.msg);
+                // console.log(data.errors[0]?.msg);
+                dispatch(
+                    notificationSliceActions.alertHandler({
+                        title: "Error!",
+                        description: data.errors[0]?.msg,
+                        type: "error",
+                    })
+                );
             }
             if (data.data?.user?.email) {
-                console.log("You signed up successfully with email " + data.data?.user?.email);
+                // console.log("You signed up successfully with email " + data.data?.user?.email);
                 dispatch(authSliceActions.login(data.data));
+                dispatch(
+                    notificationSliceActions.alertHandler({
+                        title: "Well come!",
+                        description: "You signed up successfully with" + data.data?.user?.email,
+                        type: "success",
+                    })
+                );
                 navigate("/");
             }
         }

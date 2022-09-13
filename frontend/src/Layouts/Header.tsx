@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { Link, useLocation, Navigate } from "react-router-dom";
+import { Link, useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,6 +16,7 @@ import NavTools from "./components/NavTools";
 const Header = () => {
     const location = useLocation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
@@ -41,7 +42,10 @@ const Header = () => {
                 <header className=" bg-white w-full h-full relative">
                     <div className="mx-auto px-4 py-8 h-full flex items-center">
                         {/* <!-- logo --> */}
-                        <div className="mr-auto md:w-48 flex-shrink-0">
+                        <div
+                            onClick={() => navigate("/")}
+                            className="mr-auto md:w-48 flex-shrink-0 cursor-pointer"
+                        >
                             <img
                                 className="h-8 md:h-10"
                                 src="https://i.pinimg.com/originals/b8/6f/67/b86f67625bc4f99d4b3acfd7992b3c09.png"

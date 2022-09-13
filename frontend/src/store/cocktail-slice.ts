@@ -28,6 +28,10 @@ const cocktailSlice = createSlice({
         fetCocktail(state: Http, action: Action) {
             state.data = action.payload;
         },
+        localStorageHandler(state, action) {
+            state.cocktailsBasket = action.payload?.basket;
+            state.cocktailsHeart = action.payload?.heart;
+        },
         navigationHandler(state, action) {
             state.navigationClicked = action.payload;
             state.clickedCocktail = null;
@@ -38,12 +42,14 @@ const cocktailSlice = createSlice({
         addCocktail(state, action) {
             const idCocktail = action.payload.id;
             state.total = state.total + action.payload.price * action.payload.amount;
+            // state.cocktailsBasket =
             // console.log(state.totalPrice);
             const existingCocktailIndex = state.cocktailsBasket.findIndex(
                 (item: any) => item.id === idCocktail
             );
             const existingCocktail = state.cocktailsBasket[existingCocktailIndex];
             let updateCocktails;
+            // var updatedLocalStorage = [];
             if (existingCocktail) {
                 const updateCocktail = {
                     ...existingCocktail,
@@ -55,11 +61,15 @@ const cocktailSlice = createSlice({
                 updateCocktails = [...state.cocktailsBasket];
                 updateCocktails[existingCocktailIndex] = updateCocktail;
                 state.cocktailsBasket = updateCocktails;
+
+                // localStorage.setItem("Cart", state.cocktailsBasket);
             } else {
                 state.cocktailsBasket = [...state.cocktailsBasket, action.payload];
+                // localStorage.setItem("Cart", state.cocktailsBasket);
                 // state.totalPrice = action.payload.price;
                 // console.log(state.totalPrice);
             }
+            localStorage.setItem("Cart", JSON.stringify(state.cocktailsBasket));
         },
         removeCocktail(state, action) {
             const existingCocktailIndex = state.cocktailsBasket.findIndex(
@@ -72,6 +82,7 @@ const cocktailSlice = createSlice({
                     (item: any) => item.id !== action.payload
                 );
                 state.cocktailsBasket = updateCocktails;
+                // localStorage.setItem("Cart", JSON.stringify(state.cocktailsBasket));
             } else {
                 const updateCocktail = {
                     ...existingCocktail,
@@ -82,6 +93,8 @@ const cocktailSlice = createSlice({
                 updateCocktails[existingCocktailIndex] = updateCocktail;
                 state.cocktailsBasket = updateCocktails;
             }
+            // console.log(updateCocktails);
+            localStorage.setItem("Cart", JSON.stringify(state.cocktailsBasket));
         },
         heartHandler(state, action) {
             const idCocktail = action.payload.id;
@@ -89,6 +102,7 @@ const cocktailSlice = createSlice({
                 (item: any) => item.id === idCocktail
             );
             const existingCocktail = state.cocktailsHeart[existingCocktailIndex];
+            // var arr = []
             let updateCocktails;
             if (existingCocktail) {
                 const updateCocktail = {
@@ -100,6 +114,7 @@ const cocktailSlice = createSlice({
             } else {
                 state.cocktailsHeart = [...state.cocktailsHeart, action.payload];
             }
+            localStorage.setItem("Heart", JSON.stringify(state.cocktailsHeart));
         },
         removeCocktailHeart(state, action) {
             let updateCocktails;
@@ -107,6 +122,7 @@ const cocktailSlice = createSlice({
                 (item: any) => item.id !== action.payload
             );
             state.cocktailsHeart = updateCocktails;
+            localStorage.setItem("Heart", JSON.stringify(state.cocktailsHeart));
         },
     },
 });

@@ -127,7 +127,7 @@ export const motionSearchType = {
 };
 export const motionAlert = {
     hidden: {
-        y: "-30vw",
+        y: "-50vh",
         opacity: 0,
     },
     visible: {

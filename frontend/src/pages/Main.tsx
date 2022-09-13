@@ -1,4 +1,3 @@
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Cocktails from "../components/Cocktails/Cocktails";
@@ -20,26 +19,18 @@ const Main: React.FC<Props> = (props) => {
                         Summer Collection Vol-1
                     </p>
                 </div>
-                <div className=" py-6 lg:px-20 md:px-6 px-4">
-                    {/* <p className=" font-normal text-sm leading-3 text-gray-600 ">
-                        <Link to="/">Home</Link> / Shop by Category / Women
-                    </p>
-                    <hr className=" w-full bg-gray-200 my-6" /> */}
-
-                    <div className=" flex justify-between items-center">
-                        <div className=" flex space-x-3 justify-center items-center">
-                            <FontAwesomeIcon icon={faFilter} />
-                            <p className=" font-normal text-base leading-4 text-gray-800">Filter</p>
-
-                            <Cocktails
-                                cocktailData={props.cocktailData}
-                                loadMore={props.loadMore}
-                                amountCocktail={props.amountCocktail}
-                            />
-                        </div>
+                {/* <div className=" py-6 lg:px-20 md:px-6 px-4"> */}
+                <div className=" flex justify-between items-center">
+                    <div className=" flex space-x-3 justify-center items-center">
+                        <Cocktails
+                            cocktailData={props.cocktailData}
+                            loadMore={props.loadMore}
+                            amountCocktail={props.amountCocktail}
+                        />
                     </div>
                 </div>
             </div>
+            {/* </div> */}
         </div>
     );
 };
