@@ -17,7 +17,7 @@ export const searchDataByName = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await searchedCocktail.create(data);
+    // await searchedCocktail.create(data);
     res.json(data);
     // res.json(name);
 };
@@ -37,7 +37,7 @@ export const searchDataByFirstLetter = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await searchedCocktail.create(data);
+    // await searchedCocktail.create(data);
 
     res.json(data);
 };
@@ -57,7 +57,7 @@ export const searchIngredientById = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await searchedCocktail.create(data);
+    // await searchedCocktail.create(data);
 
     res.json(data);
 };

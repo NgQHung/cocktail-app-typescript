@@ -1,4 +1,4 @@
-import { faMagnifyingGlass, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faArrowDown, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -7,7 +7,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 // import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import { searchSliceAction } from "../../store/search-slice";
+import { UISliceActions } from "../../store/ui-slice";
 import { Alert } from "../../UI/Alert";
+import { motion } from "framer-motion";
+import { motionSearchDown } from "../../UI/Animation";
+import { useAppSelector } from "../../store/hook";
 
 const Search = () => {
     const dispatch = useDispatch();
@@ -19,6 +23,8 @@ const Search = () => {
     const selectedType: any = useSelector<any>((state) => state.searchSlice.selectedType);
     // const alert: any = useSelector<any>((state) => state.notificationSlice.alertError);
     const alertContent = useSelector((state: any) => state.notificationSlice.alertContent);
+    const searchClicked = useAppSelector((state) => state.UISlice.searchClicked);
+
     // console.log(selectedType);
 
     const cocktailNameIsSelected = selectedType === "cocktail_name";
@@ -74,6 +80,10 @@ const Search = () => {
         }
     };
 
+    const closeSearchHandler = () => {
+        dispatch(UISliceActions.searchHandler());
+    };
+
     useEffect(() => {
         let time = setTimeout(() => dispatch(notificationSliceActions.alertHandler(null)), 1000);
         return () => {
@@ -86,13 +96,17 @@ const Search = () => {
             <div className="absolute">
                 {alertContent && location.pathname === "/" ? <Alert /> : null}
             </div>
-            <div
+            <motion.div
+                variants={motionSearchDown}
+                initial="hidden"
+                animate={searchClicked ? "turnDown" : ""}
+                // exit="exit"
                 onKeyUp={handleKeyboardEvent}
-                className="absolute left-1/2 -translate-x-1/2 w-full max-w-[320px] lg:max-w-[512px] lg:w-full bg-gray-100 rounded-md lg:flex  mr-24"
+                className=" lg:max-w-[512px] lg:w-full bg-gray-100 lg:rounded-md lg:flex lg:mr-24"
             >
-                <div className="flex flex-col lg:flex-row flex-start lg:items-center lg:w-full">
+                <div className=" flex flex-col lg:flex-row flex-start lg:items-center lg:w-full">
                     <div
-                        className="dropdown_search w-[95%] bg-transparent border-b uppercase font-bold text-sm py-1 px-3 lg:p-4 lg:left-0 mr-4"
+                        className="order-last dropdown_search w-[95%] bg-transparent border-b uppercase font-bold text-sm p-2 lg:py-1 lg:px-3 lg:p-4 lg:left-0 mr-4"
                         id=""
                     >
                         <div className="flex justify-between">
@@ -108,7 +122,7 @@ const Search = () => {
                                 <FontAwesomeIcon icon={faArrowDown} />
                             </div>
                         </div>
-                        <div className="dropdown_search_list absolute w-1/2 top-full bg-gray-100 left-0 mt-4 shadow-lg cursor-pointer ">
+                        <div className="dropdown_search_list absolute w-full lg:w-1/2 top-full bg-gray-100 left-0 mt-4 shadow-lg cursor-pointer ">
                             <div
                                 onClick={typeSearchHandler}
                                 datatype="cocktail_name"
@@ -133,6 +147,9 @@ const Search = () => {
                         </div>
                     </div>
                     <div className="flex justify-between w-full py-4">
+                        <div onClick={closeSearchHandler} className="absolute top-0 left-0 px-0.5 ">
+                            <FontAwesomeIcon icon={faXmark} />
+                        </div>
                         <input
                             onChange={changeHandler}
                             className="w-full h-full lg:border-l border-gray-300 bg-transparent font-semibold text-sm pl-4 outline-0"
@@ -148,7 +165,7 @@ const Search = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </Fragment>
     );
 };

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialValue: any = {
     loading: false,
+    searchClicked: false,
 };
 // interface Action {
 //     type?: any;
@@ -14,6 +15,9 @@ const UISlice = createSlice({
     reducers: {
         loadingHandler(state, action) {
             state.loading = action.payload;
+        },
+        searchHandler(state) {
+            state.searchClicked = !state.searchClicked;
         },
     },
 });

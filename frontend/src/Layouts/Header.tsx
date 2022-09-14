@@ -5,12 +5,45 @@ import { useSelector } from "react-redux";
 // import { searchSliceAction } from "../store/search-slice";
 import Search from "./components/Search";
 import NavTools from "./components/NavTools";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
+import { useAppDispatch, useAppSelector } from "../store/hook";
+import { UISliceActions } from "../store/ui-slice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    // const [searchClicked, setSearchClicked] = React.useState(false);
+    const searchClicked = useAppSelector((state) => state.UISlice.searchClicked);
 
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
+
+    const motionSearch = {
+        initialPos: {
+            x: 0,
+        },
+        turnRight: {
+            x: "100vw",
+            transition: {
+                type: "spring",
+                duration: 3,
+            },
+        },
+        exit: {
+            // x: "-100vw",
+            transition: {
+                delay: 1.5,
+                ease: "easeInOut",
+            },
+        },
+    };
+
+    const searchClickHandler = () => {
+        dispatch(UISliceActions.searchHandler());
+    };
 
     // const searchPath = location.pathname === "/search";
 
@@ -27,7 +60,10 @@ const Header = () => {
                         {/* <!-- logo --> */}
                         <div
                             onClick={() => navigate("/")}
-                            className="mr-auto md:w-48 flex-shrink-0 cursor-pointer"
+                            className={
+                                "mr-auto md:w-48 flex-shrink-0 cursor-pointer" +
+                                (searchClicked ? " hidden transition-all" : "")
+                            }
                         >
                             <img
                                 className="h-8 md:h-10"
@@ -37,10 +73,38 @@ const Header = () => {
                         </div>
 
                         {/* <!-- search --> */}
-                        <Search />
+                        <div
+                            className={
+                                "absolute left-1/2 -translate-x-1/2 "
+                                // + (searchClicked ? "hidden" : "")
+                            }
+                        >
+                            <div onClick={searchClickHandler} className="">
+                                <motion.div
+                                    variants={motionSearch}
+                                    initial="initialPos"
+                                    animate={searchClicked ? "turnRight" : ""}
+                                    // exit="exit"
+                                >
+                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                </motion.div>
+                            </div>
+                        </div>
+                        <div
+                            className={
+                                "absolute top-0 left-0 bottom-0 w-full h-full" +
+                                (!searchClicked ? " hidden" : "")
+                            }
+                        >
+                            <Search />
+                        </div>
 
                         {/* <!-- buttons --> */}
-                        <NavTools />
+                        <div className={"" + (searchClicked ? "hidden transition-all" : "")}>
+                            {/* <div className="hidden"> */}
+                            <NavTools />
+                        </div>
+                        {/* </div> */}
 
                         {/* <!-- cart count --> */}
                         <div className="ml-4 hidden sm:flex flex-col font-bold">

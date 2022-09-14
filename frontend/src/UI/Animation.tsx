@@ -45,13 +45,13 @@ export const motionNavigation_content_r = {
         x: "10vh",
         opacity: 0,
     },
-    visible: {
+    turnDown: {
         x: 0,
         opacity: 1,
-    },
-    transition: {
-        delay: 0.5,
-        type: "spring",
+        transition: {
+            delay: 0.5,
+            type: "spring",
+        },
     },
     exit: {
         x: "-100vw",
@@ -139,6 +139,28 @@ export const motionAlert = {
         },
     },
 
+    exit: {
+        x: "-100vw",
+        transition: {
+            ease: "easeInOut",
+        },
+    },
+};
+
+export const motionSearchDown = {
+    hidden: {
+        y: "-10vh",
+        opacity: 0,
+    },
+    turnDown: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            // delay: 0.5,
+            duration: 1,
+            // type: "spring",
+        },
+    },
     exit: {
         x: "-100vw",
         transition: {

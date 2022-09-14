@@ -26,7 +26,7 @@ export const alcoholic = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await Alcoholic.create(data);
+    // await Alcoholic.create(data);
     res.json({ data: data });
 };
 
@@ -44,7 +44,7 @@ export const nonAlcoholic = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await NonAlcoholic.create(data);
+    // await NonAlcoholic.create(data);
     res.json({ data: data });
 };
 
@@ -62,7 +62,7 @@ export const ordinaryDrink = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await OrdinaryDrink.create(data);
+    // await OrdinaryDrink.create(data);
     res.json({ data: data });
 };
 
@@ -80,7 +80,7 @@ export const cocktail = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await Cocktail.create(data);
+    // await Cocktail.create(data);
     res.json({ data: data });
 };
 
@@ -98,7 +98,7 @@ export const cocktailGlass = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await CocktailGlass.create(data);
+    // await CocktailGlass.create(data);
     res.json({ data: data });
 };
 
@@ -116,7 +116,7 @@ export const champagneFlute = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await Champagne.create(data);
+    // await Champagne.create(data);
     res.json({ data: data });
 };
 
@@ -134,7 +134,7 @@ export const gin = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await Gin.create(data);
+    // await Gin.create(data);
     res.json({ data: data });
 };
 
@@ -152,6 +152,6 @@ export const vodka = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
-    await Vodka.create(data);
+    // await Vodka.create(data);
     res.json({ data: data });
 };
