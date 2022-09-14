@@ -16,7 +16,7 @@ const { getAllCocktail, cocktails } = require("../controllers/cocktailController
 const router = Router();
 
 // router.get("/", getAllCocktail);
-router.get("/cocktails", cocktails);
+// router.get("/cocktails", cocktails);
 
 // // category
 router.get("/category/ordinary-drink", ordinaryDrink);

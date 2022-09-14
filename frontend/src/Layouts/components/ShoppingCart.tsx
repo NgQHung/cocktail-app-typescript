@@ -19,8 +19,8 @@ const ShoppingCart = () => {
     // console  .log(total);
     const dispatch = useDispatch();
 
-    const removeCocktailHandler = (id: string) => {
-        dispatch(cocktailSliceAction.removeCocktail(id));
+    const removeCocktailHandler = (id: string, price: number) => {
+        dispatch(cocktailSliceAction.removeCocktail({ id: id, price: price }));
         dispatch(
             notificationSliceActions.alertHandler({
                 title: "Well done!",
@@ -103,7 +103,10 @@ const ShoppingCart = () => {
                                                     <FontAwesomeIcon icon={faTrash} />
                                                     <div
                                                         onClick={() =>
-                                                            removeCocktailHandler(cocktail.id)
+                                                            removeCocktailHandler(
+                                                                cocktail.id,
+                                                                cocktail.price
+                                                            )
                                                         }
                                                     >
                                                         <span>Remove</span>

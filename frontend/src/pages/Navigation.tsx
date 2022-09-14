@@ -1,56 +1,56 @@
 import React, { Fragment, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { cocktailSliceAction } from "../store/cocktail-slice";
-import { motion } from "framer-motion";
-import {
-    motionHeader,
-    motionNavigation,
-    motionNavigation_content_l,
-    motionNavigation_content_r,
-} from "../UI/Animation";
-import { ButtonHeader } from "../UI/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+// import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
+// import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+// import { cocktailSliceAction } from "../store/cocktail-slice";
+// import { motion } from "framer-motion";
+// import {
+//     motionHeader,
+//     motionNavigation,
+//     motionNavigation_content_l,
+//     motionNavigation_content_r,
+// } from "../UI/Animation";
+// import { ButtonHeader } from "../UI/Button";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = () => {
-    const navigationClicked: any = useSelector<any>(
-        (state) => state.cocktailSlice.navigationClicked
-    );
-    const location = useLocation();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const mainPath = location.pathname === "/";
-    const navPath = location.pathname === "/navigation";
-    // console.log(pathName);
+    // const navigationClicked: any = useSelector<any>(
+    //     (state) => state.cocktailSlice.navigationClicked
+    // );
+    // const location = useLocation();
+    // const navigate = useNavigate();
+    // const dispatch = useDispatch();
+    // const mainPath = location.pathname === "/";
+    // const navPath = location.pathname === "/navigation";
+    // // console.log(pathName);
 
-    const navigationHandler = () => {
-        if (mainPath) {
-            dispatch(cocktailSliceAction.navigationHandler(true));
-        }
-        if (navPath) {
-            dispatch(cocktailSliceAction.navigationHandler(false));
-        }
-        // if () {
-        //     dispatch(cocktailSliceAction.navigationHandler(false));
-    };
+    // const navigationHandler = () => {
+    //     if (mainPath) {
+    //         dispatch(cocktailSliceAction.navigationHandler(true));
+    //     }
+    //     if (navPath) {
+    //         dispatch(cocktailSliceAction.navigationHandler(false));
+    //     }
+    //     // if () {
+    //     //     dispatch(cocktailSliceAction.navigationHandler(false));
+    // };
 
-    const isNavigation = location.pathname === "/navigation";
+    // const isNavigation = location.pathname === "/navigation";
 
-    const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
-    const style_search = searchClicked ? "hidden" : "";
+    // const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
+    // const style_search = searchClicked ? "hidden" : "";
 
-    useEffect(() => {
-        if (!navigationClicked && isNavigation) {
-            navigate("/");
-        }
-    }, [navigationClicked]);
+    // useEffect(() => {
+    //     if (!navigationClicked && isNavigation) {
+    //         navigate("/");
+    //     }
+    // }, [navigationClicked]);
 
     return (
         <Fragment>
             {/* <div> */}
-            <motion.div
+            {/* <motion.div
                 variants={motionHeader}
                 initial="hidden"
                 animate="visible"
@@ -248,9 +248,9 @@ const Navigation = () => {
                         </motion.div>
                     </div>
                     {/* </motion.div> */}
-                </div>
+            {/* </div>
             ) : null}
-            <Outlet />
+            <Outlet /> */}
         </Fragment>
     );
 };

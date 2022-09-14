@@ -1,25 +1,16 @@
-import CocktailModel from "../models/models";
 import mongoose from "mongoose";
 import express, { Request, Response } from "express";
+import Cocktail from "../models/cocktailModel";
+import Alcoholic from "../models/alcoholicModel";
+import NonAlcoholic from "../models/nonAlcoholicModel";
+import Champagne from "../models/champagneFluteModel";
+import Gin from "../models/ginModel";
+import OrdinaryDrink from "../models/ordinaryDrinkModel";
+import Vodka from "../models/vodkaModel";
+import CocktailGlass from "../models/cocktailGlassModel";
+
 import axios from "axios";
 // import axios from "axios";
-
-// get all cocktail
-export const cocktails = async (req: Request, res: Response) => {
-    let data;
-    const sendRequest = async () => {
-        const request = await axios.get(
-            "http://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail"
-        );
-        data = request.data.drinks;
-    };
-    try {
-        const data = await sendRequest();
-    } catch (error: any) {
-        throw Error(error);
-    }
-    res.json({ data: data });
-};
 
 // alcoholic
 export const alcoholic = async (req: Request, res: Response) => {
@@ -35,8 +26,11 @@ export const alcoholic = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
+    await Alcoholic.create(data);
     res.json({ data: data });
 };
+
+// nonAlcoholic
 export const nonAlcoholic = async (req: Request, res: Response) => {
     let data;
     const sendRequest = async () => {
@@ -50,8 +44,11 @@ export const nonAlcoholic = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
+    await NonAlcoholic.create(data);
     res.json({ data: data });
 };
+
+// ordinary drink
 export const ordinaryDrink = async (req: Request, res: Response) => {
     let data;
     const sendRequest = async () => {
@@ -65,8 +62,11 @@ export const ordinaryDrink = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
+    await OrdinaryDrink.create(data);
     res.json({ data: data });
 };
+
+// cocktail
 export const cocktail = async (req: Request, res: Response) => {
     let data;
     const sendRequest = async () => {
@@ -80,8 +80,11 @@ export const cocktail = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
+    await Cocktail.create(data);
     res.json({ data: data });
 };
+
+// cocktail glass
 export const cocktailGlass = async (req: Request, res: Response) => {
     let data;
     const sendRequest = async () => {
@@ -95,8 +98,11 @@ export const cocktailGlass = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
+    await CocktailGlass.create(data);
     res.json({ data: data });
 };
+
+// champagne flute
 export const champagneFlute = async (req: Request, res: Response) => {
     let data;
     const sendRequest = async () => {
@@ -110,8 +116,11 @@ export const champagneFlute = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
+    await Champagne.create(data);
     res.json({ data: data });
 };
+
+// gin
 export const gin = async (req: Request, res: Response) => {
     let data;
     const sendRequest = async () => {
@@ -125,8 +134,11 @@ export const gin = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
+    await Gin.create(data);
     res.json({ data: data });
 };
+
+// vodka
 export const vodka = async (req: Request, res: Response) => {
     let data;
     const sendRequest = async () => {
@@ -140,5 +152,6 @@ export const vodka = async (req: Request, res: Response) => {
     } catch (error: any) {
         throw Error(error);
     }
+    await Vodka.create(data);
     res.json({ data: data });
 };

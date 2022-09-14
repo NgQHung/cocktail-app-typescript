@@ -13,30 +13,81 @@ type InitialValue = {
     data: Cocktail[];
     error: string;
     dataToShow: Cocktail[];
-    // dataShowLoad: Cocktail[];
     indexStart: number;
     indexEnd: number;
+    typeCocktail: string;
+    // dataOrdinaryCocktail: Cocktail[];
+    // dataCocktailGlass: Cocktail[];
+    // dataChampagneFlute: Cocktail[];
+    // dataIngredientGin: Cocktail[];
+    // dataIngredientVodka: Cocktail[];
+    // dataAlcoholic: Cocktail[];
+    // dataNonAlcoholic: Cocktail[];
 };
 
 const initialValue: InitialValue = {
     loading: false,
     data: [],
     dataToShow: [],
-    // dataShowLoad: [],
+    // dataOrdinaryCocktail: [],
+    // dataCocktailGlass: [],
+    // dataChampagneFlute: [],
+    // dataIngredientGin: [],
+    // dataIngredientVodka: [],
+    // dataAlcoholic: [],
+    // dataNonAlcoholic: [],
     indexStart: 0,
     indexEnd: 20,
     error: "",
+    typeCocktail: "",
 };
 
-export const fetchData = () => {
+export const fetchDataToShow = () => {
     return async (dispatch: any) => {
-        // const sendRequest = async () => {
-        const res = await axios.get(
-            // "www.thecocktaildb.com/api/json/v1/1/search.php?f=a"
-            "http://localhost:4000/api/cocktails/category/cocktail"
-        );
+        const res = await axios.get("http://localhost:4000/api/cocktails/category/cocktail");
         dispatch(dataSliceActions.getAllCocktail(res.data.data));
-        // console.log(res.data);
+    };
+};
+export const fetchOrdinaryCocktail = () => {
+    return async (dispatch: any) => {
+        const res = await axios.get("http://localhost:4000/api/cocktails/category/ordinary-drink");
+        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+    };
+};
+export const fetchCocktailGlass = () => {
+    return async (dispatch: any) => {
+        const res = await axios.get("http://localhost:4000/api/cocktails/glass/cocktail-glass");
+        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+    };
+};
+export const fetchChampagneFlute = () => {
+    return async (dispatch: any) => {
+        const res = await axios.get("http://localhost:4000/api/cocktails/glass/champagne-flute");
+        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+    };
+};
+export const fetchIngredientGin = () => {
+    return async (dispatch: any) => {
+        const res = await axios.get("http://localhost:4000/api/cocktails/ingredient/gin");
+        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+    };
+};
+export const fetchIngredientVodka = () => {
+    return async (dispatch: any) => {
+        const res = await axios.get("http://localhost:4000/api/cocktails/ingredient/vodka");
+        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+    };
+};
+export const fetchAlcoholic = () => {
+    return async (dispatch: any) => {
+        const res = await axios.get("http://localhost:4000/api/cocktails/alcoholic/alcoholic");
+        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+    };
+};
+export const fetchNonAlcoholic = () => {
+    return async (dispatch: any) => {
+        const res = await axios.get("http://localhost:4000/api/cocktails/alcoholic/non-alcoholic");
+        dispatch(dataSliceActions.getAllCocktail(res.data.data));
     };
 };
 
@@ -55,6 +106,10 @@ const dataSlice = createSlice({
         getMoreCocktails(state) {
             state.indexEnd = state.indexEnd + 20;
             state.dataToShow = state.data.slice(state.indexStart, state.indexEnd);
+        },
+        typeCocktailHandler(state, action) {
+            state.typeCocktail = action.payload;
+            // console.log(action.payload);
         },
     },
 

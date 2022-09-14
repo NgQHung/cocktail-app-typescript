@@ -104,11 +104,11 @@ const Signin = () => {
         loginHandler();
     };
 
-    useEffect(() => {
-        if (isSignin) {
-            dispatch(cocktailSliceAction.navigationHandler(false));
-        }
-    }, [isSignin]);
+    // useEffect(() => {
+    //     if (isSignin) {
+    //         dispatch(cocktailSliceAction.navigationHandler(false));
+    //     }
+    // }, [isSignin]);
     const closeSigninHandler = () => {
         navigate("/");
     };

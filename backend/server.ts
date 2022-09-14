@@ -1,7 +1,8 @@
 import express from "express";
-import routes from "./routes/routes";
+import dataRoutes from "./routes/dataRoutes";
 import mongoose from "mongoose";
 import userRoutes from "./routes/userRoutes";
+import searchRoutes from "./routes/searchRoutes";
 import dotenv from "dotenv";
 // import userRoutes from "./routes/userRoutes";
 
@@ -19,8 +20,9 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 
 // routes
-app.use("/api/cocktails", routes);
+app.use("/api/cocktails", dataRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/search", searchRoutes);
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
     next();
 });

@@ -15,6 +15,12 @@ const Searched = () => {
         );
         setSearchedCocktail(res.data.drinks);
     };
+    // const searchDataByName = async () => {
+    //     const res = await axios.post(
+    //         `http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${params.cocktail}`
+    //     );
+    //     setSearchedCocktail(res.data.drinks);
+    // };
     const searchDataByFirstLetter = async () => {
         const res = await axios.get(
             `http://www.thecocktaildb.com/api/json/v1/1/search.php?f=${params.cocktail}`

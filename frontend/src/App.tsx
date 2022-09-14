@@ -16,7 +16,17 @@ import Signup from "./components/Form/Signup";
 import Signin from "./components/Form/Signin";
 import WishList from "./pages/WishList";
 import Main from "./pages/Main";
-import { dataSliceActions, fetchData } from "./store/slice-http";
+import {
+    dataSliceActions,
+    fetchAlcoholic,
+    fetchChampagneFlute,
+    fetchCocktailGlass,
+    fetchDataToShow,
+    fetchIngredientGin,
+    fetchIngredientVodka,
+    fetchNonAlcoholic,
+    fetchOrdinaryCocktail,
+} from "./store/slice-http";
 import { useAppDispatch, useAppSelector } from "./store/hook";
 import { AppDispatch } from "./store";
 import { UISliceActions } from "./store/ui-slice";
@@ -55,7 +65,7 @@ function App() {
     //     fetchCocktal();
     // }, []);
     useEffect(() => {
-        // dispatch(UISliceActions.loadingHandler(true));
+        dispatch(UISliceActions.loadingHandler(true));
         try {
             const basket = JSON.parse(itemsSavedToLocalStorageCart);
             const heart = JSON.parse(itemsSavedToLocalStorageHeart);
@@ -65,18 +75,24 @@ function App() {
                 dispatch(cocktailSliceAction.localStorageHandler({ heart: [], basket: [] }));
                 // window.location.reload(false);
             }
-            dispatch(fetchData());
+            dispatch(fetchDataToShow());
+            // dispatch(fetchOrdinaryCocktail());
+            // dispatch(fetchCocktailGlass());
+            // dispatch(fetchChampagneFlute());
+            // dispatch(fetchIngredientGin());
+            // dispatch(fetchIngredientVodka());
+            // dispatch(fetchAlcoholic());
+            // dispatch(fetchNonAlcoholic());
         } catch (error) {
             console.log(error);
+            dispatch(UISliceActions.loadingHandler(false));
         }
-        // dispatch(UISliceActions.loadingHandler(false));
     }, []);
 
     // if (isInitial) {
     //     isInitial = false;
     //     return;
     // }
-    // useEffect(() => {}, []);
     useEffect(() => {
         dispatch(UISliceActions.loadingHandler(true));
         if (data) {
@@ -94,16 +110,7 @@ function App() {
                 <Header />
                 <AnimatePresence>
                     <Routes location={location} key={location.key}>
-                        <Route
-                            path="/"
-                            element={
-                                <Main
-                                    cocktailData={dataToShow}
-                                    // loadMore={loadMore}
-                                    // amountCocktail={index}
-                                />
-                            }
-                        >
+                        <Route path="/" element={<Main cocktailData={dataToShow} />}>
                             <Route path="navigation" element={<Navigation />} />
                             <Route path="signup" element={<Signup />} />
                             <Route path="signin" element={<Signin />} />

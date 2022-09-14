@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { cocktailSliceAction } from "../../store/cocktail-slice";
+// import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { searchSliceAction } from "../../store/search-slice";
 import { Button } from "../../UI/Button";
 import { motion } from "framer-motion";
@@ -45,13 +45,13 @@ const Search = () => {
         if (e.key === "Enter") {
             searchHandler();
         }
-        dispatch(cocktailSliceAction.navigationHandler(false));
+        // dispatch(cocktailSliceAction.navigationHandler(false));
     };
 
     // close search section
     const closeSearchHandler = () => {
         dispatch(searchSliceAction.searchHandler(false));
-        dispatch(cocktailSliceAction.navigationHandler(false));
+        // dispatch(cocktailSliceAction.navigationHandler(false));
 
         navigate("/");
     };

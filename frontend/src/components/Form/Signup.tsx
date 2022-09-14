@@ -147,11 +147,11 @@ const Signup = () => {
     //     postSignupData();
     // }, []);
 
-    useEffect(() => {
-        if (isSignup) {
-            dispatch(cocktailSliceAction.navigationHandler(false));
-        }
-    }, [isSignup]);
+    // useEffect(() => {
+    //     if (isSignup) {
+    //         dispatch(cocktailSliceAction.navigationHandler(false));
+    //     }
+    // }, [isSignup]);
 
     return (
         <Modal>

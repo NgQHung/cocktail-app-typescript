@@ -1,8 +1,56 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import { useAppDispatch, useAppSelector } from "../store/hook";
+import {
+    dataSliceActions,
+    fetchAlcoholic,
+    fetchChampagneFlute,
+    fetchCocktailGlass,
+    fetchDataToShow,
+    fetchIngredientGin,
+    fetchIngredientVodka,
+    fetchNonAlcoholic,
+    fetchOrdinaryCocktail,
+} from "../store/slice-http";
 
 const Filter = () => {
+    const dispatch = useAppDispatch();
+    const [clicked, setClicked] = React.useState(false);
+    const typeCocktail = useAppSelector((state) => state.dataSlice.typeCocktail);
+
+    const changeHandler = (e: React.FormEvent<HTMLInputElement>) => {
+        dispatch(dataSliceActions.typeCocktailHandler(e.currentTarget.value));
+        setClicked((prev) => !prev);
+        // console.log(e.currentTarget.value);
+    };
+    const applyFilterHandler = () => {
+        if (typeCocktail === "alcoholic") {
+            dispatch(fetchAlcoholic());
+        }
+        if (typeCocktail === "non-Alcoholic") {
+            dispatch(fetchNonAlcoholic());
+        }
+        if (typeCocktail === "gin") {
+            dispatch(fetchIngredientGin());
+        }
+        if (typeCocktail === "vodka") {
+            dispatch(fetchIngredientVodka());
+        }
+        if (typeCocktail === "cocktailGlass") {
+            dispatch(fetchCocktailGlass());
+        }
+        if (typeCocktail === "champagneFlute") {
+            dispatch(fetchChampagneFlute());
+        }
+        if (typeCocktail === "ordinaryDrink") {
+            dispatch(fetchOrdinaryCocktail());
+        }
+        if (typeCocktail === "cocktail") {
+            dispatch(fetchDataToShow());
+        }
+    };
+
     return (
         <React.Fragment>
             <div className="2xl:container 2xl:mx-auto lg:absolute sm:w-[600px] lg:top-full lg:left-0 z-50 bg-white">
@@ -19,7 +67,7 @@ const Filter = () => {
                     </div>
 
                     {/* Colors Section */}
-                    <div>
+                    {/* <div>
                         <div className=" flex space-x-2">
                             <p className="lg:text-2xl text-xl lg:leading-6 leading-5 font-medium text-gray-800 ">
                                 Colors
@@ -69,7 +117,7 @@ const Filter = () => {
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <hr className=" bg-gray-200 lg:w-6/12 w-full md:my-10 my-8" />
 
@@ -88,8 +136,11 @@ const Filter = () => {
                                     id="alcoholic"
                                     name="alcoholic"
                                     value="alcoholic"
+                                    disabled={
+                                        typeCocktail !== "alcoholic" && clicked ? true : false
+                                    }
                                     // checked={alcoholic}
-                                    // onChange={changeHandler}
+                                    onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
                                     <div className=" flex justify-center items-center">
@@ -109,8 +160,11 @@ const Filter = () => {
                                     id="non-Alcoholic"
                                     name="non-Alcoholic"
                                     value="non-Alcoholic"
+                                    disabled={
+                                        typeCocktail !== "non-Alcoholic" && clicked ? true : false
+                                    }
                                     // checked={non-Alcoholic}
-                                    // onChange={changeHandler}
+                                    onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
                                     <div className=" fl justify-center items-center">
@@ -130,8 +184,8 @@ const Filter = () => {
                                     id="gin"
                                     name="gin"
                                     value="gin"
-                                    // checked={gin}
-                                    // onChange={changeHandler}
+                                    disabled={typeCocktail !== "gin" && clicked ? true : false} // checked={gin}
+                                    onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
                                     <div className=" fl justify-center items-center">
@@ -151,8 +205,8 @@ const Filter = () => {
                                     id="vodka"
                                     name="vodka"
                                     value="vodka"
-                                    // checked={vodka}
-                                    // onChange={changeHandler}
+                                    disabled={typeCocktail !== "vodka" && clicked ? true : false} // checked={vodka}
+                                    onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
                                     <div className=" fl justify-center items-center">
@@ -172,8 +226,10 @@ const Filter = () => {
                                     id="cocktailGlass"
                                     name="cocktailGlass"
                                     value="cocktailGlass"
-                                    // checked={cocktailGlass}
-                                    // onChange={changeHandler}
+                                    disabled={
+                                        typeCocktail !== "cocktailGlass" && clicked ? true : false
+                                    } // checked={cocktailGlass}
+                                    onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
                                     <div className=" fl justify-center items-center">
@@ -193,8 +249,10 @@ const Filter = () => {
                                     id="champagneFlute"
                                     name="champagneFlute"
                                     value="champagneFlute"
-                                    // checked={champagneFlute}
-                                    // onChange={changeHandler}
+                                    disabled={
+                                        typeCocktail !== "champagneFlute" && clicked ? true : false
+                                    } // checked={champagneFlute}
+                                    onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
                                     <div className=" fl justify-center items-center">
@@ -214,8 +272,10 @@ const Filter = () => {
                                     id="ordinaryDrink"
                                     name="ordinaryDrink"
                                     value="ordinaryDrink"
-                                    // checked={ordinaryDrink}
-                                    // onChange={changeHandler}
+                                    disabled={
+                                        typeCocktail !== "ordinaryDrink" && clicked ? true : false
+                                    } // checked={ordinaryDrink}
+                                    onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
                                     <div className=" fl justify-center items-center">
@@ -235,8 +295,8 @@ const Filter = () => {
                                     id="cocktail"
                                     name="cocktail"
                                     value="cocktail"
-                                    // checked={cocktail}
-                                    // onChange={changeHandler}
+                                    disabled={typeCocktail !== "cocktail" && clicked ? true : false} // checked={cocktail}
+                                    onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
                                     <div className=" fl justify-center items-center">
@@ -255,99 +315,6 @@ const Filter = () => {
                     <hr className=" bg-gray-200 lg:w-6/12 w-full md:my-10 my-8" />
 
                     {/* Size Section */}
-                    <div>
-                        <div className=" flex space-x-2">
-                            <p className="  lg:text-2xl text-xl lg:leading-6 leading-5 font-medium text-gray-800 ">
-                                Size
-                            </p>
-                        </div>
-                        <div className=" md:flex md:justify-between  mt-8 grid grid-cols-3 gap-y-8 flex-wrap">
-                            <div className=" flex md:justify-center md:items-center items-center justify-start ">
-                                <input
-                                    className="w-4 h-4 mr-2"
-                                    type="checkbox"
-                                    id="Large"
-                                    name="large"
-                                    value="Large"
-                                    // checked={large}
-                                    // onChange={changeHandler}
-                                />
-                                <div className=" inline-block">
-                                    <div className=" fl justify-center items-center">
-                                        <label
-                                            className=" mr-2 text-sm leading-3 font-normal text-gray-600"
-                                            htmlFor="Large"
-                                        >
-                                            Large
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className=" flex space-x-2 md:justify-center md:items-center items-center justify-start ">
-                                <input
-                                    className="w-4 h-4 mr-2"
-                                    type="checkbox"
-                                    id="Medium"
-                                    name="medium"
-                                    value="Medium"
-                                    // checked={medium}
-                                    // onChange={changeHandler}
-                                />
-                                <div className=" inline-block">
-                                    <div className=" fl justify-center items-center">
-                                        <label
-                                            className=" mr-2 text-sm leading-3 font-normal text-gray-600"
-                                            htmlFor="Medium"
-                                        >
-                                            Medium
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className=" flex md:justify-center md:items-center items-center justify-end ">
-                                <input
-                                    className="w-4 h-4 mr-2"
-                                    type="checkbox"
-                                    id="Small"
-                                    name="small"
-                                    value="Small"
-                                    // checked={small}
-                                    // onChange={changeHandler}
-                                />
-                                <div className=" inline-block">
-                                    <div className=" fl justify-center items-center">
-                                        <label
-                                            className=" mr-2 text-sm leading-3 font-normal text-gray-600"
-                                            htmlFor="Small"
-                                        >
-                                            Small
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className=" flex md:justify-center md:items-center items-center justify-start ">
-                                <input
-                                    className="w-4 h-4 mr-2"
-                                    type="checkbox"
-                                    id="Mini"
-                                    name="mini"
-                                    value="Mini"
-                                    // checked={mini}
-                                    // onChange={changeHandler}
-                                />
-                                <div className=" inline-block">
-                                    <div className=" fl justify-center items-center">
-                                        <label
-                                            className=" mr-2 text-sm leading-3 font-normal text-gray-600"
-                                            htmlFor="Mini"
-                                        >
-                                            Mini
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <hr className=" bg-gray-200 lg:w-6/12 w-full md:my-10 my-8" />
 
@@ -355,7 +322,7 @@ const Filter = () => {
 
                     <div className="px-0 mt-10 w-full md:w-auto md:mt-0 md:absolute md:right-0 md:bottom-0 md:py-10 lg:px-30 md:px-6">
                         <button
-                            // onClick={applyFilters}
+                            onClick={applyFilterHandler}
                             className="w-full hover:bg-gray-700 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-gray-800"
                         >
                             Apply Filter
