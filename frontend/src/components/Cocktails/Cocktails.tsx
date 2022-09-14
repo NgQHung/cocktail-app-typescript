@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import CocktailItem from "./CocktailItem";
-import { Button, ButtonLoadMore } from "../../UI/Button";
+import { ButtonLoadMore } from "../../UI/Button";
 import { Cocktail } from "../../models/cocktails";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Signin from "../Form/Signin";
 import Signup from "../Form/Signup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,48 +10,42 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { Alert } from "../../UI/Alert";
 import { useDispatch } from "react-redux";
-import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import Filter from "../Filter";
 import { dataSliceActions } from "../../store/slice-http";
+import { useAppSelector } from "../../store/hook";
 
 interface Props {
     cocktailData?: Cocktail[];
     selectedType?: string;
-    // loadMore?: () => void;
-    // amountCocktail?: number;
 }
 
 const Cocktails: React.FC<Props> = (props) => {
     const error = props.cocktailData === null;
     const dataIsEmpty = props.cocktailData?.length === 0;
     const dispatch = useDispatch();
-    const [addCocktailNotification, setAddCocktailNotification] = useState(false);
-    // console.log(addCocktailNotification);
 
     const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertContent);
-    // console.log(alert);
+    // const dataToShow = useAppSelector(state => state.dataSlice.dataToShow)
+    const amountOfCocktail = useAppSelector((state) => state.dataSlice.indexEnd);
 
     const location = useLocation();
     const isSignin = location.pathname === "/signin";
     const isSignup = location.pathname === "/signup";
-    // console.log(props.cocktailData.length);
     const ingredient = props.selectedType === "ingredient_id";
-    // const amountCocktail = props?.amountCocktail ? props?.amountCocktail : 20;
 
     const loadMoreHandler = () => {
-        // dispatch(dataSliceActions.getMoreCocktails());
+        dispatch(dataSliceActions.getMoreCocktails());
     };
 
     useEffect(() => {
         let time = setTimeout(() => {
             dispatch(notificationSliceActions.alertHandler(null));
-            setAddCocktailNotification(false);
         }, 1000);
         return () => {
             clearTimeout(time);
         };
-    }, []);
+    }, [dispatch]);
     return (
         <Fragment>
             <div className="absolute">
@@ -62,7 +56,6 @@ const Cocktails: React.FC<Props> = (props) => {
                     <div className=" flex justify-between items-center">
                         <div className="relative dropdown_filter flex cursor-pointer">
                             <FontAwesomeIcon icon={faFilter} />
-                            {/* <Alert /> */}
                             <p className=" ml-4 font-normal text-base leading-4 text-gray-800">
                                 Filter
                             </p>
@@ -71,7 +64,7 @@ const Cocktails: React.FC<Props> = (props) => {
                             </div>
                         </div>
                         <p className=" cursor-pointer hover:underline duration-100 font-normal text-base leading-4 text-gray-600">
-                            {/* Showing {amountCocktail - 20} products */}
+                            Showing {amountOfCocktail} products
                         </p>
                     </div>
 
@@ -83,7 +76,6 @@ const Cocktails: React.FC<Props> = (props) => {
                                     id={coc.idDrink}
                                     name={coc.strDrink}
                                     image={coc.strDrinkThumb}
-                                    notification={setAddCocktailNotification}
                                 />
                             ))}
                         {ingredient &&
@@ -92,8 +84,6 @@ const Cocktails: React.FC<Props> = (props) => {
                                     key={coc.idDrink}
                                     id={coc.idIngredient}
                                     name={coc.strIngredient}
-                                    notification={setAddCocktailNotification}
-                                    // image={coc.strDrinkThumb}
                                 />
                             ))}
                         {error && <p>There are no such cocktail</p>}

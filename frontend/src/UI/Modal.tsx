@@ -1,15 +1,10 @@
 import React from "react";
-// import ReactDom from "react-dom";
 import ReactDom from "react-dom";
 
 interface Props {
     onClose?: () => void;
     children?: React.ReactNode;
 }
-// interface PropsModal {
-//     onClose: () => void;
-//     children: React.ReactNode;
-// }
 
 const BackDrop: React.FC<Props> = (props) => {
     return <div className="backdrop" onClick={props.onClose} />;

@@ -1,12 +1,12 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState, MouseEventHandler } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Use_Form from "../../hooks/use_form";
 import { authSliceActions } from "../../store/auth-slice";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
-import { formSliceActions, signupHandler } from "../../store/form-slice";
+import { formSliceActions } from "../../store/form-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import Modal from "../../UI/Modal";
 
@@ -28,7 +28,6 @@ const iconValid = (
         ></path>
     </svg>
 );
-// const confirmPasswordIsValid = ()
 
 const Signup = () => {
     // useForm for input form
@@ -36,7 +35,7 @@ const Signup = () => {
         input: firstNameInput,
         hasError: firstNameHasError,
         inputIsValid: firstNameIsValid,
-        reset: firstNameReset,
+        // reset: firstNameReset,
         onChangeHandler: firstNameChange,
         inputBlurHandler: firstNameOnBlur,
         isTouched: firstNameIsTouched,
@@ -46,7 +45,7 @@ const Signup = () => {
         input: lastNameInput,
         hasError: lastNameHasError,
         inputIsValid: lastNameIsValid,
-        reset: lastNameReset,
+        // reset: lastNameReset,
         onChangeHandler: lastNameChange,
         inputBlurHandler: lastNameOnBlur,
     } = Use_Form(inputIsValid);
@@ -55,7 +54,7 @@ const Signup = () => {
         input: emailInput,
         hasError: emailHasError,
         inputIsValid: emailIsValid,
-        reset: emailReset,
+        // reset: emailReset,
         onChangeHandler: emailChange,
         inputBlurHandler: emailOnBlur,
     } = Use_Form(emailInputIsValid);
@@ -64,7 +63,7 @@ const Signup = () => {
         input: passwordInput,
         hasError: passwordHasError,
         inputIsValid: passwordIsValid,
-        reset: passwordReset,
+        // reset: passwordReset,
         onChangeHandler: passwordChange,
         inputBlurHandler: passwordOnBlur,
     } = Use_Form(inputIsValid);
@@ -73,7 +72,7 @@ const Signup = () => {
         input: confirmPassInput,
         hasError: confirmPassHasError,
         inputIsValid: confirmPassIsValid,
-        reset: confirmPassReset,
+        // reset: confirmPassReset,
         onChangeHandler: confirmPassChange,
         inputBlurHandler: confirmPassOnBlur,
         isTouched: confirmPassIsTouched,
@@ -86,15 +85,6 @@ const Signup = () => {
 
     const confirmPassIsInvalid = passwordInput !== confirmPassInput;
     const confirmPasswordHasError = confirmPassIsInvalid && confirmPassIsTouched;
-
-    // const initialValue = {
-    //     firstName: "",
-    //     lastName: "",
-    //     email: "",
-    //     password: "",
-    //     confirmPass: "",
-    // };
-    // const [inputObj, setInputObj] = useState({})
 
     // close form
     const closeSignupHandler = () => {
@@ -113,14 +103,10 @@ const Signup = () => {
             },
         });
         const data = await res.json();
-        // const json = JSON.stringify(data);
         if (!res.ok) {
             throw new Error("Something went wrong");
         } else {
-            // user = JSON.stringify(json);
-            // console.log("You sent data successfully");
             if (data.errors[0]?.msg) {
-                // console.log(data.errors[0]?.msg);
                 dispatch(
                     notificationSliceActions.alertHandler({
                         title: "Error!",
@@ -130,7 +116,6 @@ const Signup = () => {
                 );
             }
             if (data.data?.user?.email) {
-                // console.log("You signed up successfully with email " + data.data?.user?.email);
                 dispatch(authSliceActions.login(data.data));
                 dispatch(
                     notificationSliceActions.alertHandler({
@@ -147,9 +132,6 @@ const Signup = () => {
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // setInputObj()
-        // console.log()
-        // console.log("hello?");
         dispatch(
             formSliceActions.formHandler({
                 firstName: firstNameInput,
@@ -159,13 +141,6 @@ const Signup = () => {
             })
         );
         signupHandler();
-
-        // signupHandler({
-        //     firstName: firstNameInput,
-        //     lastName: lastNameInput,
-        //     email: emailInput,
-        //     password: passwordInput,
-        // });
     };
 
     // useEffect(() => {
@@ -180,7 +155,6 @@ const Signup = () => {
 
     return (
         <Modal>
-            {/* <body className="font-mono bg-gray-400"> */}
             <div className="container mx-auto absolute w-full h-full">
                 <div className="flex justify-center sm:px-6 sm:my-4">
                     <div className="w-full xl:w-full lg:w-full flex">
@@ -357,12 +331,12 @@ const Signup = () => {
                                 </div>
                                 <hr className="mb-6 border-t" />
                                 <div className="text-center">
-                                    <a
+                                    <p
                                         className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                        href="#"
+                                        // href="#"
                                     >
                                         Forgot Password?
-                                    </a>
+                                    </p>
                                 </div>
                                 <div className="text-center">
                                     <a
@@ -377,7 +351,6 @@ const Signup = () => {
                     </div>
                 </div>
             </div>
-            {/* </body> */}
         </Modal>
     );
 };

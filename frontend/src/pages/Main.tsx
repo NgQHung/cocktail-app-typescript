@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Cocktails from "../components/Cocktails/Cocktails";
 import { Cocktail } from "../models/cocktails";
@@ -6,12 +6,10 @@ import { Cocktail } from "../models/cocktails";
 interface Props {
     cocktailData?: Cocktail[];
     selectedType?: string;
-    // loadMore?: () => void;
-    // amountCocktail?: number;
 }
 
 const Main: React.FC<Props> = (props) => {
-    console.log(props.cocktailData);
+    // console.log(props.cocktailData);
     return (
         <div>
             <div className=" 2xl:container 2xl:mx-auto">
@@ -20,18 +18,12 @@ const Main: React.FC<Props> = (props) => {
                         Summer Collection Vol-1
                     </p>
                 </div>
-                {/* <div className=" py-6 lg:px-20 md:px-6 px-4"> */}
                 <div className=" flex justify-between items-center">
                     <div className=" flex space-x-3 justify-center items-center">
-                        <Cocktails
-                            cocktailData={props?.cocktailData}
-                            // loadMore={props.loadMore}
-                            // amountCocktail={props.amountCocktail}
-                        />
+                        <Cocktails cocktailData={props?.cocktailData} />
                     </div>
                 </div>
             </div>
-            {/* </div> */}
         </div>
     );
 };

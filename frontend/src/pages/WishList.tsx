@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../store/cocktail-slice";
 import { notificationSliceActions } from "../store/notification-slice";
 import { Alert } from "../UI/Alert";
@@ -28,7 +28,6 @@ const WishList = () => {
 
     const navigateHandler = (name: string) => {
         const nameUrl = name.split(" ").join("%");
-        // console.log(nameUrl);
         navigate("/cocktail/" + nameUrl);
     };
 

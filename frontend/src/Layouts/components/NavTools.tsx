@@ -9,7 +9,7 @@ import User from "./User";
 const NavTools = () => {
     const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
     const cocktailsHeart: any = useSelector<any>((state) => state.cocktailSlice.cocktailsHeart);
-    console.log(cocktailsHeart);
+    // console.log(cocktailsHeart);
     const amountCocktailsHeart = cocktailsHeart.length;
     // console.log(cocktailsHeart);
     const amountItems = cocktailsBasket.length;

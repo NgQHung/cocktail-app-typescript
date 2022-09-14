@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Cocktail } from "../models/cocktails";
-// import { Http } from "../models/Http";
 
 const initialValue: any = {
     loading: false,
 };
-interface Action {
-    type?: any;
-    payload?: any;
-}
+// interface Action {
+//     type?: any;
+//     payload?: any;
+// }
 
 const UISlice = createSlice({
     name: "notification",

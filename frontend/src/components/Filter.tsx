@@ -8,11 +8,7 @@ const Filter = () => {
             <div className="2xl:container 2xl:mx-auto lg:absolute sm:w-[600px] lg:top-full lg:left-0 z-50 bg-white">
                 <div
                     id="filterSection"
-                    className={
-                        "relative md:py-10 lg:px-20 md:px-6 py-9 px-4 bg-gray-50 w-full "
-                        // +
-                        // (showFilters ? "block" : "hidden")
-                    }
+                    className={"relative md:py-10 lg:px-20 md:px-6 py-9 px-4 bg-gray-50 w-full "}
                 >
                     {/* Cross button Code  */}
                     <div

@@ -13,24 +13,16 @@ import {
 import { ButtonHeader } from "../UI/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-// interface Props {
-//     isClicked: boolean;
-// }
 
 const Navigation = () => {
     const navigationClicked: any = useSelector<any>(
         (state) => state.cocktailSlice.navigationClicked
     );
-    // console.log(navigationClicked);
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const pathName = location.pathname;
     const mainPath = location.pathname === "/";
     const navPath = location.pathname === "/navigation";
-    const searchPath = location.pathname === "/search";
-    const isSignin = location.pathname === "/signin";
-    const isSignup = location.pathname === "/signup";
     // console.log(pathName);
 
     const navigationHandler = () => {
@@ -42,7 +34,6 @@ const Navigation = () => {
         }
         // if () {
         //     dispatch(cocktailSliceAction.navigationHandler(false));
-        // }
     };
 
     const isNavigation = location.pathname === "/navigation";

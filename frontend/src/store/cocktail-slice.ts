@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
-import { Cocktail } from "../models/cocktails";
+// import { useNavigate } from "react-router-dom";
+// import { Cocktail } from "../models/cocktails";
 import { Http } from "../models/Http";
 
 const initialValue: any = {
     data: [],
-    clickedCocktail: [],
+    cocktailSelected: [],
     navigationClicked: false,
     cocktailsBasket: [],
     amount: 0,
@@ -16,10 +16,10 @@ const initialValue: any = {
     cocktailsHeart: [],
     amountCocktailsHeart: 0,
 };
-interface Action {
-    type?: any;
-    payload?: any;
-}
+// interface Action {
+//     type?: any;
+//     payload?: any;
+// }
 
 const cocktailSlice = createSlice({
     name: "dataState",
@@ -36,8 +36,8 @@ const cocktailSlice = createSlice({
             state.navigationClicked = action.payload;
             state.clickedCocktail = null;
         },
-        clickedCocktailHandler(state, action) {
-            state.clickedCocktail = action.payload;
+        viewCocktailHandler(state, action) {
+            state.cocktailSelected = action.payload;
         },
         addCocktail(state, action) {
             const idCocktail = action.payload.id;
@@ -57,17 +57,11 @@ const cocktailSlice = createSlice({
                     // totalPrice:
                     //     action.payload.price * existingCocktail.amount + action.payload.price,
                 };
-                // console.log()
                 updateCocktails = [...state.cocktailsBasket];
                 updateCocktails[existingCocktailIndex] = updateCocktail;
                 state.cocktailsBasket = updateCocktails;
-
-                // localStorage.setItem("Cart", state.cocktailsBasket);
             } else {
                 state.cocktailsBasket = [...state.cocktailsBasket, action.payload];
-                // localStorage.setItem("Cart", state.cocktailsBasket);
-                // state.totalPrice = action.payload.price;
-                // console.log(state.totalPrice);
             }
             localStorage.setItem("Cart", JSON.stringify(state.cocktailsBasket));
         },

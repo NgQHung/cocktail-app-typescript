@@ -1,8 +1,8 @@
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Fragment, useState } from "react";
+// import { faUser } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { authSliceActions } from "../../store/auth-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
@@ -21,8 +21,8 @@ const User = () => {
     const user: any = localStorage.getItem("User");
     const email = JSON.parse(user)?.user?.email;
     // console.log(emailLocal.user.email);
-    // const email: any = useSelector<any>((state) => state.authSlice.email);
-    // console.log(email);
+
+    // to = ""; // const email: any = useSelector<Linkny>((state) => state.authSlice.email);
 
     const signoutHandler = () => {
         dispatch(authSliceActions.logout());
@@ -67,28 +67,28 @@ const User = () => {
                 aria-labelledby="dropdownUserAvatarButton"
             >
                 <li>
-                    <a
-                        href="#"
+                    <Link
+                        to=""
                         className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                         Dashboard
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#"
+                    <Link
+                        to=""
                         className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                         Settings
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a
-                        href="#"
+                    <Link
+                        to=""
                         className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                         Earnings
-                    </a>
+                    </Link>
                 </li>
             </ul>
             {user && (

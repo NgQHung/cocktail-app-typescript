@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import Footer from "../../Layouts/Footer";
+import { useLocation, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { searchSliceAction } from "../../store/search-slice";
 import { Button } from "../../UI/Button";
@@ -19,7 +18,6 @@ const Search = () => {
     const [valueEntered, setValueEntered] = useState("");
     const [selectedType, setSelectedType] = useState("cocktail_name");
     const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
-    const selectedTypes: any = useSelector<any>((state) => state.searchSlice.typeSearchClicked);
 
     const changeHandler = (e: React.FormEvent<HTMLInputElement>) => {
         setValueEntered(e.currentTarget.value);
@@ -64,8 +62,6 @@ const Search = () => {
             dispatch(searchSliceAction.searchHandler(true));
         }
     }, [isSearch]);
-
-    // console.log(location);
 
     const style_search = !searchClicked ? "hidden" : "";
 

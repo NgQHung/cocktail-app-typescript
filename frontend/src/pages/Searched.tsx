@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Cocktail } from "../models/cocktails";
 import Cocktails from "../components/Cocktails/Cocktails";
 import { useSelector } from "react-redux";
 

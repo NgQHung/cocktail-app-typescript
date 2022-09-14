@@ -1,11 +1,6 @@
 import axios from "axios";
-import { ActionCreator, AnyAction, Dispatch } from "redux";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { Cocktail } from "../models/cocktails";
-import { cocktailSliceAction } from "./cocktail-slice";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { faListSquares } from "@fortawesome/free-solid-svg-icons";
-import { AppDispatch } from ".";
+import { createSlice } from "@reduxjs/toolkit";
 
 type Data = {
     strDrink: string;

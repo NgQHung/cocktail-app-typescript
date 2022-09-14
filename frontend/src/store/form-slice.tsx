@@ -22,8 +22,6 @@ const formSlice = createSlice({
 
 export const signupHandler = async (data: signupModel) => {
     let user;
-    // return async (dispatch: any) => {
-    // const sendRequest = async () => {
     const response: any = await fetch("http://localhost:4000/api/users/signup", {
         method: "POST",
         body: JSON.stringify({ email: data.email, password: data.password }),
@@ -31,19 +29,21 @@ export const signupHandler = async (data: signupModel) => {
             "Content-Type": "application/json",
         },
     });
-
-    const json = await response.json();
-    // console.log(json);
     if (!response.ok) {
         throw new Error("Something went wrong");
-    } else {
-        user = JSON.stringify(json);
-        // console.log("You are Signed up");
     }
+
+    // const json = await response.json();
+    // return json
+    // console.log(json);
+    // else {
+    //     user = JSON.stringify(json);
+    //     // console.log("You are Signed up");
+    // }
     // };
 
     try {
-        const data = await response();
+        await response();
     } catch (error) {
         console.log(error);
     }

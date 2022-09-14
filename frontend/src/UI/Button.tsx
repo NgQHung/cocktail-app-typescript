@@ -7,7 +7,6 @@ interface Props {
 }
 
 export const Button: React.FC<Props> = (props) => {
-    const active = "bg-green-500";
     return (
         <div
             onClick={props.clickHandler}
@@ -19,7 +18,6 @@ export const Button: React.FC<Props> = (props) => {
     );
 };
 export const ButtonLoadMore: React.FC<Props> = (props) => {
-    const active = "bg-green-500";
     return (
         <div
             onClick={props.clickHandler}

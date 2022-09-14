@@ -1,15 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Cocktail } from "../models/cocktails";
-// import { Http } from "../models/Http";
 
 const initialValue: any = {
     searchClicked: false,
     selectedType: "",
 };
-interface Action {
-    type?: any;
-    payload?: any;
-}
+// interface Action {
+//     type?: any;
+//     payload?: any;
+// }
 
 const searchSlice = createSlice({
     name: "dataState",

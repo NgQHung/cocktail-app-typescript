@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Cocktail } from "../models/cocktails";
-// import { Http } from "../models/Http";
 
 const initialValue: any = {
     alertAdded: false,
@@ -8,10 +6,10 @@ const initialValue: any = {
     alertError: false,
     alertContent: null,
 };
-interface Action {
-    type?: any;
-    payload?: any;
-}
+// interface Action {
+//     type?: any;
+//     payload?: any;
+// }
 
 const notificationSlice = createSlice({
     name: "notification",

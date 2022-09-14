@@ -1,41 +1,24 @@
-import React, { useState, Fragment } from "react";
-import { Link, useLocation, Navigate, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { Fragment } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faMagnifyingGlass,
-    faUser,
-    faHeart,
-    faBasketShopping,
-} from "@fortawesome/free-solid-svg-icons";
-import { searchSliceAction } from "../store/search-slice";
+// import { searchSliceAction } from "../store/search-slice";
 import Search from "./components/Search";
 import NavTools from "./components/NavTools";
 
 const Header = () => {
     const location = useLocation();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
 
-    const totalPrices = cocktailsBasket
-        .map((item: any) => item.totalPrice)
-        .reduce((prev: number, curr: number) => prev + curr, 0);
-
-    const searchPath = location.pathname === "/search";
-
-    const searchHandler = () => {
-        dispatch(searchSliceAction.searchHandler(true));
-    };
+    // const searchPath = location.pathname === "/search";
 
     return (
         <Fragment>
             <div
                 className={`
-                ${searchPath ? "hidden" : ""} shadow-xl sticky top-0 z-10 rounded-b-xl h-[90px] `}
+                 shadow-xl sticky top-0 z-10 rounded-b-xl h-[90px] `}
             >
                 {/* <Navigation /> */}
 

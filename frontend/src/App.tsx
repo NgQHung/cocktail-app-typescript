@@ -1,13 +1,9 @@
-import React, { Fragment, useEffect, useState } from "react";
-import axios from "axios";
-import Cocktails from "./components/Cocktails/Cocktails";
+import React, { Fragment, useEffect } from "react";
 import Header from "./Layouts/Header";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Alcoholic from "./pages/Alcoholic";
 import NonAlcoholic from "./pages/NonAlcoholic";
-import { Cocktail } from "./models/cocktails";
 import Navigation from "./pages/Navigation";
-import CocktailItem from "./components/Cocktails/CocktailItem";
 import Searched from "./pages/Searched";
 import NotFound from "./pages/NotFound";
 import Search from "./components/Search/Search";
@@ -20,29 +16,24 @@ import Signup from "./components/Form/Signup";
 import Signin from "./components/Form/Signin";
 import WishList from "./pages/WishList";
 import Main from "./pages/Main";
-import { useSelector } from "react-redux";
 import { dataSliceActions, fetchData } from "./store/slice-http";
 import { useAppDispatch, useAppSelector } from "./store/hook";
 import { AppDispatch } from "./store";
 import { UISliceActions } from "./store/ui-slice";
 import Loading from "./UI/Loading";
 
-let isInitial = true;
+// let isInitial = true;
 
 function App() {
-    // const [cocktails, setCocktails] = useState<Cocktail[]>([]);
-    // const [index, setIndex] = useState(20);
-    const [loading, setLoading] = useState(false);
-    var emptyArr: any = [];
-    // const dispatch = useAppDispatch();
     const itemsSavedToLocalStorageCart: any = localStorage.getItem("Cart");
     const itemsSavedToLocalStorageHeart: any = localStorage.getItem("Heart");
     const user: any = localStorage.getItem("User");
     const dispatch = useDispatch<any>();
     const loadingState = useAppSelector((state) => state.UISlice.loading);
-    console.log(loadingState);
-
+    const data = useAppSelector((state) => state.dataSlice?.data);
+    const dataToShow = useAppSelector((state) => state.dataSlice?.dataToShow);
     const location = useLocation();
+    // console.log(loadingState);
 
     // const fetchCocktal = async () => {
     //     setLoading(true);
@@ -80,8 +71,6 @@ function App() {
         }
         // dispatch(UISliceActions.loadingHandler(false));
     }, []);
-    const data = useAppSelector((state) => state.dataSlice?.data);
-    const dataToShow = useAppSelector((state) => state.dataSlice?.dataToShow);
 
     // if (isInitial) {
     //     isInitial = false;
@@ -96,7 +85,7 @@ function App() {
         }
 
         dispatch(UISliceActions.loadingHandler(false));
-    }, [data]);
+    }, [data, dispatch]);
 
     return (
         <Fragment>
@@ -124,15 +113,7 @@ function App() {
                         <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
                         <Route path="/wish-list" element={<WishList />} />
                         <Route path="*" element={<NotFound />} />
-                        <Route
-                            path="/cocktail/:cocktailId"
-                            element={
-                                <CocktailDetail
-                                    // cocktailEntered={enteredCocktail}
-                                    cocktailData={dataToShow}
-                                />
-                            }
-                        />
+                        <Route path="/cocktail/:cocktailId" element={<CocktailDetail />} />
                         <Route path="/searched/:cocktail" element={<Searched />} />
                         <Route path="/searched/*" element={<NotFound />} />
                     </Routes>

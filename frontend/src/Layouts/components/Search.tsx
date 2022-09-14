@@ -4,7 +4,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { cocktailSliceAction } from "../../store/cocktail-slice";
+// import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import { searchSliceAction } from "../../store/search-slice";
 import { Alert } from "../../UI/Alert";
@@ -15,7 +15,7 @@ const Search = () => {
     const location = useLocation();
 
     const [valueEntered, setValueEntered] = useState("");
-    const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
+    // const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
     const selectedType: any = useSelector<any>((state) => state.searchSlice.selectedType);
     // const alert: any = useSelector<any>((state) => state.notificationSlice.alertError);
     const alertContent = useSelector((state: any) => state.notificationSlice.alertContent);
@@ -79,7 +79,7 @@ const Search = () => {
         return () => {
             clearTimeout(time);
         };
-    }, [alertContent]);
+    }, [alertContent, dispatch]);
 
     return (
         <Fragment>

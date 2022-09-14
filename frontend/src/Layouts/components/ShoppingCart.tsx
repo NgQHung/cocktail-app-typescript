@@ -13,9 +13,9 @@ const ShoppingCart = () => {
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
     const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertRemoved);
     const location = useLocation();
-    const totalPrices = cocktailsBasket
-        .map((item: any) => item.totalPrice)
-        .reduce((prev: number, curr: number) => prev + curr, 0);
+    // const totalPrices = cocktailsBasket
+    //     .map((item: any) => item.totalPrice)
+    //     .reduce((prev: number, curr: number) => prev + curr, 0);
     // console  .log(total);
     const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ const ShoppingCart = () => {
         return () => {
             clearTimeout(time);
         };
-    }, []);
+    }, [dispatch]);
 
     return (
         <Fragment>

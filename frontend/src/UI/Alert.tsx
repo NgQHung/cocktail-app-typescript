@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 export const Alert = () => {
     const alertContent = useSelector((state: any) => state.notificationSlice.alertContent);
     const successType = alertContent?.type === "success";
-    const errorType = alertContent?.type === "error";
 
     return (
         <Fragment>

@@ -16,17 +16,17 @@ const inputIsValid = (value: string) => value.trim() !== "";
 const emailInputIsValid = (value: string) => value.includes("@");
 
 const Signin = () => {
-    const initialValue = {
-        email: "",
-        password: "",
-    };
+    // const initialValue = {
+    //     email: "",
+    //     password: "",
+    // };
 
     // use form for input
     const {
         input: emailInput,
         hasError: emailHasError,
         inputIsValid: emailIsValid,
-        reset: emailReset,
+        // reset: emailReset,
         onChangeHandler: emailChange,
         inputBlurHandler: emailOnBlur,
     } = Use_Form(emailInputIsValid);
@@ -35,7 +35,7 @@ const Signin = () => {
         input: passwordInput,
         hasError: passwordHasError,
         inputIsValid: passwordIsValid,
-        reset: passwordReset,
+        // reset: passwordReset,
         onChangeHandler: passwordChange,
         inputBlurHandler: passwordOnBlur,
     } = Use_Form(inputIsValid);
@@ -60,14 +60,16 @@ const Signin = () => {
             },
         });
         const data = await res.json();
-        // console.log(res.json());
         if (!res.ok) {
-            console.log("Your email or password is incorrect");
+            dispatch(
+                notificationSliceActions.alertHandler({
+                    title: "Error!",
+                    description: "something went wrong",
+                    type: "error",
+                })
+            );
         } else {
-            // console.log("You sent data successfully");
-            // console.log(data.data);
             if (data.errors[0]?.msg) {
-                console.log(data.errors[0]?.msg);
                 dispatch(
                     notificationSliceActions.alertHandler({
                         title: "Error!",
@@ -77,7 +79,6 @@ const Signin = () => {
                 );
             }
             if (data.data?.user?.email) {
-                // console.log("You signed in successfully with email " + data.data?.user?.email);
                 dispatch(authSliceActions.login(data.data));
                 dispatch(
                     notificationSliceActions.alertHandler({
@@ -284,12 +285,12 @@ const Signin = () => {
                             </label>
                         </div>
                         <div className="text-sm">
-                            <a
-                                href="#"
+                            <p
+                                // href="#"
                                 className="font-medium text-indigo-500 hover:text-indigo-500"
                             >
                                 Forgot your password?
-                            </a>
+                            </p>
                         </div>
                     </div>
                     <div>
