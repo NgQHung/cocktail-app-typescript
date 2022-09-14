@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import Search from "./components/Search";
 import NavTools from "./components/NavTools";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { UISliceActions } from "../store/ui-slice";
@@ -100,7 +100,13 @@ const Header = () => {
                         </div>
 
                         {/* <!-- buttons --> */}
-                        <div className={"" + (searchClicked ? "hidden transition-all" : "")}>
+                        <div
+                            className={
+                                ""
+                                // "hidden sm:block"
+                                // + (barsClicked ? "hidden transition-all" : "")
+                            }
+                        >
                             {/* <div className="hidden"> */}
                             <NavTools />
                         </div>

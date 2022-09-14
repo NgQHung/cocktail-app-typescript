@@ -1,8 +1,8 @@
-// import { faUser } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Fragment } from "react";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { authSliceActions } from "../../store/auth-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
@@ -21,8 +21,7 @@ const User = () => {
     const user: any = localStorage.getItem("User");
     const email = JSON.parse(user)?.user?.email;
     // console.log(emailLocal.user.email);
-
-    // to = ""; // const email: any = useSelector<Linkny>((state) => state.authSlice.email);
+    // const email: any = useSelector<LinkLinkny>((state) => state.authSlice.email);
 
     const signoutHandler = () => {
         dispatch(authSliceActions.logout());

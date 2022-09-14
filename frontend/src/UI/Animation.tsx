@@ -168,3 +168,25 @@ export const motionSearchDown = {
         },
     },
 };
+
+export const motionNavtoolsLeft = {
+    hidden: {
+        x: "150vw",
+        // opacity: 0,
+    },
+    turnLeft: {
+        x: 0,
+        opacity: 1,
+        transition: {
+            // delay: 0.5,
+            duration: 2,
+            type: "spring",
+        },
+    },
+    exit: {
+        x: "-100vw",
+        transition: {
+            ease: "easeInOut",
+        },
+    },
+};

@@ -1,4 +1,9 @@
-import { faMagnifyingGlass, faArrowDown, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+    faMagnifyingGlass,
+    faArrowDown,
+    faXmark,
+    faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -147,8 +152,8 @@ const Search = () => {
                         </div>
                     </div>
                     <div className="flex justify-between w-full py-4">
-                        <div onClick={closeSearchHandler} className="absolute top-0 left-0 px-0.5 ">
-                            <FontAwesomeIcon icon={faXmark} />
+                        <div onClick={closeSearchHandler} className="absolute top-3 left-0 px-0.5 ">
+                            <FontAwesomeIcon icon={faChevronLeft} />
                         </div>
                         <input
                             onChange={changeHandler}

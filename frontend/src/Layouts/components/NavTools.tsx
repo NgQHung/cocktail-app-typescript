@@ -1,21 +1,36 @@
-import { faBasketShopping, faHeart, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBasketShopping, faHeart, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment } from "react";
+import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 import User from "./User";
+import { motionNavtoolsLeft } from "../../UI/Animation";
+import { useAppSelector } from "../../store/hook";
+import { useDispatch } from "react-redux";
+import { UISliceActions } from "../../store/ui-slice";
 
 const NavTools = () => {
     const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
     const cocktailsHeart: any = useSelector<any>((state) => state.cocktailSlice.cocktailsHeart);
+    const barsClicked = useAppSelector((state) => state.UISlice.barsClicked);
+    console.log(barsClicked);
+    const dispatch = useDispatch();
+
     // console.log(cocktailsHeart);
     const amountCocktailsHeart = cocktailsHeart.length;
     // console.log(cocktailsHeart);
     const amountItems = cocktailsBasket.length;
+
+    const navToolsHandler = () => {
+        dispatch(UISliceActions.navToolsHandler());
+    };
+
     return (
         <Fragment>
-            <nav className="contents relative">
+            {/* screen */}
+            <nav className=" relative hidden sm:block">
                 <ul className="ml-4 xl:w-48 flex items-center justify-end">
                     <li
                         className=" dropdown_basket group  ml-2 lg:ml-4  h-[40px] flex justify-center items-center relative
@@ -39,7 +54,7 @@ const NavTools = () => {
                             <div className="hide_part_basket lg:absolute lg:top-[90%] lg:right-[0.5px] bg-white lg:w-[34px] lg:z-50 lg:h-[5px]"></div>
                             <div
                                 id="dropdownAvatar"
-                                className={`dropdown_list_user
+                                className={`dropdown_list_user absolute
                      lg:absolute  lg:top-[95%] lg:right-0 bg-white lg:border lg:border-black z-10 w-[250px] divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}
                             >
                                 <User />
@@ -75,6 +90,58 @@ const NavTools = () => {
                     </li>
                 </ul>
             </nav>
+            {/* mobile */}
+            <motion.div
+                // initial={{ x: 0 }}
+                // animate={{ x: "-10vw" }}
+                className="p-4 text-2xl sm:hidden"
+                onClick={navToolsHandler}
+            >
+                <FontAwesomeIcon icon={faBars} />
+            </motion.div>
+
+            <div
+                className={
+                    "absolute right-0 top-0 w-1/2 h-screen bg-white sm:hidden " +
+                    (!barsClicked ? "hidden" : "")
+                }
+            >
+                <motion.nav>
+                    <motion.div
+                        variants={motionNavtoolsLeft}
+                        initial="hidden"
+                        animate={barsClicked ? "turnLeft" : ""}
+                        onClick={navToolsHandler}
+                        className=" "
+                    >
+                        <div className="p-4 text-2xl">
+                            <FontAwesomeIcon icon={faBars} />
+                        </div>
+                        <div className="flex flex-col items-end justify-center pt-4">
+                            <div className="flex items-center justify-between w-full p-4 mt-4 active:bg-gray-100 transition-colors">
+                                <p className="ml-2">Profile</p>
+                                <div className="mr-2">
+                                    <FontAwesomeIcon icon={faUser} />
+                                </div>
+                            </div>
+                            <div className="flex items-center p-4 justify-between w-full active:bg-gray-100 transition-colors">
+                                <p className="ml-2">Wish List</p>
+
+                                <div className="mr-2">
+                                    <FontAwesomeIcon icon={faHeart} />
+                                </div>
+                            </div>
+                            <div className="flex items-center p-4 justify-between w-full active:bg-gray-100 transition-colors">
+                                <p className="ml-2">Shopping Cart</p>
+
+                                <div className="mr-2">
+                                    <FontAwesomeIcon icon={faBasketShopping} />
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </motion.nav>
+            </div>
         </Fragment>
     );
 };
