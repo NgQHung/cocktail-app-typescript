@@ -91,6 +91,20 @@ export const fetchNonAlcoholic = () => {
     };
 };
 
+// export const postDataToUser = async (id: string, data: any) => {
+//     await fetch(`http://localhost:4000/users/${id}/shopping-cart`, {
+//         method: "POST",
+//         body: JSON.stringify({
+//             id: id,
+//             data: data,
+//         }),
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//     });
+//     // dispatch(dataSliceActions.getAllCocktail(res.data.data));
+// };
+
 const dataSlice = createSlice({
     name: "data",
     initialState: initialValue,

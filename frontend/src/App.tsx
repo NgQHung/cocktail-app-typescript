@@ -17,14 +17,14 @@ import WishList from "./pages/WishList";
 import Main from "./pages/Main";
 import {
     dataSliceActions,
-    fetchAlcoholic,
-    fetchChampagneFlute,
-    fetchCocktailGlass,
+    // fetchAlcoholic,
+    // fetchChampagneFlute,
+    // fetchCocktailGlass,
     fetchDataToShow,
-    fetchIngredientGin,
-    fetchIngredientVodka,
-    fetchNonAlcoholic,
-    fetchOrdinaryCocktail,
+    // fetchIngredientGin,
+    // fetchIngredientVodka,
+    // fetchNonAlcoholic,
+    // fetchOrdinaryCocktail,
 } from "./store/slice-http";
 import { useAppDispatch, useAppSelector } from "./store/hook";
 import { AppDispatch } from "./store";
@@ -42,27 +42,6 @@ function App() {
     const data = useAppSelector((state) => state.dataSlice?.data);
     const dataToShow = useAppSelector((state) => state.dataSlice?.dataToShow);
     const location = useLocation();
-    // console.log(loadingState);
-
-    // const fetchCocktal = async () => {
-    //     setLoading(true);
-    //     const res = await axios.get(
-    //         "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic"
-    //     );
-    //     const data = res.data.drinks;
-    //     setCocktails(data.slice(0, index));
-    //     setLoading(false);
-    // };
-
-    // const loadMore = () => {
-    //     setIndex((prev) => prev + 20);
-    //     fetchCocktal();
-    // };
-
-    // useEffect(() => {
-    //     setIndex((prev) => prev + 20);
-    //     fetchCocktal();
-    // }, []);
     useEffect(() => {
         dispatch(UISliceActions.loadingHandler(true));
         try {
@@ -75,13 +54,6 @@ function App() {
                 // window.location.reload(false);
             }
             dispatch(fetchDataToShow());
-            // dispatch(fetchOrdinaryCocktail());
-            // dispatch(fetchCocktailGlass());
-            // dispatch(fetchChampagneFlute());
-            // dispatch(fetchIngredientGin());
-            // dispatch(fetchIngredientVodka());
-            // dispatch(fetchAlcoholic());
-            // dispatch(fetchNonAlcoholic());
         } catch (error) {
             console.log(error);
             dispatch(UISliceActions.loadingHandler(false));

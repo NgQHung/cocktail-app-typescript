@@ -19,7 +19,7 @@ const Header = () => {
     const dispatch = useDispatch();
     // const [searchClicked, setSearchClicked] = React.useState(false);
     const searchClicked = useAppSelector((state) => state.UISlice.searchClicked);
-    console.log(searchClicked);
+    // console.log(searchClicked);
 
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
 

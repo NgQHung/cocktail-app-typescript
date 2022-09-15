@@ -16,7 +16,7 @@ const NavTools = () => {
     const cocktailsHeart: any = useSelector<any>((state) => state.cocktailSlice.cocktailsHeart);
     const barsClicked = useAppSelector((state) => state.UISlice.barsClicked);
     const navigate = useNavigate();
-    console.log(barsClicked);
+    // console.log(barsClicked);
     const dispatch = useDispatch();
 
     // console.log(cocktailsHeart);
