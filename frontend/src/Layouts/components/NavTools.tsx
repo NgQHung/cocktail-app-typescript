@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment } from "react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 import User from "./User";
 import { motionNavtoolsLeft } from "../../UI/Animation";
@@ -15,6 +15,7 @@ const NavTools = () => {
     const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
     const cocktailsHeart: any = useSelector<any>((state) => state.cocktailSlice.cocktailsHeart);
     const barsClicked = useAppSelector((state) => state.UISlice.barsClicked);
+    const navigate = useNavigate();
     console.log(barsClicked);
     const dispatch = useDispatch();
 
@@ -30,17 +31,9 @@ const NavTools = () => {
     return (
         <Fragment>
             {/* screen */}
-            <nav className=" relative hidden sm:block">
-                <ul className="ml-4 xl:w-48 flex items-center justify-end">
-                    <li
-                        className=" dropdown_basket group  ml-2 lg:ml-4  h-[40px] flex justify-center items-center relative
-                         before:content-[''] before:invisible before:lg:visible before:h-[40px] before:absolute before:w-[51px] before:top-[63px] before:right-[192px] before:bg-transparent
-
-                    "
-                    >
-                        {/* <a className="" href=""> */}
-                        {/* <div className="h-9 lg:h-10 p-2 text-gray-500"> */}
-                        {/* <FontAwesomeIcon icon={faUser} /> */}
+            <nav className="sm:absolute sm:top-1/2 sm:-translate-y-1/2 sm:right-[120px] hidden sm:block">
+                <ul className="ml-4 xl:w-48 flex items-center justify-end ">
+                    <li className=" dropdown_basket group  ml-2 lg:ml-4  h-[40px] flex justify-center items-center relative z-50">
                         <div
                             id="dropdownUserAvatarButton"
                             data-dropdown-toggle="dropdownAvatar"
@@ -60,8 +53,6 @@ const NavTools = () => {
                                 <User />
                             </div>
                         </div>
-                        {/* </div> */}
-                        {/* </a> */}
                     </li>
                     <li className="h-[40px] ml-2 lg:ml-4 relative inline-block">
                         <Link to="/wish-list" className="">
@@ -92,55 +83,58 @@ const NavTools = () => {
             </nav>
             {/* mobile */}
             <motion.div
-                // initial={{ x: 0 }}
-                // animate={{ x: "-10vw" }}
-                className="p-4 text-2xl sm:hidden"
+                initial={{ opacity: 0.1 }}
+                animate={{
+                    x: barsClicked ? -100 : 10,
+                    opacity: barsClicked ? 1 : 1,
+                    transition: {
+                        duration: 0.5,
+                    },
+                }}
+                className="w-full h-full text-xl z-50 sm:hidden mr-2 "
                 onClick={navToolsHandler}
             >
                 <FontAwesomeIcon icon={faBars} />
             </motion.div>
-
-            <div
-                className={
-                    "absolute right-0 top-0 w-1/2 h-screen bg-white sm:hidden " +
-                    (!barsClicked ? "hidden" : "")
-                }
-            >
-                <motion.nav>
-                    <motion.div
-                        variants={motionNavtoolsLeft}
-                        initial="hidden"
-                        animate={barsClicked ? "turnLeft" : ""}
-                        onClick={navToolsHandler}
-                        className=" "
-                    >
-                        <div className="p-4 text-2xl">
-                            <FontAwesomeIcon icon={faBars} />
-                        </div>
-                        <div className="flex flex-col items-end justify-center pt-4">
-                            <div className="flex items-center justify-between w-full p-4 mt-4 active:bg-gray-100 transition-colors">
-                                <p className="ml-2">Profile</p>
-                                <div className="mr-2">
-                                    <FontAwesomeIcon icon={faUser} />
-                                </div>
-                            </div>
-                            <div className="flex items-center p-4 justify-between w-full active:bg-gray-100 transition-colors">
-                                <p className="ml-2">Wish List</p>
-
-                                <div className="mr-2">
-                                    <FontAwesomeIcon icon={faHeart} />
-                                </div>
-                            </div>
-                            <div className="flex items-center p-4 justify-between w-full active:bg-gray-100 transition-colors">
-                                <p className="ml-2">Shopping Cart</p>
-
-                                <div className="mr-2">
-                                    <FontAwesomeIcon icon={faBasketShopping} />
-                                </div>
+            <div className="sm:hidden absolute right-0 top-full w-1/2 h-screen bg-red overflow-hidden">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{
+                        x: barsClicked ? 0 : 200,
+                        opacity: barsClicked ? 1 : 0,
+                        transition: {
+                            type: "tween",
+                            duration: 0.5,
+                        },
+                    }}
+                    className=" w-full h-screen bg-white sm:hidden z-50 "
+                >
+                    <div className="flex flex-col items-end justify-center  ">
+                        {/* <Link to="/profile"> */}
+                        <div
+                            onClick={() => navigate("/signin")}
+                            className="flex items-center justify-between p-4 w-full active:bg-gray-100 transition-colors"
+                        >
+                            <p className="ml-2">Profile</p>
+                            <div className=" text-lg">
+                                <FontAwesomeIcon icon={faUser} />
                             </div>
                         </div>
-                    </motion.div>
-                </motion.nav>
+                        {/* </Link> */}
+                        <div
+                            onClick={() => navigate("/wish-list")}
+                            className="flex items-center p-4 justify-between w-full active:bg-gray-100 transition-colors"
+                        >
+                            {/* <Link to="/wish-list"> */}
+                            <p className="ml-2">Wish List</p>
+
+                            <div className="text-lg">
+                                <FontAwesomeIcon icon={faHeart} />
+                            </div>
+                            {/* </Link> */}
+                        </div>
+                    </div>
+                </motion.div>
             </div>
         </Fragment>
     );

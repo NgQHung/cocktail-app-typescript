@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { UISliceActions } from "../store/ui-slice";
 import { useDispatch } from "react-redux";
+import { ConnectionStates } from "mongoose";
 
 const Header = () => {
     const location = useLocation();
@@ -18,6 +19,7 @@ const Header = () => {
     const dispatch = useDispatch();
     // const [searchClicked, setSearchClicked] = React.useState(false);
     const searchClicked = useAppSelector((state) => state.UISlice.searchClicked);
+    console.log(searchClicked);
 
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
 
@@ -51,69 +53,89 @@ const Header = () => {
         <Fragment>
             <div
                 className={`
-                 shadow-xl sticky top-0 z-10 rounded-b-xl h-[90px] `}
+                 shadow-xl sticky top-0 z-10 rounded-b-xl h-[90px]`}
             >
                 {/* <Navigation /> */}
 
-                <header className=" bg-white w-full h-full relative">
-                    <div className="mx-auto px-4 py-8 h-full flex items-center">
+                <header className="relative bg-white w-full h-full ">
+                    <div className="px-4 py-8 h-full w-full flex justify-between items-center sm:items-center ">
                         {/* <!-- logo --> */}
-                        <div
+                        {/* <div className=" order-2 sm:order-1 my-0 cursor-pointer"> */}
+                        <motion.div
+                            initial={{ opacity: 1 }}
+                            animate={{
+                                x: searchClicked ? 100 : 0,
+                                opacity: searchClicked ? 0 : 1,
+                                transition: {
+                                    duration: 1,
+                                    type: "tween",
+                                },
+                            }}
+                            className=" order-2 sm:order-1 my-0 cursor-pointer"
                             onClick={() => navigate("/")}
-                            className={
-                                "mr-auto md:w-48 flex-shrink-0 cursor-pointer" +
-                                (searchClicked ? " hidden transition-all" : "")
-                            }
+                            // className={
+                            //     // " order-2 sm:order-1 my-0  cursor-pointer"
+                            //     //  +
+                            //     // (searchClicked ? " hidden transition-all" : "")
+                            // }
                         >
                             <img
                                 className="h-8 md:h-10"
                                 src="https://i.pinimg.com/originals/b8/6f/67/b86f67625bc4f99d4b3acfd7992b3c09.png"
                                 alt=""
                             />
-                        </div>
+                        </motion.div>
+                        {/* </div> */}
 
                         {/* <!-- search --> */}
-                        <div
-                            className={
-                                "absolute left-1/2 -translate-x-1/2 "
-                                // + (searchClicked ? "hidden" : "")
-                            }
+                        <motion.div
+                            initial={{ opacity: 1 }}
+                            animate={{
+                                x: searchClicked ? 300 : 0,
+                                opacity: searchClicked ? 0 : 1,
+                                transition: {
+                                    duration: 1,
+                                    type: "tween",
+                                },
+                            }}
+                            onClick={searchClickHandler}
+                            className="order-1 pl-2 sm:hidden"
                         >
-                            <div onClick={searchClickHandler} className="">
-                                <motion.div
-                                    variants={motionSearch}
-                                    initial="initialPos"
-                                    animate={searchClicked ? "turnRight" : ""}
-                                    // exit="exit"
-                                >
-                                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                                </motion.div>
-                            </div>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </motion.div>
+                        <Search />
+
+                        {/* </div> */}
+
+                        {/* <!-- nav tools --> */}
+                        <div className="order-3 sm:order-3 sm:hidden">
+                            <motion.div
+                                initial={{ opacity: 1 }}
+                                animate={{
+                                    // x: searchClicked ?  : 0,
+                                    opacity: searchClicked ? 0 : 1,
+                                    transition: {
+                                        duration: 0.5,
+                                        type: "tween",
+                                    },
+                                }}
+                                className=""
+                            >
+                                <NavTools />
+                            </motion.div>
                         </div>
-                        <div
-                            className={
-                                "absolute top-0 left-0 bottom-0 w-full h-full" +
-                                (!searchClicked ? " hidden" : "")
-                            }
-                        >
+                        <div className="hidden sm:block sm:order-2 sm:absolute bg-transparent h-full w-full">
                             <Search />
                         </div>
 
-                        {/* <!-- buttons --> */}
-                        <div
-                            className={
-                                ""
-                                // "hidden sm:block"
-                                // + (barsClicked ? "hidden transition-all" : "")
-                            }
-                        >
-                            {/* <div className="hidden"> */}
+                        <div className="hidden sm:block sm:order-3 ">
                             <NavTools />
                         </div>
+
                         {/* </div> */}
 
                         {/* <!-- cart count --> */}
-                        <div className="ml-4 hidden sm:flex flex-col font-bold">
+                        <div className="ml-4 hidden sm:flex sm:flex-col sm:order-4 font-bold">
                             <span className="text-xs text-gray-400">Your Cart</span>
                             <span>$ {total}</span>
                         </div>

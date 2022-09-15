@@ -6,7 +6,6 @@ import NonAlcoholic from "./pages/NonAlcoholic";
 import Navigation from "./pages/Navigation";
 import Searched from "./pages/Searched";
 import NotFound from "./pages/NotFound";
-import Search from "./components/Search/Search";
 import Footer from "./Layouts/Footer";
 import { AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
@@ -115,7 +114,6 @@ function App() {
                             <Route path="signup" element={<Signup />} />
                             <Route path="signin" element={<Signin />} />
                         </Route>
-                        <Route path="/search" element={<Search />} />
                         <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
                         <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
                         <Route path="/wish-list" element={<WishList />} />
@@ -126,7 +124,7 @@ function App() {
                     </Routes>
                 </AnimatePresence>
                 {/* <CocktailItem /> */}
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </Fragment>
     );

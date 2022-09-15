@@ -20,7 +20,6 @@ const Main: React.FC<Props> = (props) => {
                     <p className=" w-10/12 mx-auto md:w-full  font-semibold lg:text-4xl text-3xl lg:leading-9 md:leading-7 leading-9 text-center text-gray-800">
                         Well come!!!
                         <br />
-                        {/* {typeCocktail} */}
                     </p>
                 </div>
                 <div className=" flex justify-between items-center">

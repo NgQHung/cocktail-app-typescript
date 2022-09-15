@@ -26,6 +26,7 @@ const Cocktails: React.FC<Props> = (props) => {
     const dispatch = useDispatch();
 
     const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertContent);
+    // console.log(alertContent);
     // const dataToShow = useAppSelector(state => state.dataSlice.dataToShow)
     const amountOfCocktail = useAppSelector((state) => state.dataSlice.indexEnd);
 
@@ -48,15 +49,16 @@ const Cocktails: React.FC<Props> = (props) => {
     }, [dispatch]);
     return (
         <Fragment>
-            <div className="absolute">
-                {alertContent && location.pathname === "/" ? <Alert /> : null}
-            </div>
             <div className=" 2xl:container 2xl:mx-auto">
+                <div className="absolute">
+                    {alertContent && location.pathname === "/" ? <Alert /> : null}
+                </div>
                 <div className=" py-6 lg:px-20 md:px-6 px-4">
                     <div className=" flex justify-between items-center">
                         <div className="relative dropdown_filter flex cursor-pointer">
                             <FontAwesomeIcon icon={faFilter} />
                             <p className=" ml-4 font-normal text-base leading-4 text-gray-800">
+                                {/* <Alert /> */}
                                 Filter
                             </p>
                             <div className="dropdown_filter_list">

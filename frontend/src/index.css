@@ -6,6 +6,12 @@ html {
     height: 100%;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .bg-header {
     /* background-image: url("../public/texture2.jpg"); */
     background: url("../public/noise-lines.jpg") repeat-x 0 0;
@@ -113,11 +119,21 @@ footer ul li a {
 .dropdown_search:hover::before {
     content: "";
     height: 2.5rem;
-    width: 51px;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: -15px;
+    /* width: 50%; */
+    background-color: transparent;
+}
+.dropdown_basket::before {
+    content: "";
+    height: 2.5rem;
+    /* width: 50px; */
     position: absolute;
     top: 100%;
     left: 0;
-    width: 50%;
+    width: 50px;
     background-color: transparent;
 }
 /* .dropdown_basket:hover .dropdown_list_user { */
