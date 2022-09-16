@@ -18,12 +18,12 @@ const CocktailItem: React.FC<Props> = (props) => {
     const { id, name, image } = props;
     const urlName = name?.split(" ").join("%");
     const cocktailBasket = useAppSelector((state) => state.cocktailSlice.cocktailsBasket);
-    let user: any;
-    let idUser: any;
+    // let user: any;
+    // let idUser: any;
     React.useEffect(() => {
         try {
-            user = localStorage.getItem("User") || [];
-            idUser = JSON.parse(user).user.id;
+            // return user = localStorage.getItem("User") || '';
+            // idUser = JSON.parse(user).user.id;
         } catch (error) {
             console.log(error);
         }

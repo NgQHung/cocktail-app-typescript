@@ -97,7 +97,7 @@ const CocktailDetail: React.FC = () => {
 
     return (
         <React.Fragment>
-            <div className="fixed z-50">{alertContent && <Alert />}</div>
+            {/* <div className="fixed z-50">{alertContent && <Alert />}</div> */}
             <div className="detail">
                 {cocktailSelected?.map((item: ClickedCocktail, inx: number) => (
                     <div

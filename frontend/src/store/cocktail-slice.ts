@@ -12,6 +12,8 @@ const initialValue: any = {
     price: 0,
     cocktailsHeart: [],
     amountCocktailsHeart: 0,
+    addedCocktails: [],
+    addedCocktailDetail: [],
 };
 
 const cocktailSlice = createSlice({
@@ -21,7 +23,15 @@ const cocktailSlice = createSlice({
         fetCocktail(state: Http, action) {
             state.data = action.payload;
         },
+        addedCocktailHandler(state, action) {
+            state.addedCocktails = action.payload;
+        },
+        addedCocktailDetailHandler(state, action) {
+            state.addedCocktailDetail = action.payload;
+        },
         localStorageHandler(state, action) {
+            console.log(action.payload.basket);
+            state.total = action.payload?.total;
             state.cocktailsBasket = action.payload?.basket;
             state.cocktailsHeart = action.payload?.heart;
         },
@@ -49,6 +59,8 @@ const cocktailSlice = createSlice({
             } else {
                 state.cocktailsBasket = [...state.cocktailsBasket, action.payload];
             }
+            localStorage.setItem("Total", JSON.stringify(state.total));
+
             localStorage.setItem("Cart", JSON.stringify(state.cocktailsBasket));
         },
         removeCocktail(state, action) {
@@ -75,6 +87,8 @@ const cocktailSlice = createSlice({
                 state.cocktailsBasket = updateCocktails;
             }
             // console.log(updateCocktails);
+            localStorage.setItem("Total", JSON.stringify(state.total));
+
             localStorage.setItem("Cart", JSON.stringify(state.cocktailsBasket));
         },
         heartHandler(state, action) {

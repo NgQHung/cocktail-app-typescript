@@ -72,7 +72,7 @@ const Header = () => {
                                     type: "tween",
                                 },
                             }}
-                            className=" order-2 sm:order-1 my-0 cursor-pointer"
+                            className=" order-2 sm:order-1 my-0 cursor-pointer z-50"
                             onClick={() => navigate("/")}
                             // className={
                             //     // " order-2 sm:order-1 my-0  cursor-pointer"

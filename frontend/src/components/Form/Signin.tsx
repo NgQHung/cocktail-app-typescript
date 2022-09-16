@@ -46,8 +46,6 @@ const Signin = () => {
     const navigate = useNavigate();
     const isSignin = location.pathname === "/signin";
 
-    const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertContent);
-
     const loginHandler = async () => {
         const res = await fetch("http://localhost:4000/api/users/login", {
             method: "POST",
@@ -88,7 +86,7 @@ const Signin = () => {
                     })
                 );
                 navigate("/");
-                window.location.reload();
+                // window.location.reload();
             }
         }
     };
@@ -114,7 +112,7 @@ const Signin = () => {
     };
     return (
         <Modal>
-            <div className="absolute">{alertContent && <Alert />}</div>
+            {/* <div className="absolute">{alertContent && <Alert />}</div> */}
             {/* screen start */}
             <div className="absolute h-full w-full sm:static space-y-8 px-10 pb-10 pt-5 bg-white lg:rounded-xl z-10">
                 <div

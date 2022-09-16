@@ -8,33 +8,16 @@ import { authSliceActions } from "../../store/auth-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 
 const User = () => {
-    // const [dropDown, setDropDown] = useState(false);
-
-    // const dropDownHandler = (e: any) => {
-    //     e.preventDefault();
-    //     setDropDown((prev) => (prev = !prev));
-    // };
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    let user: any;
-    let email;
-    React.useEffect(() => {
-        // let user
-        try {
-            user = localStorage.getItem("User") || [];
-            email = JSON.parse(user)?.user?.email;
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
 
-    // console.log(user);
-    // console.log(emailLocal.user.email);
-    // const email: any = useSelector<LinkLinkny>((state) => state.authSlice.email);
+    const user = localStorage.getItem("User") !== null;
+    const email = user ? JSON.parse(localStorage.getItem("User") || "").user.email : "";
 
     const signoutHandler = () => {
         dispatch(authSliceActions.logout());
+        navigate("/");
+        // window.location.reload();
         dispatch(
             notificationSliceActions.alertHandler({
                 title: "Oops!",
@@ -42,8 +25,61 @@ const User = () => {
                 type: "success",
             })
         );
-        navigate("/");
-        window.location.reload();
+    };
+
+    const navigateHandlerCocktail = () => {
+        if (user) {
+            return navigate("/create-cocktail");
+        } else {
+            return dispatch(
+                notificationSliceActions.alertHandler({
+                    title: "Oops!",
+                    description: "You must be logged in first!!!",
+                    type: "error",
+                })
+            );
+        }
+    };
+    const navigateHandlerIngredient = () => {
+        if (user) {
+            return navigate("/create-ingredient");
+        } else {
+            return dispatch(
+                notificationSliceActions.alertHandler({
+                    title: "Oops!",
+                    description: "You must be logged in first!!!",
+                    type: "error",
+                })
+            );
+        }
+    };
+
+    const navigateHandlerAddedIngredient = () => {
+        if (user) {
+            return navigate("/added-ingredient");
+        } else {
+            return dispatch(
+                notificationSliceActions.alertHandler({
+                    title: "Oops!",
+                    description: "You must be logged in first!!!",
+                    type: "error",
+                })
+            );
+        }
+    };
+
+    const navigateHandlerAddedCocktail = () => {
+        if (user) {
+            return navigate("/added-cocktails");
+        } else {
+            return dispatch(
+                notificationSliceActions.alertHandler({
+                    title: "Oops!",
+                    description: "You must be logged in first!!!",
+                    type: "error",
+                })
+            );
+        }
     };
 
     return (
@@ -75,29 +111,23 @@ const User = () => {
                 className="py-1 text-sm text-gray-700 dark:text-gray-200 transition-color"
                 aria-labelledby="dropdownUserAvatarButton"
             >
-                <li>
-                    <Link
-                        to=""
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                        Dashboard
-                    </Link>
+                <li
+                    onClick={navigateHandlerCocktail}
+                    className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                >
+                    Create Cocktail
                 </li>
-                <li>
-                    <Link
-                        to=""
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                        Settings
-                    </Link>
+                <li
+                    onClick={navigateHandlerIngredient}
+                    className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                >
+                    Create Ingredient
                 </li>
-                <li>
-                    <Link
-                        to=""
-                        className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                        Earnings
-                    </Link>
+                <li
+                    onClick={navigateHandlerAddedCocktail}
+                    className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+                >
+                    Added Cocktail
                 </li>
             </ul>
             {user && (

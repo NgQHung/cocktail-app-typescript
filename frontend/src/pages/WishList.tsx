@@ -34,9 +34,9 @@ const WishList = () => {
     return (
         <div className=" py-12">
             {/* Desktop Responsive Start */}
-            <div className="absolute">
+            {/* <div className="absolute">
                 {alertContent && location.pathname === "/wish-list" ? <Alert /> : null}
-            </div>
+            </div> */}
             <div className="hidden sm:flex flex-col justify-start items-start">
                 <div className="pl-4 lg:px-10 2xl:px-20 flex flex-row justify-center items-end space-x-4">
                     <h1 className="text-4xl font-semibold leading-9 text-gray-800">Favourites</h1>

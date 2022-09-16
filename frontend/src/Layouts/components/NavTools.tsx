@@ -20,9 +20,11 @@ const NavTools = () => {
     const dispatch = useDispatch();
 
     // console.log(cocktailsHeart);
-    const amountCocktailsHeart = cocktailsHeart.length;
-    // console.log(cocktailsHeart);
-    const amountItems = cocktailsBasket.length;
+    const amountCocktailsHeart = cocktailsHeart?.length || 0;
+    // console.log(amountCocktailsHeart);
+    // console.log(cocktailsHeart.length);
+    // // console.log(cocktailsHeart);
+    const amountItems = cocktailsBasket?.length || 0;
 
     const navToolsHandler = () => {
         dispatch(UISliceActions.navToolsHandler());

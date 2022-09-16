@@ -39,20 +39,20 @@ const Cocktails: React.FC<Props> = (props) => {
         dispatch(dataSliceActions.getMoreCocktails());
     };
 
-    useEffect(() => {
-        let time = setTimeout(() => {
-            dispatch(notificationSliceActions.alertHandler(null));
-        }, 1000);
-        return () => {
-            clearTimeout(time);
-        };
-    }, [dispatch]);
+    // useEffect(() => {
+    //     let time = setTimeout(() => {
+    //         dispatch(notificationSliceActions.alertHandler(null));
+    //     }, 1000);
+    //     return () => {
+    //         clearTimeout(time);
+    //     };
+    // }, [dispatch]);
     return (
         <Fragment>
             <div className=" 2xl:container 2xl:mx-auto">
-                <div className="absolute">
+                {/* <div className="absolute">
                     {alertContent && location.pathname === "/" ? <Alert /> : null}
-                </div>
+                </div> */}
                 <div className=" py-6 lg:px-20 md:px-6 px-4">
                     <div className=" flex justify-between items-center">
                         <div className="relative dropdown_filter flex cursor-pointer">

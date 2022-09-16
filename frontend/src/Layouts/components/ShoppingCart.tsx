@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import { Alert } from "../../UI/Alert";
@@ -11,12 +11,8 @@ import { Alert } from "../../UI/Alert";
 const ShoppingCart = () => {
     const cocktailsBasket: any = useSelector<any>((state) => state.cocktailSlice.cocktailsBasket);
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
-    const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertRemoved);
-    const location = useLocation();
-    // const totalPrices = cocktailsBasket
-    //     .map((item: any) => item.totalPrice)
-    //     .reduce((prev: number, curr: number) => prev + curr, 0);
-    // console  .log(total);
+    const navigate = useNavigate();
+
     const dispatch = useDispatch();
 
     const removeCocktailHandler = (id: string, price: number) => {
@@ -44,32 +40,36 @@ const ShoppingCart = () => {
         );
     };
 
-    useEffect(() => {
-        let time = setTimeout(() => dispatch(notificationSliceActions.alertHandler(false)), 1000);
-        return () => {
-            clearTimeout(time);
-        };
-    }, [dispatch]);
+    const viewCocktailHandler = (name: string) => {
+        const urlName = name?.split(" ").join("%");
+
+        navigate("/cocktail/" + urlName);
+    };
 
     return (
         <Fragment>
-            <div className="absolute">
+            {/* <div className="absolute">
                 {alertContent && location.pathname === "/" ? <Alert /> : null}
-            </div>
+            </div> */}
             <div className="relative flex flex-col max-w-4xl max-h-[600px] pl-6 pt-6 pb-40 over-flow space-y-4 dark:bg-gray-900 dark:text-gray-100">
                 <h2 className="text-xl font-semibold">Your cart</h2>
 
                 <div className=" overflow-auto">
-                    {cocktailsBasket.map((cocktail: any, inx: number) => (
+                    {cocktailsBasket?.map((cocktail: any, inx: number) => (
                         <div key={inx} className="">
                             <ul className="flex flex-col divide-y divide-gray-700 ">
                                 <li className="flex flex-col py-6 sm:flex-row sm:justify-between sm:pr-6">
                                     <div className="flex w-full space-x-2 sm:space-x-4">
-                                        <img
-                                            className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500"
-                                            src={cocktail.image}
-                                            alt="Polaroid camera"
-                                        />
+                                        <div
+                                            onClick={() => viewCocktailHandler(cocktail.name)}
+                                            className=""
+                                        >
+                                            <img
+                                                className="flex-shrink-0 object-cover w-20 h-20 dark:border-transparent rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500"
+                                                src={cocktail.image}
+                                                alt="Polaroid camera"
+                                            />
+                                        </div>
                                         <div className="flex flex-col justify-between w-full pb-4">
                                             <div className="flex justify-between w-full pb-2 space-x-2">
                                                 <div className="space-y-1">
@@ -139,7 +139,9 @@ const ShoppingCart = () => {
                         <div className="space-y-1 text-right">
                             <p>
                                 Total amount:
-                                <span className="font-semibold"> {total} €</span>
+                                <span className="font-semibold">
+                                    {total !== null ? total : 0} €
+                                </span>
                             </p>
                             <p className="text-sm dark:text-gray-400">
                                 Not including taxes and shipping costs

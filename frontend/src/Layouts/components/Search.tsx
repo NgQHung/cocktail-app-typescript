@@ -89,19 +89,12 @@ const Search = () => {
         dispatch(UISliceActions.searchHandler());
     };
 
-    useEffect(() => {
-        let time = setTimeout(() => dispatch(notificationSliceActions.alertHandler(null)), 1000);
-        return () => {
-            clearTimeout(time);
-        };
-    }, [alertContent, dispatch]);
-
     return (
         // mobile start
         <Fragment>
-            <div className="absolute">
+            {/* <div className="absolute">
                 {alertContent && location.pathname === "/" ? <Alert /> : null}
-            </div>
+            </div> */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{
