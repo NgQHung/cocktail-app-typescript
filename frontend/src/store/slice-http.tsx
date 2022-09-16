@@ -43,6 +43,7 @@ const initialValue: InitialValue = {
 };
 
 export const fetchDataToShow = () => {
+    console.log("fetching...");
     return async (dispatch: any) => {
         const res = await axios.get("http://localhost:4000/api/cocktails/category/cocktail");
         dispatch(dataSliceActions.getAllCocktail(res.data.data));

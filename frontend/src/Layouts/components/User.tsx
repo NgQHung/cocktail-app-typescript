@@ -17,9 +17,19 @@ const User = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    let user: any;
+    let email;
+    React.useEffect(() => {
+        // let user
+        try {
+            user = localStorage.getItem("User") || [];
+            email = JSON.parse(user)?.user?.email;
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
-    const user: any = localStorage.getItem("User");
-    const email = JSON.parse(user)?.user?.email;
+    // console.log(user);
     // console.log(emailLocal.user.email);
     // const email: any = useSelector<LinkLinkny>((state) => state.authSlice.email);
 

@@ -36,7 +36,7 @@ import Loading from "./UI/Loading";
 function App() {
     const itemsSavedToLocalStorageCart: any = localStorage.getItem("Cart");
     const itemsSavedToLocalStorageHeart: any = localStorage.getItem("Heart");
-    const user: any = localStorage.getItem("User");
+    const userLocalStorage: any = localStorage.getItem("User");
     const dispatch = useDispatch<any>();
     const loadingState = useAppSelector((state) => state.UISlice.loading);
     const data = useAppSelector((state) => state.dataSlice?.data);
@@ -47,12 +47,14 @@ function App() {
         try {
             const basket = JSON.parse(itemsSavedToLocalStorageCart);
             const heart = JSON.parse(itemsSavedToLocalStorageHeart);
-            if (!user) {
-                dispatch(cocktailSliceAction.localStorageHandler({ heart: heart, basket: basket }));
-            } else {
-                dispatch(cocktailSliceAction.localStorageHandler({ heart: [], basket: [] }));
-                // window.location.reload(false);
-            }
+            const user = userLocalStorage === null ? [] : userLocalStorage;
+            console.log(user);
+            // if (user. === []) {
+            dispatch(cocktailSliceAction.localStorageHandler({ heart: heart, basket: basket }));
+            // } else {
+            dispatch(cocktailSliceAction.localStorageHandler({ heart: [], basket: [] }));
+            // window.location.reload(false);
+            // }
             dispatch(fetchDataToShow());
         } catch (error) {
             console.log(error);

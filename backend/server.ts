@@ -1,9 +1,9 @@
 import express from "express";
-import dataRoutes from "./routes/dataRoutes";
+import dataRoutes from "./src/routes/dataRoutes";
 import mongoose from "mongoose";
 var cors = require("cors");
-import userRoutes from "./routes/userRoutes";
-import searchRoutes from "./routes/searchRoutes";
+import userRoutes from "./src/routes/userRoutes";
+import searchRoutes from "./src/routes/searchRoutes";
 import dotenv from "dotenv";
 // import userRoutes from "./routes/userRoutes";
 
@@ -18,7 +18,7 @@ app.use(cors());
 // PORT
 const PORT = process.env.PORT || 4000;
 
-// middleware
+/** Parse the body - middleware */
 app.use(express.json());
 
 // routes

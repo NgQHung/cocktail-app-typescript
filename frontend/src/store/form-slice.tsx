@@ -21,7 +21,6 @@ const formSlice = createSlice({
 });
 
 export const signupHandler = async (data: signupModel) => {
-    let user;
     const response: any = await fetch("http://localhost:4000/api/users/signup", {
         method: "POST",
         body: JSON.stringify({ email: data.email, password: data.password }),

@@ -18,8 +18,18 @@ const CocktailItem: React.FC<Props> = (props) => {
     const { id, name, image } = props;
     const urlName = name?.split(" ").join("%");
     const cocktailBasket = useAppSelector((state) => state.cocktailSlice.cocktailsBasket);
-    const user: any = localStorage.getItem("User");
-    const idUSer = JSON.parse(user).user.id;
+    let user: any;
+    let idUser: any;
+    React.useEffect(() => {
+        try {
+            user = localStorage.getItem("User") || [];
+            idUser = JSON.parse(user).user.id;
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
+    // console.log(user);
 
     const price = 273;
 
@@ -35,13 +45,13 @@ const CocktailItem: React.FC<Props> = (props) => {
         navigate("/cocktail/" + name);
     };
 
-    const postDataToUser = async (id: string, data: any) => {
-        console.log("hello");
-        await axios.post(`http://localhost:4000/users/${id}/shopping-cart`, {
-            id: id,
-            data: data,
-        });
-    };
+    // const postDataToUser = async (id: string, data: any) => {
+    //     console.log("hello");
+    //     await axios.post(`http://localhost:4000/users/${id}/shopping-cart`, {
+    //         id: id,
+    //         data: data,
+    //     });
+    // };
 
     const addCocktailHandler = () => {
         dispatch(
@@ -54,17 +64,17 @@ const CocktailItem: React.FC<Props> = (props) => {
                 totalPrice: 0,
             })
         );
-        const data: any = [
-            {
-                id: id,
-                name: name,
-                image: image,
-                price: price,
-                amount: 1,
-                totalPrice: 0,
-            },
-        ];
-        postDataToUser(idUSer, data);
+        // const data: any = [
+        //     {
+        //         id: id,
+        //         name: name,
+        //         image: image,
+        //         price: price,
+        //         amount: 1,
+        //         totalPrice: 0,
+        //     },
+        // ];
+        // postDataToUser(idUSer, data);
         if (cocktailBasket) {
             dispatch(
                 notificationSliceActions.alertHandler({

@@ -22,6 +22,7 @@ const Header = () => {
     // console.log(searchClicked);
 
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
+    // console.log(total);
 
     const motionSearch = {
         initialPos: {
