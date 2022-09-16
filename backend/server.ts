@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 var cors = require("cors");
 import userRoutes from "./src/routes/userRoutes";
 import searchRoutes from "./src/routes/searchRoutes";
+import cocktailsActionsRoutes from "./src/routes/cocktailActionsRoutes";
 import dotenv from "dotenv";
 // import userRoutes from "./routes/userRoutes";
 
@@ -23,6 +24,7 @@ app.use(express.json());
 
 // routes
 app.use("/api/cocktails", dataRoutes);
+app.use("/api/my-cocktail", cocktailsActionsRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/search", searchRoutes);
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
