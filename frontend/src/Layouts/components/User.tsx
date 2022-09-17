@@ -70,7 +70,7 @@ const User = () => {
 
     const navigateHandlerAddedCocktail = () => {
         if (user) {
-            return navigate("/added-cocktails");
+            return navigate("/my-cocktail");
         } else {
             return dispatch(
                 notificationSliceActions.alertHandler({
@@ -115,19 +115,19 @@ const User = () => {
                     onClick={navigateHandlerCocktail}
                     className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                 >
-                    Create Cocktail
+                    Create a Cocktail
                 </li>
                 <li
                     onClick={navigateHandlerIngredient}
                     className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                 >
-                    Create Ingredient
+                    Create a Ingredient
                 </li>
                 <li
                     onClick={navigateHandlerAddedCocktail}
                     className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                 >
-                    Added Cocktail
+                    My Cocktail
                 </li>
             </ul>
             {user && (

@@ -13,7 +13,8 @@ const initialValue: any = {
     cocktailsHeart: [],
     amountCocktailsHeart: 0,
     addedCocktails: [],
-    addedCocktailDetail: [],
+    addedCocktailDetail: {},
+    addedCocktailEdit: {},
 };
 
 const cocktailSlice = createSlice({
@@ -28,6 +29,9 @@ const cocktailSlice = createSlice({
         },
         addedCocktailDetailHandler(state, action) {
             state.addedCocktailDetail = action.payload;
+        },
+        addedCocktailEditHandler(state, action) {
+            state.addedCocktailEdit = action.payload;
         },
         localStorageHandler(state, action) {
             console.log(action.payload.basket);

@@ -1,4 +1,5 @@
 import express from "express";
+import { json } from "stream/consumers";
 import MyCocktail from "../models/myCocktail";
 
 export const createCocktail = async (req: express.Request, res: express.Response) => {
@@ -127,7 +128,8 @@ export const editCocktail = async (req: express.Request, res: express.Response) 
         const cocktail = await MyCocktail.findById(id);
         if (cocktail) {
             // res.json({ cocktail, msg: "You get data successfully" });
-            res.render(`/${id}/edit`);
+            // res.render(`/${id}/edit`);
+            res.json(cocktail);
         }
     } catch (error: any) {
         return res.status(400).json({
@@ -144,10 +146,24 @@ export const editCocktail = async (req: express.Request, res: express.Response) 
 
 export const updateCocktail = async (req: express.Request, res: express.Response) => {
     const { id } = req.params;
-
+    const { name, price, type, addressImage } = req.body;
+    let error;
     try {
+        if (isNaN(price)) {
+            error = {
+                msg: "Price must be a number",
+            };
+        }
+        if (error) {
+            return res.json({
+                data: null,
+                error: error,
+            });
+        }
         const cocktail = await MyCocktail.updateOne({ _id: id }, req.body);
-        return res.redirect("/added-cocktails");
+        if (cocktail) {
+            return res.status(200).json(cocktail);
+        }
     } catch (error: any) {
         return res.status(400).json({
             data: null,
@@ -157,8 +173,22 @@ export const updateCocktail = async (req: express.Request, res: express.Response
             },
         });
     }
-    // if (cocktail) {
-    //     res.json({ cocktail, msg: "You get data successfully" });
-    // }
-    // res.json(req.params.slug);
+};
+
+export const deleteCocktail = async (req: express.Request, res: express.Response) => {
+    const { id } = req.params;
+    try {
+        const cocktail = await MyCocktail.deleteOne({ _id: id });
+        if (cocktail) {
+            return res.status(200).json({ cocktail, msg: "You deleted data successfully" });
+        }
+    } catch (error: any) {
+        return res.status(400).json({
+            data: null,
+            error: {
+                msg: "Something went wrong",
+                error: error.message,
+            },
+        });
+    }
 };

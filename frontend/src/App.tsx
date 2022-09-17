@@ -27,6 +27,7 @@ import { Alert } from "./UI/Alert";
 import AddedCocktails from "./pages/my-cocktail/AddedCocktails";
 import axios from "axios";
 import AddedCocktailsDetail from "./pages/my-cocktail/AddedCocktailsDetail";
+import EditAddedCocktail from "./pages/my-cocktail/EditAddedCocktail";
 
 // let isInitial = true;
 
@@ -87,25 +88,6 @@ function App() {
         };
     }, [alertContent, dispatch]);
 
-    useEffect(() => {
-        const fetchAddedData = async () => {
-            const data = await axios.get("http://localhost:4000/api/my-cocktail/added-cocktails");
-
-            dispatch(cocktailSliceAction.addedCocktailHandler(data.data));
-        };
-        try {
-            fetchAddedData();
-        } catch (error) {
-            dispatch(
-                notificationSliceActions.alertHandler({
-                    title: "Error",
-                    alertContent: "Something went wrong",
-                    type: "error",
-                })
-            );
-        }
-    }, []);
-
     return (
         <Fragment>
             <div className="absolute">{alertContent && <Alert />}</div>
@@ -122,8 +104,9 @@ function App() {
                         <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
                         <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
                         <Route path="/wish-list" element={<WishList />} />
-                        <Route path="/added-cocktails" element={<AddedCocktails />} />
-                        <Route path="/added-cocktails/:id" element={<AddedCocktailsDetail />} />
+                        <Route path="/my-cocktail" element={<AddedCocktails />} />
+                        <Route path="/my-cocktail/:id" element={<AddedCocktailsDetail />} />
+                        <Route path="/my-cocktail/:id/edit" element={<EditAddedCocktail />} />
                         <Route path="/create-cocktail" element={<CreateCocktail />} />
                         <Route path="/create-ingredient" element={<CreateIngredient />} />
                         <Route path="/cocktail/:cocktailId" element={<CocktailDetail />} />

@@ -4,6 +4,7 @@ const initialValue: any = {
     loading: false,
     searchClicked: false,
     barsClicked: false,
+    deleteClicked: false,
 };
 // interface Action {
 //     type?: any;
@@ -23,6 +24,9 @@ const UISlice = createSlice({
         },
         navToolsHandler(state) {
             state.barsClicked = !state.barsClicked;
+        },
+        deleteHandler(state, action) {
+            state.deleteClicked = action.payload;
         },
     },
 });

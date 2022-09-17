@@ -2,6 +2,9 @@ import express from "express";
 import {
     addedCocktail,
     createCocktail,
+    deleteCocktail,
+    editCocktail,
+    updateCocktail,
     // createIngredient,
     viewDetailCocktail,
 } from "../controllers/cocktailsActionsController";
@@ -18,11 +21,11 @@ router.get("/added-cocktails", addedCocktail);
 router.get("/added-cocktails/:slug", viewDetailCocktail);
 
 // edit cocktail
-router.put("/:id");
-router.get("/:id/edit");
+router.get("/:id/edit", editCocktail);
+router.put("/:id/update", updateCocktail);
 
 // delete cocktail
-router.delete("/:id");
+router.delete("/:id/delete", deleteCocktail);
 
 // show all stored cocktails
 router.get("/stored/cocktails");

@@ -1,10 +1,11 @@
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { notificationSliceActions } from "../../store/notification-slice";
 
 interface AddedCocktailsTypes {
     _id: string;
@@ -22,17 +23,36 @@ const AddedCocktails = () => {
     // console.log(addedCocktails);
 
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const fetchData = async (id: string) => {
+    const fetchDetailData = async (id: string) => {
         const detail = await axios.get(
             "http://localhost:4000/api/my-cocktail/added-cocktails/" + id
         );
-        dispatch(cocktailSliceAction.addedCocktailDetailHandler([detail.data]));
+        dispatch(cocktailSliceAction.addedCocktailDetailHandler(detail.data));
     };
     const cocktailDetailHandler = (id: string) => {
         navigate(id);
-        fetchData(id);
+        fetchDetailData(id);
     };
+    useEffect(() => {
+        const fetchAddedData = async () => {
+            const data = await axios.get("http://localhost:4000/api/my-cocktail/added-cocktails");
+
+            dispatch(cocktailSliceAction.addedCocktailHandler(data.data));
+        };
+        try {
+            fetchAddedData();
+        } catch (error) {
+            dispatch(
+                notificationSliceActions.alertHandler({
+                    title: "Error",
+                    alertContent: "Something went wrong",
+                    type: "error",
+                })
+            );
+        }
+    }, [location.key]);
 
     return (
         <div>
@@ -44,7 +64,7 @@ const AddedCocktails = () => {
                         {addedCocktails?.map((item: AddedCocktailsTypes) => (
                             <div
                                 onClick={() => cocktailDetailHandler(item._id)}
-                                key={item.name}
+                                key={item._id}
                                 className="mx-2 w-72 lg:mb-0 mb-8 cursor-pointer"
                             >
                                 <div>
