@@ -30,7 +30,7 @@ const formSlice = createSlice({
         },
         createCocktail(state, action) {
             state.addedCocktail = action.payload;
-            console.log(state.addedCocktail);
+            // console.log(state.addedCocktail);
         },
     },
 });
@@ -44,7 +44,7 @@ export const createCocktail = async (data: TypeCreatedCocktail) => {
         price: price,
         addressImage: addressImageInput,
     });
-    console.log(res.data.data);
+    // console.log(res.data.data);
     // if (res.data.data === null) {
     //     dispatch(
     //         notificationSliceActions.alertHandler({

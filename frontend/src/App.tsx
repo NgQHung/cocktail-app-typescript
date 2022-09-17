@@ -28,6 +28,7 @@ import AddedCocktails from "./pages/my-cocktail/AddedCocktails";
 import axios from "axios";
 import AddedCocktailsDetail from "./pages/my-cocktail/AddedCocktailsDetail";
 import EditAddedCocktail from "./pages/my-cocktail/EditAddedCocktail";
+import DeletedCocktails from "./pages/my-cocktail/DeletedCocktails";
 
 // let isInitial = true;
 
@@ -90,7 +91,7 @@ function App() {
 
     return (
         <Fragment>
-            <div className="absolute">{alertContent && <Alert />}</div>
+            <div className="fixed top-[150px] left-[20px] z-50">{alertContent && <Alert />}</div>
             <div className="absolute">{loadingState && <Loading />}</div>
             <div className="main flex flex-col justify-between">
                 <Header />
@@ -107,6 +108,7 @@ function App() {
                         <Route path="/my-cocktail" element={<AddedCocktails />} />
                         <Route path="/my-cocktail/:id" element={<AddedCocktailsDetail />} />
                         <Route path="/my-cocktail/:id/edit" element={<EditAddedCocktail />} />
+                        <Route path="/my-cocktail/trash/cocktails" element={<DeletedCocktails />} />
                         <Route path="/create-cocktail" element={<CreateCocktail />} />
                         <Route path="/create-ingredient" element={<CreateIngredient />} />
                         <Route path="/cocktail/:cocktailId" element={<CocktailDetail />} />

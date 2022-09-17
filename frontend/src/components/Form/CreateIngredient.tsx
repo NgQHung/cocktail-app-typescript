@@ -64,7 +64,7 @@ const CreateIngredient = () => {
                 price: priceInput,
                 addressImageInput: addressImageInput,
             });
-            console.log(res.data.data);
+            // console.log(res.data.data);
             if (res.data.data === null) {
                 dispatch(
                     notificationSliceActions.alertHandler({
@@ -82,7 +82,7 @@ const CreateIngredient = () => {
                     })
                 );
             }
-            console.log("hello?");
+            // console.log("hello?");
         } catch (error) {
             console.log(error);
         }

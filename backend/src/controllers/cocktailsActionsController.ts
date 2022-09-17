@@ -178,10 +178,65 @@ export const updateCocktail = async (req: express.Request, res: express.Response
 export const deleteCocktail = async (req: express.Request, res: express.Response) => {
     const { id } = req.params;
     try {
+        const cocktail = await MyCocktail.softDelete({ _id: id });
+        if (cocktail) {
+            return res.status(200).json({ cocktail, msg: "You deleted data successfully" });
+        }
+    } catch (error: any) {
+        return res.status(400).json({
+            data: null,
+            error: {
+                msg: "Something went wrong",
+                error: error.message,
+            },
+        });
+    }
+};
+
+export const storeDeletedCocktails = async (req: express.Request, res: express.Response) => {
+    // const { id } = req.params;
+    try {
+        const cocktail = await MyCocktail.findDeleted();
+        if (cocktail) {
+            return res.status(200).json({ cocktail, msg: "You get data successfully" });
+        }
+    } catch (error: any) {
+        return res.status(400).json({
+            data: null,
+            error: {
+                msg: "Something went wrong",
+                error: error.message,
+            },
+        });
+    }
+};
+
+export const forceDeletedCocktails = async (req: express.Request, res: express.Response) => {
+    const { id } = req.params;
+    try {
         const cocktail = await MyCocktail.deleteOne({ _id: id });
         if (cocktail) {
             return res.status(200).json({ cocktail, msg: "You deleted data successfully" });
         }
+    } catch (error: any) {
+        return res.status(400).json({
+            data: null,
+            error: {
+                msg: "Something went wrong",
+                error: error.message,
+            },
+        });
+    }
+};
+
+export const restoreDeletedCocktails = async (req: express.Request, res: express.Response) => {
+    const { id } = req.params;
+    try {
+        const cocktail = await MyCocktail.restore({ _id: id });
+        if (cocktail) {
+            return res.status(200).json({ cocktail, msg: "You restored data successfully" });
+        }
+        // res.json(id);
     } catch (error: any) {
         return res.status(400).json({
             data: null,

@@ -103,13 +103,13 @@ const EditAddedCocktail = () => {
 
     const onSaveHandler = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({
-            ...cocktailEdit,
-            name: nameInput,
-            type: typeInput,
-            price: priceInput,
-            addressImage: addressImageInput,
-        });
+        // console.log({
+        //     ...cocktailEdit,
+        //     name: nameInput,
+        //     type: typeInput,
+        //     price: priceInput,
+        //     addressImage: addressImageInput,
+        // });
         updateCocktail();
     };
 

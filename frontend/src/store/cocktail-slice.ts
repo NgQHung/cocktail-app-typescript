@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { stat } from "fs";
 import { Http } from "../models/Http";
 
 const initialValue: any = {
@@ -15,6 +16,8 @@ const initialValue: any = {
     addedCocktails: [],
     addedCocktailDetail: {},
     addedCocktailEdit: {},
+    deletedCocktails: {},
+    idAddedCocktail: "",
 };
 
 const cocktailSlice = createSlice({
@@ -32,6 +35,12 @@ const cocktailSlice = createSlice({
         },
         addedCocktailEditHandler(state, action) {
             state.addedCocktailEdit = action.payload;
+        },
+        addedCocktailDeleteHandler(state, action) {
+            state.idAddedCocktail = action.payload;
+        },
+        deletedCocktailHandler(state, action) {
+            state.deletedCocktails = action.payload;
         },
         localStorageHandler(state, action) {
             console.log(action.payload.basket);

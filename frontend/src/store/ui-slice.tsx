@@ -5,6 +5,7 @@ const initialValue: any = {
     searchClicked: false,
     barsClicked: false,
     deleteClicked: false,
+    confirmationContent: null,
 };
 // interface Action {
 //     type?: any;
@@ -27,6 +28,9 @@ const UISlice = createSlice({
         },
         deleteHandler(state, action) {
             state.deleteClicked = action.payload;
+        },
+        confirmationHandler(state, action) {
+            state.confirmationContent = action.payload;
         },
     },
 });

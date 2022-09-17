@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { notificationSliceActions } from "../store/notification-slice";
 import { UISliceActions } from "../store/ui-slice";
@@ -10,9 +10,15 @@ const Confirmation = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
+    const confirmationContent = useAppSelector((state) => state.UISlice.confirmationContent);
     const detail = addedCocktailDetail?.cocktail;
+    // const location = useLocation();
+    // console.log(location);
     // console.log(addedCocktailDetail);
-    const id = detail?._id;
+    // const id = detail?._id;
+    const id = useAppSelector((state) => state.cocktailSlice.idAddedCocktail);
+    const deleteConfirmation = confirmationContent?.title === "Delete";
+    const forceDeleteConfirmation = confirmationContent?.title === "Force Delete";
 
     const sendReqDeleteData = async () => {
         const res = await axios.delete(`http://localhost:4000/api/my-cocktail/${id}/delete`);
@@ -37,12 +43,40 @@ const Confirmation = () => {
             setTimeout(() => navigate("/my-cocktail"), 1000);
         }
     };
+
+    const sendReqForceDeleteData = async () => {
+        const res = await axios.delete(`http://localhost:4000/api/my-cocktail/${id}/force-delete`);
+        if (res.data.data === null) {
+            dispatch(
+                notificationSliceActions.alertHandler({
+                    title: "Error!",
+                    description: res.data.error.msg,
+                    type: "error",
+                })
+            );
+        } else {
+            dispatch(
+                notificationSliceActions.alertHandler({
+                    title: "Success!",
+                    description: res.data.msg,
+                    type: "success",
+                })
+            );
+
+            // navigate('/my-cocktail')
+            setTimeout(() => navigate(""), 1000);
+        }
+    };
     // const deleteClicked = useAppSelector((state) => state.UISlice.deleteClicked);
 
     const deleteCocktailHandler = () => {
-        sendReqDeleteData();
-        // setDeleteClicked((prev) => !prev);
-        // navigate("/my-cocktail");
+        if (deleteConfirmation) {
+            sendReqDeleteData();
+        }
+        if (forceDeleteConfirmation) {
+            sendReqForceDeleteData();
+        }
+        dispatch(UISliceActions.deleteHandler(false));
     };
 
     const closeConfirmationHandler = () => {
@@ -59,11 +93,9 @@ const Confirmation = () => {
                             <i className="bx bx-error text-3xl"></i>
                         </div> */}
                         <div className="mt-4 md:mt-0  text-center md:text-left">
-                            <p className="font-bold pb-4">Delete your Cocktail</p>
+                            <p className="font-bold pb-4">{confirmationContent?.title}</p>
                             <p className="text-sm text-gray-700 mt-1 pb-4">
-                                Are you sure you want to delete this created cocktail?
-                                {/* You will lose all of your data by deleting your Cocktail. */}
-                                {/* This action cannot be undone. */}
+                                {confirmationContent?.description}
                             </p>
                         </div>
                     </div>
