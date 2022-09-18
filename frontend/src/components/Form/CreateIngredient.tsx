@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Use_Form from "../../hooks/use_form";
-import { createCocktail, formSliceActions } from "../../store/form-slice";
+import { formSliceActions } from "../../store/form-slice";
 import { useAppDispatch } from "../../store/hook";
 import { notificationSliceActions } from "../../store/notification-slice";
 
@@ -13,46 +13,46 @@ const CreateIngredient = () => {
         input: nameInput,
         inputBlurHandler: nameOnBlur,
         reset: nameOnReset,
-        isTouched: nameIsTouched,
-        hasError: nameHasError,
-        inputIsValid: nameIsValid,
+        // isTouched: nameIsTouched,
+        // hasError: nameHasError,
+        // inputIsValid: nameIsValid,
     } = Use_Form(inputIsValid);
     const {
         onChangeHandler: typeOnChange,
         input: typeInput,
         inputBlurHandler: typeOnBlur,
         reset: typeOnReset,
-        isTouched: typeIsTouched,
-        hasError: typeHasError,
-        inputIsValid: typeIsValid,
+        // isTouched: typeIsTouched,
+        // hasError: typeHasError,
+        // inputIsValid: typeIsValid,
     } = Use_Form(inputIsValid);
     const {
         onChangeHandler: priceOnChange,
         input: priceInput,
         inputBlurHandler: priceOnBlur,
         reset: priceOnReset,
-        isTouched: priceIsTouched,
-        hasError: priceHasError,
-        inputIsValid: priceIsValid,
+        // isTouched: priceIsTouched,
+        // hasError: priceHasError,
+        // inputIsValid: priceIsValid,
     } = Use_Form(inputIsValid);
     const {
         onChangeHandler: addressImageOnChange,
         input: addressImageInput,
         inputBlurHandler: addressImageOnBlur,
         reset: addressImageOnReset,
-        isTouched: addressImageIsTouched,
-        hasError: addressImageHasError,
-        inputIsValid: addressImageIsValid,
+        // isTouched: addressImageIsTouched,
+        // hasError: addressImageHasError,
+        // inputIsValid: addressImageIsValid,
     } = Use_Form(inputIsValid);
-    const {
-        onChangeHandler: imageOnChange,
-        input: imageInput,
-        inputBlurHandler: imageOnBlur,
-        reset: imageOnReset,
-        isTouched: imageIsTouched,
-        hasError: imageHasError,
-        inputIsValid: imageIsValid,
-    } = Use_Form(inputIsValid);
+    // const {
+    //     onChangeHandler: imageOnChange,
+    //     input: imageInput,
+    //     inputBlurHandler: imageOnBlur,
+    //     reset: imageOnReset,
+    //     isTouched: imageIsTouched,
+    //     hasError: imageHasError,
+    //     inputIsValid: imageIsValid,
+    // } = Use_Form(inputIsValid);
 
     const dispatch = useAppDispatch();
 

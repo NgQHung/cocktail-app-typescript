@@ -1,14 +1,14 @@
 import React from "react";
 import { useAppSelector } from "../../store/hook";
 
-interface AddedCocktailDetailTypes {
-    _id: string;
-    name: string;
-    type: string;
-    price: number;
-    addressImage: string;
-    __v?: 0;
-}
+// interface AddedCocktailDetailTypes {
+//     _id: string;
+//     name: string;
+//     type: string;
+//     price: number;
+//     addressImage: string;
+//     __v?: 0;
+// }
 
 function AddedCocktailsDetail() {
     const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);

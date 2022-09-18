@@ -2,7 +2,7 @@
 import React from "react";
 import Cocktails from "../components/Cocktails/Cocktails";
 import { Cocktail } from "../models/cocktails";
-import { useAppSelector } from "../store/hook";
+// import { useAppSelector } from "../store/hook";
 
 interface Props {
     cocktailData?: Cocktail[];
@@ -11,7 +11,7 @@ interface Props {
 
 const Main: React.FC<Props> = (props) => {
     // console.log(props.cocktailData);
-    const typeCocktail = useAppSelector((state) => state.dataSlice.typeCocktail);
+    // const typeCocktail = useAppSelector((state) => state.dataSlice.typeCocktail);
 
     return (
         <div>

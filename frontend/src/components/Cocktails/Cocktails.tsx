@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import CocktailItem from "./CocktailItem";
 import { ButtonLoadMore } from "../../UI/Button";
 import { Cocktail } from "../../models/cocktails";
@@ -7,10 +7,10 @@ import Signin from "../Form/Signin";
 import Signup from "../Form/Signup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
-import { Alert } from "../../UI/Alert";
+// import { useSelector } from "react-redux";
+// import { Alert } from "../../UI/Alert";
 import { useDispatch } from "react-redux";
-import { notificationSliceActions } from "../../store/notification-slice";
+// import { notificationSliceActions } from "../../store/notification-slice";
 import Filter from "../Filter";
 import { dataSliceActions } from "../../store/slice-http";
 import { useAppSelector } from "../../store/hook";
@@ -25,7 +25,7 @@ const Cocktails: React.FC<Props> = (props) => {
     const dataIsEmpty = props.cocktailData?.length === 0;
     const dispatch = useDispatch();
 
-    const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertContent);
+    // const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertContent);
     // console.log(alertContent);
     // const dataToShow = useAppSelector(state => state.dataSlice.dataToShow)
     const amountOfCocktail = useAppSelector((state) => state.dataSlice.indexEnd);

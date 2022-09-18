@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { notificationSliceActions } from "../store/notification-slice";
 import { UISliceActions } from "../store/ui-slice";
@@ -9,9 +9,9 @@ import Modal from "../UI/Modal";
 const Confirmation = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
+    // const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
     const confirmationContent = useAppSelector((state) => state.UISlice.confirmationContent);
-    const detail = addedCocktailDetail?.cocktail;
+    // const detail = addedCocktailDetail?.cocktail;
     const id = useAppSelector((state) => state.cocktailSlice.idSelectedCocktail);
     const deleteConfirmation = confirmationContent?.title === "Delete";
     const forceDeleteConfirmation = confirmationContent?.title === "Force Delete";

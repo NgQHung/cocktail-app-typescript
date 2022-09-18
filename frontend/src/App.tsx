@@ -6,7 +6,7 @@ import Searched from "./pages/Searched";
 import NotFound from "./pages/NotFound";
 import CreateCocktail from "./components/Form/CreateCocktail";
 import CreateIngredient from "./components/Form/CreateIngredient";
-import Footer from "./Layouts/Footer";
+// import Footer from "./Layouts/Footer";
 import { AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
 import CocktailDetail from "./pages/CocktailDetail";
@@ -15,8 +15,8 @@ import Signin from "./components/Form/Signin";
 import WishList from "./pages/WishList";
 import Main from "./pages/Main";
 import { dataSliceActions, fetchDataToShow } from "./store/slice-http";
-import { useAppDispatch, useAppSelector } from "./store/hook";
-import { AppDispatch } from "./store";
+import { useAppSelector } from "./store/hook";
+// import { AppDispatch } from "./store";
 import { UISliceActions } from "./store/ui-slice";
 import Loading from "./UI/Loading";
 import { notificationSliceActions } from "./store/notification-slice";
@@ -39,7 +39,7 @@ function App() {
     const data = useAppSelector((state) => state.dataSlice?.data);
     const dataToShow = useAppSelector((state) => state.dataSlice?.dataToShow);
     const alertContent = useAppSelector((state) => state.notificationSlice.alertContent);
-    const addedCocktails = useAppSelector((state) => state.cocktailSlice.addedCocktails);
+    // const addedCocktails = useAppSelector((state) => state.cocktailSlice.addedCocktails);
 
     const location = useLocation();
     useEffect(() => {

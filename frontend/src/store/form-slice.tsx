@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { NumberLiteralType } from "typescript";
 import { signupModel } from "../models/cocktails";
-import { notificationSliceActions } from "./notification-slice";
+// import { notificationSliceActions } from "./notification-slice";
 
 interface InitialValue {
     formInput: [];
@@ -35,34 +34,34 @@ const formSlice = createSlice({
     },
 });
 
-export const createCocktail = async (data: TypeCreatedCocktail) => {
-    // return async (dispatch: any) => {
-    const { name, type, price, addressImageInput } = data;
-    const res = await axios.post("http://localhost:4000/api/my-data/create-cocktail", {
-        name: name,
-        type: type,
-        price: price,
-        addressImage: addressImageInput,
-    });
-    // console.log(res.data.data);
-    // if (res.data.data === null) {
-    //     dispatch(
-    //         notificationSliceActions.alertHandler({
-    //             title: "Error!",
-    //             description: res.data.error.msg,
-    //             type: "error",
-    //         })
-    //     );
-    // }
+// export const createCocktail = async (data: TypeCreatedCocktail) => {
+// return async (dispatch: any) => {
+// const { name, type, price, addressImageInput } = data;
+// const res = await axios.post("http://localhost:4000/api/my-data/create-cocktail", {
+//     name: name,
+//     type: type,
+//     price: price,
+//     addressImage: addressImageInput,
+// });
+// console.log(res.data.data);
+// if (res.data.data === null) {
+//     dispatch(
+//         notificationSliceActions.alertHandler({
+//             title: "Error!",
+//             description: res.data.error.msg,
+//             type: "error",
+//         })
+//     );
+// }
 
-    // try {
-    //     console.log("hello?");
-    // } catch (error) {
-    //     console.log(error);
-    // }
-    // };
-    // };
-};
+// try {
+//     console.log("hello?");
+// } catch (error) {
+//     console.log(error);
+// }
+// };
+// };
+// };
 
 export const signupHandler = async (data: signupModel) => {
     const response: any = await fetch("http://localhost:4000/api/users/signup", {

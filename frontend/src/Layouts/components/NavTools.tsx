@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 import User from "./User";
-import { motionNavtoolsLeft } from "../../UI/Animation";
+// import { motionNavtoolsLeft } from "../../UI/Animation";
 import { useAppSelector } from "../../store/hook";
 import { useDispatch } from "react-redux";
 import { UISliceActions } from "../../store/ui-slice";

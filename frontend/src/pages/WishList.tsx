@@ -1,18 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../store/cocktail-slice";
 import { notificationSliceActions } from "../store/notification-slice";
-import { Alert } from "../UI/Alert";
+// import { Alert } from "../UI/Alert";
 
 const WishList = () => {
     const cocktailsHeart: any = useSelector<any>((state) => state.cocktailSlice.cocktailsHeart);
-    const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertRemoved);
+    // const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertRemoved);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
+    // const location = useLocation();
     const amountCocktailsHeart = cocktailsHeart.length;
 
     const removeCocktailHeartHandler = (id: string) => {
@@ -133,13 +133,12 @@ const WishList = () => {
                             </div>
                             <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
                                 <div>
-                                    <a
+                                    <p
                                         // href="javascript:void(0)"
                                         className="hover:underline text-base font-medium leading-none focus:outline-none focus:underline  text-gray-800"
                                     >
-                                        {" "}
                                         View details
-                                    </a>
+                                    </p>
                                 </div>
                                 <div>
                                     <button

@@ -1,11 +1,11 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import Use_Form from "../../hooks/use_form";
 import { authSliceActions } from "../../store/auth-slice";
-import { cocktailSliceAction } from "../../store/cocktail-slice";
+// import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { formSliceActions } from "../../store/form-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import Modal from "../../UI/Modal";
@@ -80,7 +80,7 @@ const Signup = () => {
 
     const location = useLocation();
     const dispatch = useDispatch();
-    const isSignup = location.pathname === "/signup";
+    // const isSignup = location.pathname === "/signup";
     const navigate = useNavigate();
 
     const confirmPassIsInvalid = passwordInput !== confirmPassInput;

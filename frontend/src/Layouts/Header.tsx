@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 // import { searchSliceAction } from "../store/search-slice";
@@ -8,12 +8,12 @@ import NavTools from "./components/NavTools";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import { useAppDispatch, useAppSelector } from "../store/hook";
+import { useAppSelector } from "../store/hook";
 import { UISliceActions } from "../store/ui-slice";
 import { useDispatch } from "react-redux";
 
 const Header = () => {
-    const location = useLocation();
+    // const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     // const [searchClicked, setSearchClicked] = React.useState(false);
@@ -23,25 +23,25 @@ const Header = () => {
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
     // console.log(total);
 
-    const motionSearch = {
-        initialPos: {
-            x: 0,
-        },
-        turnRight: {
-            x: "100vw",
-            transition: {
-                type: "spring",
-                duration: 3,
-            },
-        },
-        exit: {
-            // x: "-100vw",
-            transition: {
-                delay: 1.5,
-                ease: "easeInOut",
-            },
-        },
-    };
+    // const motionSearch = {
+    //     initialPos: {
+    //         x: 0,
+    //     },
+    //     turnRight: {
+    //         x: "100vw",
+    //         transition: {
+    //             type: "spring",
+    //             duration: 3,
+    //         },
+    //     },
+    //     exit: {
+    //         // x: "-100vw",
+    //         transition: {
+    //             delay: 1.5,
+    //             ease: "easeInOut",
+    //         },
+    //     },
+    // };
 
     const searchClickHandler = () => {
         dispatch(UISliceActions.searchHandler());

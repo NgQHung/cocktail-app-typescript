@@ -18,7 +18,7 @@ interface AddedCocktailsTypes {
 
 const AddedCocktails = () => {
     const addedCocktails = useAppSelector((state) => state.cocktailSlice.addedCocktails);
-    const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
+    // const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
     const deleteClicked = useAppSelector((state) => state.UISlice.deleteClicked);
 
     const dispatch = useAppDispatch();

@@ -2,11 +2,11 @@ import axios from "axios";
 import { Cocktail } from "../models/cocktails";
 import { createSlice } from "@reduxjs/toolkit";
 
-type Data = {
-    strDrink: string;
-    strDrinkThumb: string;
-    idDrink: string;
-};
+// type Data = {
+//     strDrink: string;
+//     strDrinkThumb: string;
+//     idDrink: string;
+// };
 
 type InitialValue = {
     loading: boolean;

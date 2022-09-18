@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation, useParams } from "react-router-dom";
-import { ClickedCocktail, Cocktail } from "../models/cocktails";
+import { Link, useParams } from "react-router-dom";
+import { ClickedCocktail } from "../models/cocktails";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,14 +16,14 @@ import { cocktailSliceAction } from "../store/cocktail-slice";
 import { useDispatch } from "react-redux";
 import { notificationSliceActions } from "../store/notification-slice";
 import { useAppSelector } from "../store/hook";
-import { Alert } from "../UI/Alert";
+// import { Alert } from "../UI/Alert";
 
 const CocktailDetail: React.FC = () => {
     const params = useParams();
     const [my_swiper, set_my_swiper] = useState<any>({});
     const [hasError, setHasError] = useState();
     const dispatch = useDispatch();
-    const location = useLocation();
+    // const location = useLocation();
     // const params = useParams();
     const urlName = params?.cocktailId?.split(" ").join("%");
 
@@ -32,7 +32,7 @@ const CocktailDetail: React.FC = () => {
     const cocktailBasket = useAppSelector((state) => state.cocktailSlice.cocktailsBasket);
     // console.log(cocktailBasket);
     const cocktailSelected: any = useSelector<any>((state) => state.cocktailSlice.cocktailSelected);
-    const alertContent = useAppSelector((state) => state.notificationSlice.alertContent);
+    // const alertContent = useAppSelector((state) => state.notificationSlice.alertContent);
 
     const addAmount = () => {
         setAmount((prev) => prev + 1);

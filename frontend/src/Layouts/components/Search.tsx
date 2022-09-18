@@ -1,33 +1,33 @@
 import {
     faMagnifyingGlass,
     faArrowDown,
-    faXmark,
+    // faXmark,
     faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import { searchSliceAction } from "../../store/search-slice";
 import { UISliceActions } from "../../store/ui-slice";
-import { Alert } from "../../UI/Alert";
+// import { Alert } from "../../UI/Alert";
 import { motion } from "framer-motion";
-import { motionSearchDown } from "../../UI/Animation";
+// import { motionSearchDown } from "../../UI/Animation";
 import { useAppSelector } from "../../store/hook";
 
 const Search = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
+    // const location = useLocation();
 
     const [valueEntered, setValueEntered] = useState("");
     // const searchClicked: any = useSelector<any>((state) => state.searchSlice.searchClicked);
     const selectedType: any = useSelector<any>((state) => state.searchSlice.selectedType);
     // const alert: any = useSelector<any>((state) => state.notificationSlice.alertError);
-    const alertContent = useSelector((state: any) => state.notificationSlice.alertContent);
+    // const alertContent = useSelector((state: any) => state.notificationSlice.alertContent);
     const searchClicked = useAppSelector((state) => state.UISlice.searchClicked);
 
     // console.log(selectedType);

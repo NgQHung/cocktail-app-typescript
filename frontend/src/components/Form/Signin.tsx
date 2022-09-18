@@ -1,16 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { cocktailSliceAction } from "../../store/cocktail-slice";
+// import { cocktailSliceAction } from "../../store/cocktail-slice";
 import Modal from "../../UI/Modal";
 import Use_Form from "../../hooks/use_form";
 import { formSliceActions } from "../../store/form-slice";
 import { authSliceActions } from "../../store/auth-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
-import { useSelector } from "react-redux";
-import { Alert } from "../../UI/Alert";
+// import { useSelector } from "react-redux";
+// import { Alert } from "../../UI/Alert";
 
 const inputIsValid = (value: string) => value.trim() !== "";
 const emailInputIsValid = (value: string) => value.includes("@");
@@ -44,7 +44,7 @@ const Signin = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isSignin = location.pathname === "/signin";
+    // const isSignin = location.pathname === "/signin";
 
     const loginHandler = async () => {
         const res = await fetch("http://localhost:4000/api/users/login", {

@@ -1,8 +1,8 @@
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Fragment, useState } from "react";
+// import { faUser } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { authSliceActions } from "../../store/auth-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
@@ -54,19 +54,19 @@ const User = () => {
         }
     };
 
-    const navigateHandlerAddedIngredient = () => {
-        if (user) {
-            return navigate("/added-ingredient");
-        } else {
-            return dispatch(
-                notificationSliceActions.alertHandler({
-                    title: "Oops!",
-                    description: "You must be logged in first!!!",
-                    type: "error",
-                })
-            );
-        }
-    };
+    // const navigateHandlerAddedIngredient = () => {
+    //     if (user) {
+    //         return navigate("/added-ingredient");
+    //     } else {
+    //         return dispatch(
+    //             notificationSliceActions.alertHandler({
+    //                 title: "Oops!",
+    //                 description: "You must be logged in first!!!",
+    //                 type: "error",
+    //             })
+    //         );
+    //     }
+    // };
 
     const navigateHandlerAddedCocktail = () => {
         if (user) {
