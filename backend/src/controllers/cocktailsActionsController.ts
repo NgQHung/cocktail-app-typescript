@@ -1,5 +1,4 @@
 import express from "express";
-import { json } from "stream/consumers";
 import MyCocktail from "../models/myCocktail";
 
 export const createCocktail = async (req: express.Request, res: express.Response) => {

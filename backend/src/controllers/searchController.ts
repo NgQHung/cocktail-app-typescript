@@ -1,6 +1,5 @@
 import axios from "axios";
 import express, { Request, Response } from "express";
-import searchedCocktail from "../models/searchModels";
 
 export const searchDataByName = async (req: Request, res: Response) => {
     let data;

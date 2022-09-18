@@ -11,8 +11,4 @@ router.post("/searchByName", searchDataByName);
 router.post("/searchByFirstLetter", searchDataByFirstLetter);
 router.post("/searchById", searchIngredientById);
 
-// method GET data
-// router.get("/searchByName/data", searchDataByName);
-// router.get("/searchByFirstLetter/data", searchDataByFirstLetter);
-// router.get("/searchById/data", searchIngredientById);
 export default router;

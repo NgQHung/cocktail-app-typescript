@@ -1,5 +1,3 @@
-import { faHeart, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -20,31 +18,16 @@ interface DeletedCocktailsTypes {
 
 const DeletedCocktails = () => {
     const deletedCocktails = useAppSelector((state) => state.cocktailSlice.deletedCocktails);
-    // console.log(deletedCocktails)
-    const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
     const deleteClicked = useAppSelector((state) => state.UISlice.deleteClicked);
 
     const dispatch = useAppDispatch();
-    // console.log(addedCocktails);
 
     const navigate = useNavigate();
     const location = useLocation();
 
-    // const fetchDetailData = async (id: string) => {
-    //     const data = await axios.get("http://localhost:4000/api/my-cocktail/added-cocktails/" + id);
-    //     dispatch(cocktailSliceAction.deletedCocktailHandler(data.data));
-    // };
     const cocktailDetailHandler = (id: string) => {
         navigate("/my-cocktail/" + id);
-        // fetchDetailData(id);
     };
-
-    // const fetchAddedDataEdit = async (id: string) => {
-    //     const data = await axios.get(`http://localhost:4000/api/my-cocktail/${id}/edit`);
-    //     // console.log(data);
-    //     dispatch(cocktailSliceAction.addedCocktailEditHandler(data.data));
-    // };
-    // console.log(deleteClicked);
 
     const restoreCocktailHandler = async (id: string) => {
         const res = await axios.patch(`http://localhost:4000/api/my-cocktail/trash/${id}/restore`);

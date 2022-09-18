@@ -1,11 +1,5 @@
-import axios from "axios";
-import { compareSync } from "bcrypt";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Confirmation from "../../components/Confirmation";
-import { cocktailSliceAction } from "../../store/cocktail-slice";
-import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { UISliceActions } from "../../store/ui-slice";
+import React from "react";
+import { useAppSelector } from "../../store/hook";
 
 interface AddedCocktailDetailTypes {
     _id: string;
@@ -17,15 +11,8 @@ interface AddedCocktailDetailTypes {
 }
 
 function AddedCocktailsDetail() {
-    // const [deleteClicked, setDeleteClicked] = useState(false);
-
     const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
     const detail = addedCocktailDetail?.cocktail;
-    // console.log(detail);
-    // console.log(addedCocktailDetail);
-    const id = detail?._id;
-    const navigate = useNavigate();
-    const dispatch = useAppDispatch();
 
     return (
         <div>

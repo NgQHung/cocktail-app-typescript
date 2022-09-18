@@ -1,6 +1,5 @@
 import express, { Response, Request, NextFunction } from "express";
 import { shoppingCart } from "../controllers/cartController";
-// import { shoppingCart } from "../controllers/cartController";
 import { loginUser, signupUser } from "../controllers/userController";
 import requireAuth from "../middleware/requireAuth";
 import User from "../models/userModel";

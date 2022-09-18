@@ -6,12 +6,11 @@ import { useSelector } from "react-redux";
 import Search from "./components/Search";
 import NavTools from "./components/NavTools";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../store/hook";
 import { UISliceActions } from "../store/ui-slice";
 import { useDispatch } from "react-redux";
-import { ConnectionStates } from "mongoose";
 
 const Header = () => {
     const location = useLocation();

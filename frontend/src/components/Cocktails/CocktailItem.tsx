@@ -1,7 +1,5 @@
 import axios from "axios";
 import React, { Fragment } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";

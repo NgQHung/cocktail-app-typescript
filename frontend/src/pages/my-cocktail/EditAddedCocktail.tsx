@@ -1,61 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Use_Form from "../../hooks/use_form";
-import Use_Form_Cocktail_Actions from "../../hooks/use_form_cocktail_actions";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
-import { formSliceActions } from "../../store/form-slice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { notificationSliceActions } from "../../store/notification-slice";
-const inputIsValid = (value: string) => value.trim() !== "";
 
 const EditAddedCocktail = () => {
-    // const {
-    //     onChangeHandler: nameOnChange,
-    //     input: nameInput,
-    //     inputBlurHandler: nameOnBlur,
-    //     reset: nameOnReset,
-    //     isTouched: nameIsTouched,
-    //     hasError: nameHasError,
-    //     inputIsValid: nameIsValid,
-    // } = Use_Form_Cocktail_Actions(inputIsValid);
-    // const {
-    //     onChangeHandler: typeOnChange,
-    //     input: typeInput,
-    //     inputBlurHandler: typeOnBlur,
-    //     reset: typeOnReset,
-    //     isTouched: typeIsTouched,
-    //     hasError: typeHasError,
-    //     inputIsValid: typeIsValid,
-    // } = Use_Form_Cocktail_Actions(inputIsValid);
-    // const {
-    //     onChangeHandler: priceOnChange,
-    //     input: priceInput,
-    //     inputBlurHandler: priceOnBlur,
-    //     reset: priceOnReset,
-    //     isTouched: priceIsTouched,
-    //     hasError: priceHasError,
-    //     inputIsValid: priceIsValid,
-    // } = Use_Form_Cocktail_Actions(inputIsValid);
-    // const {
-    //     onChangeHandler: addressImageOnChange,
-    //     input: addressImageInput,
-    //     inputBlurHandler: addressImageOnBlur,
-    //     reset: addressImageOnReset,
-    //     isTouched: addressImageIsTouched,
-    //     hasError: addressImageHasError,
-    //     inputIsValid: addressImageIsValid,
-    // } = Use_Form_Cocktail_Actions(inputIsValid);
-    // const {
-    //     onChangeHandler: imageOnChange,
-    //     input: imageInput,
-    //     inputBlurHandler: imageOnBlur,
-    //     reset: imageOnReset,
-    //     isTouched: imageIsTouched,
-    //     hasError: imageHasError,
-    //     inputIsValid: imageIsValid,
-    // } = Use_Form_Cocktail_Actions(inputIsValid);
-
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const location = useLocation();
@@ -64,7 +14,6 @@ const EditAddedCocktail = () => {
     const [type, setType] = useState("");
     const [price, setPrice] = useState("");
     const [addressImage, setAddressImage] = useState("");
-    // const cocktailEdit = useAppSelector((state) => state.cocktailSlice.addedCocktailEdit);
     const id = useAppSelector((state) => state.cocktailSlice.idSelectedCocktail);
 
     const nameOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

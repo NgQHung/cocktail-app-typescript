@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import Header from "./Layouts/Header";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Alcoholic from "./pages/Alcoholic";
-import NonAlcoholic from "./pages/NonAlcoholic";
 import Navigation from "./pages/Navigation";
 import Searched from "./pages/Searched";
 import NotFound from "./pages/NotFound";
@@ -11,7 +9,6 @@ import CreateIngredient from "./components/Form/CreateIngredient";
 import Footer from "./Layouts/Footer";
 import { AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { cocktailSliceAction } from "./store/cocktail-slice";
 import CocktailDetail from "./pages/CocktailDetail";
 import Signup from "./components/Form/Signup";
 import Signin from "./components/Form/Signin";
@@ -25,11 +22,9 @@ import Loading from "./UI/Loading";
 import { notificationSliceActions } from "./store/notification-slice";
 import { Alert } from "./UI/Alert";
 import AddedCocktails from "./pages/my-cocktail/AddedCocktails";
-import axios from "axios";
 import AddedCocktailsDetail from "./pages/my-cocktail/AddedCocktailsDetail";
 import EditAddedCocktail from "./pages/my-cocktail/EditAddedCocktail";
 import DeletedCocktails from "./pages/my-cocktail/DeletedCocktails";
-import Test from "./pages/Test";
 
 // let isInitial = true;
 
@@ -103,8 +98,6 @@ function App() {
                             <Route path="signup" element={<Signup />} />
                             <Route path="signin" element={<Signin />} />
                         </Route>
-                        <Route path="alcoholic/non-alcoholic" element={<NonAlcoholic />} />
-                        <Route path="alcoholic/alcoholic" element={<Alcoholic />} />
                         <Route path="/wish-list" element={<WishList />} />
                         <Route path="/my-cocktail" element={<AddedCocktails />} />
                         <Route path="/my-cocktail/:id" element={<AddedCocktailsDetail />} />
@@ -114,7 +107,6 @@ function App() {
                         <Route path="/create-ingredient" element={<CreateIngredient />} />
                         <Route path="/cocktail/:cocktailId" element={<CocktailDetail />} />
                         <Route path="/searched/:cocktail" element={<Searched />} />
-                        <Route path="/test" element={<Test />} />
                         <Route path="/searched/*" element={<NotFound />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
