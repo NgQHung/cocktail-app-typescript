@@ -36,7 +36,7 @@ footer ul li a {
 }
 
 .main {
-    min-height: 100vh;
+    height: 100%;
 }
 .bg_nav {
     background: url("../public/noise-lines.jpg") repeat-x 0 0;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-200">
+        <footer className="bg-gray-200 absolute bottom-0 left-0">
             <ul className="flex flex-wrap text-xs sm:px-8 sm:py-12 py-8 ">
                 <li className="sm:w-1/4 pt-4 px-8">
                     <h2 className="text-sm mb-2 ">Download</h2>

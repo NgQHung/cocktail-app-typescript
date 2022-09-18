@@ -18,6 +18,7 @@ const initialValue: any = {
     addedCocktailEdit: {},
     deletedCocktails: {},
     idAddedCocktail: "",
+    idSelectedCocktail: "",
 };
 
 const cocktailSlice = createSlice({
@@ -37,7 +38,10 @@ const cocktailSlice = createSlice({
             state.addedCocktailEdit = action.payload;
         },
         addedCocktailDeleteHandler(state, action) {
-            state.idAddedCocktail = action.payload;
+            state.idSelectedCocktail = action.payload;
+        },
+        editAddedCocktailHandler(state, action) {
+            state.idSelectedCocktail = action.payload;
         },
         deletedCocktailHandler(state, action) {
             state.deletedCocktails = action.payload;

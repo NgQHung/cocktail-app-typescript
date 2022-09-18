@@ -29,6 +29,7 @@ import axios from "axios";
 import AddedCocktailsDetail from "./pages/my-cocktail/AddedCocktailsDetail";
 import EditAddedCocktail from "./pages/my-cocktail/EditAddedCocktail";
 import DeletedCocktails from "./pages/my-cocktail/DeletedCocktails";
+import Test from "./pages/Test";
 
 // let isInitial = true;
 
@@ -93,7 +94,7 @@ function App() {
         <Fragment>
             <div className="fixed top-[150px] left-[20px] z-50">{alertContent && <Alert />}</div>
             <div className="absolute">{loadingState && <Loading />}</div>
-            <div className="main flex flex-col justify-between">
+            <div className="relative w-full h-full">
                 <Header />
                 <AnimatePresence>
                     <Routes location={location} key={location.key}>
@@ -113,6 +114,7 @@ function App() {
                         <Route path="/create-ingredient" element={<CreateIngredient />} />
                         <Route path="/cocktail/:cocktailId" element={<CocktailDetail />} />
                         <Route path="/searched/:cocktail" element={<Searched />} />
+                        <Route path="/test" element={<Test />} />
                         <Route path="/searched/*" element={<NotFound />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>

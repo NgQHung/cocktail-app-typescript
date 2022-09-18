@@ -21,6 +21,7 @@ function AddedCocktailsDetail() {
 
     const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
     const detail = addedCocktailDetail?.cocktail;
+    // console.log(detail);
     // console.log(addedCocktailDetail);
     const id = detail?._id;
     const navigate = useNavigate();

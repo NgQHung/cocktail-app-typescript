@@ -95,9 +95,10 @@ const CreateCocktail = () => {
                 name: nameInput,
                 type: typeInput,
                 price: priceInput,
-                addressImageInput: addressImageInput,
+                addressImage: addressImageInput,
             })
         );
+        // console.log(nameInput, typeInput, priceInput, addressImageInput);
         typeOnReset();
         nameOnReset();
         priceOnReset();
@@ -150,8 +151,6 @@ const CreateCocktail = () => {
 
                         <div className="relative z-0 w-full mb-5">
                             <input
-                                // type="password"
-                                // name="password"
                                 onChange={priceOnChange}
                                 onBlur={priceOnBlur}
                                 value={priceInput}
@@ -165,8 +164,6 @@ const CreateCocktail = () => {
 
                         <div className="relative z-0 w-full mb-5">
                             <input
-                                // type="email"
-                                // name="email"
                                 onChange={addressImageOnChange}
                                 onBlur={addressImageOnBlur}
                                 value={addressImageInput}

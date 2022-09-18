@@ -1,79 +1,105 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Use_Form from "../../hooks/use_form";
 import Use_Form_Cocktail_Actions from "../../hooks/use_form_cocktail_actions";
+import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { formSliceActions } from "../../store/form-slice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { notificationSliceActions } from "../../store/notification-slice";
 const inputIsValid = (value: string) => value.trim() !== "";
 
 const EditAddedCocktail = () => {
-    const {
-        onChangeHandler: nameOnChange,
-        input: nameInput,
-        inputBlurHandler: nameOnBlur,
-        reset: nameOnReset,
-        isTouched: nameIsTouched,
-        hasError: nameHasError,
-        inputIsValid: nameIsValid,
-    } = Use_Form_Cocktail_Actions(inputIsValid);
-    const {
-        onChangeHandler: typeOnChange,
-        input: typeInput,
-        inputBlurHandler: typeOnBlur,
-        reset: typeOnReset,
-        isTouched: typeIsTouched,
-        hasError: typeHasError,
-        inputIsValid: typeIsValid,
-    } = Use_Form_Cocktail_Actions(inputIsValid);
-    const {
-        onChangeHandler: priceOnChange,
-        input: priceInput,
-        inputBlurHandler: priceOnBlur,
-        reset: priceOnReset,
-        isTouched: priceIsTouched,
-        hasError: priceHasError,
-        inputIsValid: priceIsValid,
-    } = Use_Form_Cocktail_Actions(inputIsValid);
-    const {
-        onChangeHandler: addressImageOnChange,
-        input: addressImageInput,
-        inputBlurHandler: addressImageOnBlur,
-        reset: addressImageOnReset,
-        isTouched: addressImageIsTouched,
-        hasError: addressImageHasError,
-        inputIsValid: addressImageIsValid,
-    } = Use_Form_Cocktail_Actions(inputIsValid);
-    const {
-        onChangeHandler: imageOnChange,
-        input: imageInput,
-        inputBlurHandler: imageOnBlur,
-        reset: imageOnReset,
-        isTouched: imageIsTouched,
-        hasError: imageHasError,
-        inputIsValid: imageIsValid,
-    } = Use_Form_Cocktail_Actions(inputIsValid);
+    // const {
+    //     onChangeHandler: nameOnChange,
+    //     input: nameInput,
+    //     inputBlurHandler: nameOnBlur,
+    //     reset: nameOnReset,
+    //     isTouched: nameIsTouched,
+    //     hasError: nameHasError,
+    //     inputIsValid: nameIsValid,
+    // } = Use_Form_Cocktail_Actions(inputIsValid);
+    // const {
+    //     onChangeHandler: typeOnChange,
+    //     input: typeInput,
+    //     inputBlurHandler: typeOnBlur,
+    //     reset: typeOnReset,
+    //     isTouched: typeIsTouched,
+    //     hasError: typeHasError,
+    //     inputIsValid: typeIsValid,
+    // } = Use_Form_Cocktail_Actions(inputIsValid);
+    // const {
+    //     onChangeHandler: priceOnChange,
+    //     input: priceInput,
+    //     inputBlurHandler: priceOnBlur,
+    //     reset: priceOnReset,
+    //     isTouched: priceIsTouched,
+    //     hasError: priceHasError,
+    //     inputIsValid: priceIsValid,
+    // } = Use_Form_Cocktail_Actions(inputIsValid);
+    // const {
+    //     onChangeHandler: addressImageOnChange,
+    //     input: addressImageInput,
+    //     inputBlurHandler: addressImageOnBlur,
+    //     reset: addressImageOnReset,
+    //     isTouched: addressImageIsTouched,
+    //     hasError: addressImageHasError,
+    //     inputIsValid: addressImageIsValid,
+    // } = Use_Form_Cocktail_Actions(inputIsValid);
+    // const {
+    //     onChangeHandler: imageOnChange,
+    //     input: imageInput,
+    //     inputBlurHandler: imageOnBlur,
+    //     reset: imageOnReset,
+    //     isTouched: imageIsTouched,
+    //     hasError: imageHasError,
+    //     inputIsValid: imageIsValid,
+    // } = Use_Form_Cocktail_Actions(inputIsValid);
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const cocktailEdit = useAppSelector((state) => state.cocktailSlice.addedCocktailEdit);
+    const [name, setName] = useState("");
+    const [type, setType] = useState("");
+    const [price, setPrice] = useState("");
+    const [addressImage, setAddressImage] = useState("");
+    // const cocktailEdit = useAppSelector((state) => state.cocktailSlice.addedCocktailEdit);
+    const id = useAppSelector((state) => state.cocktailSlice.idSelectedCocktail);
 
-    // nameInput = cocktailEdit.name
+    const nameOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget;
+        if (!value) return;
+        setName(value);
+    };
+    const typeOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget;
+        if (!value) return;
+
+        setType(value);
+    };
+    const priceOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget;
+        if (!value) return;
+
+        setPrice(value);
+    };
+    const addressImageOnChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget;
+        if (!value) return;
+
+        setAddressImage(value);
+    };
 
     const updateCocktail = async () => {
         try {
-            const res = await axios.put(
-                `http://localhost:4000/api/my-cocktail/${cocktailEdit._id}/update`,
-                {
-                    // ...cocktailEdit,
-                    name: nameInput,
-                    type: typeInput,
-                    price: priceInput,
-                    addressImage: addressImageInput,
-                }
-            );
+            const res = await axios.put(`http://localhost:4000/api/my-cocktail/${id}/update`, {
+                // ...cocktailEdit,
+                name: name,
+                type: type,
+                price: price,
+                addressImage: addressImage,
+            });
             // console.log(res.data.data);
             if (res.data.data === null) {
                 dispatch(
@@ -101,19 +127,48 @@ const EditAddedCocktail = () => {
         }
     };
 
+    // const [inputEdit, setInputEdit] = useState({
+    //     name: cocktailEdit.name,
+    //     type: cocktailEdit.type,
+    //     price: cocktailEdit.price,
+    //     addressImage: cocktailEdit.addressImage,
+    // });
+    // const [input, setInput] = useState('')
     const onSaveHandler = (e: React.FormEvent) => {
         e.preventDefault();
-        // console.log({
-        //     ...cocktailEdit,
-        //     name: nameInput,
-        //     type: typeInput,
-        //     price: priceInput,
-        //     addressImage: addressImageInput,
-        // });
+        console.log({
+            // ...cocktailEdit,
+            name: name,
+            type: type,
+            price: price,
+            addressImage: addressImage,
+        });
         updateCocktail();
+        // console.log(inputEdit);
     };
 
-    // console.log(cocktailEdit);
+    useEffect(() => {
+        const fetchAddedDataEdit = async () => {
+            const data = await axios.get(`http://localhost:4000/api/my-cocktail/${id}/edit`);
+            // console.log(data);
+            dispatch(cocktailSliceAction.addedCocktailEditHandler(data.data));
+            setName(data.data.name);
+            setType(data.data.type);
+            setPrice(data.data.price);
+            setAddressImage(data.data.addressImage);
+        };
+        try {
+            fetchAddedDataEdit();
+        } catch (error) {
+            dispatch(
+                notificationSliceActions.alertHandler({
+                    title: "Error",
+                    alertContent: "Something went wrong",
+                    type: "error",
+                })
+            );
+        }
+    }, [location.key]);
 
     return (
         <div>
@@ -124,11 +179,11 @@ const EditAddedCocktail = () => {
                         <div className="relative z-0 w-full mb-5">
                             <input
                                 type="text"
-                                onChange={nameOnChange}
-                                onBlur={nameOnBlur}
+                                onChange={nameOnChangeHandler}
+                                // onBlur={nameOnBlur}
                                 name="name"
-                                defaultValue={cocktailEdit.name}
-                                // value={cocktailEdit.name}
+                                // defaultValue={cocktailEdit.name}
+                                value={name}
                                 placeholder="Enter name"
                                 required
                                 className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
@@ -142,9 +197,11 @@ const EditAddedCocktail = () => {
                             <input
                                 // type="email"
                                 // name="email"
-                                onChange={typeOnChange}
-                                onBlur={typeOnBlur}
-                                defaultValue={cocktailEdit.type}
+                                name="type"
+                                onChange={typeOnChangeHandler}
+                                // onBlur={typeOnBlur}
+                                value={type}
+                                // defaultValue={cocktailEdit.type}
                                 placeholder="Enter type "
                                 className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                             />
@@ -156,10 +213,11 @@ const EditAddedCocktail = () => {
                         <div className="relative z-0 w-full mb-5">
                             <input
                                 // type="password"
-                                // name="password"
-                                onChange={priceOnChange}
-                                onBlur={priceOnBlur}
-                                defaultValue={cocktailEdit.price}
+                                name="price"
+                                onChange={priceOnChangeHandler}
+                                // onBlur={priceOnBlur}
+                                value={price}
+                                // defaultValue={cocktailEdit.price}
                                 placeholder="Enter price "
                                 className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                             />
@@ -171,10 +229,11 @@ const EditAddedCocktail = () => {
                         <div className="relative z-0 w-full mb-5">
                             <input
                                 // type="email"
-                                // name="email"
-                                onChange={addressImageOnChange}
-                                onBlur={addressImageOnBlur}
-                                defaultValue={cocktailEdit?.addressImageInput}
+                                name="addressImage"
+                                onChange={addressImageOnChangeHandler}
+                                // onBlur={addressImageOnBlur}
+                                value={addressImage}
+                                // defaultValue={cocktailEdit?.addressImage}
                                 placeholder="Enter address image "
                                 className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                             />

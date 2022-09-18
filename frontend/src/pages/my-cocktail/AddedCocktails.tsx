@@ -49,7 +49,7 @@ const AddedCocktails = () => {
 
     const editCocktailHandler = (id: string) => {
         navigate(`${id}/edit`);
-        // console.log(id);
+        dispatch(cocktailSliceAction.editAddedCocktailHandler(id));
         fetchAddedDataEdit(id);
     };
 

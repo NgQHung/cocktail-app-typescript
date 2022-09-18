@@ -12,11 +12,7 @@ const Confirmation = () => {
     const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
     const confirmationContent = useAppSelector((state) => state.UISlice.confirmationContent);
     const detail = addedCocktailDetail?.cocktail;
-    // const location = useLocation();
-    // console.log(location);
-    // console.log(addedCocktailDetail);
-    // const id = detail?._id;
-    const id = useAppSelector((state) => state.cocktailSlice.idAddedCocktail);
+    const id = useAppSelector((state) => state.cocktailSlice.idSelectedCocktail);
     const deleteConfirmation = confirmationContent?.title === "Delete";
     const forceDeleteConfirmation = confirmationContent?.title === "Force Delete";
 
