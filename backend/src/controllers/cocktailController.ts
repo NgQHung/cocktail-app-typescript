@@ -1,16 +1,7 @@
 import mongoose from "mongoose";
 import express, { Request, Response } from "express";
-// import Cocktail from "../models/cocktailModel";
-// import Alcoholic from "../models/alcoholicModel";
-// import NonAlcoholic from "../models/nonAlcoholicModel";
-// import Champagne from "../models/champagneFluteModel";
-// import Gin from "../models/ginModel";
-// import OrdinaryDrink from "../models/ordinaryDrinkModel";
-// import Vodka from "../models/vodkaModel";
-// import CocktailGlass from "../models/cocktailGlassModel";
 
 import axios from "axios";
-// import axios from "axios";
 
 // alcoholic
 export const alcoholic = async (req: Request, res: Response) => {
