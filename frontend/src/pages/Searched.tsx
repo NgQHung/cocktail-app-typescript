@@ -3,16 +3,20 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Cocktails from "../components/Cocktails/Cocktails";
 import { useSelector } from "react-redux";
+import { useAppDispatch } from "../store/hook";
+import { searchSliceAction } from "../store/search-slice";
+import { dataSliceActions } from "../store/slice-http";
 
 const Searched = () => {
     const [searchedCocktail, setSearchedCocktail] = useState([]);
     const params = useParams();
+    const dispatch = useAppDispatch();
     const selectedType: any = useSelector<any>((state) => state.searchSlice.selectedType);
 
     const searchDataByName = async () => {
-        const res = await axios.get(
-            `http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${params.cocktail}`
-        );
+        const res = await axios.get(`http://www.thecocktaildb.com/api/json/v1/1/search.php?s=${params.cocktail}`);
+        dispatch(searchSliceAction.getSearchedData(res.data.drinks));
+        dispatch(dataSliceActions.getAllCocktail(res.data.drinks));
         setSearchedCocktail(res.data.drinks);
     };
     // const searchDataByName = async () => {
@@ -22,15 +26,11 @@ const Searched = () => {
     //     setSearchedCocktail(res.data.drinks);
     // };
     const searchDataByFirstLetter = async () => {
-        const res = await axios.get(
-            `http://www.thecocktaildb.com/api/json/v1/1/search.php?f=${params.cocktail}`
-        );
+        const res = await axios.get(`http://www.thecocktaildb.com/api/json/v1/1/search.php?f=${params.cocktail}`);
         setSearchedCocktail(res.data.drinks);
     };
     const searchIngredientByName = async () => {
-        const res = await axios.get(
-            `http://www.thecocktaildb.com/api/json/v1/1/search.php?i=${params.cocktail}`
-        );
+        const res = await axios.get(`http://www.thecocktaildb.com/api/json/v1/1/search.php?i=${params.cocktail}`);
         setSearchedCocktail(res.data.ingredients);
     };
     const cocktailNameIsSelected = selectedType === "cocktail_name";

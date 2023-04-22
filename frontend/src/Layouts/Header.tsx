@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 // import { searchSliceAction } from "../store/search-slice";
@@ -19,6 +19,11 @@ const Header = () => {
     // const [searchClicked, setSearchClicked] = React.useState(false);
     const searchClicked = useAppSelector((state) => state.UISlice.searchClicked);
     // console.log(searchClicked);
+
+    const navigateHome = () => {
+        navigate("/");
+        window.location.reload();
+    };
 
     const total: any = useSelector<any>((state) => state.cocktailSlice.total);
     // console.log(total);
@@ -72,7 +77,7 @@ const Header = () => {
                                 },
                             }}
                             className=" order-2 sm:order-1 my-0 cursor-pointer z-50"
-                            onClick={() => navigate("/")}
+                            onClick={navigateHome}
                             // className={
                             //     // " order-2 sm:order-1 my-0  cursor-pointer"
                             //     //  +

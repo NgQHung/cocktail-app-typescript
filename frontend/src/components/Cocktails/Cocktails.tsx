@@ -26,7 +26,9 @@ const Cocktails: React.FC<Props> = (props) => {
     const dispatch = useDispatch();
 
     // const amountOfCocktail = useAppSelector((state) => state.dataSlice.indexEnd);
-    const allCocktails = useAppSelector((state) => state.dataSlice.data);
+    const allCocktails = useAppSelector((state) => state.dataSlice.dataToShow);
+
+    // const amountOfCocktail = useAppSelector((state) => state.searchSlice.searchedDataToShow);
 
     const location = useLocation();
     const isSignin = location.pathname === "/signin";
@@ -45,12 +47,12 @@ const Cocktails: React.FC<Props> = (props) => {
                 </div> */}
                 <div className=" py-6 lg:px-20 md:px-6 px-4">
                     <div className=" flex justify-between  flex-col ">
-                        <div className="relative dropdown_filter flex cursor-pointer pb-4">
+                        <div className="relative dropdown_filter inline-flex cursor-pointer pb-4  ">
                             <FontAwesomeIcon icon={faFilter} />
-                            <p className=" ml-4 font-normal text-base leading-4 text-gray-800">
+                            <span className=" ml-4 font-normal text-base leading-4 text-gray-800 ">
                                 {/* <Alert /> */}
                                 Filter
-                            </p>
+                            </span>
                             <div className="dropdown_filter_list ">
                                 <Filter />
                             </div>

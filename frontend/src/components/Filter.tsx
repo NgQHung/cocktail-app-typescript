@@ -53,7 +53,7 @@ const Filter = () => {
 
     return (
         <React.Fragment>
-            <div className=" absolute sm:w-[600px] top-full left-0 z-50 bg-white  ">
+            <div className=" absolute sm:w-[600px] top-full left-0 z-50 bg-white border border-[#1a1a1a] ">
                 <div id="filterSection" className={"relative md:py-10 lg:px-20 md:px-6 py-9 px-4 bg-gray-50 w-full "}>
                     {/* Cross button Code  */}
                     <div
@@ -62,59 +62,6 @@ const Filter = () => {
                     >
                         <FontAwesomeIcon icon={faXmark} />
                     </div>
-
-                    {/* Colors Section */}
-                    {/* <div>
-                        <div className=" flex space-x-2">
-                            <p className="lg:text-2xl text-xl lg:leading-6 leading-5 font-medium text-gray-800 ">
-                                Colors
-                            </p>
-                        </div>
-                        <div className=" md:flex md:justify-between  mt-8 grid grid-cols-3 gap-y-8 flex-wrap">
-                            <div className=" flex space-x-2 md:justify-center md:items-center items-center justify-start ">
-                                <div className=" w-4 h-4 rounded-full bg-white shadow"></div>
-                                <p className=" text-base leading-4 text-gray-600 font-normal">
-                                    White
-                                </p>
-                            </div>
-                            <div className=" flex space-x-2 justify-center items-center">
-                                <div className=" w-4 h-4 rounded-full bg-blue-600 shadow"></div>
-                                <p className=" text-base leading-4 text-gray-600 font-normal">
-                                    Blue
-                                </p>
-                            </div>
-                            <div className=" flex space-x-2 md:justify-center md:items-center items-center justify-start">
-                                <div className=" w-4 h-4 rounded-full bg-red-600 shadow"></div>
-                                <p className=" text-base leading-4 text-gray-600 font-normal">
-                                    Red
-                                </p>
-                            </div>
-                            <div className=" flex space-x-2 md:justify-center md:items-center items-center justify-start ">
-                                <div className=" w-4 h-4 rounded-full bg-indigo-600 shadow"></div>
-                                <p className=" text-base leading-4 text-gray-600 font-normal">
-                                    Indigo
-                                </p>
-                            </div>
-                            <div className=" flex space-x-2 justify-center items-center">
-                                <div className=" w-4 h-4 rounded-full bg-black shadow"></div>
-                                <p className=" text-base leading-4 text-gray-600 font-normal">
-                                    Black
-                                </p>
-                            </div>
-                            <div className=" flex space-x-2 md:justify-center md:items-center items-center justify-start">
-                                <div className=" w-4 h-4 rounded-full bg-purple-600 shadow"></div>
-                                <p className=" text-base leading-4 text-gray-600 font-normal">
-                                    Purple
-                                </p>
-                            </div>
-                            <div className=" flex space-x-2 md:justify-center md:items-center items-center justify-start">
-                                <div className=" w-4 h-4 rounded-full bg-gray-600 shadow"></div>
-                                <p className=" text-base leading-4 text-gray-600 font-normal">
-                                    Grey
-                                </p>
-                            </div>
-                        </div>
-                    </div> */}
 
                     <hr className=" bg-gray-200 lg:w-6/12 w-full md:my-10 my-8" />
 

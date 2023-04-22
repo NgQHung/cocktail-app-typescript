@@ -109,7 +109,7 @@ const dataSlice = createSlice({
     name: "data",
     initialState: initialValue,
     reducers: {
-        getAllCocktail(state: any, action: any) {
+        getAllCocktail(state, action) {
             state.data = action.payload;
             // console.log(state.data);
         },
