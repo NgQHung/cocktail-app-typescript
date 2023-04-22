@@ -9,6 +9,7 @@ import { authSliceActions } from "../../store/auth-slice";
 import { formSliceActions } from "../../store/form-slice";
 import { notificationSliceActions } from "../../store/notification-slice";
 import Modal from "../../UI/Modal";
+import { baseURL } from "../../utils/baseUrl";
 
 const inputIsValid = (value: string) => value.trim() !== "";
 const emailInputIsValid = (value: string) => value.includes("@") && value.includes(".");
@@ -92,7 +93,7 @@ const Signup = () => {
     };
 
     const signupHandler = async () => {
-        const res = await fetch("http://localhost:4000/api/users/signup", {
+        const res = await fetch(`${baseURL.server}/api/users/signup`, {
             method: "POST",
             body: JSON.stringify({
                 email: emailInput,
@@ -166,10 +167,7 @@ const Signup = () => {
                                 <FontAwesomeIcon icon={faXmark} />
                             </div>
                             <h3 className="pt-4 text-2xl text-center">Create an Account!</h3>
-                            <form
-                                className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
-                                onSubmit={onSubmitHandler}
-                            >
+                            <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded" onSubmit={onSubmitHandler}>
                                 <div className="mb-4 md:flex md:justify-between">
                                     <div className="mb-4 md:mr-2 md:mb-0">
                                         <label
@@ -190,15 +188,11 @@ const Signup = () => {
                                                 onChange={firstNameChange}
                                                 onBlur={firstNameOnBlur}
                                             />
-                                            {firstNameIsValid && firstNameIsTouched
-                                                ? iconValid
-                                                : null}
+                                            {firstNameIsValid && firstNameIsTouched ? iconValid : null}
                                         </div>
 
                                         {firstNameHasError && (
-                                            <p className="text-xs italic text-red-500">
-                                                Please enter a valid name.
-                                            </p>
+                                            <p className="text-xs italic text-red-500">Please enter a valid name.</p>
                                         )}
                                     </div>
                                     <div className="md:ml-2">
@@ -224,17 +218,12 @@ const Signup = () => {
                                         </div>
 
                                         {lastNameHasError && (
-                                            <p className="text-xs italic text-red-500">
-                                                Please enter a valid name.
-                                            </p>
+                                            <p className="text-xs italic text-red-500">Please enter a valid name.</p>
                                         )}
                                     </div>
                                 </div>
                                 <div className="mb-4">
-                                    <label
-                                        className="block mb-2 text-sm font-bold text-gray-700"
-                                        htmlFor="email"
-                                    >
+                                    <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="email">
                                         Email
                                     </label>
                                     <div>
@@ -252,9 +241,7 @@ const Signup = () => {
                                         {emailIsValid && iconValid}
                                     </div>
                                     {emailHasError && (
-                                        <p className="text-xs italic text-red-500">
-                                            Please enter a valid email.
-                                        </p>
+                                        <p className="text-xs italic text-red-500">Please enter a valid email.</p>
                                     )}
                                 </div>
                                 <div className="mb-4 md:flex md:justify-between">
@@ -302,9 +289,7 @@ const Signup = () => {
                                                 onChange={confirmPassChange}
                                                 onBlur={confirmPassOnBlur}
                                             />
-                                            {confirmPassIsValid &&
-                                            !confirmPassHasError &&
-                                            !confirmPasswordHasError
+                                            {confirmPassIsValid && !confirmPassHasError && !confirmPasswordHasError
                                                 ? iconValid
                                                 : null}
                                         </div>

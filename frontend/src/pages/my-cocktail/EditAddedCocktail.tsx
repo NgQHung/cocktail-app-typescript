@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { notificationSliceActions } from "../../store/notification-slice";
+import { baseURL } from "../../utils/baseUrl";
 
 const EditAddedCocktail = () => {
     const dispatch = useAppDispatch();
@@ -42,7 +43,7 @@ const EditAddedCocktail = () => {
 
     const updateCocktail = async () => {
         try {
-            const res = await axios.put(`http://localhost:4000/api/my-cocktail/${id}/update`, {
+            const res = await axios.put(`${baseURL.server}/api/my-cocktail/${id}/update`, {
                 // ...cocktailEdit,
                 name: name,
                 type: type,
@@ -98,7 +99,7 @@ const EditAddedCocktail = () => {
 
     useEffect(() => {
         const fetchAddedDataEdit = async () => {
-            const data = await axios.get(`http://localhost:4000/api/my-cocktail/${id}/edit`);
+            const data = await axios.get(`${baseURL.server}/api/my-cocktail/${id}/edit`);
             // console.log(data);
             dispatch(cocktailSliceAction.addedCocktailEditHandler(data.data));
             setName(data.data.name);
@@ -202,10 +203,7 @@ const EditAddedCocktail = () => {
                                 id="file_input"
                                 type="file"
                             />
-                            <p
-                                className="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                id="file_input_help"
-                            >
+                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">
                                 SVG, PNG, JPG or GIF (MAX. 800x400px).
                             </p>
                         </div>

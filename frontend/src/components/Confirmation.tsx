@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../store/hook";
 import { notificationSliceActions } from "../store/notification-slice";
 import { UISliceActions } from "../store/ui-slice";
 import Modal from "../UI/Modal";
+import { baseURL } from "../utils/baseUrl";
 
 const Confirmation = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Confirmation = () => {
     const forceDeleteConfirmation = confirmationContent?.title === "Force Delete";
 
     const sendReqDeleteData = async () => {
-        const res = await axios.delete(`http://localhost:4000/api/my-cocktail/${id}/delete`);
+        const res = await axios.delete(`${baseURL.server}/api/my-cocktail/${id}/delete`);
         if (res.data.data === null) {
             dispatch(
                 notificationSliceActions.alertHandler({
@@ -41,7 +42,7 @@ const Confirmation = () => {
     };
 
     const sendReqForceDeleteData = async () => {
-        const res = await axios.delete(`http://localhost:4000/api/my-cocktail/${id}/force-delete`);
+        const res = await axios.delete(`${baseURL.server}/api/my-cocktail/${id}/force-delete`);
         if (res.data.data === null) {
             dispatch(
                 notificationSliceActions.alertHandler({
@@ -90,9 +91,7 @@ const Confirmation = () => {
                         </div> */}
                         <div className="mt-4 md:mt-0  text-center md:text-left">
                             <p className="font-bold pb-4">{confirmationContent?.title}</p>
-                            <p className="text-sm text-gray-700 mt-1 pb-4">
-                                {confirmationContent?.description}
-                            </p>
+                            <p className="text-sm text-gray-700 mt-1 pb-4">{confirmationContent?.description}</p>
                         </div>
                     </div>
                     <div className="text-center md:text-right mt-4 md:flex md:justify-end ">

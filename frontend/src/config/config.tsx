@@ -1,6 +1,6 @@
 const config = {
     server: {
-        url: "http://localhost:4000",
+        url: "https://cocktail-be.onrender.com",
     },
 };
 

@@ -6,6 +6,7 @@ import { cocktailSliceAction } from "../../store/cocktail-slice";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { notificationSliceActions } from "../../store/notification-slice";
 import { UISliceActions } from "../../store/ui-slice";
+import { baseURL } from "../../utils/baseUrl";
 
 interface AddedCocktailsTypes {
     _id: string;
@@ -28,9 +29,7 @@ const AddedCocktails = () => {
     const location = useLocation();
 
     const fetchDetailData = async (id: string) => {
-        const detail = await axios.get(
-            "http://localhost:4000/api/my-cocktail/added-cocktails/" + id
-        );
+        const detail = await axios.get(`${baseURL.server}/api/my-cocktail/added-cocktails/` + id);
         dispatch(cocktailSliceAction.addedCocktailDetailHandler(detail.data));
     };
     const cocktailDetailHandler = (id: string) => {
@@ -39,7 +38,7 @@ const AddedCocktails = () => {
     };
 
     const fetchAddedDataEdit = async (id: string) => {
-        const data = await axios.get(`http://localhost:4000/api/my-cocktail/${id}/edit`);
+        const data = await axios.get(`${baseURL}/api/my-cocktail/${id}/edit`);
         // console.log(data);
         dispatch(cocktailSliceAction.addedCocktailEditHandler(data.data));
     };
@@ -63,14 +62,14 @@ const AddedCocktails = () => {
     };
 
     const fetchDataFromTrashHandler = async () => {
-        const data = await axios.get("http://localhost:4000/api/my-cocktail/trash/cocktails");
+        const data = await axios.get(`${baseURL}/api/my-cocktail/trash/cocktails`);
         // console.log();
         dispatch(cocktailSliceAction.deletedCocktailHandler(data.data.cocktail));
     };
 
     useEffect(() => {
         const fetchAddedData = async () => {
-            const data = await axios.get("http://localhost:4000/api/my-cocktail/added-cocktails");
+            const data = await axios.get(`${baseURL}/api/my-cocktail/added-cocktails`);
 
             dispatch(cocktailSliceAction.addedCocktailHandler(data.data));
         };
@@ -115,9 +114,7 @@ const AddedCocktails = () => {
                                 className="mt-4 sm:mt-0 mr-4 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
                             >
                                 <Link to="/create-cocktail">
-                                    <p className="text-sm font-medium leading-none text-white">
-                                        Add Cocktail
-                                    </p>
+                                    <p className="text-sm font-medium leading-none text-white">Add Cocktail</p>
                                 </Link>
                             </button>
                             <Link to="trash/cocktails">
@@ -125,9 +122,7 @@ const AddedCocktails = () => {
                                     onClick={fetchDataFromTrashHandler}
                                     className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-red-700 hover:bg-red-600 focus:outline-none rounded"
                                 >
-                                    <p className="text-sm font-medium leading-none text-white">
-                                        Trash
-                                    </p>
+                                    <p className="text-sm font-medium leading-none text-white">Trash</p>
                                 </button>
                             </Link>
                         </div>
@@ -136,10 +131,7 @@ const AddedCocktails = () => {
                                 <tbody>
                                     {addedCocktails?.map((item: AddedCocktailsTypes) => (
                                         // <div>
-                                        <tr
-                                            key={item._id}
-                                            className="h-16 border border-gray-100 rounded"
-                                        >
+                                        <tr key={item._id} className="h-16 border border-gray-100 rounded">
                                             <td>
                                                 <div className="ml-5">
                                                     <div className="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
@@ -160,10 +152,7 @@ const AddedCocktails = () => {
                                                                 strokeLinecap="round"
                                                                 strokeLinejoin="round"
                                                             >
-                                                                <path
-                                                                    stroke="none"
-                                                                    d="M0 0h24v24H0z"
-                                                                />
+                                                                <path stroke="none" d="M0 0h24v24H0z" />
                                                                 <path d="M5 12l5 5l10 -10" />
                                                             </svg>
                                                         </div>

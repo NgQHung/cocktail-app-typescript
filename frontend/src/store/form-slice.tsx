@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { signupModel } from "../models/cocktails";
+import { baseURL } from "../utils/baseUrl";
 // import { notificationSliceActions } from "./notification-slice";
 
 interface InitialValue {
@@ -64,7 +65,7 @@ const formSlice = createSlice({
 // };
 
 export const signupHandler = async (data: signupModel) => {
-    const response: any = await fetch("http://localhost:4000/api/users/signup", {
+    const response: any = await fetch(`${baseURL.server}/api/users/signup`, {
         method: "POST",
         body: JSON.stringify({ email: data.email, password: data.password }),
         headers: {

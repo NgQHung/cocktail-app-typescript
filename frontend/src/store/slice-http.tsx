@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Cocktail } from "../models/cocktails";
 import { createSlice } from "@reduxjs/toolkit";
+import { baseURL } from "../utils/baseUrl";
 
 type InitialValue = {
     loading: boolean;
@@ -22,55 +23,55 @@ const initialValue: InitialValue = {
     typeCocktail: "",
 };
 
-const uriBase = {
-    server: "https://cocktail-be.onrender.com",
-};
+// const uriBase = {
+//     server: "https://cocktail-be.onrender.com",
+// };
 
 export const fetchDataToShow = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${uriBase.server}/api/cocktails/category/cocktail`);
+        const res = await axios.get(`${baseURL.server}/api/cocktails/category/cocktail`);
         dispatch(dataSliceActions.getAllCocktail(res.data.data));
     };
 };
 export const fetchOrdinaryCocktail = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${uriBase.server}/api/cocktails/category/ordinary-drink`);
+        const res = await axios.get(`${baseURL.server}/api/cocktails/category/ordinary-drink`);
         dispatch(dataSliceActions.getAllCocktail(res.data.data));
     };
 };
 export const fetchCocktailGlass = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${uriBase.server}/api/cocktails/glass/cocktail-glass`);
+        const res = await axios.get(`${baseURL.server}/api/cocktails/glass/cocktail-glass`);
         dispatch(dataSliceActions.getAllCocktail(res.data.data));
     };
 };
 export const fetchChampagneFlute = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${uriBase.server}/api/cocktails/glass/champagne-flute`);
+        const res = await axios.get(`${baseURL.server}/api/cocktails/glass/champagne-flute`);
         dispatch(dataSliceActions.getAllCocktail(res.data.data));
     };
 };
 export const fetchIngredientGin = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${uriBase.server}/api/cocktails/ingredient/gin`);
+        const res = await axios.get(`${baseURL.server}/api/cocktails/ingredient/gin`);
         dispatch(dataSliceActions.getAllCocktail(res.data.data));
     };
 };
 export const fetchIngredientVodka = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${uriBase.server}/api/cocktails/ingredient/vodka`);
+        const res = await axios.get(`${baseURL.server}/api/cocktails/ingredient/vodka`);
         dispatch(dataSliceActions.getAllCocktail(res.data.data));
     };
 };
 export const fetchAlcoholic = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${uriBase.server}/api/cocktails/alcoholic/alcoholic`);
+        const res = await axios.get(`${baseURL.server}/api/cocktails/alcoholic/alcoholic`);
         dispatch(dataSliceActions.getAllCocktail(res.data.data));
     };
 };
 export const fetchNonAlcoholic = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${uriBase.server}/api/cocktails/alcoholic/non-alcoholic`);
+        const res = await axios.get(`${baseURL.server}/api/cocktails/alcoholic/non-alcoholic`);
         dispatch(dataSliceActions.getAllCocktail(res.data.data));
     };
 };

@@ -4,6 +4,7 @@ import Use_Form from "../../hooks/use_form";
 import { formSliceActions } from "../../store/form-slice";
 import { useAppDispatch } from "../../store/hook";
 import { notificationSliceActions } from "../../store/notification-slice";
+import { baseURL } from "../../utils/baseUrl";
 
 const inputIsValid = (value: string) => value.trim() !== "";
 
@@ -58,7 +59,7 @@ const CreateCocktail = () => {
 
     const createCocktail = async () => {
         try {
-            const res = await axios.post("http://localhost:4000/api/my-cocktail/create-cocktail", {
+            const res = await axios.post(`${baseURL.server}/api/my-cocktail/create-cocktail`, {
                 name: nameInput,
                 type: typeInput,
                 price: priceInput,
@@ -186,10 +187,7 @@ const CreateCocktail = () => {
                                 id="file_input"
                                 type="file"
                             />
-                            <p
-                                className="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                id="file_input_help"
-                            >
+                            <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">
                                 SVG, PNG, JPG or GIF (MAX. 800x400px).
                             </p>
                         </div>
