@@ -11,8 +11,9 @@ const User = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const user = localStorage.getItem("User") !== null;
-    const email = user ? JSON.parse(localStorage.getItem("User") || "").user.email : "";
+    const user = localStorage.getItem("User");
+    console.log(localStorage.getItem("User"));
+    const email = user ? JSON.parse(localStorage.getItem("User")!) : "";
 
     const signoutHandler = () => {
         dispatch(authSliceActions.logout());
@@ -28,7 +29,7 @@ const User = () => {
     };
 
     const navigateHandlerCocktail = () => {
-        if (user) {
+        if (user !== null) {
             return navigate("/create-cocktail");
         } else {
             return dispatch(
@@ -41,7 +42,7 @@ const User = () => {
         }
     };
     const navigateHandlerIngredient = () => {
-        if (user) {
+        if (user !== null) {
             return navigate("/create-ingredient");
         } else {
             return dispatch(
@@ -88,7 +89,7 @@ const User = () => {
                 {user ? (
                     <div className="py-2 px-4 text-sm text-gray-900 dark:text-white">
                         <div>Bonnie Green</div>
-                        <div className="font-medium truncate">{email}</div>
+                        <div className="font-medium truncate">{email?.user?.email}</div>
                     </div>
                 ) : (
                     // <div className="py-2">{email}</div>

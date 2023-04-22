@@ -53,11 +53,8 @@ const Filter = () => {
 
     return (
         <React.Fragment>
-            <div className="2xl:container 2xl:mx-auto lg:absolute sm:w-[600px] lg:top-full lg:left-0 z-50 bg-white">
-                <div
-                    id="filterSection"
-                    className={"relative md:py-10 lg:px-20 md:px-6 py-9 px-4 bg-gray-50 w-full "}
-                >
+            <div className=" absolute sm:w-[600px] top-full left-0 z-50 bg-white  ">
+                <div id="filterSection" className={"relative md:py-10 lg:px-20 md:px-6 py-9 px-4 bg-gray-50 w-full "}>
                     {/* Cross button Code  */}
                     <div
                         // onClick={() => setShowfilters(false)}
@@ -136,9 +133,7 @@ const Filter = () => {
                                     id="alcoholic"
                                     name="alcoholic"
                                     value="alcoholic"
-                                    disabled={
-                                        typeCocktail !== "alcoholic" && clicked ? true : false
-                                    }
+                                    disabled={typeCocktail !== "alcoholic" && clicked ? true : false}
                                     // checked={alcoholic}
                                     onChange={changeHandler}
                                 />
@@ -160,9 +155,7 @@ const Filter = () => {
                                     id="non-Alcoholic"
                                     name="non-Alcoholic"
                                     value="non-Alcoholic"
-                                    disabled={
-                                        typeCocktail !== "non-Alcoholic" && clicked ? true : false
-                                    }
+                                    disabled={typeCocktail !== "non-Alcoholic" && clicked ? true : false}
                                     // checked={non-Alcoholic}
                                     onChange={changeHandler}
                                 />
@@ -226,9 +219,7 @@ const Filter = () => {
                                     id="cocktailGlass"
                                     name="cocktailGlass"
                                     value="cocktailGlass"
-                                    disabled={
-                                        typeCocktail !== "cocktailGlass" && clicked ? true : false
-                                    } // checked={cocktailGlass}
+                                    disabled={typeCocktail !== "cocktailGlass" && clicked ? true : false} // checked={cocktailGlass}
                                     onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
@@ -249,9 +240,7 @@ const Filter = () => {
                                     id="champagneFlute"
                                     name="champagneFlute"
                                     value="champagneFlute"
-                                    disabled={
-                                        typeCocktail !== "champagneFlute" && clicked ? true : false
-                                    } // checked={champagneFlute}
+                                    disabled={typeCocktail !== "champagneFlute" && clicked ? true : false} // checked={champagneFlute}
                                     onChange={changeHandler}
                                 />
                                 <div className=" inline-block">
@@ -272,9 +261,7 @@ const Filter = () => {
                                     id="ordinaryDrink"
                                     name="ordinaryDrink"
                                     value="ordinaryDrink"
-                                    disabled={
-                                        typeCocktail !== "ordinaryDrink" && clicked ? true : false
-                                    } // checked={ordinaryDrink}
+                                    disabled={typeCocktail !== "ordinaryDrink" && clicked ? true : false} // checked={ordinaryDrink}
                                     onChange={changeHandler}
                                 />
                                 <div className=" inline-block">

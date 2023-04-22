@@ -25,10 +25,8 @@ const Cocktails: React.FC<Props> = (props) => {
     const dataIsEmpty = props.cocktailData?.length === 0;
     const dispatch = useDispatch();
 
-    // const alertContent: any = useSelector<any>((state) => state.notificationSlice.alertContent);
-    // console.log(alertContent);
-    // const dataToShow = useAppSelector(state => state.dataSlice.dataToShow)
-    const amountOfCocktail = useAppSelector((state) => state.dataSlice.indexEnd);
+    // const amountOfCocktail = useAppSelector((state) => state.dataSlice.indexEnd);
+    const allCocktails = useAppSelector((state) => state.dataSlice.data);
 
     const location = useLocation();
     const isSignin = location.pathname === "/signin";
@@ -39,14 +37,6 @@ const Cocktails: React.FC<Props> = (props) => {
         dispatch(dataSliceActions.getMoreCocktails());
     };
 
-    // useEffect(() => {
-    //     let time = setTimeout(() => {
-    //         dispatch(notificationSliceActions.alertHandler(null));
-    //     }, 1000);
-    //     return () => {
-    //         clearTimeout(time);
-    //     };
-    // }, [dispatch]);
     return (
         <Fragment>
             <div className=" 2xl:container 2xl:mx-auto">
@@ -54,19 +44,19 @@ const Cocktails: React.FC<Props> = (props) => {
                     {alertContent && location.pathname === "/" ? <Alert /> : null}
                 </div> */}
                 <div className=" py-6 lg:px-20 md:px-6 px-4">
-                    <div className=" flex justify-between items-center">
-                        <div className="relative dropdown_filter flex cursor-pointer">
+                    <div className=" flex justify-between  flex-col ">
+                        <div className="relative dropdown_filter flex cursor-pointer pb-4">
                             <FontAwesomeIcon icon={faFilter} />
                             <p className=" ml-4 font-normal text-base leading-4 text-gray-800">
                                 {/* <Alert /> */}
                                 Filter
                             </p>
-                            <div className="dropdown_filter_list">
+                            <div className="dropdown_filter_list ">
                                 <Filter />
                             </div>
                         </div>
-                        <p className=" cursor-pointer hover:underline duration-100 font-normal text-base leading-4 text-gray-600">
-                            Showing {amountOfCocktail} products
+                        <p className=" cursor-pointer  duration-100 font-normal text-base leading-4 text-gray-600">
+                            Showing {allCocktails.length} products
                         </p>
                     </div>
 
@@ -82,11 +72,7 @@ const Cocktails: React.FC<Props> = (props) => {
                             ))}
                         {ingredient &&
                             props.cocktailData?.map((coc) => (
-                                <CocktailItem
-                                    key={coc.idDrink}
-                                    id={coc.idIngredient}
-                                    name={coc.strIngredient}
-                                />
+                                <CocktailItem key={coc.idDrink} id={coc.idIngredient} name={coc.strIngredient} />
                             ))}
                         {error && <p>There are no such cocktail</p>}
                     </div>
@@ -103,9 +89,7 @@ const Cocktails: React.FC<Props> = (props) => {
                         //     <Button clickHandler={props.loadMore}>Load more</Button>
                         // </div>
                         <div className=" flex justify-center items-center">
-                            <ButtonLoadMore clickHandler={loadMoreHandler}>
-                                Load More
-                            </ButtonLoadMore>
+                            <ButtonLoadMore clickHandler={loadMoreHandler}>Load More</ButtonLoadMore>
                         </div>
                     ) : null}
                     {isSignin && !isSignup ? <Signin /> : null}
