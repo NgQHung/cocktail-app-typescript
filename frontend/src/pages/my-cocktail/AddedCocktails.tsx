@@ -29,8 +29,16 @@ const AddedCocktails = () => {
     const location = useLocation();
 
     const fetchDetailData = async (id: string) => {
-        const detail = await axios.get(`${baseURL.server}/api/my-cocktail/added-cocktails/` + id);
-        dispatch(cocktailSliceAction.addedCocktailDetailHandler(detail.data));
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+            const detail = await axios.get(`${baseURL.server}/api/my-cocktail/added-cocktails/` + id);
+            dispatch(cocktailSliceAction.addedCocktailDetailHandler(detail.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
     const cocktailDetailHandler = (id: string) => {
         navigate(id);
@@ -38,9 +46,16 @@ const AddedCocktails = () => {
     };
 
     const fetchAddedDataEdit = async (id: string) => {
-        const data = await axios.get(`${baseURL}/api/my-cocktail/${id}/edit`);
-        // console.log(data);
-        dispatch(cocktailSliceAction.addedCocktailEditHandler(data.data));
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+            const data = await axios.get(`${baseURL}/api/my-cocktail/${id}/edit`);
+            dispatch(cocktailSliceAction.addedCocktailEditHandler(data.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
     // console.log(deleteClicked);
 

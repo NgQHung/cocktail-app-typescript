@@ -34,7 +34,7 @@ export const fetchDataToShow = () => {
 
     return async (dispatch: any) => {
         try {
-            console.log("render here 2");
+            // console.log("render here 2");
             dispatch(UISliceActions.loadingHandler(true));
             dispatch(notificationSliceActions.alertErrorHandler(true));
             const res = await axios.get(`${baseURL.server}/api/cocktails/category/cocktai`);

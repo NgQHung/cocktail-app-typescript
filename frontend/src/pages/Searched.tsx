@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../store/hook";
 import { searchSliceAction } from "../store/search-slice";
 import { dataSliceActions } from "../store/slice-http";
+import { UISliceActions } from "../store/ui-slice";
+import { notificationSliceActions } from "../store/notification-slice";
 
 const Searched = () => {
     const [searchedCocktail, setSearchedCocktail] = useState([]);
@@ -26,12 +28,26 @@ const Searched = () => {
     //     setSearchedCocktail(res.data.drinks);
     // };
     const searchDataByFirstLetter = async () => {
-        const res = await axios.get(`http://www.thecocktaildb.com/api/json/v1/1/search.php?f=${params.cocktail}`);
-        setSearchedCocktail(res.data.drinks);
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+            const res = await axios.get(`http://www.thecocktaildb.com/api/json/v1/1/search.php?f=${params.cocktail}`);
+            setSearchedCocktail(res.data.drinks);
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
     const searchIngredientByName = async () => {
-        const res = await axios.get(`http://www.thecocktaildb.com/api/json/v1/1/search.php?i=${params.cocktail}`);
-        setSearchedCocktail(res.data.ingredients);
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+            const res = await axios.get(`http://www.thecocktaildb.com/api/json/v1/1/search.php?i=${params.cocktail}`);
+            setSearchedCocktail(res.data.ingredients);
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
     const cocktailNameIsSelected = selectedType === "cocktail_name";
     const cocktailLetterIsSelected = selectedType === "cocktail_letter";

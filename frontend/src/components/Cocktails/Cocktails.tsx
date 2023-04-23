@@ -26,6 +26,7 @@ const Cocktails: React.FC<Props> = (props) => {
     const dataIsEmpty = props.cocktailData?.length === 0;
     const dispatch = useDispatch();
     const alertError = useAppSelector((state) => state.notificationSlice.alertError);
+    const amountCocktails = props.cocktailData ? props.cocktailData.length : 0;
 
     // const amountOfCocktail = useAppSelector((state) => state.dataSlice.indexEnd);
     const allCocktails = useAppSelector((state) => state.dataSlice.dataToShow);
@@ -64,22 +65,22 @@ const Cocktails: React.FC<Props> = (props) => {
                         </p>
                     </div>
 
-                    {alertError && props.cocktailData.length === 0 ? (
+                    {alertError && amountCocktails === 0 ? (
                         <Loading />
                     ) : (
                         <div className=" grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-y-12 lg:gap-x-8 sm:gap-y-10 sm:gap-x-6 gap-y-6 lg:mt-12 mt-10">
                             {!ingredient &&
-                                props.cocktailData?.map((coc) => (
+                                props.cocktailData?.map((coc, idx) => (
                                     <CocktailItem
-                                        key={coc.idDrink}
+                                        key={idx}
                                         id={coc.idDrink}
                                         name={coc.strDrink}
                                         image={coc.strDrinkThumb}
                                     />
                                 ))}
                             {ingredient &&
-                                props.cocktailData?.map((coc) => (
-                                    <CocktailItem key={coc.idDrink} id={coc.idIngredient} name={coc.strIngredient} />
+                                props.cocktailData?.map((coc, idx) => (
+                                    <CocktailItem key={idx} id={coc.idIngredient} name={coc.strIngredient} />
                                 ))}
                             {error && <p>There are no such cocktail</p>}
                         </div>
