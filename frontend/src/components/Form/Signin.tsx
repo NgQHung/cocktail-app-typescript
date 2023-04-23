@@ -279,7 +279,7 @@ const Signin = () => {
             </div>
             {/* screen end */}
             {/* mobile start */}
-            <div className="hidden sm:block absolute h-full w-full sm:static space-y-8 px-10 pb-10 pt-5 bg-white lg:rounded-xl z-10">
+            {/* <div className="hidden sm:block absolute h-full w-full sm:static space-y-8 px-10 pb-10 pt-5 bg-white lg:rounded-xl z-10">
                 <div
                     className="absolute right-8 hover:text-red-500 cursor-pointer text-xl"
                     onClick={closeSigninHandler}
@@ -440,7 +440,7 @@ const Signin = () => {
                         </Link>
                     </p>
                 </form>
-            </div>
+            </div> */}
             {/* mobile end */}
         </Modal>
     );

@@ -2,6 +2,8 @@ import axios from "axios";
 import { Cocktail } from "../models/cocktails";
 import { createSlice } from "@reduxjs/toolkit";
 import { baseURL } from "../utils/baseUrl";
+import { UISliceActions } from "./ui-slice";
+import { notificationSliceActions } from "./notification-slice";
 
 type InitialValue = {
     loading: boolean;
@@ -28,51 +30,123 @@ const initialValue: InitialValue = {
 // };
 
 export const fetchDataToShow = () => {
+    console.log("render here 1");
+
     return async (dispatch: any) => {
-        const res = await axios.get(`${baseURL.server}/api/cocktails/category/cocktail`);
-        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+        try {
+            console.log("render here 2");
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+            const res = await axios.get(`${baseURL.server}/api/cocktails/category/cocktai`);
+            dispatch(dataSliceActions.getAllCocktail(res.data.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+            // dispatch(notificationSliceActions.alertErrorHandler(true));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
 };
 export const fetchOrdinaryCocktail = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${baseURL.server}/api/cocktails/category/ordinary-drink`);
-        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+
+            const res = await axios.get(`${baseURL.server}/api/cocktails/category/ordinary-drink`);
+            dispatch(dataSliceActions.getAllCocktail(res.data.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
 };
 export const fetchCocktailGlass = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${baseURL.server}/api/cocktails/glass/cocktail-glass`);
-        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+            const res = await axios.get(`${baseURL.server}/api/cocktails/glass/cocktail-glass`);
+            dispatch(dataSliceActions.getAllCocktail(res.data.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
 };
 export const fetchChampagneFlute = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${baseURL.server}/api/cocktails/glass/champagne-flute`);
-        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+            const res = await axios.get(`${baseURL.server}/api/cocktails/glass/champagne-flute`);
+            dispatch(dataSliceActions.getAllCocktail(res.data.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
 };
 export const fetchIngredientGin = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${baseURL.server}/api/cocktails/ingredient/gin`);
-        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+            const res = await axios.get(`${baseURL.server}/api/cocktails/ingredient/gin`);
+            dispatch(dataSliceActions.getAllCocktail(res.data.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
 };
 export const fetchIngredientVodka = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${baseURL.server}/api/cocktails/ingredient/vodka`);
-        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+
+            const res = await axios.get(`${baseURL.server}/api/cocktails/ingredient/vodka`);
+            dispatch(dataSliceActions.getAllCocktail(res.data.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
 };
 export const fetchAlcoholic = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${baseURL.server}/api/cocktails/alcoholic/alcoholic`);
-        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+
+            const res = await axios.get(`${baseURL.server}/api/cocktails/alcoholic/alcoholic`);
+            dispatch(dataSliceActions.getAllCocktail(res.data.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
 };
 export const fetchNonAlcoholic = () => {
     return async (dispatch: any) => {
-        const res = await axios.get(`${baseURL.server}/api/cocktails/alcoholic/non-alcoholic`);
-        dispatch(dataSliceActions.getAllCocktail(res.data.data));
+        try {
+            dispatch(UISliceActions.loadingHandler(true));
+            dispatch(notificationSliceActions.alertErrorHandler(true));
+
+            const res = await axios.get(`${baseURL.server}/api/cocktails/alcoholic/non-alcoholic`);
+            dispatch(dataSliceActions.getAllCocktail(res.data.data));
+            dispatch(notificationSliceActions.alertErrorHandler(false));
+        } catch (error: any) {
+            dispatch(notificationSliceActions.alertHandler(error.response.data.message));
+        }
+        dispatch(UISliceActions.loadingHandler(false));
     };
 };
 

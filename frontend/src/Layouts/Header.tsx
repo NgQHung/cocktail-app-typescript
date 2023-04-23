@@ -129,7 +129,7 @@ const Header = () => {
                                 <NavTools />
                             </motion.div>
                         </div>
-                        <div className="hidden sm:block sm:order-2 sm:absolute bg-transparent h-full w-full">
+                        <div className="hidden sm:block sm:order-2 sm:absolute bg-transparent h-full ">
                             <Search />
                         </div>
 

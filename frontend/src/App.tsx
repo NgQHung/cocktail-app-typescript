@@ -40,7 +40,7 @@ function App() {
     const dataToShow = useAppSelector((state) => state.dataSlice?.dataToShow);
     const alertContent = useAppSelector((state) => state.notificationSlice.alertContent);
     // const addedCocktails = useAppSelector((state) => state.cocktailSlice.addedCocktails);
-
+    console.log("loadingState: ", loadingState);
     const location = useLocation();
     useEffect(() => {
         try {
@@ -86,35 +86,35 @@ function App() {
     }, [alertContent, dispatch]);
 
     return (
-        <Fragment>
+        <div className="min-h-screen w-full">
             <div className="fixed top-[150px] left-[20px] z-50">{alertContent && <Alert />}</div>
             <div className="absolute">{loadingState && <Loading />}</div>
-            <div className="relative w-full h-full">
-                <Header />
-                <AnimatePresence>
-                    <Routes location={location} key={location.key}>
-                        <Route path="/" element={<Main cocktailData={dataToShow} />}>
-                            <Route path="navigation" element={<Navigation />} />
-                            <Route path="signup" element={<Signup />} />
-                            <Route path="signin" element={<Signin />} />
-                        </Route>
-                        <Route path="/wish-list" element={<WishList />} />
-                        <Route path="/my-cocktail" element={<AddedCocktails />} />
-                        <Route path="/my-cocktail/:id" element={<AddedCocktailsDetail />} />
-                        <Route path="/my-cocktail/:id/edit" element={<EditAddedCocktail />} />
-                        <Route path="/my-cocktail/trash/cocktails" element={<DeletedCocktails />} />
-                        <Route path="/create-cocktail" element={<CreateCocktail />} />
-                        <Route path="/create-ingredient" element={<CreateIngredient />} />
-                        <Route path="/cocktail/:cocktailId" element={<CocktailDetail />} />
-                        <Route path="/searched/:cocktail" element={<Searched />} />
-                        <Route path="/searched/*" element={<NotFound />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </AnimatePresence>
-                {/* <CocktailItem /> */}
-                {/* <Footer /> */}
-            </div>
-        </Fragment>
+            {/* <div className="relative w-full h-full"> */}
+            <Header />
+            <AnimatePresence>
+                <Routes location={location} key={location.key}>
+                    <Route path="/" element={<Main cocktailData={dataToShow} />}>
+                        <Route path="navigation" element={<Navigation />} />
+                        <Route path="signup" element={<Signup />} />
+                        <Route path="signin" element={<Signin />} />
+                    </Route>
+                    <Route path="/wish-list" element={<WishList />} />
+                    <Route path="/my-cocktail" element={<AddedCocktails />} />
+                    <Route path="/my-cocktail/:id" element={<AddedCocktailsDetail />} />
+                    <Route path="/my-cocktail/:id/edit" element={<EditAddedCocktail />} />
+                    <Route path="/my-cocktail/trash/cocktails" element={<DeletedCocktails />} />
+                    <Route path="/create-cocktail" element={<CreateCocktail />} />
+                    <Route path="/create-ingredient" element={<CreateIngredient />} />
+                    <Route path="/cocktail/:cocktailId" element={<CocktailDetail />} />
+                    <Route path="/searched/:cocktail" element={<Searched />} />
+                    <Route path="/searched/*" element={<NotFound />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </AnimatePresence>
+            {/* <CocktailItem /> */}
+            {/* <Footer /> */}
+            {/* </div> */}
+        </div>
     );
 }
 

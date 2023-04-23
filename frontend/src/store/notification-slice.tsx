@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialValue: any = {
+const initialValue = {
     alertAdded: false,
     alertRemoved: false,
     alertError: false,

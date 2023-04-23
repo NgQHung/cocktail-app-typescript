@@ -11,7 +11,7 @@ const User = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const user = localStorage.getItem("User");
+    const user = JSON.parse(localStorage.getItem("User")!);
     const email = user ? JSON.parse(localStorage.getItem("User")!) : "";
 
     const signoutHandler = () => {
@@ -69,7 +69,7 @@ const User = () => {
     // };
 
     const navigateHandlerAddedCocktail = () => {
-        if (user) {
+        if (user !== null) {
             return navigate("/my-cocktail");
         } else {
             return dispatch(
