@@ -86,13 +86,6 @@ const EditAddedCocktail = () => {
     // const [input, setInput] = useState('')
     const onSaveHandler = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({
-            // ...cocktailEdit,
-            name: name,
-            type: type,
-            price: price,
-            addressImage: addressImage,
-        });
         updateCocktail();
         // console.log(inputEdit);
     };

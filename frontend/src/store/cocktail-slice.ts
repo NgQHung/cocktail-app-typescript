@@ -46,7 +46,6 @@ const cocktailSlice = createSlice({
             state.deletedCocktails = action.payload;
         },
         localStorageHandler(state, action) {
-            console.log(action.payload.basket);
             state.total = action.payload?.total;
             state.cocktailsBasket = action.payload?.basket;
             state.cocktailsHeart = action.payload?.heart;
@@ -57,9 +56,7 @@ const cocktailSlice = createSlice({
         addCocktail(state, action) {
             const idCocktail = action.payload.id;
             state.total = state.total + action.payload.price * action.payload.amount;
-            const existingCocktailIndex = state.cocktailsBasket.findIndex(
-                (item: any) => item.id === idCocktail
-            );
+            const existingCocktailIndex = state.cocktailsBasket.findIndex((item: any) => item.id === idCocktail);
             const existingCocktail = state.cocktailsBasket[existingCocktailIndex];
             let updateCocktails;
             if (existingCocktail) {
@@ -80,17 +77,13 @@ const cocktailSlice = createSlice({
             localStorage.setItem("Cart", JSON.stringify(state.cocktailsBasket));
         },
         removeCocktail(state, action) {
-            const existingCocktailIndex = state.cocktailsBasket.findIndex(
-                (item: any) => item.id === action.payload.id
-            );
+            const existingCocktailIndex = state.cocktailsBasket.findIndex((item: any) => item.id === action.payload.id);
             // console.log(action.payload.price);
             state.total = state.total - action.payload.price;
             const existingCocktail = state.cocktailsBasket[existingCocktailIndex];
             let updateCocktails;
             if (existingCocktail.amount === 1) {
-                updateCocktails = state.cocktailsBasket.filter(
-                    (item: any) => item.id !== action.payload.id
-                );
+                updateCocktails = state.cocktailsBasket.filter((item: any) => item.id !== action.payload.id);
                 state.cocktailsBasket = updateCocktails;
             } else {
                 const updateCocktail = {
@@ -109,9 +102,7 @@ const cocktailSlice = createSlice({
         },
         heartHandler(state, action) {
             const idCocktail = action.payload.id;
-            const existingCocktailIndex = state.cocktailsHeart.findIndex(
-                (item: any) => item.id === idCocktail
-            );
+            const existingCocktailIndex = state.cocktailsHeart.findIndex((item: any) => item.id === idCocktail);
             const existingCocktail = state.cocktailsHeart[existingCocktailIndex];
             // var arr = []
             let updateCocktails;
@@ -129,9 +120,7 @@ const cocktailSlice = createSlice({
         },
         removeCocktailHeart(state, action) {
             let updateCocktails;
-            updateCocktails = state.cocktailsHeart.filter(
-                (item: any) => item.id !== action.payload
-            );
+            updateCocktails = state.cocktailsHeart.filter((item: any) => item.id !== action.payload);
             state.cocktailsHeart = updateCocktails;
             localStorage.setItem("Heart", JSON.stringify(state.cocktailsHeart));
         },

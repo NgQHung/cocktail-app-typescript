@@ -12,7 +12,6 @@ const User = () => {
     const navigate = useNavigate();
 
     const user = localStorage.getItem("User");
-    console.log(localStorage.getItem("User"));
     const email = user ? JSON.parse(localStorage.getItem("User")!) : "";
 
     const signoutHandler = () => {
