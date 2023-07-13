@@ -1,4 +1,4 @@
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -13,22 +13,22 @@ import { baseURL } from "../../utils/baseUrl";
 
 const inputIsValid = (value: string) => value.trim() !== "";
 const emailInputIsValid = (value: string) => value.includes("@") && value.includes(".");
-const iconValid = (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-green-500"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-    >
-        <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-        ></path>
-    </svg>
-);
+// const iconValid = (
+//     <svg
+//         xmlns="http://www.w3.org/2000/svg"
+//         className="h-6 w-6 text-green-500"
+//         fill="none"
+//         viewBox="0 0 24 24"
+//         stroke="currentColor"
+//     >
+//         <path
+//             strokeLinecap="round"
+//             strokeLinejoin="round"
+//             strokeWidth="2"
+//             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+//         ></path>
+//     </svg>
+// );
 
 const Signup = () => {
     // useForm for input form
@@ -83,6 +83,8 @@ const Signup = () => {
     const dispatch = useDispatch();
     // const isSignup = location.pathname === "/signup";
     const navigate = useNavigate();
+    const [passwordType, setPasswordType] = React.useState("password");
+    const [passwordConfirmType, setPasswordConfirmType] = React.useState("password");
 
     const confirmPassIsInvalid = passwordInput !== confirmPassInput;
     const confirmPasswordHasError = confirmPassIsInvalid && confirmPassIsTouched;
@@ -153,6 +155,20 @@ const Signup = () => {
     //         dispatch(cocktailSliceAction.navigationHandler(false));
     //     }
     // }, [isSignup]);
+    const togglePassword = () => {
+        if (passwordType === "password") {
+            setPasswordType("text");
+            return;
+        }
+        setPasswordType("password");
+    };
+    const togglePasswordConfirm = () => {
+        if (passwordConfirmType === "password") {
+            setPasswordConfirmType("text");
+            return;
+        }
+        setPasswordConfirmType("password");
+    };
 
     return (
         <Modal>
@@ -167,9 +183,9 @@ const Signup = () => {
                                 <FontAwesomeIcon icon={faXmark} />
                             </div>
                             <h3 className="pt-4 text-2xl text-center">Create an Account!</h3>
-                            <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded" onSubmit={onSubmitHandler}>
-                                <div className="mb-4 md:flex md:justify-between">
-                                    <div className="mb-4 md:mr-2 md:mb-0">
+                            <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded " onSubmit={onSubmitHandler}>
+                                <div className="mb-8 md:flex md:justify-between">
+                                    <div className="mb-8 md:mr-2 md:mb-0 relative">
                                         <label
                                             className="block mb-2 text-sm font-bold text-gray-700"
                                             htmlFor="firstName"
@@ -188,14 +204,16 @@ const Signup = () => {
                                                 onChange={firstNameChange}
                                                 onBlur={firstNameOnBlur}
                                             />
-                                            {firstNameIsValid && firstNameIsTouched ? iconValid : null}
+                                            {/* {firstNameIsValid && firstNameIsTouched ? iconValid : null} */}
                                         </div>
 
                                         {firstNameHasError && (
-                                            <p className="text-xs italic text-red-500">Please enter a valid name.</p>
+                                            <p className="text-xs italic text-red-500 absolute top-full">
+                                                Please enter a valid name.
+                                            </p>
                                         )}
                                     </div>
-                                    <div className="md:ml-2">
+                                    <div className="mb-8 md:mr-2 md:mb-0 relative ">
                                         <label
                                             className="block mb-2 text-sm font-bold text-gray-700"
                                             htmlFor="lastName"
@@ -214,23 +232,24 @@ const Signup = () => {
                                                 onChange={lastNameChange}
                                                 onBlur={lastNameOnBlur}
                                             />
-                                            {lastNameIsValid && iconValid}
+                                            {/* {lastNameIsValid && iconValid} */}
                                         </div>
 
                                         {lastNameHasError && (
-                                            <p className="text-xs italic text-red-500">Please enter a valid name.</p>
+                                            <p className="text-xs italic text-red-500 absolute top-full">
+                                                Please enter a valid name.
+                                            </p>
                                         )}
                                     </div>
                                 </div>
-                                <div className="mb-4">
+                                <div className="mb-8  relative">
                                     <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="email">
                                         Email
                                     </label>
-                                    <div>
+                                    <div className="flex mb-3">
                                         <input
-                                            className={`${
-                                                emailHasError ? "border-red-500" : ""
-                                            }w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline`}
+                                            className={`${emailHasError ? "border-red-500" : ""}
+            w-full px-3 py-2  text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline`}
                                             id="email"
                                             type="email"
                                             placeholder="Email"
@@ -238,68 +257,90 @@ const Signup = () => {
                                             onChange={emailChange}
                                             onBlur={emailOnBlur}
                                         />
-                                        {emailIsValid && iconValid}
+                                        {/* {emailIsValid && iconValid} */}
                                     </div>
                                     {emailHasError && (
-                                        <p className="text-xs italic text-red-500">Please enter a valid email.</p>
+                                        <p className="text-xs italic text-red-500 absolute top-full">
+                                            Please enter a valid email.
+                                        </p>
                                     )}
                                 </div>
-                                <div className="mb-4 md:flex md:justify-between">
-                                    <div className="mb-4 md:mr-2 md:mb-0">
+                                <div className="mb-4 flex flex-col ">
+                                    <div className="mb-8 relative">
                                         <label
                                             className="block mb-2 text-sm font-bold text-gray-700"
                                             htmlFor="password"
                                         >
                                             Password
                                         </label>
-                                        <div>
+                                        <div
+                                            className={`${
+                                                passwordHasError ? "border-red-500" : ""
+                                            } w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500s rounded shadow appearance-none focus:outline-none focus:shadow-outline flex justify-between cursor-pointer`}
+                                        >
                                             <input
-                                                className={`${
-                                                    passwordHasError ? "border-red-500" : ""
-                                                } w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500s rounded shadow appearance-none focus:outline-none focus:shadow-outline`}
                                                 id="password"
+                                                className="outline-none w-full"
                                                 placeholder="******************"
+                                                type={passwordType}
                                                 name="password"
                                                 onChange={passwordChange}
                                                 onBlur={passwordOnBlur}
                                             />
-                                            {passwordIsValid && iconValid}
+                                            <button type="button" onClick={togglePassword}>
+                                                {passwordType === "password" ? (
+                                                    <FontAwesomeIcon title="Zobrazit" icon={faEye} className="" />
+                                                ) : (
+                                                    <FontAwesomeIcon title="Skrýt" icon={faEyeSlash} className="" />
+                                                )}
+                                            </button>
+                                            {/* {passwordIsValid && iconValid} */}
                                         </div>
                                         {passwordHasError && (
-                                            <p className="text-xs italic text-red-500">
+                                            <p className="text-xs italic text-red-500 absolute top-full">
                                                 Please enter a valid password.
                                             </p>
                                         )}
                                     </div>
-                                    <div className="md:ml-2">
+                                    <div className="mb-8  relative">
                                         <label
                                             className="block mb-2 text-sm font-bold text-gray-700"
                                             htmlFor="c_password"
                                         >
                                             Confirm Password
                                         </label>
-                                        <div>
+                                        <div
+                                            className={`${
+                                                confirmPassHasError ? "border-red-500" : ""
+                                            } w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline flex justify-between`}
+                                        >
                                             <input
-                                                className={`${
-                                                    confirmPassHasError ? "border-red-500" : ""
-                                                } w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline`}
                                                 id="c_password"
+                                                className="outline-none w-full"
+                                                type={passwordConfirmType}
                                                 placeholder="******************"
                                                 name="confirmPass"
                                                 onChange={confirmPassChange}
                                                 onBlur={confirmPassOnBlur}
                                             />
-                                            {confirmPassIsValid && !confirmPassHasError && !confirmPasswordHasError
+                                            <button type="button" onClick={togglePasswordConfirm}>
+                                                {passwordConfirmType === "password" ? (
+                                                    <FontAwesomeIcon title="Zobrazit" icon={faEye} className="" />
+                                                ) : (
+                                                    <FontAwesomeIcon title="Skrýt" icon={faEyeSlash} className="" />
+                                                )}
+                                            </button>
+                                            {/* {confirmPassIsValid && !confirmPassHasError && !confirmPasswordHasError
                                                 ? iconValid
-                                                : null}
+                                                : null} */}
                                         </div>
                                         {confirmPassHasError && (
-                                            <p className="text-xs italic text-red-500">
+                                            <p className="text-xs italic text-red-500 absolute top-full">
                                                 Please enter a valid password.
                                             </p>
                                         )}
                                         {!confirmPassHasError && confirmPasswordHasError ? (
-                                            <p className="text-xs italic text-red-500">
+                                            <p className="text-xs italic text-red-500 absolute top-full">
                                                 Password and confirm password does not match
                                             </p>
                                         ) : null}

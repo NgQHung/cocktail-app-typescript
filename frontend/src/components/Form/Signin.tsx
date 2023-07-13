@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faXmark } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -17,12 +17,6 @@ const inputIsValid = (value: string) => value.trim() !== "";
 const emailInputIsValid = (value: string) => value.includes("@");
 
 const Signin = () => {
-    // const initialValue = {
-    //     email: "",
-    //     password: "",
-    // };
-
-    // use form for input
     const {
         input: emailInput,
         hasError: emailHasError,
@@ -45,6 +39,8 @@ const Signin = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [passwordType, setPasswordType] = React.useState("password");
+
     // const isSignin = location.pathname === "/signin";
 
     const loginHandler = async () => {
@@ -110,6 +106,15 @@ const Signin = () => {
     // }, [isSignin]);
     const closeSigninHandler = () => {
         navigate("/");
+    };
+
+    // show and hide password
+    const togglePassword = () => {
+        if (passwordType === "password") {
+            setPasswordType("text");
+            return;
+        }
+        setPasswordType("password");
     };
     return (
         <Modal>
@@ -205,7 +210,7 @@ const Signin = () => {
                         {emailHasError && <p className="text-xs italic text-red-500">Please enter a valid name.</p>}
                     </div>
                     <div className="mt-8 content-center">
-                        <div className="absolute right-10 mt-4">
+                        {/* <div className="absolute right-10 mt-4">
                             {passwordIsValid && (
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -222,20 +227,32 @@ const Signin = () => {
                                     ></path>
                                 </svg>
                             )}
-                        </div>
+                        </div> */}
                         <label className="text-sm font-bold text-gray-700 tracking-wide">Password</label>
-                        <input
+                        <div
                             className={`${
                                 passwordHasError ? "border-red-500" : ""
-                            }w-full content-center text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500`}
-                            type=""
-                            placeholder="Enter your password"
-                            name="password"
-                            onChange={passwordChange}
-                            onBlur={passwordOnBlur}
-                        />
+                            } w-full content-center text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 flex justify-between`}
+                        >
+                            <input
+                                className="w-full  outline-none"
+                                type={passwordType}
+                                placeholder="Enter your password"
+                                name="password"
+                                value={passwordInput}
+                                onChange={passwordChange}
+                                onBlur={passwordOnBlur}
+                            />
+                            <button type="button" className="py-2 pr-3" onClick={togglePassword}>
+                                {passwordType === "password" ? (
+                                    <FontAwesomeIcon title="Zobrazit" icon={faEye} className="" />
+                                ) : (
+                                    <FontAwesomeIcon title="Skrýt" icon={faEyeSlash} className="" />
+                                )}
+                            </button>
+                        </div>
                     </div>
-                    {passwordHasError && <p className="text-xs italic text-red-500">Please enter a valid name.</p>}
+                    {passwordHasError && <p className="text-xs italic text-red-500">Please enter a valid password.</p>}
                     <div className="flex items-center justify-between">
                         <div className="flex items-center">
                             <input

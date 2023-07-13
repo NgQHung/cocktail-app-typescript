@@ -14,8 +14,8 @@ interface Props {
 
 const Main: React.FC<Props> = (props) => {
     // console.log(props.cocktailData.length === 0);
-    const alertError = useAppSelector((state) => state.notificationSlice.alertError);
-    console.log("alertError:", alertError);
+    // const alertError = useAppSelector((state) => state.notificationSlice.alertError);
+    // console.log("alertError:", alertError);
     // const typeCocktail = useAppSelector((state) => state.dataSlice.typeCocktail);
 
     return (

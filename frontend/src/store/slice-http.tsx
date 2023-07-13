@@ -37,7 +37,7 @@ export const fetchDataToShow = () => {
             // console.log("render here 2");
             dispatch(UISliceActions.loadingHandler(true));
             dispatch(notificationSliceActions.alertErrorHandler(true));
-            const res = await axios.get(`${baseURL.server}/api/cocktails/category/cocktai`);
+            const res = await axios.get(`${baseURL.server}/api/cocktails/category/cocktail`);
             dispatch(dataSliceActions.getAllCocktail(res.data.data));
             dispatch(notificationSliceActions.alertErrorHandler(false));
         } catch (error: any) {

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hook";
 import { notificationSliceActions } from "../../store/notification-slice";
 import { UISliceActions } from "../../store/ui-slice";
 import { baseURL } from "../../utils/baseUrl";
+import Loading from "../../UI/Loading";
 
 interface AddedCocktailsTypes {
     _id: string;
@@ -21,6 +22,7 @@ const AddedCocktails = () => {
     const addedCocktails = useAppSelector((state) => state.cocktailSlice.addedCocktails);
     // const addedCocktailDetail = useAppSelector((state) => state.cocktailSlice.addedCocktailDetail);
     const deleteClicked = useAppSelector((state) => state.UISlice.deleteClicked);
+    const alertError = useAppSelector((state) => state.notificationSlice.alertError);
 
     const dispatch = useAppDispatch();
     // console.log(addedCocktails);
@@ -77,14 +79,14 @@ const AddedCocktails = () => {
     };
 
     const fetchDataFromTrashHandler = async () => {
-        const data = await axios.get(`${baseURL}/api/my-cocktail/trash/cocktails`);
+        const data = await axios.get(`${baseURL.server}/api/my-cocktail/trash/cocktails`);
         // console.log();
         dispatch(cocktailSliceAction.deletedCocktailHandler(data.data.cocktail));
     };
 
     useEffect(() => {
         const fetchAddedData = async () => {
-            const data = await axios.get(`${baseURL}/api/my-cocktail/added-cocktails`);
+            const data = await axios.get(`${baseURL.server}/api/my-cocktail/added-cocktails`);
 
             dispatch(cocktailSliceAction.addedCocktailHandler(data.data));
         };
@@ -102,46 +104,48 @@ const AddedCocktails = () => {
     }, [location.key]);
 
     return (
-        <div className="absolute top-[120px] w-full h-full bg-gray-100">
+        <div className=" w-full h-full bg-gray-100">
             {deleteClicked && <Confirmation />}
 
-            <div>
-                <div className="sm:px-6 w-full">
-                    <div className="px-4 md:px-10 py-4 md:py-7">
-                        <div className="flex items-center justify-between">
-                            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
-                                Cocktails
-                            </p>
-                            <div className="py-3 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded">
-                                <p>Sort By:</p>
-                                <select className="focus:outline-none bg-transparent ml-1">
-                                    <option className="text-sm text-indigo-800">Latest</option>
-                                    <option className="text-sm text-indigo-800">Oldest</option>
-                                    <option className="text-sm text-indigo-800">Latest</option>
-                                </select>
-                            </div>
+            <div className="sm:px-6 w-full h-[calc(100vh-90px)] ">
+                <div className="px-4 md:px-10 py-4 md:py-7">
+                    <div className="flex items-center justify-between">
+                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
+                            Cocktails
+                        </p>
+                        <div className="py-3 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded">
+                            <p>Sort By:</p>
+                            <select className="focus:outline-none bg-transparent ml-1">
+                                <option className="text-sm text-indigo-800">Latest</option>
+                                <option className="text-sm text-indigo-800">Oldest</option>
+                                <option className="text-sm text-indigo-800">Latest</option>
+                            </select>
                         </div>
                     </div>
-                    <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
-                        <div className="sm:flex items-center justify-start">
-                            <button
-                                // onclick="popuphandler(true)"
-                                className="mt-4 sm:mt-0 mr-4 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
-                            >
-                                <Link to="/create-cocktail">
-                                    <p className="text-sm font-medium leading-none text-white">Add Cocktail</p>
-                                </Link>
-                            </button>
-                            <Link to="trash/cocktails">
-                                <button
-                                    onClick={fetchDataFromTrashHandler}
-                                    className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-red-700 hover:bg-red-600 focus:outline-none rounded"
-                                >
-                                    <p className="text-sm font-medium leading-none text-white">Trash</p>
-                                </button>
+                </div>
+                <div className="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10 h-[calc(100vh-100px-90px-28px)]">
+                    <div className="sm:flex items-center justify-start">
+                        <button
+                            // onclick="popuphandler(true)"
+                            className="mt-4 sm:mt-0 mr-4 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
+                        >
+                            <Link to="/create-cocktail">
+                                <p className="text-sm font-medium leading-none text-white">Add Cocktail</p>
                             </Link>
-                        </div>
-                        <div className="mt-7 overflow-x-auto">
+                        </button>
+                        <Link to="trash/cocktails">
+                            <button
+                                onClick={fetchDataFromTrashHandler}
+                                className="mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-red-700 hover:bg-red-600 focus:outline-none rounded"
+                            >
+                                <p className="text-sm font-medium leading-none text-white">Trash</p>
+                            </button>
+                        </Link>
+                    </div>
+                    <div className="mt-7 overflow-x-auto">
+                        {alertError ? (
+                            <Loading />
+                        ) : (
                             <table className="w-full whitespace-nowrap">
                                 <tbody>
                                     {addedCocktails?.map((item: AddedCocktailsTypes) => (
@@ -211,7 +215,7 @@ const AddedCocktails = () => {
                                     ))}
                                 </tbody>
                             </table>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>

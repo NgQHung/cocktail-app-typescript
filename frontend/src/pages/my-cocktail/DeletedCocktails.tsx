@@ -20,6 +20,7 @@ interface DeletedCocktailsTypes {
 const DeletedCocktails = () => {
     const deletedCocktails = useAppSelector((state) => state.cocktailSlice.deletedCocktails);
     const deleteClicked = useAppSelector((state) => state.UISlice.deleteClicked);
+    // const alertError = useAppSelector((state) => state.notificationSlice.alertError);
 
     const dispatch = useAppDispatch();
 
